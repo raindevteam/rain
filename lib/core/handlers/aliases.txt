@@ -1,0 +1,3 @@
+watpower:roll! | jrun! Array({roll} + 1).join('wat') | say! Your power is {jrun} | jrun! if({roll} > 3) "Nice power bro"; else if({roll} < 3) "Weakling"; else "Meh, Average"
+helloworld:say! Back again
+test:watpower | say! {watpower} | AvgSixRolls
