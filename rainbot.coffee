@@ -23,21 +23,16 @@ bot = new (irc.Client) 'irc.canternet.org', config.nick,
   userName: "RainbotDev"
   realName: "Rainbot"
   channels: config.channel
-  autoConnect: false 
+  autoConnect: false
   port: 6667
   debug: true
 
-# Load Modules
-modules.load bot, (modules) ->
-  for module in modules
-    core.addModule module
-  
+# Load Modules, Core and connect to IRC
+modules.load bot, () ->
   core.load(bot)
-  # Initialize Listeners
   core.listen () ->
-    # Connect to IRC!
     bot.connect 3, init
-    
+
 init = ->
   if config.password
     bot.send 'ns', 'identify', config.password
