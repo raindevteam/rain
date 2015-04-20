@@ -6,6 +6,7 @@
     "hashmap": "^2.0.1",
     "irc": "*",
     "lodash": "^3.7.0",
+    "mathjs": "^1.5.2",
     "mongoose": "^3.8.24",
     "sandbox": "^0.8.6"
   },
