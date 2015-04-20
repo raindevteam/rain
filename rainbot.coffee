@@ -16,7 +16,8 @@ mongoose = require('mongoose')
 debug.set(config.debug)
 
 # Connect to the database
-mongoose.connect(config.db)
+if config.db
+  mongoose.connect(config.db)
 
 # Create the bot
 bot = new (irc.Client) 'irc.canternet.org', config.nick,
