@@ -4,28 +4,23 @@ async      = require('async')
 
 class ResponseHandler
   constructor: () ->
-    @responded = false
     @responses = []
-    
+
   say: (to, response) ->
-    @responded = true
-    @responses.push({
-      method : 'say'
-      to  : to
-      res : response
-    })
-  
+    @responses.push
+      method: 'say'
+      to: to
+      res: response
+
   action: (to, response) ->
-    @responded = true
-    @responses.push({
-      method : 'action'
-      to  : to
-      res : response
-    })
-    
+    @responses.push
+      method: 'action'
+      to: to
+      res: response
+
   output: (data) ->
     @data = data
-    
+
   reset: () ->
     @responses = []
     @data      = undefined
@@ -39,14 +34,14 @@ class Module
     @listeners = {}
     for event in core.events
       @listeners[event] = []
-  
+
   setBot: (bot) ->
     @bot = bot
-    
+
   addListeners: (listeners) ->
     for name,listener of listeners
       @listeners[listener.event].push(listener)
-      
+
   fire: (event, args, handler) ->
     @resHandler.reset()
     self = this
