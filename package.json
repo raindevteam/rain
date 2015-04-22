@@ -11,7 +11,8 @@
     "sandbox": "^0.8.6"
   },
   "devDependencies": {
+    "chai": "^2.2.0",
     "coffee-script": "^1.9.1",
-    "expect": "^1.6.0"
+    "mocha": "^2.2.4"
   }
 }
