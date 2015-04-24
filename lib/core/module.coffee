@@ -21,7 +21,7 @@ class Module
       }
 
   addTriggers: (triggers) ->
-    for name, trigger of listeners
+    for name, trigger of triggers
       @triggers[trigger.event].push(trigger)
 
 module.exports = Module
