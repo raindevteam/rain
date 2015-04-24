@@ -4,13 +4,15 @@ defined = core.defined
 _       = require('lodash')
 
 class CmdHandler
-  constructor: (@alias) ->
-    
+  constructor: (aliasHandler, commands) ->
+    @commands = commands
+    @aliasHandler = aliasHandler
+
   isCommand: (text) ->
     return text.trim().lower().has(defined.MSG_TRIGGER)
 
-  splitCommands: (text) ->
-    if @alias.isAliasCmd(text) then return [text]
+  getCommands: (text) ->
+    if @aliasHandler.isAliasCmd(text) then return [text.trim()]
     cmds     = []
     lastpipe = 0
     pipe     = 0
@@ -21,7 +23,7 @@ class CmdHandler
       dpipe = text.indexOf('||', lastpipe)
       if esc + 1 != pipe and dpipe != pipe
         cmd = text.before('|', lastpipe).trim()
-        cmds.push cmd
+        if cmd.trim() then cmds.push(cmd.trim())
         text = text.substring(pipe + 1)
         lastpipe = pipe+1 - (cmd.length)
       else if dpipe and dpipe == pipe
@@ -33,76 +35,66 @@ class CmdHandler
       else if esc and esc+1 == pipe
         lastpipe = esc + 1
         text = text.substring(0, esc) + "|" + text.substring(esc+2)
-    cmds.push(text)
+    if text.trim() then cmds.push(text.trim())
     return cmds
 
-  fireAlias: (cmd, args, callback) ->
-    aliasCmds = @splitCommands(@alias.getAlias(cmd))
-    @executeCmds aliasCmds, args, (action) ->
-      callback(action)
+  executeCommand: (commandRaw, responseHandler, done) ->
+    if commandRaw.has('!') then commandName = commandRaw.before('!').trim()
+    else commandName = commandRaw
+    if commandRaw.has('!') then args = commandRaw.after('!')
+    console.log(commandName)
+    # if !core.WHITELISTED commandName, ar then done({})
+    if @aliasHandler.isAlias commandName
+      aliasCommands = @getCommands(@aliasHandler.getAlias(commandName))
+      @run aliasCommands, responseHandler, (lastCommand) ->
+         lastCommand.name = commandName
+         lastCommand.wasAlias = true
+         return done lastCommand
+    else if @commands.has(commandName.trim())
+      command = @commands.get(commandName)
+      action = command.action args.clean().split(' '), responseHandler, () ->
+        command.name = commandName
+        console.log 'here'
+        return done command
 
-  fireModules: (cmd, args, callback) ->
-    async.eachSeries core.modules, ((module, next) ->
-      module.fire 'message', [args[0], args[1], cmd, args[3]], 
-      (action) ->
-        if !(_.isEmpty action)
-          return callback(action)
-        next()
-    ), (err) ->
-      callback({})
-
-  executeCmd: (cmd, args, callback) ->
-    if !core.WHITELISTED(cmd.before('!'), args[0]) 
-      return callback({})
-    if (@alias.isAlias(cmd))
-      @fireAlias cmd, args, (lastAction) ->
-        lastAction.nest = cmd
-        lastAction.wasAlias = true
-        return callback(lastAction)
-    else
-      @fireModules cmd, args, (actionFired) ->
-        return callback(actionFired)
-
-  executeCmds: (cmds, args, callback) ->
-    cmdsProcessed = 0
-    results       = {}
-    self          = this
-    async.eachSeries cmds, ((cmd, next) ->
-      cmdsProcessed++
-      # Nest class?
-      nests = cmd.match(/\{(.*?)\}/g)
+  run: (commands, responseHandler, respond) ->
+    commandsProcessed = 0
+    results = {}
+    self = this
+    async.eachSeries commands, ((commandRaw, next) ->
+      commandsProcessed++
+      nests = commandRaw.match(/\{(.*?)\}/g)
       if nests?.length > 0
-        for nest in nests   
+        for nest in nests
           nest = nest.replace('{', '').replace('}', '')
           if results[nest]
-            cmd = cmd.replace('{'+nest+'}', results[nest].res)
-
-      self.executeCmd(cmd.trim(), args, (action) ->
-        if action.responses or action.output
-          if action.nest
-            results[action.nest] = {}
-            if action.output
-              results[action.nest].res = action.output
-            else
-              results[action.nest].res = ''
-              for response in action.responses
-                results[action.nest].res +=
-                if results[action.nest]
-                then response.res
-                else " " + response.res
-          if action.ASAP and !action.wasAlias
-            core.ACTION_RESPOND(action)
-          if cmdsProcessed == cmds.length
-            return callback(action)
+            commandRaw =
+              commandRaw.replace('{'+nest+'}', results[nest].response)
+      self.executeCommand(commandRaw, responseHandler, (firedCommand) ->
+        commandName = firedCommand.name
+        responses = responseHandler.responses
+        output = responseHandler.output()
+        if responses or output
+          results[commandName] = {}
+          if output
+            results[commandName].response = output
+            console.log 'nested ' + commandName + " with " + results[commandName].response
+          else
+            results[commandName].response = ''
+            for response in responses
+              results[commandName].response += " " + response.res
+              results[commandName].response =
+              results[commandName].response.trim()
+            console.log 'nested ' + commandName + " with " + results[commandName].response
+        if firedCommand.ASAP and !firedCommand.wasAlias
+          console.log 'Would have fired immediately'
+        if commandsProcessed == commands.length
+          console.log 'firing back with ' + firedCommand
+          return respond firedCommand
+        responseHandler.reset()
         next()
       )
     ), (err) ->
-      callback({})
+      return respond()
 
-  handle: (channel, to, text, msg) ->
-    @executeCmds @splitCommands(text), [channel, to, text, msg],
-    (lastAction) ->
-      if lastAction?.ASAP != true
-        core.ACTION_RESPOND(lastAction)
-        
 module.exports = CmdHandler

@@ -2,61 +2,26 @@ core       = require(__core)
 events     = core.events
 async      = require('async')
 
-class ResponseHandler
-  constructor: () ->
-    @responses = []
-
-  say: (to, response) ->
-    @responses.push
-      method: 'say'
-      to: to
-      res: response
-
-  action: (to, response) ->
-    @responses.push
-      method: 'action'
-      to: to
-      res: response
-
-  output: (data) ->
-    @data = data
-
-  reset: () ->
-    @responses = []
-    @data      = undefined
-
-
 class Module
   constructor: (name) ->
     @name = name
-    @fired = undefined
-    @resHandler = new ResponseHandler()
-    @listeners = {}
+    @commands = []
+    @triggers = {}
     for event in core.events
-      @listeners[event] = []
+      @triggers[event] = []
 
   setBot: (bot) ->
     @bot = bot
 
-  addListeners: (listeners) ->
-    for name,listener of listeners
-      @listeners[listener.event].push(listener)
+  addCommands: (commands) ->
+    for name, command of commands
+      @commands.push {
+        'name': name
+        'command': command
+      }
 
-  fire: (event, args, handler) ->
-    @resHandler.reset()
-    self = this
-    async.eachSeries @listeners[event], ((list, next) ->
-      action = list.action.apply(undefined, args)
-      if (action.trigger)
-        self.fired = list.name
-        action.fire self.resHandler, () ->
-          return handler
-            responses : self.resHandler.responses
-            output    : self.resHandler.data
-            nest      : if list.nest then list.nest.name or null
-            ASAP      : if list.nest then list.nest.ASAP or false
-      else return next()
-    ), (err) ->
-      return handler({})
+  addTriggers: (triggers) ->
+    for name, trigger of listeners
+      @triggers[trigger.event].push(trigger)
 
 module.exports = Module
