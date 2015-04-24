@@ -5,9 +5,14 @@ _       = require('lodash')
 async   = require('async')
 module  = require('./module')
 helpers = require('./helpers')
+hashmap = require('hashmap')
+response = require('./handlers/response')
+responseHandler = new response()
 
 # Locals
 _bot    = undefined
+commands = new hashmap()
+triggers = {}
 modules = []
 alias   = undefined
 cmd     = undefined
@@ -50,19 +55,23 @@ exports.events = [
   'error'
 ]
 
+
+
 # Export Handlers, helpers and defined messages
 exports.helpers = helpers
 exports.defined = defined
+action = require('./handlers/action')
 triggerHandler  = require('./handlers/trigger')
 trigger         = new triggerHandler()
 aliasHandler    = require('./handlers/alias')
 alias           = new aliasHandler(trigger)
 alias.loadAliases()
 commandHandler  = require('./handlers/cmds')
-cmd             = new commandHandler(alias)
+cmd             = new commandHandler(alias, commands)
 exports.trigger = trigger
 exports.cmd     = cmd
 exports.alias   = alias
+actionHandler = undefined
 
 # Modules
 exports.module = module
@@ -70,10 +79,34 @@ exports.modules = modules
 exports.addModule = (module) ->
   modules.push module
 
+exports.preload = ->
+  for event in exports.events
+    triggers[event] = []
+
+  ###
+  fs.readdir __dirname + "../../modules", (err, modules) ->
+    for module in modules
+      if path.extname(module)
+        continue # Don't load stray files
+      module = require(__dirname + '/' + module)(core.module)
+      for command in module.commands
+         commands.set(command.name, command.value)
+      for event, listeners in module.triggers
+         triggers[event].push(listeners)
+   ###
+exports.loadModules = (callback) ->
+  lmodule = require('./../../modules/rainbin/index')(exports.module)
+  console.log(lmodule.addCommands())
+  for command in lmodule.commands
+    commands.set(command.name, command.command)
+  for event, listeners of lmodule.triggers
+    triggers[event].push(listeners)
+  return callback()
+
 # Load Bot
 exports.load = (bot) ->
-
   Core = new module('Core')
+  ###
   Core.addListeners(require('./listeners/notice'))
   Core.addListeners(require('./listeners/names'))
   Core.addListeners(require('./listeners/join'))
@@ -81,20 +114,28 @@ exports.load = (bot) ->
   Core.addListeners(require('./listeners/msg'))
   Core.addListeners(require('./listeners/raw'))
   modules.push(Core)
-
+  ###
   # Ready the bot
   _bot      = bot
   bot.nicks = []
   bot.sleep = false
+  actionHandler = new action(responseHandler, cmd, _bot)
 
 
 # Attach Listeners
 exports.listen = (callback) ->
-  _bot.addListener 'notice', (nick, to, text, msgs) ->
+  _bot.addListener 'notice', (nick, to, text, msg) ->
     if !_bot.sleep
-      for module in modules
-        module.fire('notice', [nick, to, text, msgs], exports.ACTION_RESPOND)
+      actionHandler.setResponseProperties
+         from: nick
+         to: to
+         text: text
+         msg: msg
+      # async.detect triggers['notice'],
+      # actionHandler.triggered.bind(actionHandler),
+      # actionHandler.fireTrigger.bind(actionHandler)
 
+  ###
   # Names Events
   _bot.addListener 'names', (channel, nicks) ->
     for module in modules
@@ -109,17 +150,22 @@ exports.listen = (callback) ->
   _bot.addListener 'nick', (oldnick, newnick, channels, msg) ->
     for module in modules
       module.fire('nick', [oldnick, newnick, channels, msg], exports.ACTION_RESPOND)
+  ###
 
   # Message Events
-  _bot.addListener 'message', (nick, to, text, msgs) ->
+  _bot.addListener 'message', (nick, to, text, msg) ->
     if !_bot.sleep
+      actionHandler.setResponseProperties
+        from: nick
+        to: to
+        text: text
+        msg: msg
       if cmd.isCommand(text)
-        trigger.acceptingCommands(true)
-        cmd.handle(nick, to, text.after(defined.MSG_TRIGGER+1).trim(), msgs)
+        actionHandler.fireCommand text.after(defined.MSG_TRIGGER+1).clean()
       else
-        trigger.acceptingCommands(false)
-        for module in modules
-          module.fire('message', [nick, to, text, msgs], exports.ACTION_RESPOND)
+        # async.detect triggers['message'],
+        # actionHandler.triggered.bind(actionHandler),
+        # actionHandler.fireTrigger.bind(actionHandler)
 
   # PM Events
   _bot.addListener 'pm', (nick, text, msgs) ->
@@ -145,10 +191,7 @@ exports.listen = (callback) ->
   return callback()
 
 exports.ACTION_RESPOND = (action) ->
-  if (action.responses)
-    for response in action.responses
-      if (response.length > 250) then return # temp
-      _bot[response.method](response.to, response.res)
+
 
 exports.IDLE = () ->
   _bot.sleep = true
