@@ -1,11 +1,15 @@
 module.exports = {
    /* pb command */
-   pb: {
-      nest: true,
-      ASAP: false,
+   '++': {
+     action: function(args, respond, done) {
+       respond.say(args[0] + 1);
+       return done();
+     }
+   },
+
+   echoArgs: {
       action: function(args, respond, done) {
-         var randomTestText = "test text";
-         respond.say randomTestText;
+         respond.say(args.join(' '));
          return done();
       }
    }
