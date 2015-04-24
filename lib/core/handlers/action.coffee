@@ -8,7 +8,9 @@ class Action
     @responseHandler.setProperties(properties)
 
   triggered: (action, callback) ->
-    if action.trigger(@responseHandler.text)
+    console.log 'now'
+    if action.trigger @responseHandler.properties
+      console.log 'hi'
       return callback(true)
 
   actionRespond: (responses) ->
@@ -17,7 +19,6 @@ class Action
         @bot[response.method](response.to, response.res)
 
   fireTrigger: (trigger) ->
-    if !trigger then return
     @responseHandler.reset()
     self = this
     action = trigger.action @responseHandler, () ->
