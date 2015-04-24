@@ -100,7 +100,7 @@ exports.loadModules = (callback) ->
   for command in lmodule.commands
     commands.set(command.name, command.command)
   for event, listeners of lmodule.triggers
-    triggers[event].push(listeners)
+    triggers[event] = listeners
   return callback()
 
 # Load Bot
@@ -156,16 +156,15 @@ exports.listen = (callback) ->
   _bot.addListener 'message', (nick, to, text, msg) ->
     if !_bot.sleep
       actionHandler.setResponseProperties
-        from: nick
-        to: to
-        text: text
-        msg: msg
+      from: nick, to: to, text: text, msg: msg
       if cmd.isCommand(text)
         actionHandler.fireCommand text.after(defined.MSG_TRIGGER+1).clean()
       else
-        # async.detect triggers['message'],
-        # actionHandler.triggered.bind(actionHandler),
-        # actionHandler.fireTrigger.bind(actionHandler)
+        console.log 'testing!'
+        console.log triggers['message']
+        async.detect triggers['message'],
+        actionHandler.triggered.bind(actionHandler),
+        actionHandler.fireTrigger.bind(actionHandler)
 
   # PM Events
   _bot.addListener 'pm', (nick, text, msgs) ->
