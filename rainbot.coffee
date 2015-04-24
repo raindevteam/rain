@@ -29,7 +29,8 @@ bot = new (irc.Client) 'irc.canternet.org', config.nick,
   debug: true
 
 # Load Modules, Core and connect to IRC
-modules.load bot, () ->
+core.preload()
+core.loadModules ()->
   core.load(bot)
   core.listen () ->
     bot.connect 3, init
