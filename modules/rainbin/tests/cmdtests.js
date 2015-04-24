@@ -6,7 +6,7 @@ describe('Rainbin', function() {
       describe('pb', function() {
          it('should respond with "test text"', function() {
             response = Rainbin.testCommand('pb', 'testing', null);
-            expect(results).to.equal("test text");
+            expect(response).to.equal("test text");
          });
       });
    });
