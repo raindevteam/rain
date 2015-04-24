@@ -8,7 +8,6 @@ irc      = require('irc')
 core     = require(__core)
 config   = require(__config)
 debug    = require(__debug)
-modules  = require('./modules')
 string   = require('./lib/string')
 mongoose = require('mongoose')
 
