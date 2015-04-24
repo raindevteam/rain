@@ -40,9 +40,7 @@ class CmdHandler
 
   executeCommand: (commandRaw, responseHandler, done) ->
     if commandRaw.has('!') then commandName = commandRaw.before('!').trim()
-    else commandName = commandRaw
     if commandRaw.has('!') then args = commandRaw.after('!')
-    console.log(commandName)
     # if !core.WHITELISTED commandName, ar then done({})
     if @aliasHandler.isAlias commandName
       aliasCommands = @getCommands(@aliasHandler.getAlias(commandName))
@@ -54,7 +52,6 @@ class CmdHandler
       command = @commands.get(commandName)
       action = command.action args.clean().split(' '), responseHandler, () ->
         command.name = commandName
-        console.log 'here'
         return done command
 
   run: (commands, responseHandler, respond) ->
@@ -78,18 +75,15 @@ class CmdHandler
           results[commandName] = {}
           if output
             results[commandName].response = output
-            console.log 'nested ' + commandName + " with " + results[commandName].response
           else
             results[commandName].response = ''
             for response in responses
               results[commandName].response += " " + response.res
               results[commandName].response =
               results[commandName].response.trim()
-            console.log 'nested ' + commandName + " with " + results[commandName].response
         if firedCommand.ASAP and !firedCommand.wasAlias
-          console.log 'Would have fired immediately'
+          console.log 'temp'
         if commandsProcessed == commands.length
-          console.log 'firing back with ' + firedCommand
           return respond firedCommand
         responseHandler.reset()
         next()
