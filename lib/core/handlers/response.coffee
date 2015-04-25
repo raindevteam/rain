@@ -16,10 +16,10 @@ class ResponseHandler
       to: @properties.to
       res: response
 
-  action: (to, response) ->
+  action: (response) ->
     @responses.push
       method: 'action'
-      to: to
+      to: @properties.to
       res: response
 
   output: (data) ->
