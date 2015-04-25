@@ -2,6 +2,7 @@ core    = require(__core)
 async   = require('async')
 defined = core.defined
 _       = require('lodash')
+config  = require(__config)
 
 class CmdHandler
   constructor: (aliasHandler, commands) ->
@@ -38,9 +39,29 @@ class CmdHandler
     if text.trim() then cmds.push(text.trim())
     return cmds
 
+  getCommandName: (commandRaw) ->
+    if config.bang == 'front'
+      if commandRaw.match(/^!/)
+        return commandRaw.match(/^!(\S+)/)[1]
+    else
+      if commandRaw.has('!')
+        return commandRaw.before('!').trim()
+      else null
+
+  getCommandArgs: (commandRaw) ->
+    if config.bang == 'front'
+      if commandRaw.match(/^!/)
+        return _.drop(commandRaw.split(' '))
+    else
+      if commandRaw.has('!')
+        return commandRaw.before('!').trim()
+      else null
+
   executeCommand: (commandRaw, responseHandler, done) ->
-    if commandRaw.has('!') then commandName = commandRaw.before('!').trim()
-    if commandRaw.has('!') then args = commandRaw.after('!')
+    commandName = @getCommandName(commandRaw)
+    commandArgs = @getCommandArgs(commandRaw)
+    console.log commandArgs
+    if !commandName then return
     # if !core.WHITELISTED commandName, ar then done({})
     if @aliasHandler.isAlias commandName
       aliasCommands = @getCommands(@aliasHandler.getAlias(commandName))
@@ -50,7 +71,7 @@ class CmdHandler
          return done lastCommand
     else if @commands.has(commandName.trim())
       command = @commands.get(commandName)
-      action = command.action args.clean().split(' '), responseHandler, () ->
+      action = command.action commandArgs, responseHandler, () ->
         command.name = commandName
         return done command
 
