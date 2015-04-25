@@ -1,6 +1,5 @@
-core    = require(__core)
 async   = require('async')
-defined = core.defined
+defined = __core.defined
 _       = require('lodash')
 config  = require(__config)
 

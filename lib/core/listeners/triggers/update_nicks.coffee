@@ -1,4 +1,4 @@
-bot = require(__core).bot
+bot = __core.bot
 
 module.exports =
   ### == update_nicks (event:names) ==

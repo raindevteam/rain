@@ -1,4 +1,4 @@
-core = require(__core)
+core = __core
 
 module.exports =
   ### == alias (command) ==
