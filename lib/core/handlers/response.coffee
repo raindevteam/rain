@@ -6,11 +6,9 @@ class ResponseHandler
   setProperties: (properties) ->
     @properties = {}
     for name, prop of properties
-      console.log name + " : " + prop
       @properties[name] = prop
 
   say: (response) ->
-    console.log @properties
     @responses.push
       method: 'say'
       to: @properties.to
