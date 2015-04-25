@@ -4,13 +4,8 @@ defined = core.defined
 
 class Trigger
   constructor: () ->
-    @acceptCommands = false
-  
-  acceptingCommands: (val) ->
-    @acceptCommands = val
-  
+
   cmd: (text, trigger) ->
-    if (!@acceptCommands) then return false
     if helpers.isFunction(trigger)
       if text.lower().hasAt(defined.CMD_TRIGGER, 0)
         return trigger(text.after('!', true).nospace())
@@ -22,5 +17,5 @@ class Trigger
 
   hasAnywhere: (text, trigger) ->
     return text.has(trigger)
-    
+
 module.exports = Trigger
