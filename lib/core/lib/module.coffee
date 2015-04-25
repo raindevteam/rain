@@ -1,13 +1,11 @@
-core       = require(__core)
-events     = core.events
-async      = require('async')
+events     = require('./events.coffee')
 
 class Module
   constructor: (name) ->
     @name = name
     @commands = []
     @triggers = {}
-    for event in core.events
+    for event in events
       @triggers[event] = []
 
   setBot: (bot) ->
@@ -15,10 +13,9 @@ class Module
 
   addCommands: (commands) ->
     for name, command of commands
-      @commands.push {
+      @commands.push
         'name': name
         'command': command
-      }
 
   addTriggers: (triggers) ->
     for name, trigger of triggers
