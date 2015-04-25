@@ -6,6 +6,7 @@ async   = require('async')
 module  = require('./module')
 helpers = require('./helpers')
 hashmap = require('hashmap')
+fs      = require('fs')
 response = require('./handlers/response')
 responseHandler = new response()
 
@@ -100,25 +101,36 @@ exports.loadModules = (callback) ->
   for command in lmodule.commands
     commands.set(command.name, command.command)
   for event, listeners of lmodule.triggers
-    triggers[event] = listeners
+    for listener in listeners
+      triggers[event].push listener
   return callback()
 
 # Load Bot
 exports.load = (bot) ->
   Core = new module('Core')
-  ###
-  Core.addListeners(require('./listeners/notice'))
-  Core.addListeners(require('./listeners/names'))
-  Core.addListeners(require('./listeners/join'))
-  Core.addListeners(require('./listeners/part'))
-  Core.addListeners(require('./listeners/msg'))
-  Core.addListeners(require('./listeners/raw'))
-  modules.push(Core)
-  ###
+  # Load commands
+  fs.readdir __dirname + '/listeners/commands', (err, modfiles) ->
+    for modfile in modfiles
+      corecommand = require(__dirname + '/listeners/commands/' + modfile)
+      Core.addCommands(corecommand)
+    for command in Core.commands
+      commands.set(command.name, command.command)
+  # Load triggers
+  fs.readdir __dirname + '/listeners/triggers', (err, modfiles) ->
+    for modfile in modfiles
+      coretrigger = require(__dirname + '/listeners/triggers/' + modfile)
+      Core.addTriggers(coretrigger)
+    for event, listeners of Core.triggers
+      for listener in listeners
+        triggers[event].push listener
+
+  console.log(Core.commands)
+  console.log(triggers)
+
   # Ready the bot
   _bot      = bot
-  bot.nicks = []
-  bot.sleep = false
+  _bot.nicks = []
+  _bot.sleep = false
   actionHandler = new action(responseHandler, cmd, _bot)
 
 
@@ -126,6 +138,7 @@ exports.load = (bot) ->
 exports.listen = (callback) ->
   _bot.addListener 'notice', (nick, to, text, msg) ->
     if !_bot.sleep
+      console.log 'notice was sent ' + text
       actionHandler.setResponseProperties
          from: nick
          to: to
@@ -155,8 +168,9 @@ exports.listen = (callback) ->
   # Message Events
   _bot.addListener 'message', (nick, to, text, msg) ->
     if !_bot.sleep
+      console.log 'nick is ' + nick, 'to is ' + to
       actionHandler.setResponseProperties
-      from: nick, to: to, text: text, msg: msg
+        from: nick, to: to, text: text, msg: msg
       if cmd.isCommand(text)
         actionHandler.fireCommand text.after(defined.MSG_TRIGGER+1).clean()
       else
@@ -196,6 +210,7 @@ exports.IDLE = () ->
   _bot.sleep = true
   _bot.addListener 'raw', wake = (message) ->
     if message['command'] == 'PRIVMSG'
+      console.log 'here'
       if trigger.cmd(message['args'][1], 'wake') and
       _.includes(config.whitelist, message.nick)
         _bot.sleep = false
