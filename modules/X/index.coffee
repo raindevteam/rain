@@ -1,6 +1,6 @@
-msg = require('./listeners/msg')
+commands = require('./listeners/commands')
 
 module.exports = (Module) ->
-  X = new Module('X') # Create the module
-  X.addListeners(msg) # Add msg listeners
-  return X            # Return the module
+  X = new Module('X')
+  X.addCommands(commands)
+  return X
