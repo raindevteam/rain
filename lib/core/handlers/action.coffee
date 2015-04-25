@@ -5,6 +5,7 @@ class Action
     @bot = bot
 
   setResponseProperties: (properties) ->
+    console.log 'setting response props'
     @responseHandler.setProperties(properties)
 
   triggered: (action, callback) ->
