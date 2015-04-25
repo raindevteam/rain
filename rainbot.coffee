@@ -1,11 +1,12 @@
 # Globals for use in modules and listeners
 global.__config = __dirname + '/config'
 global.__models = __dirname + '/config/models'
-global.__core   = __dirname + '/lib/core/core'
 global.__debug  = __dirname + '/lib/debug'
 
+Core          = require('./lib/core/newcore')
+global.__core = new Core()
+
 irc      = require('irc')
-core     = require(__core)
 config   = require(__config)
 debug    = require(__debug)
 string   = require('./lib/string')
@@ -26,17 +27,14 @@ bot = new (irc.Client) 'irc.canternet.org', config.nick,
   port: 6667
   debug: true
 
-init = ()->
-  console.log 'here now --------=-=-----------------------=-=====================-=-=---------------------'
+# Assign bot to core
+__core.setBot(bot)
+
+init = ->
   if config.password
     bot.send 'ns', 'identify', config.password
   bot.send 'mode', config.nick, '+B'
-  for channel in config.channels
-    core.GATE channel
+  __core.gate channel for channel in config.channels
 
 # Load Modules, Core and connect to IRC
-core.preload()
-core.loadModules ()->
-  core.load(bot)
-  core.listen () ->
-    bot.connect init
+__core.load () -> __core.listen () -> bot.connect init
