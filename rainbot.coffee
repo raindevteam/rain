@@ -22,20 +22,21 @@ if config.db
 bot = new (irc.Client) 'irc.canternet.org', config.nick,
   userName: "RainbotDev"
   realName: "Rainbot"
-  channels: config.channel
   autoConnect: false
   port: 6667
   debug: true
+
+init = ()->
+  console.log 'here now --------=-=-----------------------=-=====================-=-=---------------------'
+  if config.password
+    bot.send 'ns', 'identify', config.password
+  bot.send 'mode', config.nick, '+B'
+  for channel in config.channels
+    core.GATE channel
 
 # Load Modules, Core and connect to IRC
 core.preload()
 core.loadModules ()->
   core.load(bot)
   core.listen () ->
-    bot.connect 3, init
-
-init = ->
-  if config.password
-    bot.send 'ns', 'identify', config.password
-  bot.send 'mode', config.nick, '+B'
-  core.GATE null, null
+    bot.connect init
