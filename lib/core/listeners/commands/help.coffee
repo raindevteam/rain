@@ -10,4 +10,5 @@ module.exports =
     ASAP: false
     action: (args, respond, done) ->
       respond.say 'Have a link: ' + config.helpLink
+      respond.output config.helpLink
       return done()
