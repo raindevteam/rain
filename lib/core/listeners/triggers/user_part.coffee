@@ -1,4 +1,4 @@
-bot = require(__core).bot
+bot = __core.bot
 _   = require('lodash')
 
 module.exports =

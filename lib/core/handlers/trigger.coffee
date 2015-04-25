@@ -1,6 +1,5 @@
-core    = require(__core)
-helpers = core.helpers
-defined = core.defined
+helpers = __core.helpers
+defined = __core.defined
 
 class Trigger
   constructor: () ->

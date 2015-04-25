@@ -1,4 +1,4 @@
-core    = require(__core)
+core    = __core
 
 module.exports =
   ### == sleep (command) ==
@@ -11,5 +11,5 @@ module.exports =
     action: (args, respond, done) ->
       respond.say 'Don\'t forget to wake me'
       respond.action 'Lays down and idles'
-      core.IDLE()
+      core.idle()
       return done()

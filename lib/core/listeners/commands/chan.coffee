@@ -1,4 +1,4 @@
-core = require(__core)
+core = __core
 
 module.exports =
   ### == chan (command) ==
@@ -34,5 +34,5 @@ module.exports =
           return done()
       else if LEAVE then LEAVE = respond.to
 
-      core.CHANNEL_SWITCH JOIN, LEAVE, respond.to
+      core.channelSwitch JOIN, LEAVE, respond.to
       return done()
