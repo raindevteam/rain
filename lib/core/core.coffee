@@ -31,13 +31,16 @@ class Core
     @bot.sleep = false
 
   loadModules: (callback) ->
-    module = require('./../../modules/rainbin/index')(Module)
-    for command in module.commands
-      @commands.set(command.name, command.command)
-    for event, listeners of module.triggers
-      for listener in listeners
-        @triggers[event].push listener
-    return callback()
+    self = @
+    fs.readdir __dirname + '/../../modules', (err, modules) ->
+      for module in modules
+        module = require(__dirname + '/../../modules/' + module)(self.Module)
+        for command in module.commands
+          self.commands.set(command.name, command.command)
+        for event, listeners of module.triggers
+          for listener in listeners
+            self.triggers[event].push listener
+      return callback()
 
   preload: () ->
     for event in @events
@@ -49,7 +52,7 @@ class Core
 
     # Response Handler
     ResponseHandler = require('./handlers/response')
-    @response        = new ResponseHandler()
+    @response        = new ResponseHandler(@bot)
 
     # Alias Handler
     AliasHandler    = require('./handlers/alias')
@@ -62,7 +65,7 @@ class Core
 
     # Action Handler
     ActionHandler = require('./handlers/action')
-    @action        = new ActionHandler(@response, @command, @bot)
+    @action        = new ActionHandler(@response, @command)
 
   load: (callback) ->
     self = @
