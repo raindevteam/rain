@@ -3,7 +3,7 @@ global.__config = __dirname + '/config'
 global.__models = __dirname + '/config/models'
 global.__debug  = __dirname + '/lib/debug'
 
-Core          = require('./lib/core/newcore')
+Core          = require('./lib/core/core')
 global.__core = new Core()
 
 irc      = require('irc')
