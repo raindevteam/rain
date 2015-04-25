@@ -53,13 +53,12 @@ class CmdHandler
         return _.drop(commandRaw.split(' '))
     else
       if commandRaw.has('!')
-        return commandRaw.before('!').trim()
+        return commandRaw.after('!').trim().split(' ')
       else null
 
   executeCommand: (commandRaw, responseHandler, done) ->
     commandName = @getCommandName(commandRaw)
     commandArgs = @getCommandArgs(commandRaw)
-    console.log commandArgs
     if !commandName then return
     # if !core.WHITELISTED commandName, ar then done({})
     if @aliasHandler.isAlias commandName
@@ -74,7 +73,7 @@ class CmdHandler
         command.name = commandName
         return done command
 
-  run: (commands, responseHandler, respond) ->
+  run: (commands, responseHandler, done) ->
     commandsProcessed = 0
     results = {}
     self = this
@@ -89,26 +88,25 @@ class CmdHandler
               commandRaw.replace('{'+nest+'}', results[nest].response)
       self.executeCommand(commandRaw, responseHandler, (firedCommand) ->
         commandName = firedCommand.name
-        responses = responseHandler.responses
-        output = responseHandler.output()
+        responses   = responseHandler.responses
+        output      = responseHandler.data
         if responses or output
           results[commandName] = {}
-          if output
-            results[commandName].response = output
+          if output then results[commandName].response = output
           else
             results[commandName].response = ''
             for response in responses
               results[commandName].response += " " + response.res
               results[commandName].response =
               results[commandName].response.trim()
-        if firedCommand.ASAP and !firedCommand.wasAlias
-          console.log 'temp'
         if commandsProcessed == commands.length
-          return respond firedCommand
+          return done()
+        if firedCommand.ASAP and !firedCommand.wasAlias
+          responseHandler.respond()
         responseHandler.reset()
         next()
       )
     ), (err) ->
-      return respond()
+      return done()
 
 module.exports = CmdHandler
