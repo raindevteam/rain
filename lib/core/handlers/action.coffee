@@ -1,8 +1,7 @@
 class Action
-  constructor: (responseHandler, commandHandler, bot) ->
+  constructor: (responseHandler, commandHandler) ->
     @commandHandler = commandHandler
     @responseHandler = responseHandler
-    @bot = bot
 
   setResponseProperties: (properties) ->
     @responseHandler.setProperties(properties)
@@ -11,17 +10,12 @@ class Action
     if action.trigger @responseHandler.properties
       return callback(true)
 
-  actionRespond: (responses) ->
-      for response in responses
-        if (response.length > 250) then return # temp
-        @bot[response.method](response.to, response.res)
-
   fireTrigger: (trigger) ->
     if !trigger then return
     @responseHandler.reset()
     self = this
     action = trigger.action @responseHandler, () ->
-      self.actionRespond self.responseHandler.responses
+      self.responseHandler.respond()
 
   fireCommand: (commandText) ->
     if !commandText then return
@@ -29,6 +23,6 @@ class Action
     commands = @commandHandler.getCommands(commandText)
     self = this
     @commandHandler.run commands, @responseHandler, (lastAction) ->
-      self.actionRespond self.responseHandler.responses
+      self.responseHandler.respond()
 
 module.exports = Action

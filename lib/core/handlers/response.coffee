@@ -1,7 +1,8 @@
 class ResponseHandler
-  constructor: () ->
+  constructor: (bot) ->
     @responses = []
     @properties = {}
+    @bot = bot
 
   setProperties: (properties) ->
     @properties = {}
@@ -19,6 +20,11 @@ class ResponseHandler
       method: 'action'
       to: @properties.to
       res: response
+
+  respond: () ->
+    for response in @responses
+      if (response.length > 250) then return # temp
+      @bot[response.method](response.to, response.res)
 
   output: (data) ->
     @data = data
