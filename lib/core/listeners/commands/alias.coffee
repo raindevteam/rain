@@ -1,4 +1,5 @@
 core = __core
+_    = require('lodash')
 
 module.exports =
   ### == alias (command) ==
@@ -11,7 +12,7 @@ module.exports =
         respond.say 'Removed Alias: ' + args[1]
       else
         alias = args[0]
-        command = args[1]
+        command = _.drop(args).join(' ')
         if !alias
           respond.say 'No alias name entered!'
           return done()
