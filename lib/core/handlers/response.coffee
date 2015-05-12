@@ -23,7 +23,6 @@ class ResponseHandler
       res: response
 
   respond: () ->
-    console.log 'responding'
     for response in @responses
       if (response.length > 250) then return # temp
       self = @

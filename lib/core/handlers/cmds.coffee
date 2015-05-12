@@ -14,9 +14,12 @@ class CmdHandler
   # Receives a raw command text line and parses it into an array
   getCommands: (text) ->
     if @aliasHandler.isAliasCmd(text) then return [text.trim()]
-    cmds = [], lastpipe = 0, pipe = 0, lastnest = 0
+    cmds = []
+    lastpipe = 0
+    pipe = 0
+    lastnest = 0
     # Magic, caution hot, do not touch!
-    while (pipe = text.indexOf('|', lastpipe))
+    while (pipe = text.indexOf('|', lastpipe)) > -1
       esc   = text.indexOf('\\|', lastpipe)
       dpipe = text.indexOf('||', lastpipe)
       if esc + 1 != pipe and dpipe != pipe

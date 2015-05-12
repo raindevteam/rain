@@ -1,35 +1,42 @@
 hashmap = require('hashmap')
-fs      = require('fs') 
+fs      = require('fs')
+config  = require(__config)
 
 class Alias
   constructor: (@trigger) ->
     @aliases = new hashmap()
     @file = '/aliases.txt'
-    
+
   isAlias: (alias) ->
     return @aliases.get(alias) != undefined
-  
+
   getAlias: (alias) ->
     return @aliases.get(alias)
-  
+
   addAlias: (alias, cmd) ->
     @aliases.set(alias, cmd)
     @writeAlias()
-  
+
   deleteAlias: (alias) ->
     @aliases.remove(alias)
     @writeAlias()
-    
+
   writeAlias: (alias, cmd) ->
     file = fs.createWriteStream(__dirname + @file)
     @aliases.forEach (value, key) ->
       if value
         file.write(key + ':' + value + '\n')
     file.end()
-    
+
   isAliasCmd: (text) ->
-    return @trigger.cmd(text, 'alias')
-  
+    if config.bang == 'front'
+      if text.match(/^!/)
+        return text.match(/^!(\S+)/)[1].lower() == 'alias'
+    else
+      if text.has('!')
+        return text.before('!').trim().lower() == 'alias'
+      else false
+
   loadAliases: () ->
     self = this
     fs.readFile __dirname + @file, (err, data) ->
@@ -42,6 +49,5 @@ class Alias
           alias[0] = line.before(':')
           alias[1] = line.after(':')
           self.aliases.set alias[0], alias[1]
-    
+
 module.exports = Alias
-  

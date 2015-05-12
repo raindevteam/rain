@@ -99,15 +99,14 @@ class Core
   listen: (callback) ->
     self = @
 
-    ###
+    # Notice
     @bot.addListener 'notice', (nick, to, text, msg) ->
+      action = self.getNewActionHandler()
       if !self.bot.sleep
-        self.action.setResponseProperties
-           from: nick, to: to, text: text, msg: msg
+        action.setResponseProperties from: nick, to: to, text: text, msg: msg
         async.each self.triggers['notice'],
-        self.action.handle.bind(self.action), (err) ->
+        action.handle.bind(action), (err) ->
           if err then console.error 'Problem firing notice triggers'
-    ###
 
     # Names Events
     @bot.addListener 'names', (channel, nicks) ->
@@ -118,17 +117,25 @@ class Core
         action.handle.bind(action), (err) ->
           if err then console.error 'Problem firing names triggers'
 
-    ###
+
     # Join Events
-    _bot.addListener 'join', (channel, nick, msg) ->
-      for module in modules
-        module.fire('join', [channel, nick, msg], exports.ACTION_RESPOND)
+    @bot.addListener 'join', (channel, nick, msg) ->
+      action = self.getNewActionHandler()
+      if !self.bot.sleep
+        action.setResponseProperties channel: channel, nick: nick, msg: msg
+        async.each self.triggers['join'],
+        action.handle.bind(action), (err) ->
+          if err then console.error 'Problem firing names triggers'
 
     # Nicks Events
-    _bot.addListener 'nick', (oldnick, newnick, channels, msg) ->
-      for module in modules
-        module.fire('nick', [oldnick, newnick, channels, msg], exports.ACTION_RESPOND)
-    ###
+    @bot.addListener 'nick', (oldnick, newnick, channels, msg) ->
+      action = self.getNewActionHandler()
+      if !self.bot.sleep
+        action.setResponseProperties
+          oldnick: oldnick, newnick: newnick, channels: channels, msg: msg
+        async.each self.triggers['nick'],
+        action.handle.bind(action), (err) ->
+          if err then console.error 'Problem firing names triggers'
 
     # Message Events
     @bot.addListener 'message', (nick, to, text, msg) ->
@@ -137,11 +144,10 @@ class Core
         action.setResponseProperties
           from: nick, to: to, text: text, msg: msg
         if self.command.isCommand(text)
-          self.bot.say(to, "test")
-          #action.fireCommand text.after(defined.MSG_TRIGGER+1).clean()
-        #else
-          #async.detect self.triggers['message'],
-          #action.triggered.bind(action), action.fireTrigger.bind(action)
+          action.fireCommand text.after(defined.MSG_TRIGGER+1).clean()
+        else
+          async.detect self.triggers['message'],
+          action.triggered.bind(action), action.fireTrigger.bind(action)
 
     # PM Events
     @bot.addListener 'pm', (nick, text, msgs) ->

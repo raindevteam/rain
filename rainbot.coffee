@@ -3,7 +3,7 @@ global.__config = __dirname + '/config'
 global.__models = __dirname + '/config/models'
 global.__debug  = __dirname + '/lib/debug'
 
-Core          = require('./lib/core/core')
+Core          = require('./lib/core')
 global.__core = new Core()
 
 irc      = require('irc')
@@ -20,7 +20,7 @@ if config.db
   mongoose.connect(config.db)
 
 # Create the bot
-bot = new (irc.Client) 'irc.canternet.org', config.nick,
+bot = new (irc.Client) config.server, config.nick,
   userName: "RainbotDev"
   realName: "Rainbot"
   autoConnect: false
