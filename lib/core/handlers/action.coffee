@@ -23,10 +23,12 @@ class Action
       self.responseHandler.respond()
 
   fireCommand: (commandText) ->
+    console.log commandText
     if !commandText then return
-    @responseHandler.reset()
+    console.log 'here????'
     commands = @commandHandler.getCommands(commandText)
     self = this
+    console.log 'um'
     @commandHandler.run commands, @responseHandler, (lastAction) ->
       self.responseHandler.respond()
 

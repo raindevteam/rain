@@ -9,12 +9,13 @@ module.exports =
     ASAP: false
     action: (args, respond, done) ->
       info = config.info
-      respond.say
-      'I\'m ' + info['description'] +
-      ' ' + 'written with ' +
-      info['writtenIn'] + ' ' +
-      'by ' + info['developer'] +
-      ' ' + '[Version: ' +
-      info['version'] + ' ' +
-      '(' + info['versionName'] + ')]'
+      respond.say(
+        'I\'m ' + info['description'] +
+        ' ' + 'written with ' +
+        info['writtenIn'] + ' ' +
+        'by ' + info['developer'] +
+        ' ' + '[Version: ' +
+        info['version'] + ' ' +
+        '(' + info['versionName'] + ')]'
+        )
       return done()
