@@ -4,7 +4,7 @@
   "dependencies": {
     "async": "^0.9.0",
     "hashmap": "^2.0.1",
-    "irc": "*",
+    "irc": "^0.3.12",
     "lodash": "^3.7.0",
     "mathjs": "^1.5.2",
     "mongoose": "^3.8.24",
