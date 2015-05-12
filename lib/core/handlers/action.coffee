@@ -10,6 +10,11 @@ class Action
     if action.trigger @responseHandler.properties
       return callback(true)
 
+  handle: (action, callback) ->
+    if action.trigger @responseHandler.properties
+      @fireTrigger(action)
+    callback(null)
+
   fireTrigger: (trigger) ->
     if !trigger then return
     @responseHandler.reset()

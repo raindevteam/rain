@@ -1,30 +1,33 @@
+bot = undefined
+
 class ResponseHandler
   constructor: (bot) ->
     @responses = []
     @properties = {}
-    @bot = bot
 
   setProperties: (properties) ->
     @properties = {}
     for name, prop of properties
-      @properties[name] = prop
+      @[name] = prop
 
   say: (response) ->
     @responses.push
       method: 'say'
-      to: @properties.to
+      to: @to
       res: response
 
   action: (response) ->
     @responses.push
       method: 'action'
-      to: @properties.to
+      to: @to
       res: response
 
   respond: () ->
+    console.log 'responding'
     for response in @responses
       if (response.length > 250) then return # temp
-      @bot[response.method](response.to, response.res)
+      self = @
+      setImmediate(() -> bot[response.method](response.to, response.res))
 
   output: (data) ->
     @data = data
@@ -33,4 +36,6 @@ class ResponseHandler
     @responses = []
     @data      = undefined
 
-module.exports = ResponseHandler
+module.exports = (_bot) ->
+  bot = _bot
+  return ResponseHandler
