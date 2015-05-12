@@ -42,6 +42,9 @@ class Core
             self.triggers[event].push listener
       return callback()
 
+  getNewActionHandler: () ->
+    return new @ActionHandler(new @ResponseHandler(), @command)
+
   preload: () ->
     for event in @events
       @triggers[event] = []
@@ -51,8 +54,7 @@ class Core
     @trigger        = new TriggerHandler()
 
     # Response Handler
-    ResponseHandler = require('./handlers/response')
-    @response        = new ResponseHandler(@bot)
+    @ResponseHandler = require('./handlers/response')(@bot)
 
     # Alias Handler
     AliasHandler    = require('./handlers/alias')
@@ -64,8 +66,7 @@ class Core
     @command         = new CommandHandler(@alias, @commands)
 
     # Action Handler
-    ActionHandler = require('./handlers/action')
-    @action        = new ActionHandler(@response, @command)
+    @ActionHandler = require('./handlers/action')
 
   load: (callback) ->
     self = @
@@ -98,20 +99,26 @@ class Core
   listen: (callback) ->
     self = @
 
+    ###
     @bot.addListener 'notice', (nick, to, text, msg) ->
       if !self.bot.sleep
         self.action.setResponseProperties
            from: nick, to: to, text: text, msg: msg
-        async.detect self.triggers['notice'],
-        self.action.triggered.bind(self.action),
-        self.action.fireTrigger.bind(self.action)
+        async.each self.triggers['notice'],
+        self.action.handle.bind(self.action), (err) ->
+          if err then console.error 'Problem firing notice triggers'
+    ###
+
+    # Names Events
+    @bot.addListener 'names', (channel, nicks) ->
+      action = self.getNewActionHandler()
+      if !self.bot.sleep
+        action.setResponseProperties channel: channel, nicks: nicks
+        async.each self.triggers['names'],
+        action.handle.bind(action), (err) ->
+          if err then console.error 'Problem firing names triggers'
 
     ###
-    # Names Events
-    _bot.addListener 'names', (channel, nicks) ->
-      for module in modules
-        module.fire('names', [channel, nicks], exports.ACTION_RESPOND)
-
     # Join Events
     _bot.addListener 'join', (channel, nick, msg) ->
       for module in modules
@@ -125,31 +132,29 @@ class Core
 
     # Message Events
     @bot.addListener 'message', (nick, to, text, msg) ->
+      action = self.getNewActionHandler()
       if !self.bot.sleep
-        self.action.setResponseProperties
+        action.setResponseProperties
           from: nick, to: to, text: text, msg: msg
         if self.command.isCommand(text)
-          self.action.fireCommand text.after(defined.MSG_TRIGGER+1).clean()
-        else
-          async.detect self.triggers['message'],
-          self.action.triggered.bind(self.action),
-          self.action.fireTrigger.bind(self.action)
+          self.bot.say(to, "test")
+          #action.fireCommand text.after(defined.MSG_TRIGGER+1).clean()
+        #else
+          #async.detect self.triggers['message'],
+          #action.triggered.bind(action), action.fireTrigger.bind(action)
 
     # PM Events
     @bot.addListener 'pm', (nick, text, msgs) ->
-      if !self.bot.sleep then return
 
     # Channellist Events
     @bot.addListener 'channellist', (channel_list) ->
-      console.log channel_list
 
     # Error Events
     @bot.addListener 'error', (message) ->
-      console.log message
+      console.log "from error " + message
 
     # Raw Events
     @bot.addListener 'raw', (message) ->
-      if !self.bot.sleep then return
 
     # Everythings ready! Return to caller!
     return callback()
@@ -168,7 +173,7 @@ class Core
   channelSwitch: (JOIN, LEAVE, TO) ->
     if JOIN
       @gate JOIN
-      _bot.say TO, 'Joined ' + JOIN
+      @bot.say TO, 'Joined ' + JOIN
     if LEAVE
       @bot.part LEAVE
       @bot.say TO, "Left " + LEAVE
