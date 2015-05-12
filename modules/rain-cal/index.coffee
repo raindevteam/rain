@@ -11,7 +11,7 @@ commands =
         res = parser.eval(eqt)
       catch e # Quietly fail
       # Return result if not a function
-      respond.say to, res if !__core.helpers.isFunction(res)
+      respond.say res if !__core.helpers.isFunction(res)
       done()
 
 module.exports = (Module) ->
