@@ -9,7 +9,7 @@ module.exports =
     trigger: (message) -> return true
     action: (respond, done) ->
       if !bot.nicks then bot.nicks = []
-      for key of nicks
+      for key of bot.nicks
         if !bot.nicks.indexOf(key)
           bot.nicks.push key
       return done()

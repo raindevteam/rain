@@ -11,28 +11,26 @@ class CmdHandler
   isCommand: (text) ->
     return text.trim().lower().has(defined.MSG_TRIGGER)
 
+  # Receives a raw command text line and parses it into an array
   getCommands: (text) ->
     if @aliasHandler.isAliasCmd(text) then return [text.trim()]
-    cmds     = []
-    lastpipe = 0
-    pipe     = 0
-    lastnest = 0
+    cmds = [], lastpipe = 0, pipe = 0, lastnest = 0
     # Magic, caution hot, do not touch!
-    while (pipe = text.indexOf('|', lastpipe)) > -1
+    while (pipe = text.indexOf('|', lastpipe))
       esc   = text.indexOf('\\|', lastpipe)
       dpipe = text.indexOf('||', lastpipe)
       if esc + 1 != pipe and dpipe != pipe
         cmd = text.before('|', lastpipe).trim()
         if cmd.trim() then cmds.push(cmd.trim())
         text = text.substring(pipe + 1)
-        lastpipe = pipe+1 - (cmd.length)
+        lastpipe = pipe + 1 - (cmd.length)
       else if dpipe and dpipe == pipe
         pipeContRe = /\|(?!\|)/g
         sub = text.substring(lastpipe)
         cutLen = text.indexOf(sub)
         pipeContRe.exec(sub)
         lastpipe = pipeContRe.lastIndex + cutLen
-      else if esc and esc+1 == pipe
+      else if esc and esc + 1 == pipe
         lastpipe = esc + 1
         text = text.substring(0, esc) + "|" + text.substring(esc+2)
     if text.trim() then cmds.push(text.trim())
@@ -59,16 +57,21 @@ class CmdHandler
   executeCommand: (commandRaw, responseHandler, done) ->
     commandName = @getCommandName(commandRaw)
     commandArgs = @getCommandArgs(commandRaw)
-    if !commandName then return
+    if !commandName then return done()
     # if !core.WHITELISTED commandName, ar then done({})
     if @aliasHandler.isAlias commandName
       aliasCommands = @getCommands(@aliasHandler.getAlias(commandName))
       @run aliasCommands, responseHandler, (lastCommand) ->
-         lastCommand.name = commandName
-         lastCommand.wasAlias = true
+         if lastCommand
+           lastCommand.name = commandName
+           lastCommand.wasAlias = true
          return done lastCommand
     else if @commands.has(commandName.trim())
       command = @commands.get(commandName)
+      if responseHandler.to == config.nick # is PM
+        if command.pm && command.pm == false then return done {}
+      else
+        if command.msg && command.msg == false then return done {}
       action = command.action commandArgs, responseHandler, () ->
         command.name = commandName
         return done command
@@ -87,6 +90,7 @@ class CmdHandler
             commandRaw =
               commandRaw.replace('{'+nest+'}', results[nest].response)
       self.executeCommand(commandRaw, responseHandler, (firedCommand) ->
+        if !firedCommand then return done()
         commandName = firedCommand.name
         responses   = responseHandler.responses
         output      = responseHandler.data
