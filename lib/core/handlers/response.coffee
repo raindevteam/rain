@@ -23,10 +23,10 @@ class ResponseHandler
       res: response
 
   respond: () ->
+    console.log @responses
     for response in @responses
       if (response.length > 250) then return # temp
-      self = @
-      setImmediate(() -> bot[response.method](response.to, response.res))
+      bot[response.method](response.to, response.res)
 
   output: (data) ->
     @data = data
