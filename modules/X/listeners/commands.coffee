@@ -27,15 +27,3 @@ module.exports =
       respond.say result
       respond.output rolls
       return done()
-
-  testSend:
-    ASAP: true
-    action: (args, respond, done) ->
-      interval = 2000
-      donen = 0
-      setInterval (->
-        __core.bot.say 'NickServ', 'acc RainBot RainBot'
-        donen++
-        if (donen == 10)
-          return done()
-      ), interval
