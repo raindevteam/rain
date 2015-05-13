@@ -10,7 +10,7 @@ module.exports =
 
   info:
     description : 'a multipurpose IRC botpony'
-    version     : 'STG 3.3.15'
+    version     : '3.3.15'
     versionName : 'Xenith'
     developer   : 'MistaWolf'
     writtenIn   : 'node.js'
