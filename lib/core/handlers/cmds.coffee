@@ -54,7 +54,9 @@ class CmdHandler
         return _.drop(commandRaw.split(' '))
     else
       if commandRaw.has('!')
-        return commandRaw.after('!').trim().split(' ')
+        args = commandRaw.after('!').trim()
+        if args then return args.split(' ')
+        else return []
       else null
 
   executeCommand: (commandRaw, responseHandler, done) ->
