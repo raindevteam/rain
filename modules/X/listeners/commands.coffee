@@ -15,15 +15,12 @@ module.exports =
 
   roll:
     action: (args, respond, done) ->
+      console.log args + " " + args.length
       reps = 1
-      if !args.length
-        reps = 1
-      reps = args[0] if (!isNaN(args[0]))
+      if args.length > 0 and !isNaN(args[0])
+        reps = args[0]
       rolls = []
       for i in [0...reps]
         rolls.push(randomIntFromInterval(1, 6))
-      result = 0
-      result += roll for roll in rolls
-      respond.say result
-      respond.output rolls
+      respond.say rolls
       return done()

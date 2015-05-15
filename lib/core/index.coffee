@@ -166,15 +166,16 @@ class Core
     return callback()
 
   idle: () ->
+    self = @
     @bot.sleep = true
     @bot.addListener 'raw', wake = (message) ->
       if message['command'] == 'PRIVMSG'
-        if @trigger.cmd(message['args'][1], 'wake') and
+        if self.trigger.cmd(message['args'][1], 'wake') and
         _.includes(config.whitelist, message.nick)
-          @bot.sleep = false
-          @bot.removeListener 'raw', wake
-          @bot.action message['args'][0], 'Gets up from idling'
-          @bot.say message['args'][0], 'Systems online'
+          self.bot.sleep = false
+          self.bot.removeListener 'raw', wake
+          self.bot.action message['args'][0], 'Gets up from idling'
+          self.bot.say message['args'][0], 'Systems online'
 
   channelSwitch: (JOIN, LEAVE, TO) ->
     if JOIN

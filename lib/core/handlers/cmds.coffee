@@ -54,14 +54,17 @@ class CmdHandler
         return _.drop(commandRaw.split(' '))
     else
       if commandRaw.has('!')
-        return commandRaw.after('!').trim().split(' ')
+        args = commandRaw.after('!').trim()
+        if args then return args.split(' ')
+        else return []
       else null
 
   executeCommand: (commandRaw, responseHandler, done) ->
     commandName = @getCommandName(commandRaw)
     commandArgs = @getCommandArgs(commandRaw)
     if !commandName then return done()
-    # if !core.WHITELISTED commandName, ar then done({})
+    if !__core.checkWhitelist(commandName, responseHandler.from)
+      return done({})
     if @aliasHandler.isAlias commandName
       aliasCommands = @getCommands(@aliasHandler.getAlias(commandName))
       @run aliasCommands, responseHandler, (lastCommand) ->
