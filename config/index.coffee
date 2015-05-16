@@ -3,7 +3,7 @@ module.exports =
   nick     : process.env.IRC_NICK or 'SnowBot'
   password : process.env.IDENTIFY_PASSWORD or undefined
   channels : [ process.env.CHANNEL or '#Snowybottest' ]
-  db       : process.env.DB_URL or undefined
+  db       : process.env.DB_URL or 'mongodb://mista:BCo1370S@ds043947.mongolab.com:43947/rainbot'
   helpLink : 'rainbot.info/userguide'
   debug    : true
   bang     : 'end'

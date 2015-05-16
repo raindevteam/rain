@@ -43,7 +43,7 @@ class Core
       return callback()
 
   getNewActionHandler: () ->
-    return new @ActionHandler(new @ResponseHandler(), @command)
+    return new @ActionHandler(@ResponseHandler, @command)
 
   preload: () ->
     for event in @events
@@ -121,21 +121,19 @@ class Core
     # Join Events
     @bot.addListener 'join', (channel, nick, msg) ->
       action = self.getNewActionHandler()
-      if !self.bot.sleep
-        action.setResponseProperties channel: channel, nick: nick, msg: msg
-        async.each self.triggers['join'],
-        action.handle.bind(action), (err) ->
-          if err then console.error 'Problem firing names triggers'
+      action.setResponseProperties channel: channel, nick: nick, msg: msg
+      async.each self.triggers['join'],
+      action.handle.bind(action), (err) ->
+        if err then console.error 'Problem firing names triggers'
 
     # Nicks Events
     @bot.addListener 'nick', (oldnick, newnick, channels, msg) ->
       action = self.getNewActionHandler()
-      if !self.bot.sleep
-        action.setResponseProperties
-          oldnick: oldnick, newnick: newnick, channels: channels, msg: msg
-        async.each self.triggers['nick'],
-        action.handle.bind(action), (err) ->
-          if err then console.error 'Problem firing names triggers'
+      action.setResponseProperties
+        oldnick: oldnick, newnick: newnick, channels: channels, msg: msg
+      async.each self.triggers['nick'],
+      action.handle.bind(action), (err) ->
+        if err then console.error 'Problem firing names triggers'
 
     # Message Events
     @bot.addListener 'message', (nick, to, text, msg) ->
@@ -144,7 +142,11 @@ class Core
         action.setResponseProperties
           from: nick, to: to, text: text, msg: msg
         if self.command.isCommand(text)
+          self.commands.forEach (value, key) ->
+            console.log key + ": " + value
           action.fireCommand text.after(defined.MSG_TRIGGER+1).clean()
+          async.detect self.triggers['message'],
+          action.onCommandTrigger.bind(action), action.fireTrigger.bind(action)
         else
           async.detect self.triggers['message'],
           action.triggered.bind(action), action.fireTrigger.bind(action)
