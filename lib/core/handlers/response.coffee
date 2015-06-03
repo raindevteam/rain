@@ -11,7 +11,6 @@ class ResponseHandler
       @[name] = prop
 
   say: (response) ->
-    console.log 'got response'
     @responses.push
       method: 'say'
       to: @to
@@ -24,8 +23,6 @@ class ResponseHandler
       res: response
 
   respond: () ->
-    console.log @responses
-    console.log 'responding now'
     for response in @responses
       if (response.length > 250) then return # temp
       bot[response.method](response.to, response.res)

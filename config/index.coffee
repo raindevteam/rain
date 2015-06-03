@@ -5,12 +5,12 @@ module.exports =
   channels : [ process.env.CHANNEL or '#Snowybottest' ]
   db       : process.env.DB_URL or 'mongodb://mista:BCo1370S@ds043947.mongolab.com:43947/rainbot'
   helpLink : 'rainbot.info/userguide'
-  debug    : true
+  loggingLevel : true
   bang     : 'end'
 
   info:
     description : 'a multipurpose IRC botpony'
-    version     : '3.3.15'
+    version     : 'DEV 3.4.41'
     versionName : 'Xenith'
     developer   : 'MistaWolf'
     writtenIn   : 'node.js'

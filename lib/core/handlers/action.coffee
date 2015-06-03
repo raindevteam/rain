@@ -34,7 +34,6 @@ class Action
     responseHandler.setProperties(@properties)
     commands = @commandHandler.getCommands(commandText)
     @commandHandler.run commands, responseHandler, (lastAction) ->
-      console.log 'returned from firing commands'
       responseHandler.respond()
 
 module.exports = Action

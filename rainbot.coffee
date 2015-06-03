@@ -1,28 +1,29 @@
 # Globals for use in modules and listeners
-global.__config = __dirname + '/config'
-global.__models = __dirname + '/config/models'
-global.__debug  = __dirname + '/lib/debug'
+global.__config    = __dirname + '/config'
+global.__models    = __dirname + '/config/models'
+global.__rainUtil  = __dirname + '/lib/rainUtil'
 
-Core          = require('./lib/core')
+Core          = require './lib/core'
 global.__core = new Core()
 
-irc      = require('irc')
-config   = require(__config)
-debug    = require(__debug)
-string   = require('./lib/string')
-mongoose = require('mongoose')
+irc      = require 'irc'
+config   = require __config
+rainUtil = require __rainUtil
+string   = require './lib/string'
+mongoose = require 'mongoose'
 
 # Set the level of debugging
-debug.set(config.debug)
+rainUtil.loggingLevel config.loggingLevel
+rainUtil.setPrompt "RainBot "
 
 # Connect to the database
 if config.db
-  mongoose.connect(config.db)
+  mongoose.connect config.db
 
 # Create the bot
 bot = new (irc.Client) config.server, config.nick,
-  userName: "RainbotDev"
-  realName: "Rainbot"
+  userName: "RainBotDev"
+  realName: "RainBot"
   autoConnect: false
   port: 6667
   debug: true

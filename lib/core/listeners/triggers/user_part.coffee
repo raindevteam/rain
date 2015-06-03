@@ -9,6 +9,6 @@ module.exports =
     event: 'part'
     trigger: (message) -> return true
     action: (respond, done) ->
-      if bot.nicks.indexOf(nick)
-        _.pull(bot.nicks, nick)
+      if bot.nicks.indexOf(respond.nick)
+        _.pull(bot.nicks, respond.nick)
       return done()

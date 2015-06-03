@@ -75,6 +75,7 @@ class CmdHandler
     else if @commands.has(commandName.trim())
       command = @commands.get(commandName)
       if responseHandler.to == config.nick # is PM
+        responseHandler.to = responseHandler.from
         if command.pm && command.pm == false then return done {}
       else
         if command.msg && command.msg == false then return done {}
@@ -96,7 +97,6 @@ class CmdHandler
             commandRaw =
               commandRaw.replace('{'+nest+'}', results[nest].response)
       self.executeCommand(commandRaw, responseHandler, (firedCommand) ->
-        console.log 'firing'
         if !firedCommand then return done()
         commandName = firedCommand.name
         responses   = responseHandler.responses
@@ -111,16 +111,13 @@ class CmdHandler
               results[commandName].response =
               results[commandName].response.trim()
         if commandsProcessed == commands.length
-          console.log 'done with commands'
           return done()
         if firedCommand.ASAP and !firedCommand.wasAlias
-          console.log 'firing asap'
           responseHandler.respond()
         responseHandler.reset()
         next()
       )
     ), (err) ->
-      console.log 'ever here'
       return done()
 
 module.exports = CmdHandler

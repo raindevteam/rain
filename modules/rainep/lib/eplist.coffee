@@ -6,18 +6,7 @@ buffer  = undefined
 eplist = new hashmap
 file   = '/eplist.txt'
 
-# == readFile(callback)
-#
-#  Reads a file with episode identifiers and
-#  titles, then loads them into the hashmap eplist.
-#
-#  @Param callback
-#  Function to call when finished
-#  buffering lines in file.
-#
-#  @Return callback()
-#  Fires callback
-#
+# Read eplist.txt and load data into hashmap
 fs.readFile __dirname + file, (err, data) ->
   raw    = data.toString()
   buffer = raw.split('\n')
@@ -26,27 +15,27 @@ fs.readFile __dirname + file, (err, data) ->
     ep = line.split(':')
     eplist.set ep[0], ep[1]
 
-# == get_rand_ep()
+# (exports) get_rand_ep ()
 #
 #  Returns a random hashmap value, or in
 #  other terms, returns a random episode.
-#
+
 exports.get_rand_ep = ->
   keys = eplist.keys()
   rand_index = Math.floor(Math.random() * keys.length)
   [ keys[rand_index], eplist.get(keys[rand_index]) ]
 
-# get_ep(key)
-#   Returns the associated value of key
-# Params:
-#   key - The key of the episode in the hashmap
-# Return:
-#   The value of the key in hashmap
+# (exports) get_ep (String key)
+# Retrieves episode from hashmap with given key
+
 exports.get_ep = (key) ->
   eplist.get key
 
-# key_to_readable()
-#   Returns a properly formatted string from key
+# (exports) key_to_readable (String key)
+#
+# Returns a user friendly formatted string with
+# season and episode information
+
 exports.key_to_readable = (key) ->
   s_pos = key.indexOf('s')
   e_pos = key.indexOf('e')

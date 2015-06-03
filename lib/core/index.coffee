@@ -126,6 +126,23 @@ class Core
       action.handle.bind(action), (err) ->
         if err then console.error 'Problem firing names triggers'
 
+    @bot.addListener 'part', (channel, nick, reason, msg) ->
+      console.log 'parting for ' + nick + ' from ' + channel
+      action = self.getNewActionHandler()
+      action.setResponseProperties
+        channel: channel, nick: nick, reason: reason, msg: msg
+      async.each self.triggers['part'],
+      action.handle.bind(action), (err) ->
+        if err then console.error 'Problem firing names triggers'
+
+    @bot.addListener 'quit', (nick, reason, channels, msg) ->
+      action = self.getNewActionHandler()
+      action.setResponseProperties
+        nick: nick, reason: reason, channels: channels, msg: msg
+      async.each self.triggers['quit'],
+      action.handle.bind(action), (err) ->
+        if err then console.error 'Problem firing names triggers'
+
     # Nicks Events
     @bot.addListener 'nick', (oldnick, newnick, channels, msg) ->
       action = self.getNewActionHandler()
@@ -142,17 +159,30 @@ class Core
         action.setResponseProperties
           from: nick, to: to, text: text, msg: msg
         if self.command.isCommand(text)
-          self.commands.forEach (value, key) ->
-            console.log key + ": " + value
           action.fireCommand text.after(defined.MSG_TRIGGER+1).clean()
-          async.detect self.triggers['message'],
-          action.onCommandTrigger.bind(action), action.fireTrigger.bind(action)
+          # async.each self.triggers['message'],
+          # action.onCommandTrigger.bind(action)
         else
-          async.detect self.triggers['message'],
-          action.triggered.bind(action), action.fireTrigger.bind(action)
+          async.each self.triggers['message'],
+          action.handle.bind(action), (err) ->
+
+    @bot.addListener 'action', (from, to, text, msg) ->
+      action = self.getNewActionHandler()
+      action.setResponseProperties
+        from: from, to: to, text: text, msg: msg
+      async.each self.triggers['action'],
+      action.handle.bind(action), (err) ->
+        if err then console.error 'Problem firing names triggers'
 
     # PM Events
-    @bot.addListener 'pm', (nick, text, msgs) ->
+    @bot.addListener 'pm', (nick, text, msg) ->
+      action = self.getNewActionHandler()
+      if !self.bot.sleep
+        action.setResponseProperties
+          from: nick, to: config.nick, text: text, msg: msg
+        action.fireCommand text.clean()
+        async.detect self.triggers['message'],
+        action.onCommandTrigger.bind(action), action.fireTrigger.bind(action)
 
     # Channellist Events
     @bot.addListener 'channellist', (channel_list) ->

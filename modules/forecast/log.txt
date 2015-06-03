@@ -1,3 +1,2316 @@
-
-[2015-04-02 02:09:46] log: MistaWolf pushed to new ACC: Mista
-[2015-04-03 05:54:41] log: Snowy pushed to ACC: SnowFeather
+RainBot [07:19:48][log] reset -> #snowybottest :
+RainBot [07:19:48][log] push -> #snowybottest : [RainBot ChanServ Eventide|Sleepies MistaWolf SnowBot]
+RainBot [07:21:10][log] reset -> #snowybottest :
+RainBot [07:21:10][log] push -> #snowybottest : [RainBot ChanServ Eventide|Sleepies MistaWolf SnowBot]
+RainBot [07:22:00][log] reset -> #snowybottest :
+RainBot [07:22:00][log] push -> #snowybottest : [RainBot ChanServ Eventide|Sleepies MistaWolf SnowBot]
+RainBot [07:22:01][log] Creating user for RainBot
+RainBot [07:22:01][log] Done creating user for RainBot
+RainBot [07:22:01][log] Added channel #snowybottest to RainBot (RainBot)
+RainBot [07:22:05][log] Creating user for MistaWolf
+RainBot [07:22:06][log] Done creating user for MistaWolf
+RainBot [07:22:06][log] Added channel #snowybottest to MistaWolf (Mista)
+RainBot [07:22:28][log] message -> #snowybottest : MistaWolf SnowBot, !q MistaWolf
+RainBot [07:22:50][log] message -> #snowybottest : MistaWolf This is a test string
+RainBot [07:27:33][log] message -> #snowybottest : MistaWolf SnowBot, !q MistaWolf
+RainBot [07:30:37][log] message -> #snowybottest : MistaWolf SnowBot, !cal 5 + 7 
+RainBot [21:21:29][log] reset -> #snowybottest :
+RainBot [21:21:30][log] push -> #snowybottest : [RainBot ChanServ Eventide MistaWolf SnowBot]
+RainBot [21:21:34][log] Creating user for Eventide
+RainBot [21:21:34][log] Done creating user for Eventide
+RainBot [21:21:34][log] Added channel #snowybottest to Eventide (Dustrunner)
+RainBot [21:21:49][log] message -> #snowybottest : MistaWolf SnowBot, !q MistaWolf word
+RainBot [21:22:14][log] reset -> #snowybottest :
+RainBot [21:22:14][log] push -> #snowybottest : [RainBot ChanServ Eventide MistaWolf SnowBot]
+RainBot [21:23:07][log] reset -> #snowybottest :
+RainBot [21:23:07][log] push -> #snowybottest : [RainBot ChanServ Eventide SnowBot]
+RainBot [21:23:56][log] push -> #snowybottest : Alfreddy
+RainBot [21:24:29][log] pop -> #snowybottest : Alfreddy
+RainBot [21:26:10][log] push -> #snowybottest : Alfreddy
+RainBot [21:26:33][log] reset -> #Neverfree :
+RainBot [21:26:33][log] push -> #Neverfree : [Googie Dusk AppleDash King_Sombra GyroTech Moonlightning Dust RainBot Boulder ZeroItamae bikey Pocky OctaveMobile Grace MaudBot Cloud_Zephyr|Away batpony Luna Sparkler Sunrise_Flare Octave|Bed Cobalt_Blitz BerryPunch JandalAdjiel Princess-Luna Eventide Stradiverra PinkieBot TimidClef|AFK Mongoosie Inky Starburn RedHelper bucket ThatAnonPony Fall ProncessKurs Rouge_Shadow Ethera SnowBot]
+RainBot [21:26:34][log] Creating user for Googie
+RainBot [21:26:34][log] Done creating user for Googie
+RainBot [21:26:34][log] Added channel #Neverfree to Googie (Googolplexed)
+RainBot [21:26:36][log] Creating user for Dusk
+RainBot [21:26:36][log] Done creating user for Dusk
+RainBot [21:26:36][log] Added channel #Neverfree to Dusk (Dusk)
+RainBot [21:26:37][log] Creating user for AppleDash
+RainBot [21:26:37][log] Done creating user for AppleDash
+RainBot [21:26:37][log] Added channel #Neverfree to AppleDash (AppleDash)
+RainBot [21:26:39][log] Pushing nick (King_Sombra) to ACC Dustrunner
+RainBot [21:26:39][log] Done pushing nick (King_Sombra) to ACC Dustrunner
+RainBot [21:26:39][log] Added channel #Neverfree to King_Sombra (Dustrunner)
+RainBot [21:26:40][log] Creating user for GyroTech
+RainBot [21:26:40][log] Done creating user for GyroTech
+RainBot [21:26:40][log] Added channel #Neverfree to GyroTech (ThirdSpurs)
+RainBot [21:26:42][log] Creating user for Moonlightning
+RainBot [21:26:42][log] Done creating user for Moonlightning
+RainBot [21:26:42][log] Added channel #Neverfree to Moonlightning (Moonlightning)
+RainBot [21:26:45][log] Added channel #Neverfree to RainBot (RainBot)
+RainBot [21:26:46][log] Creating user for Boulder
+RainBot [21:26:46][log] Done creating user for Boulder
+RainBot [21:26:46][log] Added channel #Neverfree to Boulder (MaudBot)
+RainBot [21:26:48][log] Creating user for ZeroItamae
+RainBot [21:26:48][log] Done creating user for ZeroItamae
+RainBot [21:26:48][log] Added channel #Neverfree to ZeroItamae (ZeroItamae)
+RainBot [21:26:51][log] Creating user for Pocky
+RainBot [21:26:51][log] Done creating user for Pocky
+RainBot [21:26:51][log] Added channel #Neverfree to Pocky (Pocketguns2)
+RainBot [21:26:52][log] Creating user for OctaveMobile
+RainBot [21:26:52][log] Done creating user for OctaveMobile
+RainBot [21:26:52][log] Added channel #Neverfree to OctaveMobile (OctaveSymphony)
+RainBot [21:26:55][log] Pushing nick (MaudBot) to ACC MaudBot
+RainBot [21:26:55][log] Done pushing nick (MaudBot) to ACC MaudBot
+RainBot [21:26:58][log] Creating user for batpony
+RainBot [21:26:58][log] Done creating user for batpony
+RainBot [21:26:58][log] Added channel #Neverfree to batpony (batpony)
+RainBot [21:27:01][log] Creating user for Sparkler
+RainBot [21:27:01][log] Done creating user for Sparkler
+RainBot [21:27:01][log] Added channel #Neverfree to Sparkler (Sparkler)
+RainBot [21:27:02][log] Creating user for Sunrise_Flare
+RainBot [21:27:03][log] Done creating user for Sunrise_Flare
+RainBot [21:27:03][log] Added channel #Neverfree to Sunrise_Flare (Prius)
+RainBot [21:27:05][log] Creating user for Cobalt_Blitz
+RainBot [21:27:05][log] Done creating user for Cobalt_Blitz
+RainBot [21:27:06][log] Added channel #Neverfree to Cobalt_Blitz (Cobalt_Blitz)
+RainBot [21:27:07][log] Creating user for BerryPunch
+RainBot [21:27:07][log] Done creating user for BerryPunch
+RainBot [21:27:07][log] Added channel #Neverfree to BerryPunch (StarlightIronhoof)
+RainBot [21:27:08][log] Creating user for JandalAdjiel
+RainBot [21:27:09][log] Done creating user for JandalAdjiel
+RainBot [21:27:09][log] Added channel #Neverfree to JandalAdjiel (JandalAdjiel)
+RainBot [21:27:10][log] Creating user for Princess-Luna
+RainBot [21:27:10][log] Done creating user for Princess-Luna
+RainBot [21:27:10][log] Added channel #Neverfree to Princess-Luna (VinylScratch)
+RainBot [21:27:13][log] Creating user for Stradiverra
+RainBot [21:27:13][log] Done creating user for Stradiverra
+RainBot [21:27:13][log] Added channel #Neverfree to Stradiverra (Stradiverra)
+RainBot [21:27:14][log] Creating user for PinkieBot
+RainBot [21:27:14][log] Done creating user for PinkieBot
+RainBot [21:27:15][log] Added channel #Neverfree to PinkieBot (PinkieBot)
+RainBot [21:27:17][log] Creating user for Mongoosie
+RainBot [21:27:17][log] Done creating user for Mongoosie
+RainBot [21:27:17][log] Added channel #Neverfree to Mongoosie (Mongoose)
+RainBot [21:27:19][log] Creating user for Inky
+RainBot [21:27:19][log] Done creating user for Inky
+RainBot [21:27:19][log] Added channel #Neverfree to Inky (randomUsr)
+RainBot [21:27:20][log] Creating user for Starburn
+RainBot [21:27:20][log] Done creating user for Starburn
+RainBot [21:27:21][log] Added channel #Neverfree to Starburn (eyeburn)
+RainBot [21:27:22][log] Creating user for RedHelper
+RainBot [21:27:22][log] Done creating user for RedHelper
+RainBot [21:27:22][log] Added channel #Neverfree to RedHelper (RedHelper)
+RainBot [21:27:25][log] Creating user for ThatAnonPony
+RainBot [21:27:25][log] Done creating user for ThatAnonPony
+RainBot [21:27:25][log] Added channel #Neverfree to ThatAnonPony (ThatAnonPony)
+RainBot [21:27:26][log] Creating user for Fall
+RainBot [21:27:26][log] Done creating user for Fall
+RainBot [21:27:26][log] Added channel #Neverfree to Fall (FallSilently)
+RainBot [21:27:29][log] Creating user for Rouge_Shadow
+RainBot [21:27:29][log] Done creating user for Rouge_Shadow
+RainBot [21:27:29][log] Added channel #Neverfree to Rouge_Shadow (Rouge_Shadow)
+RainBot [21:27:31][log] Creating user for Ethera
+RainBot [21:27:31][log] Done creating user for Ethera
+RainBot [21:27:31][log] Added channel #Neverfree to Ethera (Ether)
+RainBot [21:28:16][log] message -> #Neverfree : Eventide SnowBot! 
+RainBot [21:28:29][log] message -> #Neverfree : Eventide SnowBot, q! ThatAnonPony 
+RainBot [21:28:34][log] message -> #Neverfree : Eventide D: 
+RainBot [21:28:57][log] message -> #Neverfree : Eventide SnowBot, q! ThatAnonPony 
+RainBot [21:29:04][log] message -> #Neverfree : Eventide Hm 
+RainBot [21:32:13][log] push -> #snowybottest : MistaWolf 
+RainBot [21:32:13][log] push -> #Neverfree : MistaWolf 
+RainBot [21:32:14][log] Added channel #Neverfree to MistaWolf (Mista)
+RainBot [21:33:11][log] push -> #Neverfree : Ivory_Keys 
+RainBot [21:33:12][log] Creating user for Ivory_Keys
+RainBot [21:33:13][log] Done creating user for Ivory_Keys
+RainBot [21:33:13][log] Added channel #Neverfree to Ivory_Keys (Ivory_Keys)
+RainBot [21:33:20][log] message -> #Neverfree : Ivory_Keys  /m ShellShock Hai. 
+RainBot [21:33:24][log] message -> #Neverfree : Ivory_Keys Damn it. 
+RainBot [21:34:06][log] message -> #Neverfree : Sparkler what 
+RainBot [21:37:19][log] message -> #Neverfree : Eventide AAAAAAARRRREEGGHHFJFFBDGSSVS 
+RainBot [21:37:40][log] message -> #Neverfree : Eventide I fucking swear I'm going to drown myself now 
+RainBot [21:37:45][log] message -> #Neverfree : Sparkler :( 
+RainBot [21:38:14][log] message -> #Neverfree : Eventide I've been working on this for an hour 
+RainBot [21:38:16][log] message -> #Neverfree : Eventide And like 
+RainBot [21:38:26][log] message -> #Neverfree : Eventide I was so happy i got this thing to work without completely destroying it 
+RainBot [21:38:30][log] message -> #Neverfree : Eventide And then this 
+RainBot [21:38:48][log] message -> #Neverfree : Eventide https://usercontent.irccloud-cdn.com/file/SgQ2sz5C/1432589917.JPG 
+RainBot [21:40:07][log] message -> #Neverfree : Sparkler broke your headphones? 
+RainBot [21:40:13][log] message -> #Neverfree : Eventide The plastic broke 
+RainBot [21:40:16][log] message -> #Neverfree : Eventide So i replaced a part 
+RainBot [21:40:17][log] message -> #Neverfree : Ivory_Keys Hallo, who are you? 
+RainBot [21:40:28][log] message -> #Neverfree : Eventide Put the wite through the wrong half of the little wishbone thing 
+RainBot [21:40:31][log] message -> #Neverfree : Eventide Now its backwards 
+RainBot [21:40:36][log] message -> #Neverfree : Eventide And it's like 
+RainBot [21:40:44][log] message -> #Neverfree : Eventide Really ghetto so i dont wanna take it apart again 
+RainBot [21:41:48][log] message -> #Neverfree : Eventide So it's either 
+RainBot [21:41:52][log] message -> #Neverfree : Eventide take this apart again 
+RainBot [21:41:54][log] message -> #Neverfree : Eventide Or kill myself 
+RainBot [21:42:09][log] pop -> #snowybottest : Pocky 
+RainBot [21:42:59][log] message -> #snowybottest : MistaWolf SnowBot, q! #Neverfree users now 
+RainBot [21:43:20][log] message -> #Neverfree : Ivory_Keys Ahhh! 
+RainBot [21:43:26][log] message -> #snowybottest : MistaWolf SnowBot, q! users now 
+RainBot [21:43:33][log] message -> #Neverfree : Sparkler don't jump in the pool :( 
+RainBot [21:45:16][log] push -> #Neverfree : Pocky 
+RainBot [21:46:22][log] pop -> #snowybottest : MistaWolf 
+RainBot [21:46:45][log] push -> #snowybottest : MistaWolf 
+RainBot [21:49:01][log] message -> #Neverfree : Eventide SUCCESS 
+RainBot [21:49:12][log] message -> #Neverfree : Eventide https://usercontent.irccloud-cdn.com/file/5ivf9Azr/1432590547.JPG 
+RainBot [21:49:18][log] push -> #Neverfree : Lavish 
+RainBot [21:49:19][log] Creating user for Lavish
+RainBot [21:49:19][log] Done creating user for Lavish
+RainBot [21:49:19][log] Added channel #Neverfree to Lavish (Lavish)
+RainBot [21:49:25][log] message -> #Neverfree : Eventide Now this thing is 30% ghetto so I'm gonna need to reinforce it 
+RainBot [21:49:55][log] message -> #Neverfree : Eventide I had to frankenstein it together using bits from an older version of the same headset 
+RainBot [21:53:06][log] message -> #Neverfree : Eventide IT LIIIIIVES 
+RainBot [21:53:11][log] message -> #Neverfree : Eventide MUEHEGEUEHEGEUGEHEUUEG 
+RainBot [21:53:52][log] message -> #Neverfree : Eventide https://usercontent.irccloud-cdn.com/file/KXhX7XyX/1432590821.JPG 
+RainBot [21:53:54][log] message -> #Neverfree : Eventide Old broken piece 
+RainBot [21:54:14][log] message -> #Neverfree : Eventide https://usercontent.irccloud-cdn.com/file/DLKzxbIq/1432590846.JPG 
+RainBot [21:54:23][log] message -> #Neverfree : Eventide Replaced the bit and added electrical tape for maximum ghetto 
+RainBot [21:59:27][log] push -> #Neverfree : Iron_Anvil 
+RainBot [21:59:54][log] message -> #Neverfree : Eventide eek 
+RainBot [22:00:54][log] nick -> #snowybottest : Luster Lavish 
+RainBot [22:00:59][log] message -> #Neverfree : Stradiverra Oh shush, you love it. 
+RainBot [22:01:04][log] message -> #Neverfree : Stradiverra I do have you up against a wall and everything 
+RainBot [22:06:13][log] pop -> #snowybottest : Ivory_Keys 
+RainBot [22:19:46][log] push -> #Neverfree : Phantasma_Tinia 
+RainBot [22:19:55][log] message -> #Neverfree : Sparkler heyllo 
+RainBot [22:21:07][log] message -> #Neverfree : Ethera Ahoy Eeria. 
+RainBot [22:21:09][log] message -> #Neverfree : Sparkler more pones for the snuggle pile \o/ 
+RainBot [22:22:13][log] message -> #Neverfree : Fall What does your name mean, Phantasma_Tinia? 
+RainBot [22:22:16][log] message -> #Neverfree : Ethera But that would still be TAP, and thus a wee bit confusing at times :3 
+RainBot [22:23:44][log] message -> #Neverfree : Princess-Luna thatanonsofa 
+RainBot [22:24:11][log] pop -> #snowybottest : JandalAdjiel 
+RainBot [22:25:03][log] nick -> #snowybottest : Lavish Luster 
+RainBot [22:25:04][log] Added channel #snowybottest to Lavish (Lavish)
+RainBot [22:40:47][log] message -> #Neverfree : Sparkler :3 
+RainBot [22:40:54][log] message -> #Neverfree : Ethera But the tarp is enchanted! 
+RainBot [22:40:56][log] message -> #Neverfree : Ethera :/ 
+RainBot [22:41:09][log] message -> #Neverfree : Eventide it is? 
+RainBot [22:41:30][log] message -> #Neverfree : Ethera Mildly, it won't flap around. 
+RainBot [22:42:01][log] message -> #Neverfree : Eventide hm 
+RainBot [22:52:09][log] message -> #Neverfree : Lavish <Luster eeps and wraps her hooves around Remelia in a sudden panic, "W-working on what?" 
+RainBot [22:54:07][log] message -> #Neverfree : Lavish <Luster pouts and looks around, "Y-you meant that other thestral's door?" She copies the act given to her without really thinking about it, wrapping her hooves around Remelia. 
+RainBot [22:55:44][log] pop -> #snowybottest : Princess-Luna 
+RainBot [22:55:46][log] nick -> #snowybottest : Remelia-Tyrant Rouge_Shadow 
+RainBot [22:55:48][log] Pushing nick (Remelia-Tyrant) to ACC Rouge_Shadow
+RainBot [22:55:48][log] Done pushing nick (Remelia-Tyrant) to ACC Rouge_Shadow
+RainBot [22:55:48][log] Added channel #snowybottest to Remelia-Tyrant (Rouge_Shadow)
+RainBot [22:56:03][log] message -> #Neverfree : Lavish :3 
+RainBot [22:56:28][log] push -> #Neverfree : Ivory_Keys 
+RainBot [22:59:21][log] message -> #Neverfree : Lavish <Luster brows tense up, dropping eye contact to look down at her sister's belly, "B-but wouldn't our brother just.. Break the walls in then? He doesn't seem like one where a simple wooden beam would stop him," she strokes Remelia's shoulder a little bit,  it was rather comfortable sleeping by her last night. 
+RainBot [23:01:52][log] message -> #Neverfree : Eventide there are no walls on the outside 
+RainBot [23:02:54][log] message -> #Neverfree : Lavish <Luster lips pull into a slight smile and she buries her nose into Remelia's neck, resting there for a bit.... Before realizing, with a start and a rise of her head, "Where is he anyways?"  Lavish idly plays with Eventide's nose as he lays ontop of her, "What.. You don't like uninvited guests? 
+RainBot [23:04:56][log] pop -> #snowybottest : ThatAnonPony 
+RainBot [23:14:34][log] message -> #Neverfree : Lavish blushes*  
+RainBot [23:14:53][log] nick -> #snowybottest : Cloud_Zephyr Cloud_Zephyr|Away 
+RainBot [23:14:54][log] Creating user for Cloud_Zephyr
+RainBot [23:14:54][log] Done creating user for Cloud_Zephyr
+RainBot [23:14:55][log] Added channel #snowybottest to Cloud_Zephyr (DJCloud_Zephyr[NLR])
+RainBot [23:20:29][log] pop -> #snowybottest : Pocky 
+RainBot [23:21:21][log] message -> #Neverfree : Lavish <Luster pulls her head and wraps her muzzle up in her hooves, "That-ts why we were alw-ways hiring new help," She looks back up at Remelia before getting to her hooves and slinking off the bed, "B-but at least i-it doesn't effect me as much," when she gets off and moves over to grip her sister's tail and gives it a little pull. 
+RainBot [23:22:37][log] nick -> #snowybottest : Gilda Fall 
+RainBot [23:22:38][log] Done pushing nick (Gilda) to ACC FallSilently
+RainBot [23:22:38][log] Pushing nick (Gilda) to ACC FallSilently
+RainBot [23:22:38][log] Added channel #snowybottest to Gilda (FallSilently)
+RainBot [23:29:53][log] message -> #Neverfree : Lavish NO She doesn't! 
+RainBot [23:30:03][log] message -> #Neverfree : Eventide :( 
+RainBot [23:30:06][log] message -> #Neverfree : Lavish :3 
+RainBot [23:32:12][log] pop -> #snowybottest : Alfreddy 
+RainBot [23:42:30][log] message -> #Neverfree : Eventide :> 
+RainBot [23:43:16][log] push -> #Neverfree : User_3477 
+RainBot [23:43:26][log] nick -> #snowybottest : ThatAnonPony User_3477 
+RainBot [23:43:27][log] Added channel #snowybottest to ThatAnonPony (ThatAnonPony)
+RainBot [23:44:23][log] message -> #Neverfree : Eventide :3 * 
+RainBot [23:44:42][log] message -> #Neverfree : Lavish <.< 
+RainBot [23:44:44][log] message -> #Neverfree : Lavish >,> 
+RainBot [23:46:11][log] message -> #Neverfree : Remelia-Tyrant Sorry 
+RainBot [23:46:23][log] message -> #Neverfree : Remelia-Tyrant I had to begin cleaning 
+RainBot [23:46:25][log] message -> #Neverfree : Remelia-Tyrant and I still am 
+RainBot [23:46:30][log] message -> #Neverfree : Remelia-Tyrant Im sorry Lavish pone 
+RainBot [23:46:48][log] push -> #Neverfree : QuantumPocket 
+RainBot [23:46:49][log] Creating user for QuantumPocket
+RainBot [23:46:49][log] Done creating user for QuantumPocket
+RainBot [23:46:50][log] Added channel #Neverfree to QuantumPocket (ShadyLightz)
+RainBot [23:47:15][log] message -> #Neverfree : Lavish Its alright, I thought things were happening in the back ground that didn't concern me. :3 So I was going to goof around with FBI Lavish 
+RainBot [23:48:42][log] message -> #Neverfree : Eventide yes 
+RainBot [23:48:45][log] message -> #Neverfree : Eventide you were dreaming 
+RainBot [23:48:51][log] message -> #Neverfree : Lavish K 
+RainBot [23:48:58][log] message -> #Neverfree : Lavish XD 
+RainBot [23:49:11][log] message -> #Neverfree : Eventide wwwoOOoOoOOo 
+RainBot [23:49:23][log] nick -> #snowybottest : Tihan Grace 
+RainBot [23:49:25][log] Creating user for Tihan
+RainBot [23:49:25][log] Done creating user for Tihan
+RainBot [23:49:25][log] Added channel #snowybottest to Tihan (Tihan)
+RainBot [23:51:03][log] message -> #Neverfree : ThatAnonPony Long tail.  
+RainBot [23:51:11][log] message -> #Neverfree : Lavish :e 
+RainBot [23:51:12][log] message -> #Neverfree : Lavish ;3 
+RainBot [23:56:40][log] pop -> #snowybottest : Sunrise_Flare 
+RainBot [23:57:22][log] nick -> #snowybottest : Lavish|BRB Lavish 
+RainBot [00:09:10][log] pop -> #snowybottest : Moonlightning 
+RainBot [00:09:51][log] message -> #Neverfree : Eventide so I didn't know this, but apparently an SR-71's top speed is about 1 kilometer per second 
+RainBot [00:10:06][log] message -> #Neverfree : ThatAnonPony Round about.  
+RainBot [00:10:17][log] message -> #Neverfree : Eventide that's pretty fast 
+RainBot [00:10:19][log] message -> #Neverfree : ThatAnonPony Actually, probably more.  
+RainBot [00:10:24][log] message -> #Neverfree : Eventide I just looked it up 
+RainBot [00:10:35][log] message -> #Neverfree : Eventide Top speed: 3,540 km/h 
+RainBot [00:10:41][log] message -> #Neverfree : ThatAnonPony Hm. 
+RainBot [00:10:43][log] message -> #Neverfree : Eventide which is juuuust under 1km/s 
+RainBot [00:10:43][log] push -> #Neverfree : Moonlightning 
+RainBot [00:10:45][log] message -> #Neverfree : ThatAnonPony Speedy. 
+RainBot [00:11:02][log] message -> #Neverfree : ThatAnonPony If only it wasn't so silly a plane. 
+RainBot [00:11:09][log] message -> #Neverfree : Eventide why's it so silly? 
+RainBot [00:11:48][log] push -> #Neverfree : Sunrise_Flare 
+RainBot [00:12:18][log] message -> #Neverfree : ThatAnonPony It was designed for high altitude high speed reconnaissance passes, which meant it was utterly terrible for anything but that.  
+RainBot [00:12:35][log] message -> #Neverfree : Ethera It leaks fuel continuously until it gets up to cruising speed, heats up and expands. 
+RainBot [00:12:50][log] message -> #Neverfree : ThatAnonPony Mhm. S'why silly. 
+RainBot [00:12:51][log] message -> #Neverfree : Ethera Also, what TAP said. 
+RainBot [00:13:32][log] message -> #Neverfree : ThatAnonPony Thought it was the opposite though? The airframe had to be overlarge and contracted due to the cold at high altitudes? 
+RainBot [00:13:47][log] message -> #Neverfree : ThatAnonPony But either way, the fuel tanks didn't form a complete seal on the runway, so it leaked. 
+RainBot [00:14:51][log] message -> #Neverfree : ThatAnonPony And the compressor was pretty complex too. Think it caused all manner of problems during its design phase. 
+RainBot [00:15:22][log] message -> #Neverfree : Ethera Nope, it encounters enough frictional heating at cruising speed to heat to a comfortable 600F or 316C 
+RainBot [00:15:32][log] message -> #Neverfree : ThatAnonPony Hm. Fair 'nough! 
+RainBot [00:16:18][log] message -> #Neverfree : Ethera And those engines were complex as all get. 
+RainBot [00:17:17][log] message -> #Neverfree : ThatAnonPony Mhm. 
+RainBot [00:18:02][log] message -> #Neverfree : ThatAnonPony Pseudo-ramjet jet turbines. Because why not?  
+RainBot [00:18:06][log] message -> #Neverfree : Eventide https://www.youtube.com/watch?v=4zpPHFexPcM 
+RainBot [00:18:08][log] message -> #Neverfree : PinkieBot 1,0You0,4Tube 10Title:4 Manticore 10Views:4 111,501 10Length:4 4:07 10User:4 TheUlasht 
+RainBot [00:18:10][log] message -> #Neverfree : Eventide I really like this song 
+RainBot [00:23:08][log] message -> #Neverfree : Sunrise_Flare WHAT THE FUCK 
+RainBot [00:23:16][log] message -> #Neverfree : Sunrise_Flare Where the fuck did my dark souls files go?! 
+RainBot [00:23:24][log] message -> #Neverfree : Sunrise_Flare my character was deleted? 
+RainBot [00:23:39][log] message -> #Neverfree : Sunrise_Flare fuck that shit I have to go back and get all that shitty equipment AGAIN?! 
+RainBot [00:29:05][log] message -> #Neverfree : Eventide sec 
+RainBot [00:29:10][log] message -> #Neverfree : Eventide damnit 
+RainBot [00:29:11][log] message -> #Neverfree : Eventide died 
+RainBot [00:29:13][log] message -> #Neverfree : Eventide what thing 
+RainBot [00:29:18][log] message -> #Neverfree : Eventide look at the topic 
+RainBot [00:29:37][log] message -> #Neverfree : Sparkler how much are they paying you? 
+RainBot [00:29:43][log] message -> #Neverfree : Eventide not much 
+RainBot [00:30:07][log] nick -> #snowybottest : Mongoosie|Sleep Mongoosie 
+RainBot [00:30:08][log] Pushing nick (Mongoosie|Sleep) to ACC Mongoose
+RainBot [00:30:08][log] Done pushing nick (Mongoosie|Sleep) to ACC Mongoose
+RainBot [00:30:08][log] Added channel #snowybottest to Mongoosie|Sleep (Mongoose)
+RainBot [00:30:14][log] pop -> #snowybottest : Dusk 
+RainBot [00:30:30][log] message -> #Neverfree : Eventide $12.65/hr 
+RainBot [00:31:10][log] message -> #Neverfree : Sunrise_Flare dammit 
+RainBot [00:31:15][log] message -> #Neverfree : Sunrise_Flare I fucking 100%-ed that game too 
+RainBot [00:31:23][log] message -> #Neverfree : Sunrise_Flare now I have to get the channeler's trident again 
+RainBot [00:31:25][log] message -> #Neverfree : Sunrise_Flare ugh 
+RainBot [00:31:50][log] message -> #Neverfree : Sunrise_Flare and the MLGS 
+RainBot [00:33:54][log] message -> #Neverfree : Sparkler Eventide: "not much" that's way better than most starting jobs :P 
+RainBot [00:34:32][log] message -> #Neverfree : Sparkler most starting jobs are going to be like, <10$ 
+RainBot [00:34:35][log] message -> #Neverfree : Sparkler and usually minimum wage 
+RainBot [00:34:42][log] message -> #Neverfree : Sparkler whatever that may be 
+RainBot [00:35:42][log] message -> #Neverfree : Eventide yeah 
+RainBot [00:35:46][log] message -> #Neverfree : Eventide minimum here is #10 
+RainBot [00:35:48][log] message -> #Neverfree : Eventide $10 
+RainBot [00:40:19][log] pop -> #snowybottest : Phantasma_Tinia 
+RainBot [00:42:03][log] message -> #snowybottest : MistaWolf SnowBot, q! #Neverfree users now 
+RainBot [00:51:14][log] message -> #Neverfree : Remelia-Tyrant hey Eventide 
+RainBot [00:51:20][log] message -> #Neverfree : Remelia-Tyrant thats better then what I am getting 
+RainBot [00:51:28][log] message -> #Neverfree : Remelia-Tyrant im not even in double digits 
+RainBot [00:52:23][log] message -> #Neverfree : Eventide yeah but you're getting it in american dollars 
+RainBot [00:52:51][log] message -> #Neverfree : Sparkler are they that different? 
+RainBot [00:52:54][log] message -> #Neverfree : Eventide yes 
+RainBot [00:52:59][log] message -> #Neverfree : Remelia-Tyrant mhm 
+RainBot [00:53:00][log] message -> #Neverfree : Eventide $5 US = $6 CAD 
+RainBot [00:53:13][log] message -> #Neverfree : Remelia-Tyrant the Canadian dollar is actually stronger then the US dollar 
+RainBot [00:53:16][log] message -> #Neverfree : Sparkler wait what? wow 
+RainBot [00:53:20][log] message -> #Neverfree : Eventide it's not, Remelia-Tyrant  
+RainBot [00:53:23][log] message -> #Neverfree : Sparkler the canadian dollar fell 
+RainBot [00:53:27][log] message -> #Neverfree : Remelia-Tyrant oh wait 
+RainBot [00:53:30][log] message -> #Neverfree : Remelia-Tyrant i reversed that 
+RainBot [00:53:31][log] message -> #Neverfree : Remelia-Tyrant whoops 
+RainBot [00:53:36][log] message -> #Neverfree : Sparkler it used to be like 1 USD == 1.05 CA 
+RainBot [00:53:43][log] message -> #Neverfree : Sparkler a few years ago 
+RainBot [00:53:44][log] message -> #Neverfree : Sparkler >.> 
+RainBot [00:54:56][log] message -> #Neverfree : Sparkler yeah, 1 year ago it was 1.05 CA :O 
+RainBot [00:55:20][log] message -> #Neverfree : Remelia-Tyrant can we just get rid of currency systems and just go back to the barter system? 
+RainBot [00:55:25][log] message -> #Neverfree : Remelia-Tyrant lol 
+RainBot [00:55:32][log] message -> #Neverfree : Remelia-Tyrant Ill trade you two goats for a chicken 
+RainBot [00:55:36][log] message -> #Neverfree : Sparkler btc everywhere! 
+RainBot [01:10:18][log] message -> #Neverfree : Ethera Forget btc, energy credits is where it's at! 
+RainBot [01:11:56][log] push -> #Neverfree : DinkyDoo 
+RainBot [01:14:47][log] nick -> #snowybottest : Lavish Lavish|BRB 
+RainBot [01:16:10][log] push -> #Neverfree : Lavish_ 
+RainBot [01:18:49][log] pop -> #snowybottest : Lavish 
+RainBot [01:19:04][log] nick -> #snowybottest : Lavish Lavish_ 
+RainBot [01:19:34][log] nick -> #snowybottest : Pony_41451 Lavish 
+RainBot [01:20:08][log] nick -> #snowybottest : Lavish Pony_41451 
+RainBot [01:24:46][log] message -> #Neverfree : Sparkler what a nice poni 
+RainBot [01:26:32][log] push -> #Neverfree : Moonlight_Sonata 
+RainBot [01:26:34][log] Creating user for Moonlight_Sonata
+RainBot [01:26:34][log] Done creating user for Moonlight_Sonata
+RainBot [01:26:34][log] Added channel #Neverfree to Moonlight_Sonata (Moonlight_Sonata)
+RainBot [01:26:37][log] nick -> #snowybottest : godred Moonlight_Sonata 
+RainBot [01:31:06][log] message -> #Neverfree : Eventide back 
+RainBot [01:31:44][log] push -> #Neverfree : Pi 
+RainBot [01:31:45][log] Creating user for Pi
+RainBot [01:31:45][log] Done creating user for Pi
+RainBot [01:31:45][log] Added channel #Neverfree to Pi (Pi)
+RainBot [01:31:48][log] message -> #Neverfree : Lavish OH Never mind 
+RainBot [01:32:12][log] push -> #Neverfree : LegionRed 
+RainBot [01:32:13][log] Creating user for LegionRed
+RainBot [01:32:13][log] Done creating user for LegionRed
+RainBot [01:32:14][log] Added channel #Neverfree to LegionRed (LegionRed)
+RainBot [01:33:18][log] message -> #Neverfree : Stradiverra YOU NO TAKE CANDLE! 
+RainBot [01:33:56][log] message -> #Neverfree : Sparkler silly kobald 
+RainBot [01:35:53][log] message -> #Neverfree : Ethera Hmm, what about a tentacle mine? 
+RainBot [01:38:57][log] message -> #Neverfree : Eventide I was just assuming that's Lavish being Lavish 
+RainBot [01:38:59][log] message -> #Neverfree : Eventide :> 
+RainBot [01:39:47][log] message -> #Neverfree : Eventide Lavish: http://puu.sh/i0EpE/2d8c38f230.jpg 
+RainBot [01:40:35][log] message -> #Neverfree : Lavish Yeah, that's about it. 
+RainBot [01:43:58][log] message -> #Neverfree : Eventide 10:41:07 PM — Lavish then shoves his cat in Eventide's face. 
+RainBot [01:44:06][log] message -> #Neverfree : Eventide :3 
+RainBot [01:44:19][log] message -> #Neverfree : Lavish YAY 
+RainBot [01:44:42][log] message -> #Neverfree : Ivory_Keys Yup. 
+RainBot [01:45:10][log] message -> #Neverfree : Ethera inb4  
+RainBot [01:45:17][log] message -> #Neverfree : Ethera 'a cat is fine too' 
+RainBot [01:45:18][log] message -> #Neverfree : Ivory_Keys Haha. 
+RainBot [01:45:56][log] nick -> #snowybottest : Luster Lavish 
+RainBot [01:47:27][log] nick -> #snowybottest : Fall Gilda 
+RainBot [01:47:37][log] message -> #Neverfree : Ethera Only one way from here, you must inject it into ponies! 
+RainBot [01:47:38][log] push -> #Neverfree : Sylandest 
+RainBot [01:51:33][log] nick -> #snowybottest : Gilda Fall 
+RainBot [02:00:33][log] message -> #Neverfree : Eventide who is Sylandest  
+RainBot [02:00:35][log] message -> #Neverfree : Eventide hello 
+RainBot [02:00:36][log] message -> #Neverfree : Eventide :) 
+RainBot [02:01:26][log] nick -> #snowybottest : Lavish Luster 
+RainBot [02:01:50][log] message -> #Neverfree : Lavish me holds DinkyDoo captive then! 
+RainBot [02:02:27][log] nick -> #snowybottest : Cloud_Zephyr|Away Cloud_Zephyr 
+RainBot [02:02:28][log] message -> #Neverfree : Eventide me doesn't think that's a good idea 
+RainBot [02:03:20][log] nick -> #snowybottest : Cloud_Zephyr Cloud_Zephyr|Away 
+RainBot [02:10:17][log] pop -> #snowybottest : Sylandest 
+RainBot [02:14:57][log] message -> #Neverfree : Eventide :O 
+RainBot [02:15:00][log] message -> #Neverfree : Eventide Cobalt_Blitz is still online! 
+RainBot [02:21:17][log] push -> #Neverfree : Cydie 
+RainBot [02:21:19][log] Creating user for Cydie
+RainBot [02:21:19][log] Done creating user for Cydie
+RainBot [02:21:19][log] Added channel #Neverfree to Cydie (Cloudrunner)
+RainBot [02:34:43][log] message -> #Neverfree : Eventide :3 
+RainBot [02:39:15][log] pop -> #snowybottest : Sunrise_Flare 
+RainBot [02:40:33][log] message -> #Neverfree : Cydie hi 
+RainBot [02:44:17][log] pop -> #snowybottest : Gilda 
+RainBot [02:48:50][log] message -> #Neverfree : Eventide oh right 
+RainBot [02:48:58][log] message -> #Neverfree : Eventide because Eventide never gave Remelia-Tyrant the plan B 
+RainBot [02:49:09][log] message -> #Neverfree : Eventide she kinda just froze in time 
+RainBot [02:49:48][log] message -> #Neverfree : Eventide you guys are gonna literally be raising Joffrey Baratheon 
+RainBot [02:50:56][log] push -> #Neverfree : Sunrise_Flare 
+RainBot [02:54:24][log] push -> #Neverfree : Static_Breeze 
+RainBot [02:54:25][log] Creating user for Static_Breeze
+RainBot [02:54:25][log] Done creating user for Static_Breeze
+RainBot [02:54:25][log] Added channel #Neverfree to Static_Breeze (Night_Breeze)
+RainBot [02:55:06][log] nick -> #snowybottest : Gamer_Breezy Static_Breeze 
+RainBot [02:55:07][log] Pushing nick (Gamer_Breezy) to ACC Night_Breeze
+RainBot [02:55:07][log] Done pushing nick (Gamer_Breezy) to ACC Night_Breeze
+RainBot [02:55:07][log] Added channel #snowybottest to Gamer_Breezy (Night_Breeze)
+RainBot [02:55:08][log] pop -> #snowybottest : Sunrise_Flare 
+RainBot [02:55:31][log] message -> #Neverfree : Cydie (dont abandon it. :<) 
+RainBot [02:56:00][log] message -> #Neverfree : Eventide :3 
+RainBot [02:57:54][log] message -> #Neverfree : Cobalt_Blitz nuuuu 
+RainBot [02:58:05][log] message -> #Neverfree : Eventide muehuehe 
+RainBot [03:01:55][log] message -> #Neverfree : Eventide this is totally Lavish and Remelia http://puu.sh/i0IKK/ed81b3152e.jpg 
+RainBot [03:01:55][log] pop -> #snowybottest : OctaveMobile 
+RainBot [03:03:32][log] push -> #Neverfree : SparkBot 
+RainBot [03:03:34][log] Creating user for SparkBot
+RainBot [03:03:34][log] Done creating user for SparkBot
+RainBot [03:03:34][log] Added channel #Neverfree to SparkBot (SparkBot)
+RainBot [03:03:49][log] message -> #Neverfree : Sparkler :D 
+RainBot [03:03:55][log] push -> #Neverfree : OctaveMobile 
+RainBot [03:03:59][log] message -> #Neverfree : Sparkler .claim Sparkler 
+RainBot [03:03:59][log] message -> #Neverfree : SparkBot Sparkler has claimed the character Sparkler 
+RainBot [03:05:22][log] pop -> #snowybottest : SparkBot 
+RainBot [03:05:35][log] message -> #Neverfree : Eventide err 
+RainBot [03:07:15][log] message -> #Neverfree : Lavish -I'm feeling rather intimate." 
+RainBot [03:14:03][log] message -> #Neverfree : Eventide :> 
+RainBot [03:18:42][log] pop -> #snowybottest : TimidClef|AFK 
+RainBot [03:22:13][log] push -> #Neverfree : TimidClef|AFK 
+RainBot [03:25:38][log] push -> #Neverfree : Sunrise_Flare 
+RainBot [03:28:11][log] nick -> #snowybottest : Cloud_Zephyr|Away Cloud_Zephyr 
+RainBot [03:41:50][log] message -> #Neverfree : Ethera No, she's trapped on the floor suffering from cuddle withdrawals. 
+RainBot [03:44:40][log] message -> #Neverfree : BerryPunch Well. I wish I waited until I finished my drive home before checking this channel 
+RainBot [03:45:35][log] message -> #Neverfree : Remelia-Tyrant XD 
+RainBot [03:46:37][log] message -> #Neverfree : Eventide delicious incest, BerryPunch  
+RainBot [03:46:42][log] message -> #Neverfree : BerryPunch Aye 
+RainBot [03:46:46][log] message -> #Neverfree : Eventide also, where've you been :< 
+RainBot [03:46:59][log] message -> #Neverfree : Sparkler convention? :P 
+RainBot [03:47:00][log] message -> #Neverfree : BerryPunch A con. Like I told you!  
+RainBot [03:47:07][log] message -> #Neverfree : BerryPunch :( 
+RainBot [03:47:13][log] message -> #Neverfree : Eventide oh yeah 
+RainBot [03:47:20][log] message -> #Neverfree : Eventide :< 
+RainBot [03:47:20][log] message -> #Neverfree : BerryPunch Today's my birthday. .. 
+RainBot [03:47:26][log] message -> #Neverfree : Eventide happy birthday! 
+RainBot [03:47:30][log] message -> #Neverfree : Sparkler happy burthday old man 
+RainBot [03:47:34][log] message -> #Neverfree : BerryPunch :3 
+RainBot [03:48:39][log] message -> #Neverfree : BerryPunch Thanks ^^ 
+RainBot [03:48:53][log] message -> #Neverfree : Remelia-Tyrant Merreh Burrfmus! 
+RainBot [03:49:38][log] message -> #Neverfree : BerryPunch Mmkay. Gotta drive 
+RainBot [03:49:54][log] message -> #Neverfree : Eventide nini Cobalt_Blitz  
+RainBot [03:49:58][log] message -> #Neverfree : BerryPunch I'll stay up a little bit when I get home 
+RainBot [03:50:07][log] message -> #Neverfree : Eventide yes, Berry 
+RainBot [03:50:08][log] message -> #Neverfree : Eventide now drive! 
+RainBot [03:50:12][log] pop -> #snowybottest : Cobalt_Blitz 
+RainBot [04:02:39][log] pop -> #snowybottest : ThatAnonPony 
+RainBot [04:16:48][log] pop -> #snowybottest : Ivory_Keys 
+RainBot [04:17:48][log] message -> #Neverfree : Lavish (Sorry, Got sidetracked) 
+RainBot [04:18:57][log] message -> #Neverfree : Eventide how is the Googie doing today 
+RainBot [04:30:39][log] nick -> #snowybottest : Cloud Cydie 
+RainBot [04:37:37][log] nick -> #snowybottest : Grace Tihan 
+RainBot [04:45:57][log] push -> #Neverfree : JandalAdjiel 
+RainBot [04:53:01][log] message -> #Neverfree : Eventide how are you doing, Berry? 
+RainBot [04:53:56][log] message -> #Neverfree : BerryPunch Okay, you? 
+RainBot [04:54:42][log] nick -> #snowybottest : Creeps|AFK RedHelper 
+RainBot [04:54:44][log] Pushing nick (Creeps|AFK) to ACC RedHelper
+RainBot [04:54:44][log] Done pushing nick (Creeps|AFK) to ACC RedHelper
+RainBot [04:54:44][log] Added channel #snowybottest to Creeps|AFK (RedHelper)
+RainBot [04:58:55][log] message -> #Neverfree : Pi oh... 
+RainBot [05:01:47][log] message -> #Neverfree : Eventide hello, Pi  
+RainBot [05:01:49][log] message -> #Neverfree : Eventide :) 
+RainBot [05:01:55][log] message -> #Neverfree : Eventide RainBot, cal! Pi 
+RainBot [05:01:57][log] message -> #Neverfree : Pi AFternoon 
+RainBot [05:02:02][log] message -> #Neverfree : Eventide RainBot, cal! pi 
+RainBot [05:02:02][log] message -> #Neverfree : RainBot 3.141592653589793 
+RainBot [05:02:44][log] message -> #Neverfree : Pi augh fuck 
+RainBot [05:02:54][log] message -> #Neverfree : Pi keep ressing ctrl+c instead of paste 
+RainBot [05:06:14][log] pop -> #snowybottest : Sunrise_Flare 
+RainBot [05:16:12][log] nick -> #snowybottest : Pi_Away Pi 
+RainBot [05:18:03][log] push -> #Neverfree : Sunrise_Flare 
+RainBot [23:33:56][log] reset -> #snowybottest : 
+RainBot [23:35:59][log] reset -> #snowybottest : 
+RainBot [23:35:59][log] push -> #snowybottest : [RainBot Eventide ChanServ MistaWolf SnowBot] 
+RainBot [23:36:07][log] pop -> #snowybottest : MistaWolf 
+RainBot [23:36:11][log] push -> #snowybottest : MistaWolf 
+RainBot [23:36:25][log] message -> #snowybottest : MistaWolf Snowbot, chan! join #Neverfree 
+RainBot [23:41:18][log] reset -> #snowybottest : 
+RainBot [23:41:18][log] push -> #snowybottest : [RainBot ChanServ SnowBot Eventide MistaWolf] 
+RainBot [23:46:16][log] reset -> #snowybottest : 
+RainBot [23:46:16][log] push -> #snowybottest : [RainBot ChanServ SnowBot Eventide MistaWolf] 
+RainBot [23:46:52][log] reset -> #snowybottest : 
+RainBot [23:46:52][log] push -> #snowybottest : [Eventide RainBot ChanServ SnowBot MistaWolf] 
+RainBot [23:48:57][log] reset -> #snowybottest : 
+RainBot [23:48:57][log] push -> #snowybottest : [Eventide RainBot ChanServ SnowBot MistaWolf] 
+RainBot [23:50:19][log] reset -> #snowybottest : 
+RainBot [23:50:19][log] push -> #snowybottest : [Eventide RainBot ChanServ MistaWolf SnowBot] 
+RainBot [23:50:47][log] reset -> #snowybottest : 
+RainBot [23:50:47][log] push -> #snowybottest : [Eventide SnowBot RainBot ChanServ MistaWolf] 
+RainBot [06:01:41][log] message -> #snowybottest : MistaWolf RainBot, rules! | say! {rules} 
+RainBot [06:31:57][log] reset -> #snowybottest : 
+RainBot [06:31:57][log] push -> #snowybottest : [RainBot ChanServ SnowBot Eventide MistaWolf] 
+RainBot [06:35:45][log] reset -> #snowybottest : 
+RainBot [06:35:45][log] push -> #snowybottest : [RainBot ChanServ SnowBot Eventide MistaWolf] 
+RainBot [06:36:21][log] reset -> #snowybottest : 
+RainBot [06:36:21][log] push -> #snowybottest : [RainBot ChanServ SnowBot Eventide MistaWolf] 
+RainBot [06:36:28][log] MistaWolf had conflicting ACC, resolving it
+RainBot [06:36:28][log] Creating user for MistaWolf
+RainBot [06:36:28][log] Done creating user for MistaWolf
+RainBot [06:36:28][log] Added channel #snowybottest to MistaWolf (Mista)
+RainBot [06:37:38][log] reset -> #snowybottest : 
+RainBot [06:37:39][log] push -> #snowybottest : [RainBot ChanServ MistaWolf Eventide SnowBot] 
+RainBot [06:37:43][log] MistaWolf had conflicting ACC, resolving it
+RainBot [06:37:43][log] Creating user for MistaWolf
+RainBot [06:37:43][log] Done creating user for MistaWolf
+RainBot [06:38:19][log] reset -> #snowybottest : 
+RainBot [06:38:19][log] push -> #snowybottest : [RainBot ChanServ MistaWolf SnowBot Eventide] 
+RainBot [06:38:23][log] MistaWolf had conflicting ACC, resolving it
+RainBot [06:38:23][log] Pushing nick (MistaWolf) to ACC Mista
+RainBot [06:38:23][log] Done pushing nick (MistaWolf) to ACC Mista
+RainBot [06:40:31][log] reset -> #snowybottest : 
+RainBot [06:40:31][log] push -> #snowybottest : [RainBot ChanServ MistaWolf Eventide SnowBot] 
+RainBot [06:40:34][log] MistaWolf had conflicting ACC, resolving it
+RainBot [06:40:35][log] Pushing nick (MistaWolf) to ACC Mista
+RainBot [06:40:35][log] Done pushing nick (MistaWolf) to ACC Mista
+RainBot [06:41:21][log] reset -> #snowybottest : 
+RainBot [06:41:22][log] push -> #snowybottest : [RainBot ChanServ MistaWolf Eventide SnowBot] 
+RainBot [06:41:25][log] MistaWolf had conflicting ACC, resolving it
+RainBot [06:41:26][log] Pushing nick (MistaWolf) to ACC Mista
+RainBot [06:41:26][log] Done pushing nick (MistaWolf) to ACC Mista
+RainBot [06:43:46][log] reset -> #snowybottest : 
+RainBot [06:43:46][log] push -> #snowybottest : [RainBot ChanServ SnowBot Eventide MistaWolf] 
+RainBot [06:43:52][log] message -> #snowybottest : MistaWolf test 
+RainBot [06:43:53][log] MistaWolf had conflicting ACC, resolving it
+RainBot [06:43:53][log] Pushing nick (MistaWolf) to ACC Mista
+RainBot [06:43:53][log] Done pushing nick (MistaWolf) to ACC Mista
+RainBot [06:46:23][log] reset -> #snowybottest : 
+RainBot [06:46:23][log] push -> #snowybottest : [RainBot ChanServ SnowBot Eventide MistaWolf] 
+RainBot [06:46:25][log] Creating user for RainBot
+RainBot [06:46:25][log] Done creating user for RainBot
+RainBot [06:46:25][log] Added channel #snowybottest to RainBot (RainBot)
+RainBot [06:46:29][log] Creating user for Eventide
+RainBot [06:46:29][log] Done creating user for Eventide
+RainBot [06:46:29][log] Added channel #snowybottest to Eventide (Dustrunner)
+RainBot [06:46:30][log] Creating user for MistaWolf
+RainBot [06:46:30][log] Done creating user for MistaWolf
+RainBot [06:46:31][log] Added channel #snowybottest to MistaWolf (Mista)
+RainBot [06:47:47][log] reset -> #snowybottest : 
+RainBot [06:47:47][log] push -> #snowybottest : [RainBot ChanServ SnowBot Eventide MistaWolf] 
+RainBot [06:48:35][log] reset -> #snowybottest : 
+RainBot [06:48:35][log] push -> #snowybottest : [RainBot ChanServ SnowBot Eventide MistaWolf] 
+RainBot [06:48:41][log] Creating user for MistaWolf
+RainBot [06:48:42][log] Done creating user for MistaWolf
+RainBot [06:48:42][log] Added channel #snowybottest to MistaWolf (Mista)
+RainBot [06:48:43][log] message -> #snowybottest : MistaWolf test 
+RainBot [07:32:18][log] message -> #snowybottest : Eventide Test 
+RainBot [08:27:21][log] nick -> #snowybottest : Eventide|Sleepies Eventide 
+RainBot [09:42:03][log] reset -> #snowybottest : 
+RainBot [09:42:28][log] reset -> #snowybottest : 
+RainBot [09:43:29][log] reset -> #snowybottest : 
+RainBot [09:43:55][log] reset -> #snowybottest : 
+RainBot [09:43:55][log] push -> #snowybottest : RainBot,Eventide|Sleepies,ChanServ,SnowBot,MistaWolf
+RainBot [09:43:58][log] Pushing nick (Eventide|Sleepies) to ACC Dustrunner
+RainBot [09:43:58][log] Done pushing nick (Eventide|Sleepies) to ACC Dustrunner
+RainBot [09:44:03][log] MistaWolf had conflicting ACC, resolving it
+RainBot [09:44:03][log] Creating user for MistaWolf
+RainBot [09:44:03][log] Done creating user for MistaWolf
+RainBot [09:46:19][log] message -> #snowybottest : MistaWolf test
+RainBot [09:48:58][log] reset -> #snowybottest : 
+RainBot [09:48:58][log] push -> #snowybottest : RainBot,Eventide|Sleepies,ChanServ,SnowBot,MistaWolf
+RainBot [09:49:05][log] MistaWolf had conflicting ACC, resolving it
+RainBot [09:49:05][log] Pushing nick (MistaWolf) to ACC Mista
+RainBot [09:49:05][log] Done pushing nick (MistaWolf) to ACC Mista
+RainBot [09:49:12][log] message -> #snowybottest : MistaWolf derp
+RainBot [09:49:12][log] message -> #snowybottest : MistaWolf derp
+RainBot [09:49:13][log] message -> #snowybottest : MistaWolf test
+RainBot [09:51:55][log] reset -> #snowybottest : function () {
+            chan["do"]("push", respond.channel, nicks);
+            return async.eachSeries(nicks, (function(nick, next) {
+              return user.resolveNick(nick, respond.channel, function() {
+                return user.addChannel(nick, respond.channel, next);
+              });
+            }), function(err) {
+              return done();
+            });
+          }
+RainBot [09:51:55][log] push -> #snowybottest : RainBot,Eventide|Sleepies,ChanServ,MistaWolf,SnowBot
+RainBot [09:51:58][log] message -> #snowybottest : MistaWolf derp
+RainBot [09:51:58][log] message -> #snowybottest : MistaWolf derp
+RainBot [09:51:58][log] message -> #snowybottest : MistaWolf test
+RainBot [09:52:00][log] MistaWolf had conflicting ACC, resolving it
+RainBot [09:52:00][log] Pushing nick (MistaWolf) to ACC Mista
+RainBot [09:52:01][log] Done pushing nick (MistaWolf) to ACC Mista
+RainBot [09:52:55][log] reset -> #snowybottest : function () {
+            chan["do"]("push", respond.channel, nicks);
+            return async.eachSeries(nicks, (function(nick, next) {
+              return user.resolveNick(nick, respond.channel, function() {
+                return user.addChannel(nick, respond.channel, next);
+              });
+            }), function(err) {
+              return done();
+            });
+          }
+RainBot [09:52:55][log] push -> #snowybottest : RainBot,Eventide|Sleepies,ChanServ,MistaWolf,SnowBot
+RainBot [09:53:00][log] MistaWolf had conflicting ACC, resolving it
+RainBot [09:53:01][log] Pushing nick (MistaWolf) to ACC Mista
+RainBot [09:53:01][log] Done pushing nick (MistaWolf) to ACC Mista
+RainBot [09:53:05][log] message -> #snowybottest : MistaWolf derp
+RainBot [09:53:05][log] message -> #snowybottest : MistaWolf derp
+RainBot [09:53:05][log] message -> #snowybottest : MistaWolf test
+RainBot [09:58:22][log] reset -> #snowybottest : function () {
+            chan["do"]("push", respond.channel, nicks);
+            return async.eachSeries(nicks, (function(nick, next) {
+              return user.resolveNick(nick, respond.channel, function() {
+                return user.addChannel(nick, respond.channel, next);
+              });
+            }), function(err) {
+              return done();
+            });
+          }
+RainBot [09:58:22][log] push -> #snowybottest : Eventide|Sleepies,ChanServ,RainBot,MistaWolf,SnowBot
+RainBot [09:58:27][log] MistaWolf had conflicting ACC, resolving it
+RainBot [09:58:27][log] Pushing nick (MistaWolf) to ACC Mista
+RainBot [09:58:28][log] Done pushing nick (MistaWolf) to ACC Mista
+RainBot [09:58:31][log] message -> #snowybottest : MistaWolf derp
+RainBot [09:58:31][log] message -> #snowybottest : MistaWolf derp
+RainBot [09:58:31][log] message -> #snowybottest : MistaWolf test
+RainBot [10:00:04][log] message -> #snowybottest : MistaWolf derp
+RainBot [10:00:04][log] message -> #snowybottest : MistaWolf derp
+RainBot [10:00:04][log] message -> #snowybottest : MistaWolf test
+RainBot [10:02:12][log] reset -> #snowybottest : function () {
+            chan["do"]("push", respond.channel, nicks);
+            return async.eachSeries(nicks, (function(nick, next) {
+              return user.resolveNick(nick, respond.channel, function() {
+                return user.addChannel(nick, respond.channel, next);
+              });
+            }), function(err) {
+              return done();
+            });
+          }
+RainBot [10:03:16][log] reset -> #snowybottest : function () {
+            chan["do"]("push", respond.channel, nicks);
+            return async.eachSeries(nicks, (function(nick, next) {
+              return user.resolveNick(nick, respond.channel, function() {
+                return user.addChannel(nick, respond.channel, next);
+              });
+            }), function(err) {
+              return done();
+            });
+          }
+RainBot [10:03:16][log] push -> #snowybottest : Eventide|Sleepies,ChanServ,RainBot,MistaWolf,SnowBot
+RainBot [10:03:22][log] MistaWolf had conflicting ACC, resolving it
+RainBot [10:03:22][log] Pushing nick (MistaWolf) to ACC Mista
+RainBot [10:03:22][log] Done pushing nick (MistaWolf) to ACC Mista
+RainBot [10:03:36][log] message -> #snowybottest : MistaWolf derp
+RainBot [10:03:36][log] message -> #snowybottest : MistaWolf derp
+RainBot [10:03:36][log] message -> #snowybottest : MistaWolf test
+RainBot [10:04:34][log] reset -> #snowybottest : function () {
+            chan["do"]("push", respond.channel, nicks);
+            return async.eachSeries(nicks, (function(nick, next) {
+              return user.resolveNick(nick, respond.channel, function() {
+                return user.addChannel(nick, respond.channel, next);
+              });
+            }), function(err) {
+              return done();
+            });
+          }
+RainBot [10:04:34][log] push -> #snowybottest : Eventide|Sleepies,ChanServ,RainBot,MistaWolf,SnowBot
+RainBot [10:05:23][log] reset -> #snowybottest : function () {
+            chan["do"]("push", respond.channel, nicks);
+            return async.eachSeries(nicks, (function(nick, next) {
+              return user.resolveNick(nick, respond.channel, function() {
+                return user.addChannel(nick, respond.channel, next);
+              });
+            }), function(err) {
+              return done();
+            });
+          }
+RainBot [10:05:23][log] push -> #snowybottest : Eventide|Sleepies,ChanServ,RainBot,MistaWolf,SnowBot
+RainBot [10:05:28][log] MistaWolf had conflicting ACC, resolving it
+RainBot [10:05:29][log] Pushing nick (MistaWolf) to ACC Mista
+RainBot [10:05:29][log] Done pushing nick (MistaWolf) to ACC Mista
+RainBot [10:05:34][log] message -> #snowybottest : MistaWolf derp
+RainBot [10:05:34][log] message -> #snowybottest : MistaWolf derp
+RainBot [10:05:34][log] message -> #snowybottest : MistaWolf test
+RainBot [10:06:54][log] message -> #snowybottest : MistaWolf derp
+RainBot [10:06:54][log] message -> #snowybottest : MistaWolf derp
+RainBot [10:06:54][log] message -> #snowybottest : MistaWolf test
+RainBot [10:07:06][log] message -> #snowybottest : MistaWolf derp
+RainBot [10:07:06][log] message -> #snowybottest : MistaWolf derp
+RainBot [10:07:06][log] message -> #snowybottest : MistaWolf test
+RainBot [10:12:10][log] reset -> #snowybottest : function () {
+            chan["do"]("push", respond.channel, nicks);
+            return async.eachSeries(nicks, (function(nick, next) {
+              return user.resolveNick(nick, respond.channel, function() {
+                return user.addChannel(nick, respond.channel, next);
+              });
+            }), function(err) {
+              return done();
+            });
+          }
+RainBot [10:12:25][log] reset -> #snowybottest : function () {
+            chan["do"]("push", respond.channel, nicks);
+            return async.eachSeries(nicks, (function(nick, next) {
+              return user.resolveNick(nick, respond.channel, function() {
+                return user.addChannel(nick, respond.channel, next);
+              });
+            }), function(err) {
+              return done();
+            });
+          }
+RainBot [10:12:25][log] push -> #snowybottest : RainBot,Eventide|Sleepies,ChanServ,SnowBot,MistaWolf
+RainBot [10:12:31][log] MistaWolf had conflicting ACC, resolving it
+RainBot [10:12:31][log] Pushing nick (MistaWolf) to ACC Mista
+RainBot [10:12:31][log] Done pushing nick (MistaWolf) to ACC Mista
+RainBot [10:12:38][log] message -> #snowybottest : MistaWolf derp
+RainBot [10:12:38][log] message -> #snowybottest : MistaWolf derp
+RainBot [10:12:38][log] message -> #snowybottest : MistaWolf test
+RainBot [10:14:15][log] reset -> #snowybottest : function () {
+            chan["do"]("push", respond.channel, nicks);
+            return async.eachSeries(nicks, (function(nick, next) {
+              return user.resolveNick(nick, respond.channel, function() {
+                return user.addChannel(nick, respond.channel, next);
+              });
+            }), function(err) {
+              return done();
+            });
+          }
+RainBot [10:16:50][log] reset -> #snowybottest : function () {
+            chan["do"]("push", respond.channel, nicks);
+            return async.eachSeries(nicks, (function(nick, next) {
+              return user.resolveNick(nick, respond.channel, function() {
+                return user.addChannel(nick, respond.channel, next);
+              });
+            }), function(err) {
+              return done();
+            });
+          }
+RainBot [10:16:50][log] push -> #snowybottest : RainBot,Eventide|Sleepies,ChanServ,MistaWolf,SnowBot
+RainBot [10:16:55][log] MistaWolf had conflicting ACC, resolving it
+RainBot [10:16:56][log] Pushing nick (MistaWolf) to ACC Mista
+RainBot [10:16:56][log] Done pushing nick (MistaWolf) to ACC Mista
+RainBot [10:16:59][log] message -> #snowybottest : MistaWolf derp
+RainBot [10:16:59][log] message -> #snowybottest : MistaWolf derp
+RainBot [10:16:59][log] message -> #snowybottest : MistaWolf test
+RainBot [10:19:32][log] reset -> #snowybottest : function () {
+            chan["do"]("push", respond.channel, nicks);
+            return async.eachSeries(nicks, (function(nick, next) {
+              return user.resolveNick(nick, respond.channel, function() {
+                return user.addChannel(nick, respond.channel, next);
+              });
+            }), function(err) {
+              return done();
+            });
+          }
+RainBot [10:19:33][log] push -> #snowybottest : Eventide|Sleepies,ChanServ,RainBot,MistaWolf,SnowBot
+RainBot [10:19:38][log] MistaWolf had conflicting ACC, resolving it
+RainBot [10:19:38][log] Pushing nick (MistaWolf) to ACC Mista
+RainBot [10:19:38][log] Done pushing nick (MistaWolf) to ACC Mista
+RainBot [10:19:42][log] message -> #snowybottest : MistaWolf derp
+RainBot [10:19:42][log] message -> #snowybottest : MistaWolf derp
+RainBot [10:19:42][log] message -> #snowybottest : MistaWolf test
+RainBot [16:40:28][log] #snowybottest was initialized in DB
+RainBot [16:40:28][log] reset -> #snowybottest : function () {
+            chan["do"]("push", respond.channel, nicks);
+            return async.eachSeries(nicks, (function(nick, next) {
+              return user.resolveNick(nick, respond.channel, function() {
+                return user.addChannel(nick, respond.channel, next);
+              });
+            }), function(err) {
+              return done();
+            });
+          }
+RainBot [16:40:28][log] push -> #snowybottest : Eventide|Sleepies,ChanServ,RainBot,MistaWolf,SnowBot
+RainBot [16:40:33][log] MistaWolf had conflicting ACC, resolving it
+RainBot [16:40:33][log] Pushing nick (MistaWolf) to ACC Mista
+RainBot [16:40:33][log] Done pushing nick (MistaWolf) to ACC Mista
+RainBot [16:42:23][log] reset -> #snowybottest : function () {
+            chan["do"]("push", respond.channel, nicks);
+            return async.eachSeries(nicks, (function(nick, next) {
+              return user.resolveNick(nick, respond.channel, function() {
+                return user.addChannel(nick, respond.channel, next);
+              });
+            }), function(err) {
+              return done();
+            });
+          }
+RainBot [16:42:24][log] push -> #snowybottest : Eventide|Sleepies,ChanServ,RainBot,MistaWolf,SnowBot
+RainBot [16:42:29][log] MistaWolf had conflicting ACC, resolving it
+RainBot [16:42:29][log] Pushing nick (MistaWolf) to ACC Mista
+RainBot [16:42:29][log] Done pushing nick (MistaWolf) to ACC Mista
+RainBot [16:45:01][log] reset -> #snowybottest : function () {
+            chan["do"]("push", respond.channel, nicks);
+            return async.eachSeries(nicks, (function(nick, next) {
+              return user.resolveNick(nick, respond.channel, function() {
+                return user.addChannel(nick, respond.channel, next);
+              });
+            }), function(err) {
+              return done();
+            });
+          }
+RainBot [16:45:02][log] push -> #snowybottest : Eventide|Sleepies,ChanServ,RainBot,MistaWolf,SnowBot
+RainBot [16:45:07][log] MistaWolf had conflicting ACC, resolving it
+RainBot [16:45:07][log] Pushing nick (MistaWolf) to ACC Mista
+RainBot [16:45:07][log] Done pushing nick (MistaWolf) to ACC Mista
+RainBot [16:46:39][log] #snowybottest was initialized in DB
+RainBot [16:46:39][log] reset -> #snowybottest : function () {
+            chan["do"]("start", respond.channel, nicks);
+            return async.eachSeries(nicks, (function(nick, next) {
+              return user.resolveNick(nick, respond.channel, function() {
+                return user.addChannel(nick, respond.channel, next);
+              });
+            }), function(err) {
+              return done();
+            });
+          }
+RainBot [16:46:40][log] start -> #snowybottest : Eventide|Sleepies,ChanServ,RainBot,MistaWolf,SnowBot
+RainBot [16:46:45][log] MistaWolf had conflicting ACC, resolving it
+RainBot [16:46:45][log] Pushing nick (MistaWolf) to ACC Mista
+RainBot [16:46:45][log] Done pushing nick (MistaWolf) to ACC Mista
+RainBot [16:46:59][log] reset -> #snowybottest : function () {
+            chan["do"]("start", respond.channel, nicks);
+            return async.eachSeries(nicks, (function(nick, next) {
+              return user.resolveNick(nick, respond.channel, function() {
+                return user.addChannel(nick, respond.channel, next);
+              });
+            }), function(err) {
+              return done();
+            });
+          }
+RainBot [16:47:00][log] start -> #snowybottest : Eventide|Sleepies,ChanServ,RainBot,MistaWolf,SnowBot
+RainBot [16:47:05][log] MistaWolf had conflicting ACC, resolving it
+RainBot [16:47:05][log] Pushing nick (MistaWolf) to ACC Mista
+RainBot [16:47:05][log] Done pushing nick (MistaWolf) to ACC Mista
+RainBot [16:47:17][log] pop -> #snowybottest : MistaWolf function () {
+        return responseHandler.respond();
+      }
+RainBot [16:49:34][log] reset -> #snowybottest : function () {
+            chan["do"]("start", respond.channel, nicks);
+            return async.eachSeries(nicks, (function(nick, next) {
+              return user.resolveNick(nick, respond.channel, function() {
+                return user.addChannel(nick, respond.channel, next);
+              });
+            }), function(err) {
+              return done();
+            });
+          }
+RainBot [16:49:35][log] start -> #snowybottest : Eventide|Sleepies,ChanServ,RainBot,SnowBot
+RainBot [16:49:37][log] push -> #snowybottest : MistaWolf
+RainBot [16:49:39][log] MistaWolf had conflicting ACC, resolving it
+RainBot [16:49:39][log] Pushing nick (MistaWolf) to ACC Mista
+RainBot [16:49:39][log] Done pushing nick (MistaWolf) to ACC Mista
+RainBot [16:49:49][log] pop -> #snowybottest : MistaWolf function () {
+        return responseHandler.respond();
+      }
+RainBot [16:51:11][log] reset -> #snowybottest : function () {
+            chan["do"]("start", respond.channel, nicks);
+            return async.eachSeries(nicks, (function(nick, next) {
+              return user.resolveNick(nick, respond.channel, function() {
+                return user.addChannel(nick, respond.channel, next);
+              });
+            }), function(err) {
+              return done();
+            });
+          }
+RainBot [16:51:12][log] start -> #snowybottest : Eventide|Sleepies,ChanServ,RainBot,SnowBot
+RainBot [16:51:19][log] push -> #snowybottest : MistaWolf
+RainBot [16:51:20][log] MistaWolf had conflicting ACC, resolving it
+RainBot [16:51:20][log] Pushing nick (MistaWolf) to ACC Mista
+RainBot [16:51:20][log] Done pushing nick (MistaWolf) to ACC Mista
+RainBot [16:51:27][log] pop -> #snowybottest : MistaWolf function () {
+        return responseHandler.respond();
+      }
+RainBot [16:54:28][log] reset -> #snowybottest : function () {
+            chan["do"]("start", respond.channel, nicks);
+            return async.eachSeries(nicks, (function(nick, next) {
+              return user.resolveNick(nick, respond.channel, function() {
+                return user.addChannel(nick, respond.channel, next);
+              });
+            }), function(err) {
+              return done();
+            });
+          }
+RainBot [16:54:28][log] start -> #snowybottest : RainBot,Eventide|Sleepies,ChanServ,SnowBot
+RainBot [16:54:45][log] push -> #snowybottest : MistaWolf
+RainBot [16:54:46][log] MistaWolf had conflicting ACC, resolving it
+RainBot [16:54:46][log] Pushing nick (MistaWolf) to ACC Mista
+RainBot [16:54:46][log] Done pushing nick (MistaWolf) to ACC Mista
+RainBot [16:54:55][log] message -> #snowybottest : MistaWolf test
+RainBot [17:01:17][log] reset -> #snowybottest : 
+RainBot [17:01:18][log] start -> #snowybottest : RainBot,Eventide|Sleepies,ChanServ,MistaWolf,SnowBot
+RainBot [17:01:23][log] MistaWolf had conflicting ACC, resolving it
+RainBot [17:01:23][log] Pushing nick (MistaWolf) to ACC Mista
+RainBot [17:01:23][log] Done pushing nick (MistaWolf) to ACC Mista
+RainBot [17:02:05][log] push -> #snowybottest : Alfreddy
+RainBot [17:03:58][log] reset -> #snowybottest : 
+RainBot [17:03:58][log] start -> #snowybottest : Alfreddy,RainBot,Eventide|Sleepies,ChanServ,MistaWolf,SnowBot
+RainBot [17:04:04][log] MistaWolf had conflicting ACC, resolving it
+RainBot [17:04:04][log] Pushing nick (MistaWolf) to ACC Mista
+RainBot [17:04:04][log] Done pushing nick (MistaWolf) to ACC Mista
+RainBot [17:04:25][log] #Neverfree was initialized in DB
+RainBot [17:04:25][log] reset -> #Neverfree : 
+RainBot [17:04:25][log] start -> #Neverfree : Googie,OctaveMobile,Mongoosie,GyroTech,Dust,RainBot,Tihan,TimidClef|AFK,BerryPunch,JandalAdjiel,Eventide|Sleepies,Boulder,bikey,MaudBot,Cloud_Zephyr|Away,Baron_Von_Clop,Inky,Dustrunner,Starburn,LegionRed,Creeps|AFK,Lily_the_succubus,Stradiverra,Luna,ZeroItamae,Octave|Away,Neutral,Iron_Wofle,Hisha_The_Unicorn,Dusk,Moonlightning,Sparkler|EFNW,Misty,bucket,AppleDash,PinkieBot,ThatAnonPony,MistaWolf,DanfromStateFarm,Fannie,Pi,Double,SnowBot,batpony,Iron_Anvil
+RainBot [17:04:26][log] Creating user for Googie
+RainBot [17:04:26][log] Done creating user for Googie
+RainBot [17:04:27][log] Added channel #Neverfree to Googie (Googolplexed)
+RainBot [17:04:28][log] Creating user for OctaveMobile
+RainBot [17:04:28][log] Done creating user for OctaveMobile
+RainBot [17:04:28][log] Added channel #Neverfree to OctaveMobile (OctaveSymphony)
+RainBot [17:04:29][log] Creating user for Mongoosie
+RainBot [17:04:30][log] Done creating user for Mongoosie
+RainBot [17:04:30][log] Added channel #Neverfree to Mongoosie (Mongoose)
+RainBot [17:04:31][log] Creating user for GyroTech
+RainBot [17:04:31][log] Done creating user for GyroTech
+RainBot [17:04:31][log] Added channel #Neverfree to GyroTech (ThirdSpurs)
+RainBot [17:04:34][log] Added channel #Neverfree to RainBot (RainBot)
+RainBot [17:04:35][log] Creating user for Tihan
+RainBot [17:04:35][log] Done creating user for Tihan
+RainBot [17:04:35][log] Added channel #Neverfree to Tihan (Tihan)
+RainBot [17:04:38][log] Creating user for BerryPunch
+RainBot [17:04:38][log] Done creating user for BerryPunch
+RainBot [17:04:38][log] Added channel #Neverfree to BerryPunch (StarlightIronhoof)
+RainBot [17:04:40][log] Creating user for JandalAdjiel
+RainBot [17:04:40][log] Done creating user for JandalAdjiel
+RainBot [17:04:40][log] Added channel #Neverfree to JandalAdjiel (JandalAdjiel)
+RainBot [17:04:41][log] Added channel #Neverfree to Eventide|Sleepies (Dustrunner)
+RainBot [17:04:43][log] Creating user for Boulder
+RainBot [17:04:43][log] Done creating user for Boulder
+RainBot [17:04:43][log] Added channel #Neverfree to Boulder (MaudBot)
+RainBot [17:04:45][log] Pushing nick (MaudBot) to ACC MaudBot
+RainBot [17:04:46][log] Done pushing nick (MaudBot) to ACC MaudBot
+RainBot [17:04:48][log] Creating user for Baron_Von_Clop
+RainBot [17:04:48][log] Done creating user for Baron_Von_Clop
+RainBot [17:04:48][log] Added channel #Neverfree to Baron_Von_Clop (Baron_Von_Clop)
+RainBot [17:04:50][log] Creating user for Inky
+RainBot [17:04:50][log] Done creating user for Inky
+RainBot [17:04:50][log] Added channel #Neverfree to Inky (randomUsr)
+RainBot [17:04:51][log] Pushing nick (Dustrunner) to ACC Dustrunner
+RainBot [17:04:51][log] Done pushing nick (Dustrunner) to ACC Dustrunner
+RainBot [17:04:53][log] Creating user for Starburn
+RainBot [17:04:53][log] Done creating user for Starburn
+RainBot [17:04:53][log] Added channel #Neverfree to Starburn (eyeburn)
+RainBot [17:04:54][log] Creating user for LegionRed
+RainBot [17:04:54][log] Done creating user for LegionRed
+RainBot [17:04:55][log] Added channel #Neverfree to LegionRed (LegionRed)
+RainBot [17:04:56][log] Creating user for Creeps|AFK
+RainBot [17:04:56][log] Done creating user for Creeps|AFK
+RainBot [17:04:56][log] Added channel #Neverfree to Creeps|AFK (RedHelper)
+RainBot [17:04:58][log] Creating user for Lily_the_succubus
+RainBot [17:04:58][log] Done creating user for Lily_the_succubus
+RainBot [17:04:58][log] Added channel #Neverfree to Lily_the_succubus (scythe_the_batpony)
+RainBot [17:04:59][log] Creating user for Stradiverra
+RainBot [17:04:59][log] Done creating user for Stradiverra
+RainBot [17:04:59][log] Added channel #Neverfree to Stradiverra (Stradiverra)
+RainBot [17:05:02][log] Creating user for ZeroItamae
+RainBot [17:05:02][log] Done creating user for ZeroItamae
+RainBot [17:05:02][log] Added channel #Neverfree to ZeroItamae (ZeroItamae)
+RainBot [17:05:05][log] Creating user for Neutral
+RainBot [17:05:05][log] Done creating user for Neutral
+RainBot [17:05:05][log] Added channel #Neverfree to Neutral (Nelly)
+RainBot [17:05:06][log] Creating user for Iron_Wofle
+RainBot [17:05:07][log] Done creating user for Iron_Wofle
+RainBot [17:05:07][log] Added channel #Neverfree to Iron_Wofle (Iron_wofle)
+RainBot [17:05:08][log] Creating user for Hisha_The_Unicorn
+RainBot [17:05:08][log] Done creating user for Hisha_The_Unicorn
+RainBot [17:05:08][log] Added channel #Neverfree to Hisha_The_Unicorn (Hisha_The_Unicorn)
+RainBot [17:05:10][log] Creating user for Dusk
+RainBot [17:05:10][log] Done creating user for Dusk
+RainBot [17:05:10][log] Added channel #Neverfree to Dusk (Dusk)
+RainBot [17:05:11][log] Creating user for Moonlightning
+RainBot [17:05:11][log] Done creating user for Moonlightning
+RainBot [17:05:11][log] Added channel #Neverfree to Moonlightning (Moonlightning)
+RainBot [17:05:14][log] Creating user for Misty
+RainBot [17:05:14][log] Done creating user for Misty
+RainBot [17:05:14][log] Added channel #Neverfree to Misty (Cloudrunner)
+RainBot [17:05:17][log] Creating user for AppleDash
+RainBot [17:05:17][log] Done creating user for AppleDash
+RainBot [17:05:17][log] Added channel #Neverfree to AppleDash (AppleDash)
+RainBot [17:05:19][log] Creating user for PinkieBot
+RainBot [17:05:19][log] Done creating user for PinkieBot
+RainBot [17:05:19][log] Added channel #Neverfree to PinkieBot (PinkieBot)
+RainBot [17:05:20][log] Creating user for ThatAnonPony
+RainBot [17:05:20][log] Done creating user for ThatAnonPony
+RainBot [17:05:20][log] Added channel #Neverfree to ThatAnonPony (ThatAnonPony)
+RainBot [17:05:22][log] MistaWolf had conflicting ACC, resolving it
+RainBot [17:05:22][log] Pushing nick (MistaWolf) to ACC Mista
+RainBot [17:05:22][log] Done pushing nick (MistaWolf) to ACC Mista
+RainBot [17:05:22][log] Added channel #Neverfree to MistaWolf (mista)
+RainBot [17:05:26][log] Creating user for Pi
+RainBot [17:05:26][log] Done creating user for Pi
+RainBot [17:05:26][log] Added channel #Neverfree to Pi (Pi)
+RainBot [17:05:27][log] Creating user for Double
+RainBot [17:05:27][log] Done creating user for Double
+RainBot [17:05:28][log] Added channel #Neverfree to Double (Double)
+RainBot [17:05:30][log] Creating user for batpony
+RainBot [17:05:30][log] Done creating user for batpony
+RainBot [17:05:30][log] Added channel #Neverfree to batpony (batpony)
+RainBot [17:07:11][log] nick -> #snowybottest : Alfreddy Alfreddytest
+RainBot [17:10:18][log] message -> #Neverfree : ThatAnonPony S'cause you were sleeping. You're obviously the life and soul of #Neverfree, Sparkler.
+RainBot [17:16:37][log] push -> #Neverfree : AmyBot
+RainBot [17:16:38][log] Creating user for AmyBot
+RainBot [17:16:38][log] Done creating user for AmyBot
+RainBot [17:16:39][log] Added channel #Neverfree to AmyBot (SparkBot)
+RainBot [17:19:57][log] message -> #snowybottest : MistaWolf test
+RainBot [17:34:35][log] pop -> #snowybottest : Hisha_The_Unicorn function () {
+        return responseHandler.respond();
+      }
+RainBot [17:34:54][log] push -> #Neverfree : Hisha_The_Unicorn
+RainBot [17:42:53][log] pop -> #Neverfree : Fannie function () {
+        return responseHandler.respond();
+      }
+RainBot [17:42:59][log] push -> #Neverfree : Fannie
+RainBot [17:43:25][log] push -> #Neverfree : Trildar
+RainBot [17:43:26][log] Creating user for Trildar
+RainBot [17:43:26][log] Done creating user for Trildar
+RainBot [17:43:27][log] Added channel #Neverfree to Trildar (Trildar)
+RainBot [17:50:51][log] nick -> #snowybottest : Eventide|Sleepies Eventide
+RainBot [17:56:51][log] message -> #Neverfree : Double Pinpones!
+RainBot [18:02:13][log] nick -> #snowybottest : Cloud_Zephyr|Away Cloud_Zephyr
+RainBot [18:02:15][log] Creating user for Cloud_Zephyr
+RainBot [18:02:15][log] Done creating user for Cloud_Zephyr
+RainBot [18:02:15][log] Added channel #snowybottest to Cloud_Zephyr (DJCloud_Zephyr[NLR])
+RainBot [18:07:14][log] nick -> #snowybottest : Octave|Away OctaveSymphony
+RainBot [18:07:16][log] Pushing nick (OctaveSymphony) to ACC OctaveSymphony
+RainBot [18:07:16][log] Done pushing nick (OctaveSymphony) to ACC OctaveSymphony
+RainBot [18:07:16][log] Added channel #snowybottest to OctaveSymphony (OctaveSymphony)
+RainBot [18:13:46][log] nick -> #snowybottest : Tihan Grace
+RainBot [18:15:10][log] message -> #Neverfree : PinkieBot 1,0You0,4Tube 10Title:4 KUNG FURY Official Movie [HD] 10Views:4 8,454,176 10Length:4 31:03 10User:4 LaserUnicorns
+RainBot [18:16:05][log] nick -> #snowybottest : Cloud_Zephyr Cloud_Zephyr|Away
+RainBot [18:16:32][log] pop -> #snowybottest : DanfromStateFarm function () {
+        return responseHandler.respond();
+      }
+RainBot [18:17:36][log] message -> #Neverfree : Eventide nu! must keep sparklpone safe
+RainBot [18:32:34][log] message -> #Neverfree : Eventide this movie is ridiuclous, Sparkler
+RainBot [18:32:43][log] message -> #Neverfree : Eventide ridiculous, even*
+RainBot [18:33:35][log] message -> #Neverfree : Eventide I don't know
+RainBot [18:33:48][log] message -> #Neverfree : Eventide I'd need more whiskey to come up with a proper answer to that question
+RainBot [18:36:04][log] message -> #Neverfree : Double What kind of whiskey do you prefer, Eventide?
+RainBot [18:36:15][log] message -> #Neverfree : Eventide Crown Royal
+RainBot [18:39:16][log] message -> #Neverfree : Double A blend?
+RainBot [18:39:22][log] message -> #Neverfree : Double No Single Malts?
+RainBot [18:39:36][log] message -> #Neverfree : Eventide nope
+RainBot [18:40:11][log] message -> #Neverfree : Dusk Distractions >.>
+RainBot [18:41:36][log] push -> #Neverfree : Sunrise_Flare
+RainBot [18:41:38][log] Creating user for Sunrise_Flare
+RainBot [18:41:38][log] Done creating user for Sunrise_Flare
+RainBot [18:41:38][log] Added channel #Neverfree to Sunrise_Flare (Prius)
+RainBot [18:45:59][log] pop -> #snowybottest : LegionRed function () {
+        return responseHandler.respond();
+      }
+RainBot [18:47:06][log] message -> #Neverfree : Eventide :3
+RainBot [19:04:28][log] message -> #Neverfree : Sunrise_Flare how are you?
+RainBot [19:06:40][log] message -> #Neverfree : Eventide I'm doing well
+RainBot [19:06:43][log] message -> #Neverfree : Eventide yourself?
+RainBot [19:08:59][log] message -> #Neverfree : Sunrise_Flare I'm alright
+RainBot [19:11:20][log] message -> #Neverfree : Eventide I'm not sure what Grace is >.>
+RainBot [19:11:38][log] message -> #Neverfree : Eventide well I know that!
+RainBot [19:11:41][log] message -> #Neverfree : Eventide x3
+RainBot [19:11:46][log] message -> #Neverfree : Eventide I said what, not who
+RainBot [19:12:04][log] message -> #Neverfree : Eventide yes, but what kind of pony
+RainBot [19:12:13][log] message -> #Neverfree : Eventide right
+RainBot [19:12:15][log] message -> #Neverfree : Eventide :p
+RainBot [19:13:50][log] message -> #Neverfree : Eventide http://i.imgur.com/wsRH5gm.jpg
+RainBot [19:15:43][log] message -> #Neverfree : Eventide I'll fucking castrate you, asshole*
+RainBot [19:15:45][log] message -> #Neverfree : Eventide missing comma
+RainBot [19:18:05][log] pop -> #snowybottest : Trildar function () {
+        return responseHandler.respond();
+      }
+RainBot [19:22:23][log] message -> #Neverfree : Eventide http://i.imgur.com/PSGwYDV.gif
+RainBot [19:32:24][log] push -> #Neverfree : DiancieHunter
+RainBot [19:35:22][log] message -> #Neverfree : MaudBot [ ownCloud ]
+RainBot [19:35:34][log] message -> #Neverfree : Eventide oh my god that's adorable
+RainBot [19:37:14][log] push -> #Neverfree : Ethera
+RainBot [19:37:16][log] Creating user for Ethera
+RainBot [19:37:16][log] Done creating user for Ethera
+RainBot [19:37:16][log] Added channel #Neverfree to Ethera (Ether)
+RainBot [19:39:18][log] message -> #Neverfree : Ethera The kawaii factor is off the charts!
+RainBot [19:43:14][log] message -> #Neverfree : Eventide I demand to see more pictures of tinipone
+RainBot [19:49:33][log] message -> #Neverfree : Eventide do more
+RainBot [19:49:35][log] message -> #Neverfree : Eventide :>
+RainBot [19:50:04][log] message -> #Neverfree : Eventide :p
+RainBot [19:52:39][log] message -> #Neverfree : Double xD
+RainBot [19:52:41][log] message -> #Neverfree : Double Yet~
+RainBot [19:53:55][log] message -> #Neverfree : Eventide :3
+RainBot [19:57:41][log] message -> #Neverfree : Eventide I wish I had some way of contacting Nilak
+RainBot [19:57:45][log] message -> #Neverfree : Eventide I want to speak with hiiiim
+RainBot [20:03:24][log] message -> #Neverfree : Eventide :3
+RainBot [20:03:28][log] message -> #Neverfree : Eventide hey! I don't eat ponies!
+RainBot [20:03:34][log] message -> #Neverfree : Eventide Intentionally, anyway >.>
+RainBot [20:06:20][log] pop -> #snowybottest : Hisha_The_Unicorn function () {
+        return responseHandler.respond();
+      }
+RainBot [20:07:11][log] push -> #Neverfree : Hisha_The_Unicorn
+RainBot [20:09:05][log] message -> #Neverfree : Eventide Nobody's ever told her to ask first!
+RainBot [20:09:14][log] message -> #Neverfree : Ethera :3
+RainBot [20:10:09][log] message -> #Neverfree : ThatAnonPony Well, how would you like it if you were a tiny pony and some big pony came along and did that to you all of a sudden?
+RainBot [20:10:24][log] message -> #Neverfree : Double Uh
+RainBot [20:10:28][log] message -> #Neverfree : BerryPunch I should be at EFNW 
+RainBot [20:10:30][log] message -> #Neverfree : Double I would call in goo pone
+RainBot [20:11:19][log] message -> #Neverfree : Eventide ThatAnonPony, I'd like to remind you of the time I forcibly opened your mouth and hid in it
+RainBot [20:11:29][log] message -> #Neverfree : ThatAnonPony ... Touche.
+RainBot [20:18:38][log] message -> #Neverfree : BerryPunch You don't realize how depressed and upset with myself I am for not being there
+RainBot [20:18:55][log] message -> #Neverfree : Eventide why, though
+RainBot [20:18:57][log] push -> #Neverfree : Phantasma_Eeria
+RainBot [20:18:59][log] Creating user for Phantasma_Eeria
+RainBot [20:18:59][log] Done creating user for Phantasma_Eeria
+RainBot [20:18:59][log] Added channel #Neverfree to Phantasma_Eeria (Phantasma_Eeria)
+RainBot [20:19:16][log] message -> #Neverfree : Eventide I really need to move somewhere more populated
+RainBot [20:19:23][log] message -> #Neverfree : BerryPunch It's Lee's first time at a con since bronycon 2013
+RainBot [20:19:25][log] message -> #Neverfree : BerryPunch I miss him
+RainBot [20:19:36][log] message -> #Neverfree : BerryPunch I've texted him a bit while he's there
+RainBot [20:20:12][log] pop -> #snowybottest : Iron_Anvil function () {
+        return responseHandler.respond();
+      }
+RainBot [20:20:44][log] message -> #Neverfree : Eventide ah
+RainBot [20:20:50][log] message -> #Neverfree : Eventide I don't know who Lee is
+RainBot [20:20:55][log] message -> #Neverfree : Eventide :p
+RainBot [20:21:23][log] message -> #Neverfree : BerryPunch Just a guy who does voice things
+RainBot [20:21:35][log] message -> #Neverfree : BerryPunch But he's a good guy and friend
+RainBot [20:22:56][log] message -> #Neverfree : BerryPunch Was going through a rough patch last I saw him. Would've been nice to share some time and drinks with him this weekend. :(
+RainBot [20:41:30][log] push -> #Neverfree : Solo_Act
+RainBot [20:41:31][log] Creating user for Solo_Act
+RainBot [20:41:31][log] Done creating user for Solo_Act
+RainBot [20:41:31][log] Added channel #Neverfree to Solo_Act (Solo_Act)
+RainBot [20:41:50][log] pop -> #snowybottest : Fannie function () {
+        return responseHandler.respond();
+      }
+RainBot [20:43:26][log] message -> #Neverfree : Eventide there's like
+RainBot [20:43:32][log] message -> #Neverfree : Eventide no bad angle to take a picture of this car from
+RainBot [20:43:33][log] message -> #Neverfree : Eventide http://i.imgur.com/BYuCrVx.jpg
+RainBot [20:44:18][log] message -> #Neverfree : Eventide the owner actually damaged the front of it when he was storing it for winter
+RainBot [20:44:25][log] message -> #Neverfree : Eventide because he forgot to raise it first
+RainBot [20:44:35][log] message -> #Neverfree : Eventide the replacement bumper cost as much as my car
+RainBot [20:44:54][log] message -> #Neverfree : Solo_Act baka
+RainBot [20:45:00][log] message -> #Neverfree : OctaveSymphony Actual cost of the part less than $ 50
+RainBot [20:45:28][log] message -> #Neverfree : OctaveSymphony Plastic, it's amazing how much money they earn on it
+RainBot [20:45:29][log] message -> #Neverfree : Phantasma_Eeria Solo_Act, why are you calling people stupid/fools/idiots (pick one)
+RainBot [20:45:54][log] message -> #Neverfree : Eventide ooh
+RainBot [20:45:55][log] message -> #Neverfree : Eventide which ones
+RainBot [20:46:19][log] message -> #Neverfree : Eventide tell them to come here
+RainBot [20:46:28][log] message -> #Neverfree : Solo_Act for having a replacement bumper cost as much as a car? 0.o
+RainBot [20:46:35][log] message -> #Neverfree : Eventide lol
+RainBot [20:46:43][log] message -> #Neverfree : OctaveSymphony Such is the high end market
+RainBot [20:46:47][log] message -> #Neverfree : Eventide http://i.imgur.com/LKIsruL.gif
+RainBot [20:47:08][log] message -> #Neverfree : OctaveSymphony And remember, all it is, is a piece of plastic
+RainBot [20:47:22][log] push -> #Neverfree : Dan
+RainBot [20:47:23][log] Creating user for Dan
+RainBot [20:47:23][log] Done creating user for Dan
+RainBot [20:47:24][log] Added channel #Neverfree to Dan (Dan)
+RainBot [20:47:40][log] message -> #Neverfree : Phantasma_Eeria hi everypony
+RainBot [20:48:19][log] message -> #Neverfree : Dan Even
+RainBot [20:48:27][log] message -> #Neverfree : Dan That's sexy as fuck
+RainBot [20:49:19][log] message -> #Neverfree : Eventide you want to see more, Dan?
+RainBot [20:49:28][log] message -> #Neverfree : Eventide http://i.imgur.com/6OvswYl.jpg
+RainBot [20:49:37][log] message -> #Neverfree : Eventide http://i.imgur.com/hETpBdF.jpg
+RainBot [20:49:43][log] message -> #Neverfree : Eventide http://i.imgur.com/FrO3Kaa.jpg
+RainBot [20:49:50][log] message -> #Neverfree : Eventide that's all I've got uploaded
+RainBot [20:49:59][log] message -> #Neverfree : Dan Ehh...
+RainBot [20:50:23][log] message -> #Neverfree : Eventide eh!
+RainBot [20:50:34][log] message -> #Neverfree : Dan I prefer http://images.popmatters.com/columns_art/y/yugo-splsh.jpg
+RainBot [20:50:52][log] message -> #Neverfree : Dan Cuz Yugos are sexy as fuck.
+RainBot [20:50:58][log] message -> #Neverfree : Eventide holy shit man
+RainBot [20:51:05][log] message -> #Neverfree : Eventide yeah, you're right
+RainBot [20:52:16][log] pop -> #snowybottest : Mongoosie function () {
+        return responseHandler.respond();
+      }
+RainBot [20:52:27][log] message -> #Neverfree : BerryPunch Sparkler|EFNW: yeah ...
+RainBot [20:52:30][log] push -> #Neverfree : Mongoosie
+RainBot [20:52:55][log] message -> #Neverfree : Dan I mean. Look at the insides of this beast.
+RainBot [20:53:00][log] message -> #Neverfree : Dan http://www.curbsideclassic.com/wp-content/uploads/2011/10/yugo-interior.jpg
+RainBot [20:53:09][log] message -> #Neverfree : Dan C:
+RainBot [20:53:33][log] message -> #Neverfree : Eventide who's the owner?
+RainBot [20:53:34][log] message -> #Neverfree : Eventide http://i.imgur.com/a0fVdWv.jpg
+RainBot [20:53:36][log] message -> #Neverfree : Eventide is it this guy?
+RainBot [20:53:40][log] message -> #Neverfree : OctaveSymphony http://zodiaczero.deviantart.com/art/A-Void-527415436
+RainBot [20:53:43][log] message -> #Neverfree : MaudBot [ A Void by ZodiacZero on DeviantArt ]
+RainBot [20:53:45][log] message -> #Neverfree : Dan http://i.kinja-img.com/gawker-media/image/upload/s--LIBNgZ0p--/c_fit,fl_progressive,q_80,w_320/18d3nd0d81vgcjpg.jpg
+RainBot [20:54:11][log] message -> #Neverfree : OctaveSymphony http://terror--bite.deviantart.com/art/Bipolar-535535217
+RainBot [20:54:14][log] message -> #Neverfree : MaudBot [ Bipolar by Terror--Bite on DeviantArt ]
+RainBot [20:54:55][log] message -> #Neverfree : Eventide Dan, what?
+RainBot [20:55:06][log] message -> #Neverfree : JandalAdjiel Eventide, 
+RainBot [20:55:08][log] message -> #Neverfree : JandalAdjiel I'm sorry. 
+RainBot [20:55:12][log] message -> #Neverfree : JandalAdjiel For being a shit towards you. 
+RainBot [20:55:12][log] message -> #Neverfree : Eventide sorry for what
+RainBot [20:55:16][log] message -> #Neverfree : Eventide oh
+RainBot [20:55:32][log] message -> #Neverfree : Eventide do you want a hug
+RainBot [20:55:43][log] message -> #Neverfree : Dan Even.
+RainBot [20:55:45][log] message -> #Neverfree : Dan https://www.youtube.com/watch?v=-Gq68u-f6X0
+RainBot [20:55:47][log] message -> #Neverfree : PinkieBot 1,0You0,4Tube 10Title:4 spiderman hello is it me you're looking for 10Views:4 679,710 10Length:4 13 10User:4 Levi- Heichou
+RainBot [20:56:02][log] message -> #Neverfree : JandalAdjiel ARe you still down for Minecrack?
+RainBot [20:56:17][log] message -> #Neverfree : Eventide I haven't really been playing many games lately
+RainBot [20:56:31][log] message -> #Neverfree : JandalAdjiel Eh, Neither have I. I just really want something to do. 
+RainBot [20:56:34][log] message -> #Neverfree : Eventide when I play minecraft it eats up like 80% of my time, and I'm starting a job soon
+RainBot [20:56:43][log] message -> #Neverfree : JandalAdjiel I'm even watching Attack on Titan to bide my time. 
+RainBot [20:56:47][log] message -> #Neverfree : Eventide heh
+RainBot [20:57:23][log] push -> #Neverfree : Princess-QRS
+RainBot [20:57:24][log] Creating user for Princess-QRS
+RainBot [20:57:24][log] Done creating user for Princess-QRS
+RainBot [20:57:24][log] Added channel #Neverfree to Princess-QRS (SRQ)
+RainBot [20:58:04][log] message -> #Neverfree : Eventide hello, Princess-QRS 
+RainBot [20:58:30][log] message -> #Neverfree : Eventide how's your father
+RainBot [20:59:13][log] pop -> #snowybottest : Pi function () {
+        return responseHandler.respond();
+      }
+RainBot [20:59:50][log] message -> #Neverfree : Eventide so... agar.io broke it seems
+RainBot [20:59:54][log] message -> #Neverfree : Princess-QRS he's alright
+RainBot [21:00:11][log] message -> #Neverfree : Eventide still paranoid you're gonna get sued?
+RainBot [21:00:21][log] message -> #Neverfree : Princess-QRS i have no idea
+RainBot [21:00:28][log] message -> #Neverfree : Princess-QRS i don't think so, w/e
+RainBot [21:01:23][log] pop -> #snowybottest : Iron_Wofle function () {
+        return responseHandler.respond();
+      }
+RainBot [21:01:24][log] message -> #Neverfree : Princess-QRS also holy shit the patriot act is going to end
+RainBot [21:01:28][log] message -> #Neverfree : Princess-QRS oh this is neverfree
+RainBot [21:01:31][log] message -> #Neverfree : Princess-QRS WHATEVER GOOD NEWS
+RainBot [21:01:34][log] message -> #Neverfree : Eventide lol
+RainBot [21:02:14][log] pop -> #snowybottest : Alfreddytest function () {
+        return responseHandler.respond();
+      }
+RainBot [21:02:16][log] message -> #Neverfree : Solo_Act !link https://www.youtube.com/watch?v=G8yJoxFRRIY
+RainBot [21:02:19][log] message -> #Neverfree : PinkieBot 1,0You0,4Tube 10Title:4 GIFs with Sound 10Min Compilation #2 10Views:4 574,235 10Length:4 10:29 10User:4 ArmyOfGifs
+RainBot [21:02:59][log] push -> #Neverfree : Iron_Wofle
+RainBot [21:04:15][log] message -> #Neverfree : Eventide impossible!
+RainBot [21:04:17][log] message -> #Neverfree : Solo_Act ,e mpw jas a camome dict=ta[ed tp jo,/
+RainBot [21:04:20][log] message -> #Neverfree : Eventide tinypone is in my mouth!
+RainBot [21:04:30][log] message -> #Neverfree : Solo_Act holy SHIT, I was not on homerow.
+RainBot [21:04:40][log] message -> #Neverfree : Solo_Act as I was saying,
+RainBot [21:04:43][log] message -> #Neverfree : Eventide inb4 jiggles
+RainBot [21:05:09][log] message -> #Neverfree : Eventide look very closely at the name, Solo_Act 
+RainBot [21:05:45][log] message -> #Neverfree : Solo_Act so not a wolf, a misspelled waffle?
+RainBot [21:05:52][log] message -> #Neverfree : Eventide yes
+RainBot [21:09:45][log] message -> #Neverfree : Double nini ponies
+RainBot [21:10:08][log] message -> #Neverfree : Dan Wolffle.
+RainBot [21:10:11][log] message -> #Neverfree : Ethera Ni ni Double
+RainBot [21:10:47][log] pop -> #snowybottest : Double function () {
+        return responseHandler.respond();
+      }
+RainBot [21:10:57][log] nick -> #snowybottest : OctaveSymphony Octave|Bed
+RainBot [21:12:24][log] pop -> #snowybottest : Iron_Wofle function () {
+        return responseHandler.respond();
+      }
+RainBot [21:14:07][log] message -> #Neverfree : Sunrise_Flare 3 months
+RainBot [21:14:09][log] message -> #Neverfree : Sunrise_Flare >:(
+RainBot [21:14:14][log] message -> #Neverfree : Sunrise_Flare 3 months until SGDQ
+RainBot [21:14:20][log] message -> #Neverfree : Sunrise_Flare I don't wanna wait so loooooong
+RainBot [21:16:35][log] message -> #Neverfree : Phantasma_Eeria hmmmmmm
+RainBot [21:20:36][log] pop -> #snowybottest : Phantasma_Eeria function () {
+        return responseHandler.respond();
+      }
+RainBot [21:38:23][log] #snowybottest was initialized in DB
+RainBot [21:38:23][log] reset -> #snowybottest : 
+RainBot [21:38:23][log] start -> #snowybottest : RainBot,Eventide,ChanServ,SnowBot,MistaWolf
+RainBot [21:38:24][log] Creating user for RainBot
+RainBot [21:38:24][log] Done creating user for RainBot
+RainBot [21:38:24][log] Added channel #snowybottest to RainBot (RainBot)
+RainBot [21:38:26][log] Creating user for Eventide
+RainBot [21:38:26][log] Done creating user for Eventide
+RainBot [21:38:26][log] Added channel #snowybottest to Eventide (Dustrunner)
+RainBot [21:38:30][log] Creating user for MistaWolf
+RainBot [21:38:30][log] Done creating user for MistaWolf
+RainBot [21:38:30][log] Added channel #snowybottest to MistaWolf (Mista)
+RainBot [21:38:37][log] action -> #snowybottest : MistaWolf conducts a test
+RainBot [21:39:21][log] message -> #snowybottest : MistaWolf Another test
+RainBot [21:39:59][log] #Neverfree was initialized in DB
+RainBot [21:39:59][log] reset -> #Neverfree : 
+RainBot [21:39:59][log] start -> #Neverfree : Googie,OctaveMobile,GyroTech,Dan,Dust,RainBot,Grace,TimidClef|AFK,BerryPunch,JandalAdjiel,Eventide,Boulder,bikey,Mongoosie,MaudBot,SnowBot,Cloud_Zephyr|Away,Princess-QRS,Baron_Von_Clop,Inky,Dustrunner,Starburn,Creeps|AFK,Lily_the_succubus,Stradiverra,Luna,ZeroItamae,Octave|Bed,Neutral,Dusk,DiancieHunter,Moonlightning,Sparkler|EFNW,Misty,bucket,AppleDash,PinkieBot,Hisha_The_Unicorn,ThatAnonPony,MistaWolf,AmyBot,Sunrise_Flare,batpony,Ethera,Solo_Act,Phantasma_Eeria
+RainBot [21:40:00][log] Creating user for Googie
+RainBot [21:40:00][log] Done creating user for Googie
+RainBot [21:40:01][log] Added channel #Neverfree to Googie (Googolplexed)
+RainBot [21:40:02][log] Creating user for OctaveMobile
+RainBot [21:40:02][log] Done creating user for OctaveMobile
+RainBot [21:40:02][log] Added channel #Neverfree to OctaveMobile (OctaveSymphony)
+RainBot [21:40:03][log] Creating user for GyroTech
+RainBot [21:40:03][log] Done creating user for GyroTech
+RainBot [21:40:04][log] Added channel #Neverfree to GyroTech (ThirdSpurs)
+RainBot [21:40:05][log] Creating user for Dan
+RainBot [21:40:05][log] Done creating user for Dan
+RainBot [21:40:05][log] Added channel #Neverfree to Dan (Dan)
+RainBot [21:40:08][log] Added channel #Neverfree to RainBot (RainBot)
+RainBot [21:40:12][log] Creating user for BerryPunch
+RainBot [21:40:12][log] Done creating user for BerryPunch
+RainBot [21:40:12][log] Added channel #Neverfree to BerryPunch (StarlightIronhoof)
+RainBot [21:40:13][log] Creating user for JandalAdjiel
+RainBot [21:40:14][log] Done creating user for JandalAdjiel
+RainBot [21:40:14][log] Added channel #Neverfree to JandalAdjiel (JandalAdjiel)
+RainBot [21:40:15][log] Added channel #Neverfree to Eventide (Dustrunner)
+RainBot [21:40:16][log] Creating user for Boulder
+RainBot [21:40:16][log] Done creating user for Boulder
+RainBot [21:40:17][log] Added channel #Neverfree to Boulder (MaudBot)
+RainBot [21:40:19][log] Creating user for Mongoosie
+RainBot [21:40:19][log] Done creating user for Mongoosie
+RainBot [21:40:19][log] Added channel #Neverfree to Mongoosie (Mongoose)
+RainBot [21:40:21][log] Pushing nick (MaudBot) to ACC MaudBot
+RainBot [21:40:21][log] Done pushing nick (MaudBot) to ACC MaudBot
+RainBot [21:40:25][log] Creating user for Princess-QRS
+RainBot [21:40:25][log] Done creating user for Princess-QRS
+RainBot [21:40:25][log] Added channel #Neverfree to Princess-QRS (SRQ)
+RainBot [21:40:26][log] Creating user for Baron_Von_Clop
+RainBot [21:40:27][log] Done creating user for Baron_Von_Clop
+RainBot [21:40:27][log] Added channel #Neverfree to Baron_Von_Clop (Baron_Von_Clop)
+RainBot [21:40:28][log] Creating user for Inky
+RainBot [21:40:28][log] Done creating user for Inky
+RainBot [21:40:28][log] Added channel #Neverfree to Inky (randomUsr)
+RainBot [21:40:30][log] Pushing nick (Dustrunner) to ACC Dustrunner
+RainBot [21:40:30][log] Done pushing nick (Dustrunner) to ACC Dustrunner
+RainBot [21:40:31][log] Creating user for Starburn
+RainBot [21:40:31][log] Done creating user for Starburn
+RainBot [21:40:31][log] Added channel #Neverfree to Starburn (eyeburn)
+RainBot [21:40:33][log] Creating user for Creeps|AFK
+RainBot [21:40:33][log] Done creating user for Creeps|AFK
+RainBot [21:40:33][log] Added channel #Neverfree to Creeps|AFK (RedHelper)
+RainBot [21:40:34][log] Creating user for Lily_the_succubus
+RainBot [21:40:34][log] Done creating user for Lily_the_succubus
+RainBot [21:40:34][log] Added channel #Neverfree to Lily_the_succubus (scythe_the_batpony)
+RainBot [21:40:36][log] Creating user for Stradiverra
+RainBot [21:40:36][log] Done creating user for Stradiverra
+RainBot [21:40:36][log] Added channel #Neverfree to Stradiverra (Stradiverra)
+RainBot [21:40:38][log] Creating user for ZeroItamae
+RainBot [21:40:39][log] Done creating user for ZeroItamae
+RainBot [21:40:39][log] Added channel #Neverfree to ZeroItamae (ZeroItamae)
+RainBot [21:40:41][log] Creating user for Neutral
+RainBot [21:40:41][log] Done creating user for Neutral
+RainBot [21:40:42][log] Added channel #Neverfree to Neutral (Nelly)
+RainBot [21:40:43][log] Creating user for Dusk
+RainBot [21:40:43][log] Done creating user for Dusk
+RainBot [21:40:43][log] Added channel #Neverfree to Dusk (Dusk)
+RainBot [21:40:46][log] Creating user for Moonlightning
+RainBot [21:40:46][log] Done creating user for Moonlightning
+RainBot [21:40:46][log] Added channel #Neverfree to Moonlightning (Moonlightning)
+RainBot [21:40:49][log] Creating user for Misty
+RainBot [21:40:49][log] Done creating user for Misty
+RainBot [21:40:49][log] Added channel #Neverfree to Misty (Cloudrunner)
+RainBot [21:40:51][log] Creating user for AppleDash
+RainBot [21:40:52][log] Done creating user for AppleDash
+RainBot [21:40:52][log] Added channel #Neverfree to AppleDash (AppleDash)
+RainBot [21:40:53][log] Creating user for PinkieBot
+RainBot [21:40:53][log] Done creating user for PinkieBot
+RainBot [21:40:53][log] Added channel #Neverfree to PinkieBot (PinkieBot)
+RainBot [21:40:54][log] Creating user for Hisha_The_Unicorn
+RainBot [21:40:55][log] Done creating user for Hisha_The_Unicorn
+RainBot [21:40:55][log] Added channel #Neverfree to Hisha_The_Unicorn (Hisha_The_Unicorn)
+RainBot [21:40:56][log] Creating user for ThatAnonPony
+RainBot [21:40:56][log] Done creating user for ThatAnonPony
+RainBot [21:40:56][log] Added channel #Neverfree to ThatAnonPony (ThatAnonPony)
+RainBot [21:40:58][log] Added channel #Neverfree to MistaWolf (Mista)
+RainBot [21:40:59][log] Creating user for AmyBot
+RainBot [21:40:59][log] Done creating user for AmyBot
+RainBot [21:40:59][log] Added channel #Neverfree to AmyBot (SparkBot)
+RainBot [21:41:00][log] Creating user for Sunrise_Flare
+RainBot [21:41:01][log] Done creating user for Sunrise_Flare
+RainBot [21:41:01][log] Added channel #Neverfree to Sunrise_Flare (Prius)
+RainBot [21:41:02][log] Creating user for batpony
+RainBot [21:41:02][log] Done creating user for batpony
+RainBot [21:41:02][log] Added channel #Neverfree to batpony (batpony)
+RainBot [21:41:04][log] Creating user for Ethera
+RainBot [21:41:04][log] Done creating user for Ethera
+RainBot [21:41:04][log] Added channel #Neverfree to Ethera (Ether)
+RainBot [21:41:05][log] Creating user for Solo_Act
+RainBot [21:41:05][log] Done creating user for Solo_Act
+RainBot [21:41:05][log] Added channel #Neverfree to Solo_Act (Solo_Act)
+RainBot [21:41:07][log] Creating user for Phantasma_Eeria
+RainBot [21:41:07][log] Done creating user for Phantasma_Eeria
+RainBot [21:41:07][log] Added channel #Neverfree to Phantasma_Eeria (Phantasma_Eeria)
+RainBot [21:41:13][log] action -> #Neverfree : Sunrise_Flare starts panting quite heavily, for now just laying completely limp and ragdolled against the floor. Every time Eventide nips her muscles all spasm though and she seizes up slightly "Oh! OH! Fuck! NYAH!" She says in staccato exclamations whenever she feels a bite or two
+RainBot [21:43:05][log] message -> #snowybottest : Eventide what if you get a user named users
+RainBot [21:43:29][log] action -> #Neverfree : Ethera holds ThatAnonPony close, no matter what form they take, they'll always be best sofapone.
+RainBot [21:43:29][log] message -> #snowybottest : MistaWolf True didn't think about that case
+RainBot [21:49:03][log] action -> #Neverfree : ThatAnonPony boops Ethera with a newly hardlight hoof. Also looks over at Sunrise and Eventide. "Ohmy?"
+RainBot [21:50:07][log] message -> #Neverfree : Solo_Act alright, I'm out.
+RainBot [21:50:13][log] pop -> #snowybottest : Solo_Act
+RainBot [21:50:13][log] message -> #Neverfree : Eventide cya, so
+RainBot [21:50:17][log] message -> #Neverfree : Eventide aw
+RainBot [21:50:20][log] action -> #Neverfree : Ethera is booped! "Oh my indeed~" she whispers while nuzzling ThatAnonPony.
+RainBot [21:50:53][log] message -> #Neverfree : MaudBot [ ownCloud ]
+RainBot [21:51:32][log] action -> #Neverfree : Eventide lets her muzzle find its way across Sunny's neck, leaving her with her head nearly perpendicular to the white mare's. Her tongue begins to lick and lap at a single spot in particular, getting the fur there matted and wet. She opens her mouth, revealing her fangs, and licks her lips while she takes in Sunny's excitement. Finally, she dives in, letting those
+RainBot [21:51:32][log] action -> #Neverfree : Eventide sharp fangs sink into Sunny's neck.
+RainBot [21:52:38][log] action -> #Neverfree : Lily_the_succubus sprays holy water all over Eventide 
+RainBot [21:52:46][log] message -> #Neverfree : Ethera Sparkler|EFNW, tini-pone sized too! :3
+RainBot [21:53:26][log] message -> #Neverfree : Eventide you've got a life-sized Sparkler drawing now
+RainBot [21:54:17][log] message -> #Neverfree : Sunrise_Flare writhes harder and harder, her instincts tell her to hide the spot being attacked but she fights with all her might to keep it open, she starts bucking her hips at Eventide's tummy, having something grow against her fur. Then she gets bitten which makes her completely convulse and scream like a bashee, her vision fades to white while her body just starts shaking beyond her control. That growing object should now feel a lot wetter than it was a fe
+RainBot [21:54:17][log] message -> #Neverfree : Sunrise_Flare w seconds ago too...
+RainBot [21:54:47][log] message -> #Neverfree : Eventide a couple?
+RainBot [21:55:04][log] message -> #Neverfree : Eventide what about that money you were talking about 
+RainBot [21:55:44][log] message -> #Neverfree : Eventide oh neat
+RainBot [21:56:08][log] message -> #Neverfree : Eventide do you have those yet?
+RainBot [21:56:29][log] action -> #Neverfree : Dan flops onto his back and plays N64
+RainBot [21:56:41][log] message -> #Neverfree : Eventide  oh
+RainBot [21:59:34][log] action -> #Neverfree : Eventide squeaks in pain and pins her ears back at the sudden sharp shriek from Sunny. She pulls her fangs out of the mare's neck and quickly moves in to kiss the mare, pressing her muzzle against her's firmly and tilting her head to the side in some sort of attempt to make the noise stop.
+RainBot [22:00:53][log] action -> #Neverfree : Sunrise_Flare immediately stops screaming, not even noticing the blood leaking from her expertly pierced neck. SHe pants very heavily and return the kiss to Eventide with the barest scrap of energy she had left. Her body lets out a few tremors as she hugs Eventide tight afterwards
+RainBot [22:01:39][log] action -> #Neverfree : Dan grabs Sparkler and snuggles her as he goes back to playing LoZ:OoT
+RainBot [22:01:53][log] message -> #Neverfree : Dan ** LoZ: OoT
+RainBot [22:02:00][log] message -> #Neverfree : Dan Damned Emojis
+RainBot [22:04:48][log] message -> #Neverfree : Sunrise_Flare legend of the oot
+RainBot [22:08:53][log] action -> #Neverfree : Eventide huddles herself tightly against Sunny while she lets the mare calm down, not failing to notice the blood seeping out of her neck either. It's a little difficult to miss on white fur. She's afraid of going back down there to stem the bleeding, though, after that painful screech. Instead, she simply pulls her lips away from Sunny's own and nuzzles against her
+RainBot [22:08:54][log] action -> #Neverfree : Eventide cheek, wiggling her hips against the warm shaft pressing at her belly.
+RainBot [22:09:55][log] action -> #Neverfree : ThatAnonPony lazes on Ethera and fans self. "Ohmy..."
+RainBot [23:20:36][log] reset -> #snowybottest : 
+RainBot [23:20:37][log] start -> #snowybottest : RainBot,Eventide,ChanServ,MistaWolf,SnowBot
+RainBot [23:21:27][log] push -> #snowybottest : Alfreddytest
+RainBot [23:21:51][log] pop -> #snowybottest : Alfreddytest
+RainBot [23:22:00][log] push -> #snowybottest : Alfreddytest
+RainBot [23:22:20][log] push -> #snowybottest : SnowBot1
+RainBot [23:22:20][log] push -> #snowybottest : SnowBot1
+RainBot [23:22:20][log] reset -> #snowybottest : 
+RainBot [23:22:20][log] start -> #snowybottest : RainBot,Eventide,ChanServ,MistaWolf,Alfreddytest,SnowBot,SnowBot1
+RainBot [23:23:34][log] pop -> #snowybottest : SnowBot
+RainBot [23:23:56][log] reset -> #snowybottest : 
+RainBot [23:23:57][log] start -> #snowybottest : RainBot,Eventide,ChanServ,MistaWolf,Alfreddytest,SnowBot
+RainBot [23:24:20][log] reset -> #snowybottest2 : 
+RainBot [23:24:20][log] #snowybottest2 was initialized in DB
+RainBot [23:24:20][log] start -> #snowybottest2 : MistaWolf,Alfreddytest,SnowBot
+RainBot [23:24:22][log] Added channel #snowybottest2 to MistaWolf (Mista)
+RainBot [23:24:27][log] pop -> #snowybottest : Alfreddytest
+RainBot [23:24:27][log] pop -> #snowybottest2 : Alfreddytest
+RainBot [23:27:26][log] push -> #snowybottest : SnowBot1
+RainBot [23:27:26][log] push -> #snowybottest : SnowBot1
+RainBot [23:27:27][log] reset -> #snowybottest : 
+RainBot [23:27:27][log] start -> #snowybottest : Eventide,ChanServ,RainBot,SnowBot,MistaWolf,SnowBot1
+RainBot [23:27:30][log] push -> #snowybottest2 : Alfreddytest
+RainBot [23:27:30][log] push -> #snowybottest : Alfreddytest
+RainBot [23:27:30][log] push -> #snowybottest : Alfreddytest
+RainBot [23:27:51][log] Inspecting #snowybottestfor nick SnowBot
+RainBot [23:27:51][log] Channel connected -> true
+RainBot [23:27:51][log] pop -> #snowybottest : SnowBot
+RainBot [23:28:01][log] reset -> #snowybottest : 
+RainBot [23:28:01][log] start -> #snowybottest : Eventide,ChanServ,RainBot,MistaWolf,Alfreddytest,SnowBot
+RainBot [23:28:11][log] reset -> #snowybottest2 : 
+RainBot [23:28:11][log] start -> #snowybottest2 : MistaWolf,Alfreddytest,SnowBot
+RainBot [23:28:16][log] pop -> #snowybottest : Alfreddytest function () {
+        return responseHandler.respond();
+      }
+RainBot [23:28:23][log] push -> #snowybottest : Alfreddytest
+RainBot [23:28:27][log] Inspecting #snowybottestfor nick Alfreddytest
+RainBot [23:28:27][log] Channel connected -> true
+RainBot [23:28:27][log] Inspecting #snowybottest2for nick Alfreddytest
+RainBot [23:28:27][log] pop -> #snowybottest : Alfreddytest
+RainBot [23:28:27][log] Channel connected -> true
+RainBot [23:28:27][log] pop -> #snowybottest2 : Alfreddytest
+RainBot [23:28:56][log] reset -> #snowybottest : 
+RainBot [23:28:57][log] start -> #snowybottest : Eventide,ChanServ,RainBot,SnowBot,MistaWolf
+RainBot [23:29:07][log] push -> #snowybottest : Alfreddytest
+RainBot [23:29:18][log] reset -> #Neverfree : 
+RainBot [23:29:19][log] start -> #Neverfree : ZeroItamae,Googie,GyroTech,Grace,Eventide,Dust,RainBot,bucket,Boulder,bikey,Starburn,Sparkler,Stradiverra,Dustrunner,Luna,Dusk,OctaveMobile,DJ_Vinyl_Scratch,Octave|Bed,SnowBot,MaudBot,TimidClef,BerryPunch,Xenith,Cobalt_Blitz,Princess-QRS,AppleDash,PinkieBot,DanfromStateFarm,Baron_Von_Clop,MistaWolf,Cloud|Hurt,Ethera,Cloud_Zephyr|Away,QuantumPocket,Sunrise_Flare,batpony,Inky,AmyBot,Moonlightning,Ivory_Keys,RedHelper[NLR],SkyHighAway,Static_Breeze|FO,Phantasma_Eeria,ThatAnonPony
+RainBot [23:29:35][log] Creating user for Sparkler
+RainBot [23:29:35][log] Done creating user for Sparkler
+RainBot [23:29:35][log] Added channel #Neverfree to Sparkler (Sparkler)
+RainBot [23:29:43][log] Pushing nick (DJ_Vinyl_Scratch) to ACC scythe_the_batpony
+RainBot [23:29:43][log] Done pushing nick (DJ_Vinyl_Scratch) to ACC scythe_the_batpony
+RainBot [23:29:46][log] action -> #Neverfree : ThatAnonPony wiggles beneath Eventide. Non-suggestively, of course.
+RainBot [23:29:49][log] Creating user for TimidClef
+RainBot [23:29:49][log] Done creating user for TimidClef
+RainBot [23:29:49][log] Added channel #Neverfree to TimidClef (TimidClef)
+RainBot [23:29:53][log] Creating user for Cobalt_Blitz
+RainBot [23:29:53][log] Done creating user for Cobalt_Blitz
+RainBot [23:29:53][log] Added channel #Neverfree to Cobalt_Blitz (Cobalt_Blitz)
+RainBot [23:30:13][log] Creating user for QuantumPocket
+RainBot [23:30:13][log] Done creating user for QuantumPocket
+RainBot [23:30:13][log] Added channel #Neverfree to QuantumPocket (ShadyLightz)
+RainBot [23:30:21][log] Creating user for Ivory_Keys
+RainBot [23:30:21][log] Done creating user for Ivory_Keys
+RainBot [23:30:21][log] message -> #Neverfree : Eventide SnowBot
+RainBot [23:30:21][log] Added channel #Neverfree to Ivory_Keys (Ivory_Keys)
+RainBot [23:30:29][log] message -> #Neverfree : Eventide RainBot, info!
+RainBot [23:30:29][log] message -> #Neverfree : RainBot I'm a multipurpose IRC botpony written with node.js by MistaWolf [Version: 3.3.15 (Xenith)]
+RainBot [23:30:32][log] message -> #Neverfree : Eventide uh huh...
+RainBot [23:30:51][log] message -> #Neverfree : MistaWolf oops
+RainBot [23:30:52][log] message -> #Neverfree : MistaWolf lol
+RainBot [23:31:00][log] message -> #Neverfree : Eventide :p
+RainBot [23:31:02][log] message -> #Neverfree : Sparkler lol
+RainBot [23:31:05][log] message -> #Neverfree : Sparkler same bot!
+RainBot [23:31:13][log] message -> #Neverfree : Eventide RainBot, q! users
+RainBot [23:31:18][log] message -> #Neverfree : Sparkler +hoof Eventide 
+RainBot [23:31:18][log] message -> #Neverfree : Eventide obviously not the same version
+RainBot [23:31:18][log] message -> #Neverfree : AmyBot All data will be sent in query
+RainBot [23:31:20][log] message -> #Neverfree : Eventide tsk tsk tsk
+RainBot [23:31:49][log] message -> #Neverfree : MistaWolf tis k, I keep dev notes on the side
+RainBot [23:31:52][log] message -> #Neverfree : Sparkler best quote
+RainBot [23:32:04][log] message -> #Neverfree : Eventide MistaWolf, how far back does it quote, again?
+RainBot [23:32:23][log] action -> #Neverfree : Sparkler creates a new branch in the git
+RainBot [23:32:23][log] message -> #Neverfree : MistaWolf uh, two days ago
+RainBot [23:32:29][log] message -> #Neverfree : MistaWolf that was the last db wipe I've done
+RainBot [23:32:34][log] message -> #Neverfree : Eventide right
+RainBot [23:38:41][log] Inspecting #snowybottest for nick Alfreddytest
+RainBot [23:38:41][log] Channel connected -> true
+RainBot [23:38:41][log] pop -> #snowybottest : Alfreddytest
+RainBot [23:38:41][log] Channel connected -> false
+RainBot [23:38:41][log] Inspecting #neverfree for nick Alfreddytest
+RainBot [23:38:56][log] message -> #Neverfree : Eventide MistaWolf, can aliased commands have parameters?
+RainBot [23:39:13][log] message -> #Neverfree : MistaWolf no, but I've been thinking about it
+RainBot [23:39:20][log] message -> #Neverfree : Eventide would be useful
+RainBot [23:39:24][log] message -> #Neverfree : MistaWolf yeah
+RainBot [23:40:35][log] push -> #snowybottest : Alfreddytest
+RainBot [23:40:39][log] message -> #Neverfree : Eventide hey since when is Cobalt_Blitz in here
+RainBot [23:40:48][log] action -> #Neverfree : Eventide licks a fluffy pegapone
+RainBot [23:41:59][log] nick -> #snowybottest : Cloud|Hurt Cloud|Lonely
+RainBot [23:47:05][log] reset -> #snowybottest : 
+RainBot [23:47:05][log] start -> #snowybottest : Alfreddytest,RainBot,Eventide,ChanServ,MistaWolf,SnowBot
+RainBot [23:47:17][log] reset -> #Neverfree : 
+RainBot [23:47:17][log] start -> #Neverfree : Googie,Phantasma_Eeria,DJ_Vinyl_Scratch,Sparkler,Static_Breeze|FO,GyroTech,Dust,RainBot,Grace,TimidClef,BerryPunch,RedHelper[NLR],Eventide,Boulder,bikey,Moonlightning,MaudBot,Cloud|Lonely,batpony,ThatAnonPony,Baron_Von_Clop,SkyHighAway,Dustrunner,Starburn,MistaWolf,Stradiverra,Luna,ZeroItamae,Octave|Bed,Dusk,Princess-QRS,Ivory_Keys,AppleDash,PinkieBot,DanfromStateFarm,QuantumPocket,OctaveMobile,Sunrise_Flare,AmyBot,bucket,Cloud_Zephyr|Away,Inky,Ethera,Xenith,SnowBot,Cobalt_Blitz
+RainBot [23:50:49][log] message -> #snowybottest : MistaWolf test
+RainBot [23:55:00][log] action -> #Neverfree : Sparkler rolls onto her side and rests her head deeper into DanfromStateFarm's fur. "Not now," she sighs as she nuzzles into his fur to wipe a tear away. "I don't like to think about it."
+RainBot [23:58:40][log] action -> #Neverfree : ThatAnonPony snuggles under an Eventide.
+RainBot [23:59:21][log] action -> #Neverfree : Ethera wriggles about and tentacle-snugs ThatAnonPony and Eventide, in a SFW way.
+RainBot [00:00:11][log] action -> #Neverfree : ThatAnonPony licks Ethera, SFW of course. 
+RainBot [00:00:36][log] action -> #Neverfree : Eventide lickylicks at ThatAnonPony's mane
+RainBot [00:00:43][log] action -> #Neverfree : Ethera is grapey!
+RainBot [00:01:39][log] action -> #Neverfree : ThatAnonPony now has a swished back mane. Strikes a pose!
+RainBot [00:02:30][log] action -> #Neverfree : Ethera swoons as she witnesses ThatAnonPony!
+RainBot [00:03:44][log] message -> #Neverfree : Sparkler DanfromStateFarm: driving home be back in 15 or so
+RainBot [00:09:36][log] push -> #Neverfree : Lavish
+RainBot [00:09:37][log] Creating user for Lavish
+RainBot [00:09:37][log] Done creating user for Lavish
+RainBot [00:09:39][log] Added channel #Neverfree to Lavish (Lavish)
+RainBot [00:10:19][log] action -> #Neverfree : Lavish sneaks over to Eventide and gives her a quick little hug
+RainBot [00:10:31][log] action -> #Neverfree : Eventide squeaks!
+RainBot [00:10:56][log] action -> #Neverfree : Lavish squeezes Eventide, "Squeak, you!"
+RainBot [00:11:19][log] action -> #Neverfree : Eventide lets out a long squeaky whine like a deflating balloon
+RainBot [00:12:10][log] action -> #Neverfree : Lavish eases his hold on Eventide before gripping her ear into his mouth and giving her head a little tug.
+RainBot [00:12:33][log] action -> #Neverfree : ThatAnonPony waves at Lavish!
+RainBot [00:13:48][log] action -> #Neverfree : Eventide keeps on squeaking, but this time it's because of the rough ear tugs! She doesn't really seem to mind, though
+RainBot [00:14:46][log] action -> #Neverfree : Lavish oocly waves over to TAP. He pushes Eventide's face into the grass and sniffs at her cheek, his lips letting her ear slip out of his snout, "And how are you?"
+RainBot [00:15:08][log] message -> #Neverfree : ThatAnonPony Lavish is such a friendly pone.
+RainBot [00:15:45][log] action -> #Neverfree : Eventide squirms in Lavish's grip and groans. She doesn't really seem to like it when he does that.
+RainBot [00:17:49][log] action -> #Neverfree : Lavish doesn't ease up, his curious nose slides up along Eventide's fur and sniffs here and there, "Hey! Are you listening?" Rolling her body from side to side as he explores her shoulders and on up.
+RainBot [00:19:28][log] push -> #Neverfree : JandalAdjiel
+RainBot [00:19:40][log] action -> #Neverfree : Sparkler relaxes on top of DanfromStateFarm, listening to his rhythmic heartbeat thumping below her. Staying quiet, she tugs upon his fur and ruffles it up to form a makeshift pillow.
+RainBot [00:21:25][log] action -> #Neverfree : Eventide lets out a bit more of a whine this time and struggles a little more, though she'd need to try a lot harder if she wanted to get away. "I'm fine." She replies flatly, not really enjoying the position she's been put in.
+RainBot [00:22:58][log] action -> #Neverfree : Lavish curls Eventide up and rolls her onto her back till her hind hooves are over her head. Lavish tucks in her tail between her legs to keep his mind, he pins her on her shoulder with her ass raised up, "And what are you doing?"
+RainBot [00:26:41][log] action -> #Neverfree : Eventide doesn't make any more attempts to resist Lavish, but she makes sure to make her displeasure known with a few more annoyed grunts and squeaks. This new position she's in isn't really any more comfortable than the last. In fact, it's much worse. At least the big thestral had the decency of letting her keep her bits hidden. "I'm not really up to much.
+RainBot [00:26:41][log] action -> #Neverfree : Eventide Yourself?"
+RainBot [00:28:43][log] reset -> #snowybottest : 
+RainBot [00:28:44][log] start -> #snowybottest : Alfreddytest,RainBot,Eventide,ChanServ,MistaWolf,SnowBot
+RainBot [00:29:28][log] nick -> #snowybottest : Alfreddytest Alfreddytest[test]
+RainBot [00:29:44][log] reset -> #snowybottest2 : 
+RainBot [00:29:44][log] pop -> #snowybottest : SnowBot function () {
+        return responseHandler.respond();
+      }
+RainBot [00:29:44][log] start -> #snowybottest2 : Alfreddytest[test],MistaWolf,SnowBot
+RainBot [00:30:04][log] reset -> #snowybottest : 
+RainBot [00:30:04][log] pop -> #snowybottest2 : SnowBot function () {
+        return responseHandler.respond();
+      }
+RainBot [00:30:04][log] start -> #snowybottest : Alfreddytest[test],RainBot,Eventide,ChanServ,MistaWolf,SnowBot
+RainBot [00:43:26][log] reset -> #Neverfree : 
+RainBot [00:43:26][log] start -> #Neverfree : Googie,Phantasma_Eeria,DJ_Vinyl_Scratch,Sparkler,Breeze_Away,GyroTech,Dust,RainBot,Grace,TimidClef,BerryPunch,RedHelper[NLR],Eventide,Boulder,bikey,Moonlightning,MaudBot,Cloud|Lonely,batpony,ThatAnonPony,Baron_Von_Clop,SkyHighAway,Dustrunner,Starburn,MistaWolf,Stradiverra,Luna,ZeroItamae,Octave|Bed,Dusk,Princess-QRS,Ivory_Keys,AppleDash,PinkieBot,DanfromStateFarm,QuantumPocket,OctaveMobile,Sunrise_Flare,AmyBot,Lavish,bucket,Cloud_Zephyr|Away,Inky,Ethera,JandalAdjiel,Xenith,SnowBot,Cobalt_Blitz
+RainBot [00:43:33][log] Creating user for Breeze_Away
+RainBot [00:43:33][log] Done creating user for Breeze_Away
+RainBot [00:43:33][log] Added channel #Neverfree to Breeze_Away (Night_Breeze)
+RainBot [00:43:42][log] Pushing nick (RedHelper[NLR]) to ACC RedHelper
+RainBot [00:43:42][log] Done pushing nick (RedHelper[NLR]) to ACC RedHelper
+RainBot [00:43:52][log] action -> #Neverfree : ThatAnonPony gets so many pings!
+RainBot [00:43:55][log] Creating user for SkyHighAway
+RainBot [00:43:55][log] Done creating user for SkyHighAway
+RainBot [00:43:56][log] Added channel #Neverfree to SkyHighAway (SkyHigh)
+RainBot [00:44:14][log] action -> #Neverfree : Sparkler wiggles at ThatAnonPony
+RainBot [00:44:25][log] action -> #Neverfree : ThatAnonPony wiggles back at Sparkler.
+RainBot [00:45:08][log] action -> #Neverfree : Lavish smiles as he could get her rear up to her round bottom, "Well Eventide, I think you will be mostly in comfort but.. I was going to do an experiment on you today? Testing a few toys I created for the sake of finding the optimal sort of usage and you are going to be part of the 'soaked' test."
+RainBot [00:50:23][log] action -> #Neverfree : Eventide rolls her eyes and looks at Lavish for a few moments. "What does your err... 'experiment' involve, exactly? And how long will it take?" She's still clearly displeased at the bigger pony, but she's at least willing to humor him for now.
+RainBot [00:53:59][log] action -> #Neverfree : Lavish grips Eventide by her collar and yanks her away, dragging her on her back across the tile floor, "Well. I was thinking of testing out a few my little kink toys but... I need to isolate the pony in question that will be under its effects so I can properly record the information," he brings Eventide to a pony size brief case, with foam like surroundings made to encase anything delicate, "And I...
+RainBot [00:54:00][log] action -> #Neverfree : Lavish ...don't want my results to be muddied, so I will be needed to wear  a special suit."
+RainBot [00:54:38][log] message -> #Neverfree : Eventide not sure if your last sentence has some mistakes or if that's what you meant
+RainBot [00:55:03][log] message -> #Neverfree : Lavish XD
+RainBot [00:55:06][log] message -> #Neverfree : Lavish Yeah...
+RainBot [00:55:19][log] message -> #Neverfree : Lavish (So you* will be needed to wear a special suit.
+RainBot [00:56:25][log] message -> #Neverfree : Eventide please be careful when you write, Lavish x3
+RainBot [00:56:32][log] message -> #Neverfree : Lavish XD
+RainBot [00:56:50][log] message -> #Neverfree : Eventide sec, I'm gonna start logging this 
+RainBot [00:57:47][log] message -> #Neverfree : Lavish K
+RainBot [00:58:39][log] message -> #Neverfree : Eventide where are they right now?
+RainBot [00:59:00][log] message -> #Neverfree : Eventide Eventide wasn't really... anywhere before this, so that's free for you to decide
+RainBot [00:59:32][log] message -> #Neverfree : Lavish Hm.. Lets say.. Lavish invited her over
+RainBot [01:00:11][log] message -> #Neverfree : Eventide okie
+RainBot [01:00:17][log] message -> #Neverfree : Lavish ;3 But Lavish will make sure she is taken back home when all is done. *Whistles innocently*
+RainBot [01:00:31][log] action -> #Neverfree : Eventide squints
+RainBot [01:00:39][log] message -> #Neverfree : Eventide as long as you don't do anything permanent 
+RainBot [01:01:16][log] message -> #Neverfree : Lavish It won't
+RainBot [01:02:14][log] action -> #Neverfree : Lavish oocly cuddles Cloud
+RainBot [01:05:44][log] action -> #Neverfree : Eventide simply lets herself get dragged across the floor. She’s not sure why she couldn’t just /walk/ with Lavish, but again, she doesn’t really feel like questioning him. Whatever he’s got in mind is certainly… intriguing, and while she’s still not so sure, she’s certainly interested in helping him out. “Uh-huh… And I suppose your err… toys…
+RainBot [01:05:44][log] action -> #Neverfree : Eventide are in that briefcase?” She stands herself up and dusts herself off while she looks at the very strange looking thing. It’s certainly rather big. Then again, Lavish is a big pony, so to scale, it’s just about right. “Wait, I need to wear a what?”
+RainBot [01:06:10][log] action -> #Neverfree : Sparkler spots ThatAnonPony and trots over to them. She unties the fabric around her back and holds out a small sapphire gemstone to them. The jewel was cut and appeared to be about the right size to fit a ring.
+RainBot [01:07:43][log] action -> #Neverfree : ThatAnonPony noses at Sparkler in greeting, then looks down at the sapphire. "You moving on from coins to gems, Sparks?"
+RainBot [01:09:49][log] action -> #Neverfree : Lavish wraps his hoof around Eventide's head and pulls her in for a quick kiss, "You are such a silly filly when you play dumb," he jests at her before pulling his hoof away and moving to the opposite side of the suit case, "I picked this one for you, go on! Try it, fit yourself into it. Its made for you to curl up in the fetal position and relax there. I want to make sure I have a comfortable...
+RainBot [01:09:50][log] action -> #Neverfree : Lavish ...place of isolation for you, something that will caress your body well," he moves back over to her and gives her rump a little tap to push her along.... And be Lavish.
+RainBot [01:11:25][log] action -> #Neverfree : Cobalt_Blitz Yawns and stretches.
+RainBot [01:11:43][log] action -> #Neverfree : Sparkler tilts her head, "Huh? I started with gems. That's how I got my cutie mark after all." She pushes the gem closer, then tilts it upright so that her etched side was facing upwards. On the face of the gem, it had a picture of ThatAnonPony's non-descript cutie mark, though they might not be able to see it without holding it up closely. "Isn't it great? I made it just for you!"
+RainBot [01:12:00][log] action -> #Neverfree : Dustrunner drags Cobalt_Blitz off to some strange place full of stallion cocks and pillows
+RainBot [01:12:21][log] action -> #Neverfree : Cobalt_Blitz Blushes and squirms. "Wh-whats going on."
+RainBot [01:12:32][log] message -> #Neverfree : Lavish YAY!
+RainBot [01:12:38][log] action -> #Neverfree : Dustrunner pushes Cobalt toward a swarm of flying, disembodied cocks!
+RainBot [01:12:45][log] message -> #Neverfree : Lavish Cocks and pillows!... It probably rather messy.
+RainBot [01:12:47][log] action -> #Neverfree : Dustrunner snickers
+RainBot [01:13:20][log] action -> #Neverfree : ThatAnonPony leans down and peers at the gem, making out their own cutie mark on it! Somehow, Sparkler got the non-descriptness just right. Again the nuzzle the tiny pony, this time in thanks. "It's great, Sparkler. Thank you."
+RainBot [01:13:58][log] message -> #Neverfree : Dustrunner my headcanon is that ThatAnonPony's cutie mark is nothing
+RainBot [01:14:05][log] message -> #Neverfree : Dustrunner like, they have one, but it's literally just nothing
+RainBot [01:14:18][log] message -> #Neverfree : Sparkler lol
+RainBot [01:14:28][log] message -> #Neverfree : Dustrunner or it's like uh
+RainBot [01:14:31][log] message -> #Neverfree : Dustrunner psychic paper
+RainBot [01:14:37][log] message -> #Neverfree : Dustrunner you see hwat you want to see x3
+RainBot [01:14:45][log] action -> #Neverfree : Cobalt_Blitz Tries to find a pillow instead of all the naughty bits flying around.
+RainBot [01:15:08][log] message -> #Neverfree : Dustrunner Cobalt is being attacked by a feral group of penises!
+RainBot [01:15:21][log] message -> #Neverfree : Dustrunner oh noooo~
+RainBot [01:15:43][log] action -> #Neverfree : Lavish lets Cloud ride on his back as he talks with his test subject.
+RainBot [01:15:56][log] action -> #Neverfree : Dustrunner pulls Cobalt_Blitz back to safety and brings him back into a euclidean world
+RainBot [01:16:16][log] message -> #Neverfree : Eventide Lavish, what's this bodysuit made of
+RainBot [01:16:34][log] action -> #Neverfree : Cobalt_Blitz Boops Dustrunner and smiles. "Thank you."
+RainBot [01:16:41][log] message -> #Neverfree : Lavish The body suit isn't there yet.
+RainBot [01:16:55][log] message -> #Neverfree : Lavish Its just the suit case right now, the holding area.
+RainBot [01:17:05][log] nick -> #snowybottest : Breeze_Away Static_Breeze|FO
+RainBot [01:17:11][log] action -> #Neverfree : Eventide squints
+RainBot [01:17:33][log] message -> #Neverfree : Eventide oh, okay I understand
+RainBot [01:17:45][log] message -> #Neverfree : Eventide I read your thing completely wrong
+RainBot [01:19:29][log] action -> #Neverfree : Sparkler beams back happily. "Glad you like it. It was really hard to get it right. I went through so many practice runs until I finally got one I liked," she leans her side into the nuzzles.
+RainBot [01:19:43][log] action -> #Neverfree : Princess-QRS sits, eats a cake, offers to share from whoever else.
+RainBot [01:19:50][log] action -> #Neverfree : Princess-QRS gives ThatAnonPony a large slice, blushes
+RainBot [01:20:00][log] message -> #Neverfree : Lavish <Luster comes to eat with Princess.
+RainBot [01:20:23][log] Inspecting #snowybottest for nick Phantasma_Eeria
+RainBot [01:20:23][log] pop -> #snowybottest : Phantasma_Eeria
+RainBot [01:20:23][log] Channel connected -> true
+RainBot [01:20:23][log] Channel connected -> false
+RainBot [01:20:23][log] Inspecting #neverfree for nick Phantasma_Eeria
+RainBot [01:20:26][log] message -> #Neverfree : Ethera Quers X TAP, OTP
+RainBot [01:21:28][log] action -> #Neverfree : Eventide nuzzles into Lavish’s kiss, though in the back of her mind she’s still a little curious as to what exactly he’s got planned for her. She keeps her eyes locked on the big thestral as he moves behind the… suitcase? She’s not really sure if she should call it that anymore at this point. “Wait, wait… You want me to… get into that?” She asks
+RainBot [01:21:28][log] action -> #Neverfree : Eventide incredulously. This is something she’d definitely not expected, though coming from Lavish, she should know by now to never be surprised by the ideas he gets.
+RainBot [01:22:07][log] message -> #Neverfree : Princess-QRS making soup brb
+RainBot [01:23:54][log] action -> #Neverfree : Lavish tail pets Cloud on his head, "Yes! Yes, Eventide, I need to isolate you and record what happens. that means I will have you suited up with collection devices... Er, device," he picks up her hoof and kisses it, "And I need to see if I was right about this one being comfortable for you to lay in or I need to fetch one of the others before we start," he kisses her hoof again and again.
+RainBot [01:29:43][log] action -> #Neverfree : Princess-QRS returns, offers Luster cake.
+RainBot [01:29:48][log] message -> #Neverfree : Princess-QRS also Ethera, yus
+RainBot [01:31:48][log] action -> #Neverfree : Eventide blinks at Lavish, keeping her foreleg extended for him while he just… kisses it repeatedly. The poor little thestral is just looking more confused every second. She takes another look at the case he’d brought out and takes a deep breath. It at least /looks/ kind of comfortable. What harm would there be in spending a little time in there? “Alright,
+RainBot [01:31:48][log] action -> #Neverfree : Eventide Lavish. What is it?” She asks, lowering herself a little and laying on her side to pull her hindlegs in. She curls herself up a little further to make room for her head and lays it down as well. She’s… a lot more comfortable in here than she’d have ever imagined, but that’s definitely no reason to complain. “Alright, now what?”
+RainBot [01:31:48][log] action -> #Neverfree : Eventide fine. But only because you’re a big goof when you’re not being evil and I think that’s really cute.” She giggles, and nuzzles at his shoulder as she walks by him, still eyeing the suitcase curiously. Hesitantly, she places a hoof in it, quickly noting just how… cool it is. And squishy! “I don’t think I’ve ever encountered anything like this,
+RainBot [01:31:52][log] message -> #Neverfree : Lavish <Luster happily eats a piece of cake
+RainBot [01:32:08][log] message -> #Neverfree : Princess-QRS :3
+RainBot [01:32:12][log] message -> #Neverfree : Princess-QRS armoured warfare so good
+RainBot [01:32:17][log] message -> #Neverfree : Princess-QRS gonna get the t-62 after this round
+RainBot [01:32:29][log] message -> #Neverfree : Eventide what is dis gaem, Princess-QRS 
+RainBot [01:33:56][log] message -> #Neverfree : Ethera It's like WoT, but without the WoT meta! So far....
+RainBot [01:34:05][log] message -> #Neverfree : Eventide lol
+RainBot [01:35:22][log] message -> #Neverfree : Ethera As long as nothing like that 'match prediction mod' bullshit shows up in Armored Warfare.
+RainBot [01:35:49][log] message -> #Neverfree : Eventide wat
+RainBot [01:36:48][log] message -> #Neverfree : Princess-QRS yeah
+RainBot [01:36:52][log] message -> #Neverfree : Princess-QRS it's wot except newer armour
+RainBot [01:36:54][log] message -> #Neverfree : Princess-QRS and not terrible
+RainBot [01:36:59][log] action -> #Neverfree : Lavish murrs to himself as Eventide fits it, "Good, if you don't think that will be any problem for you, then we can get you all geared up and then reinserted into the case," he takes Cloud off his shoulders and taps his little bum, whispering, "Go get some icecream little one, uncle has work with our guest to do," he walks over to Eventide and scratches at her ear, "As for the prior question, its...
+RainBot [01:37:01][log] action -> #Neverfree : Lavish ...a mixture of gel, velvet and leather. Its a bit cool now but there is a warmer on the corners that will make it all the more.... Comfy. You may not even want to leave when we get you set," he reaches out, "Ready?"
+RainBot [01:37:07][log] message -> #Neverfree : Princess-QRS you start with like
+RainBot [01:37:09][log] message -> #Neverfree : Princess-QRS usable vehicles
+RainBot [01:37:11][log] message -> #Neverfree : Princess-QRS that are fun
+RainBot [01:37:39][log] message -> #Neverfree : Ethera So less of a push to spend real money?
+RainBot [01:38:25][log] message -> #Neverfree : Ethera Also, the fact that stuff like XVM isn't in AW yet makes it better game by default.
+RainBot [01:38:26][log] Inspecting #snowybottest for nick Sunrise_Flare
+RainBot [01:38:26][log] Channel connected -> true
+RainBot [01:38:26][log] pop -> #snowybottest : Sunrise_Flare
+RainBot [01:38:26][log] Channel connected -> false
+RainBot [01:38:26][log] Inspecting #neverfree for nick Sunrise_Flare
+RainBot [01:39:10][log] message -> #Neverfree : Princess-QRS yeah like
+RainBot [01:39:15][log] message -> #Neverfree : Princess-QRS wot starts with shit, gotta get through shit
+RainBot [01:39:19][log] message -> #Neverfree : Princess-QRS aw it's all fun to play
+RainBot [01:40:28][log] action -> #Neverfree : Eventide hugs back :3
+RainBot [01:40:49][log] message -> #Neverfree : Princess-QRS AW will also have PVE
+RainBot [01:41:55][log] message -> #Neverfree : TimidClef Your mom have PvE
+RainBot [01:44:13][log] action -> #Neverfree : Eventide wiggles her body about a little to see just how much she can move in here, and finds that the fit is quite snug. She could probably fall asleep like this, actually. “Huh… Well it’s very comfortable, I’ll tell you that.” She extends a foreleg toward Lavish and hoists herself out, stretching her limbs a little as she gets back to her hooves. “I
+RainBot [01:44:13][log] action -> #Neverfree : Eventide uh… guess I’m ready. I’m just still a little unsure about this uh… ‘gear’ you keep talking about. How long are you planning on keeping me in there?” She asks, tilting her head to the side. She’s fairly sure she’s not going to be able to get out of there herself once Lavish has gotten her into whatever it is he’s talking about, so it’s
+RainBot [01:44:13][log] action -> #Neverfree : Eventide probably safe to ask.
+RainBot [01:45:12][log] message -> #Neverfree : Eventide also, Game of Thrones is now The Walking Dead
+RainBot [01:46:05][log] message -> #Neverfree : Ethera So the drama levels have been turned up to 11?
+RainBot [01:46:42][log] message -> #Neverfree : Eventide no, there's hordes of zombies
+RainBot [01:47:23][log] message -> #Neverfree : TimidClef There's no Daryl though
+RainBot [01:47:45][log] message -> #Neverfree : TimidClef Daryl Dixon, hottest redneck with a crossbow
+RainBot [01:48:13][log] message -> #Neverfree : Princess-QRS FIRST ROUND WITH A T-62 :)
+RainBot [01:48:19][log] action -> #Neverfree : Eventide puts TimidClef in a locked room with only GoT to watch
+RainBot [01:48:25][log] message -> #Neverfree : Princess-QRS I flanked an M60 and killed him, and then rammed his mate and killed him too.
+RainBot [01:48:30][log] action -> #Neverfree : Princess-QRS licks DanfromStateFarm 
+RainBot [01:48:36][log] message -> #Neverfree : TimidClef CORAL!
+RainBot [01:49:02][log] action -> #Neverfree : TimidClef sleeps instead of watching Game of Thrones
+RainBot [01:49:34][log] message -> #Neverfree : Eventide huh?
+RainBot [01:49:50][log] action -> #Neverfree : Lavish nods before pulling Eventide off to the side room, "That's just it, you will be kept in the case for about 6 hours, during so, your body's reactions will be recorded by the suit. You won't be able to get out before the 6 hours once you are locked in," he leads her to the little room with other suite cases like it and body suits of various fabrics and materials. He picks one that looks like...
+RainBot [01:49:51][log] action -> #Neverfree : Lavish ...quilted  purple leather, he straps the collar to her neck, "During your time in the case, you will be transported back home, left on your master's bed for them to open it up," (if they open it up), "and you will most likely be sexual exhausted by the end of all this," he slips the fore hoof sleeves onto her front limbs.
+RainBot [01:49:56][log] push -> #Neverfree : Sunrise_Flare
+RainBot [01:52:46][log] message -> #Neverfree : Ethera The classic 'tuck arms into overshirt and pull the undershirt out from above'?
+RainBot [01:55:29][log] message -> #Neverfree : Lavish And I want fudge!
+RainBot [01:57:08][log] action -> #Neverfree : ThatAnonPony flicks a small block of fudge at Lavish, hitting him on the nose! Long ranged confectionary-based boop! 
+RainBot [01:58:57][log] nick -> #snowybottest : Cloud|Lonely Hunny
+RainBot [01:58:58][log] Pushing nick (Hunny) to ACC Cloudrunner
+RainBot [01:58:58][log] Done pushing nick (Hunny) to ACC Cloudrunner
+RainBot [01:58:58][log] Added channel #snowybottest to Hunny (Cloudrunner)
+RainBot [01:59:15][log] message -> #Neverfree : Lavish O3O 
+RainBot [01:59:53][log] action -> #Neverfree : Eventide follows Lavish into the next little room, frankly surprised by the sheer size of this whole place. Why’s Lavish always breaking into her laboratory when he’s got so much space to play in here? “Six hours sounds reasonable.” She blinks as the big thestral finishes his sentence, though. “Wait, what? I— I’m not even going to ask. Let’s just do
+RainBot [01:59:53][log] action -> #Neverfree : Eventide this.” She extends her forelegs and lets them slip into the soft leather sleeves letting them fit snugly against her fur. The sensation is completely different than that of the latex she’s so used to, but it’s not unpleasant.
+RainBot [02:00:34][log] action -> #Neverfree : Hunny follows them
+RainBot [02:00:40][log] message -> #Neverfree : Hunny *cloud
+RainBot [02:10:31][log] action -> #Neverfree : Lavish fits her rump into the suite and zips her down, pulls up the mask and covers her face with it. The only holes in the mask are the nose holes for air and the neck hole. Other wise, the zipper in front kept her mouth shut. He makes sure the air hols aligned with her snout and she could breath. Pressing the cold iron rim on the inside of her nostrils, he secures the zip on her mouth as it would...
+RainBot [02:10:33][log] action -> #Neverfree : Lavish ...be difficult for her to hear him now anyways. He double checks her suit, making sure it was snug and fitted on her. He pats her butt when everything looked good and then walked away to fetch a attachable remote device. He comes back and slips it on the collar of the suit, finding the brass connector for it and then plugging in a few numbers. Her suit would inflate slightly and fit her...
+RainBot [02:10:34][log] action -> #Neverfree : Lavish ...snuggly and slightly limit her movement. He kicks pulls the back zipper down on her nether and pull her tail up to expose her. He can't help but look.... But he controls himself and simply blows air on her snatch to see her responsiveness and record feed back in the suit.
+RainBot [02:12:21][log] message -> #Neverfree : Eventide and the neck hole?
+RainBot [02:13:13][log] Inspecting #snowybottest for nick DanfromStateFarm
+RainBot [02:13:13][log] Channel connected -> true
+RainBot [02:13:13][log] Inspecting #neverfree for nick DanfromStateFarm
+RainBot [02:13:13][log] pop -> #snowybottest : DanfromStateFarm
+RainBot [02:13:13][log] Channel connected -> false
+RainBot [02:13:32][log] message -> #Neverfree : Hunny Aunt? Uncle?
+RainBot [02:13:44][log] message -> #Neverfree : Lavish Yeah, its still a hold in a mask, made for the neck
+RainBot [02:13:54][log] message -> #Neverfree : Eventide well.. yeah, but what's it for x3
+RainBot [02:14:00][log] message -> #Neverfree : Eventide oooh
+RainBot [02:14:01][log] message -> #Neverfree : Eventide !!!
+RainBot [02:14:01][log] message -> #Neverfree : Eventide OOOG
+RainBot [02:14:02][log] message -> #Neverfree : Lavish Xd
+RainBot [02:14:03][log] message -> #Neverfree : Eventide OOOH*
+RainBot [02:14:06][log] message -> #Neverfree : Eventide okay
+RainBot [02:14:09][log] message -> #Neverfree : Eventide you meant that 
+RainBot [02:14:11][log] action -> #Neverfree : Lavish will make it a bit rough on her now.
+RainBot [02:14:14][log] message -> #Neverfree : Eventide I was thinking like
+RainBot [02:14:16][log] message -> #Neverfree : Eventide a hole in the neck
+RainBot [02:14:18][log] message -> #Neverfree : Eventide x3
+RainBot [02:14:37][log] action -> #Neverfree : Eventide is a silly mare! Don't judge her!
+RainBot [02:14:41][log] push -> #Neverfree : Pi
+RainBot [02:14:42][log] Creating user for Pi
+RainBot [02:14:42][log] Done creating user for Pi
+RainBot [02:14:42][log] Added channel #Neverfree to Pi (Pi)
+RainBot [02:14:48][log] action -> #Neverfree : Lavish judges hard
+RainBot [02:14:52][log] action -> #Neverfree : Eventide whiiines
+RainBot [02:15:50][log] message -> #Neverfree : Sparkler the neck hole, that's where the spear goes
+RainBot [02:16:26][log] action -> #Neverfree : Hunny pulls Lavish's tail
+RainBot [02:17:20][log] action -> #Neverfree : Lavish pats Hunny's head. (We are in the middle of something, Hunny, maybe later)
+RainBot [02:17:34][log] message -> #Neverfree : Hunny Ok... :'()
+RainBot [02:18:04][log] message -> #Neverfree : Hunny Make it a promise
+RainBot [02:18:48][log] message -> #Neverfree : Princess-QRS can't force a pormise
+RainBot [02:18:54][log] action -> #Neverfree : Princess-QRS judges Eventide, 10/10 cuteybat
+RainBot [02:19:11][log] action -> #Neverfree : Eventide whiiiiiiiiiine!
+RainBot [02:19:15][log] action -> #Neverfree : Princess-QRS whiiiiiiiiiines
+RainBot [02:19:15][log] message -> #Neverfree : Eventide anyway, back to wording
+RainBot [02:19:36][log] message -> #Neverfree : Hunny I want an rp friend
+RainBot [02:19:51][log] message -> #Neverfree : Hunny And I never get one
+RainBot [02:22:04][log] message -> #Neverfree : Princess-QRS aww
+RainBot [02:22:05][log] action -> #Neverfree : Sparkler boops Hunny
+RainBot [02:22:06][log] action -> #Neverfree : Princess-QRS hugs Hunny 
+RainBot [02:27:21][log] action -> #Neverfree : Cobalt_Blitz Yawns and curls up in a pile of pillows.
+RainBot [02:29:31][log] action -> #Neverfree : Hunny hugs himself
+RainBot [02:30:12][log] message -> #Neverfree : Princess-QRS that's a cute image
+RainBot [02:30:23][log] nick -> #snowybottest : Hunny Cloudrunner
+RainBot [02:30:24][log] Pushing nick (Cloudrunner) to ACC Cloudrunner
+RainBot [02:30:24][log] Done pushing nick (Cloudrunner) to ACC Cloudrunner
+RainBot [02:30:59][log] action -> #Neverfree : Eventide helps Lavish fit her hindlegs into the suit’s rear and remains still while he pulls it up and zips it over her body, sealing her wings inside with it. At least her tail is still out in the open. She’s had that tucked inside a suit like this before, and it wasn’t very comfortable. When the big thestral begins to slide the leather mask over her head, she
+RainBot [02:30:59][log] action -> #Neverfree : Eventide snugness… her catsuit had. Movement doesn’t feel very different either, other than the added weight. All she feels is Lavish fiddling about with something on her neck, and— The little thestral lets out a muffled squeak of surprise, lifting a foreleg and finding it suddenly more difficult to move at all, though not impossible. The whole thing has gotten
+RainBot [02:30:59][log] action -> #Neverfree : Eventide fusses a little, finding suddenly difficult to keep her balance while she can’t see. Or breathe. She wriggles her muzzle inside it a little to help Lavish find her nostrils, and takes a deep breath. Now that she’s finally settled into it, she can really begin to get a feel for it. While the fit is nice and tight, it’s certainly not got the same…
+RainBot [02:30:59][log] action -> #Neverfree : Eventide much tighter against her fur as well, leaving her only with the sensation of leather pressing against her body. Then there’s a… a draft? What’s Lavish up to now? “Mphmm!” She yelps, shifting about uncomfortably as his cool breath rolls over her marehood.
+RainBot [02:36:15][log] Inspecting #snowybottest for nick Pi
+RainBot [02:36:15][log] Channel connected -> true
+RainBot [02:36:15][log] pop -> #snowybottest : Pi
+RainBot [02:36:15][log] Channel connected -> false
+RainBot [02:36:15][log] Inspecting #neverfree for nick Pi
+RainBot [02:37:05][log] message -> #Neverfree : Lavish Give me a second
+RainBot [02:37:23][log] message -> #Neverfree : Eventide kay
+RainBot [02:41:59][log] action -> #Neverfree : ThatAnonPony idly wiggledances.
+RainBot [02:42:16][log] action -> #Neverfree : Sparkler latches onto ThatAnonPony's tail
+RainBot [02:43:13][log] action -> #Neverfree : ThatAnonPony tail-wiggles (carefully) with Sparkler now attached. 
+RainBot [02:43:28][log] action -> #Neverfree : Ethera nibbles on Sparkler's tail!
+RainBot [02:44:03][log] Inspecting #snowybottest for nick JandalAdjiel
+RainBot [02:44:03][log] pop -> #snowybottest : JandalAdjiel
+RainBot [02:44:03][log] Channel connected -> true
+RainBot [02:44:03][log] Inspecting #neverfree for nick JandalAdjiel
+RainBot [02:44:03][log] Channel connected -> false
+RainBot [02:45:30][log] action -> #Neverfree : Sparkler swishes her tail around in Ethera's mouth while holding onto TAP's
+RainBot [02:47:15][log] action -> #Neverfree : Ethera pokes Sparkler in the bootay with her tongue.
+RainBot [02:48:50][log] action -> #Neverfree : Sparkler squeaks and looks over her shoulder at Ethera.
+RainBot [02:49:28][log] action -> #Neverfree : Ethera does the tentacle face 3:
+RainBot [02:49:41][log] Inspecting #snowybottest for nick Lavish
+RainBot [02:49:41][log] Channel connected -> true
+RainBot [02:49:41][log] pop -> #snowybottest : Lavish
+RainBot [02:49:41][log] Channel connected -> false
+RainBot [02:49:41][log] Inspecting #neverfree for nick Lavish
+RainBot [02:49:43][log] action -> #Neverfree : ThatAnonPony looks back over their own shoulder at the procession of ponies they seem to be leading by the tail.
+RainBot [02:50:57][log] message -> #Neverfree : Eventide ;,,;
+RainBot [02:51:10][log] Channel connected -> true
+RainBot [02:51:10][log] Inspecting #snowybottest for nick MistaWolf
+RainBot [02:51:10][log] Channel connected -> false
+RainBot [02:51:10][log] pop -> #snowybottest : MistaWolf
+RainBot [02:51:10][log] Inspecting #neverfree for nick MistaWolf
+RainBot [02:51:14][log] action -> #Neverfree : Eventide nibbles on Ethera's tail
+RainBot [02:52:25][log] action -> #Neverfree : Ethera attempts to look back and catches a glimpse of a bat-wing, it's Eventide in tow!
+RainBot [02:52:27][log] action -> #Neverfree : Sparkler focuses her attention on ThatAnonPony's tail again. She fiddles around with the individual hairs in her hooves.
+RainBot [02:54:37][log] action -> #Neverfree : ThatAnonPony walks forward at a steady pace, pulling the procession along too.
+RainBot [02:55:08][log] action -> #Neverfree : Ethera pulls out a tiny boombox and plays 'Hell March' on it.
+RainBot [02:56:31][log] action -> #Neverfree : Sparkler dangles in the air between ThatAnonPony and Ethera
+RainBot [03:02:14][log] Inspecting #snowybottest for nick Alfreddytest[test]
+RainBot [03:02:14][log] Channel connected -> true
+RainBot [03:02:14][log] Channel connected -> false
+RainBot [03:02:14][log] pop -> #snowybottest : Alfreddytest[test]
+RainBot [03:02:14][log] Inspecting #neverfree for nick Alfreddytest[test]
+RainBot [03:05:10][log] message -> #Neverfree : Eventide http://puu.sh/iar0W/792c11a19e.jpg
+RainBot [03:05:12][log] message -> #Neverfree : Eventide meuheuheuehe
+RainBot [03:05:42][log] message -> #Neverfree : Eventide http://puu.sh/iar2Q/4579f4616f.jpg
+RainBot [03:05:50][log] message -> #Neverfree : Eventide yes!
+RainBot [03:05:54][log] message -> #Neverfree : Eventide grow, my blob!
+RainBot [03:07:00][log] push -> #Neverfree : Dan
+RainBot [03:07:22][log] push -> #Neverfree : Pony_3150
+RainBot [03:07:30][log] Inspecting #snowybottest for nick Pony_3150
+RainBot [03:07:30][log] Channel connected -> true
+RainBot [03:07:30][log] pop -> #snowybottest : Pony_3150
+RainBot [03:07:30][log] Inspecting #neverfree for nick Pony_3150
+RainBot [03:07:30][log] Channel connected -> false
+RainBot [03:07:34][log] Channel connected -> true
+RainBot [03:07:34][log] Inspecting #snowybottest for nick Baron_Von_Clop
+RainBot [03:07:34][log] Channel connected -> false
+RainBot [03:07:34][log] pop -> #snowybottest : Baron_Von_Clop
+RainBot [03:07:34][log] Inspecting #neverfree for nick Baron_Von_Clop
+RainBot [03:07:46][log] push -> #Neverfree : Pony_3150
+RainBot [03:07:47][log] push -> #Neverfree : Baron_Von_Clop
+RainBot [03:08:15][log] nick -> #snowybottest : Baron_Von_Clop Pony_80240
+RainBot [03:08:50][log] nick -> #snowybottest : Pony_80240 BaronVonClop
+RainBot [03:08:55][log] nick -> #snowybottest : BaronVonClop Baron_Von_Clop
+RainBot [03:08:57][log] Added channel #snowybottest to Baron_Von_Clop (Baron_Von_Clop)
+RainBot [03:10:22][log] action -> #Neverfree : Ethera blobs Eventide 3:
+RainBot [03:11:04][log] Inspecting #snowybottest for nick Pony_3150
+RainBot [03:11:04][log] Channel connected -> true
+RainBot [03:11:04][log] Channel connected -> false
+RainBot [03:11:04][log] Inspecting #neverfree for nick Pony_3150
+RainBot [03:11:04][log] pop -> #snowybottest : Pony_3150
+RainBot [03:11:14][log] push -> #Neverfree : Pony_3150
+RainBot [03:11:28][log] message -> #Neverfree : Eventide new highscore
+RainBot [03:11:31][log] message -> #Neverfree : Eventide 11,682
+RainBot [03:11:54][log] message -> #Neverfree : Eventide a bunch of the top players just fed themselves to me, so I'd count a lot of luck into it
+RainBot [03:12:01][log] message -> #Neverfree : Dan What is with this Pony_3150?
+RainBot [03:12:19][log] message -> #Neverfree : Eventide it's Cydie
+RainBot [03:12:26][log] message -> #Neverfree : Eventide (Cydie@Pony-9r0.6j9.191.180.IP)
+RainBot [03:13:53][log] message -> #Neverfree : Dan Yo
+RainBot [03:14:20][log] message -> #Neverfree : ThatAnonPony Eventide, what game's this?
+RainBot [03:14:25][log] message -> #Neverfree : Eventide agar.io
+RainBot [03:14:39][log] message -> #Neverfree : Eventide as it says in my browser thing
+RainBot [03:14:41][log] message -> #Neverfree : Eventide :3
+RainBot [03:15:17][log] message -> #Neverfree : Eventide I did a bad move in the end and lost a lot of mass to the player named "sorry I ate you"
+RainBot [03:15:20][log] message -> #Neverfree : Eventide then I said fuck it
+RainBot [03:15:23][log] message -> #Neverfree : Eventide and gave them the rest of me
+RainBot [03:17:53][log] message -> #Neverfree : Sparkler kinky
+RainBot [03:18:49][log] message -> #Neverfree : Eventide yeah
+RainBot [03:18:54][log] message -> #Neverfree : Eventide you lose mass over time
+RainBot [03:18:56][log] Inspecting #snowybottest for nick Dan
+RainBot [03:18:56][log] pop -> #snowybottest : Dan
+RainBot [03:18:56][log] Channel connected -> true
+RainBot [03:18:56][log] Inspecting #neverfree for nick Dan
+RainBot [03:18:56][log] Channel connected -> false
+RainBot [03:19:08][log] message -> #Neverfree : Eventide I think it's 10% every minute or something
+RainBot [03:19:43][log] push -> #Neverfree : Dan
+RainBot [03:25:32][log] push -> #Neverfree : Lavish
+RainBot [03:26:04][log] message -> #Neverfree : Lavish I'm sorry I left
+RainBot [03:26:07][log] action -> #Neverfree : Eventide nips at Sparkler's tail
+RainBot [03:26:15][log] message -> #Neverfree : Lavish Just had to digest some information.
+RainBot [03:26:21][log] message -> #Neverfree : Eventide and what might that be?
+RainBot [03:27:10][log] action -> #Neverfree : ThatAnonPony pouts at Eventide. Is addicted to game!
+RainBot [03:27:19][log] message -> #Neverfree : Eventide it's fun isn't it
+RainBot [03:27:20][log] message -> #Neverfree : Eventide :3
+RainBot [03:27:23][log] message -> #Neverfree : ThatAnonPony :<!
+RainBot [03:27:38][log] message -> #Neverfree : ThatAnonPony No one seems to realise you can capture by splitting though. Thankfully.
+RainBot [03:28:45][log] message -> #Neverfree : Eventide by pressing space?
+RainBot [03:28:47][log] message -> #Neverfree : Eventide or w
+RainBot [03:28:58][log] action -> #Neverfree : Lavish nuzzles up to Eventide, cuddling her, "Lets just say.. What I have been feeling has been mutual. Now... Where were we?"
+RainBot [03:29:00][log] message -> #Neverfree : Sparkler capture? should be consume :P
+RainBot [03:29:16][log] message -> #Neverfree : Eventide what
+RainBot [03:29:25][log] message -> #Neverfree : Eventide there goes Lavish being vague again
+RainBot [03:29:33][log] message -> #Neverfree : Sparkler it is a game about consuming others :LP
+RainBot [03:29:36][log] message -> #Neverfree : Lavish ^_^
+RainBot [03:29:38][log] message -> #Neverfree : Sparkler :P
+RainBot [03:29:47][log] message -> #Neverfree : ThatAnonPony Eventide, space. Though you can make the spiky blobs grow and split by feeding them with W. Potentially fun if you poke a bigger blob with 'em.
+RainBot [03:29:59][log] message -> #Neverfree : Eventide I think maybe another time, Lavish
+RainBot [03:30:12][log] message -> #Neverfree : Eventide yeah, ThatAnonPony, it's pretty useful when you're just a little too small to consume a bigger one
+RainBot [03:30:27][log] message -> #Neverfree : Eventide makes them create a few smaller splinters
+RainBot [03:30:28][log] action -> #Neverfree : Lavish chuckles softly, he grips Eventide's ear in his mouth and happily sucks on it in the mean time.
+RainBot [03:32:52][log] message -> #Neverfree : ThatAnonPony I feel bad. I just got someone the second after they spawned...
+RainBot [03:33:11][log] message -> #Neverfree : Eventide lel
+RainBot [03:34:37][log] message -> #Neverfree : Eventide there are a bunch of strategies involved
+RainBot [03:34:42][log] message -> #Neverfree : Eventide mostly stuff you learn as you play
+RainBot [03:35:19][log] message -> #Neverfree : Eventide what nick are you using, ThatAnonPony?
+RainBot [03:35:50][log] message -> #Neverfree : ThatAnonPony Nyam Cat. Because I'm punny like that.
+RainBot [03:36:04][log] message -> #Neverfree : Eventide there's a list of nicks that give you custom skins
+RainBot [03:36:36][log] message -> #Neverfree : Eventide I've seen ISIS consume the european union
+RainBot [03:36:41][log] message -> #Neverfree : Eventide was funny
+RainBot [03:37:12][log] nick -> #snowybottest : Lavish Luster
+RainBot [03:44:17][log] push -> #snowybottest : Alfreddytest[test]
+RainBot [03:46:00][log] Inspecting #snowybottest for nick Dan
+RainBot [03:46:00][log] Channel connected -> true
+RainBot [03:46:00][log] Inspecting #neverfree for nick Dan
+RainBot [03:46:00][log] Channel connected -> false
+RainBot [03:46:00][log] pop -> #snowybottest : Dan
+RainBot [03:46:40][log] action -> #Neverfree : Princess-QRS pounces Eventide for hugs
+RainBot [03:46:44][log] action -> #Neverfree : Princess-QRS boops Luster 
+RainBot [03:47:21][log] message -> #Neverfree : Princess-QRS owo
+RainBot [03:47:34][log] action -> #Neverfree : Princess-QRS repeatedly boops Luster 
+RainBot [03:48:51][log] push -> #Neverfree : BaronVonClop
+RainBot [03:50:32][log] nick -> #snowybottest : BerryPunch BerryDraft
+RainBot [03:50:56][log] message -> #Neverfree : Cobalt_Blitz ni ni everypony
+RainBot [03:51:10][log] message -> #Neverfree : Eventide nuuuu
+RainBot [03:51:15][log] action -> #Neverfree : Eventide holds onto Cobalt_Blitz
+RainBot [03:51:17][log] Inspecting #snowybottest for nick Baron_Von_Clop
+RainBot [03:51:17][log] Channel connected -> true
+RainBot [03:51:17][log] Inspecting #neverfree for nick Baron_Von_Clop
+RainBot [03:51:17][log] pop -> #snowybottest : Baron_Von_Clop
+RainBot [03:51:17][log] Channel connected -> false
+RainBot [03:51:22][log] nick -> #snowybottest : BaronVonClop Baron_Von_Clop
+RainBot [03:51:35][log] action -> #Neverfree : Cobalt_Blitz Hugs Eventide and then boops Princess-QRS "Have a nice evening everypony."
+RainBot [03:51:44][log] action -> #Neverfree : Eventide whines at Cobalt_Blitz
+RainBot [03:51:53][log] message -> #Neverfree : Sparkler night Cobalt_Blitz
+RainBot [03:52:05][log] action -> #Neverfree : Cobalt_Blitz Awrs and kisses Eventide's cheek. "I'm sorry but I'm sleepy."
+RainBot [03:52:07][log] action -> #Neverfree : Princess-QRS mimicks Eventide's whining
+RainBot [03:52:40][log] action -> #Neverfree : Cobalt_Blitz Pouts and yawns while sprawing out. "Mnnn.. "
+RainBot [03:53:12][log] Inspecting #snowybottest for nick Cobalt_Blitz
+RainBot [03:53:12][log] Channel connected -> true
+RainBot [03:53:12][log] Inspecting #neverfree for nick Cobalt_Blitz
+RainBot [03:53:12][log] pop -> #snowybottest : Cobalt_Blitz
+RainBot [03:53:12][log] Channel connected -> false
+RainBot [03:53:15][log] push -> #Neverfree : Reia_Hope
+RainBot [03:53:17][log] Creating user for Reia_Hope
+RainBot [03:53:17][log] Done creating user for Reia_Hope
+RainBot [03:53:17][log] Added channel #Neverfree to Reia_Hope (Reia)
+RainBot [03:53:20][log] message -> #Neverfree : Eventide \o/
+RainBot [03:53:38][log] action -> #Neverfree : Eventide shows the chubpone to chat!
+RainBot [03:53:46][log] action -> #Neverfree : Reia_Hope squeaks and tries to hide!
+RainBot [03:54:04][log] message -> #Neverfree : Sparkler hello Reia_Hope 
+RainBot [03:54:07][log] action -> #Neverfree : Eventide gently pushes Reia_Hope out into the open, "Don't worry, they won't bite!"
+RainBot [03:54:17][log] message -> #Neverfree : Sparkler only Eventide does
+RainBot [03:54:21][log] message -> #Neverfree : Eventide I'd be the most likely to bite anyone
+RainBot [03:54:23][log] message -> #Neverfree : Eventide x3
+RainBot [03:54:24][log] message -> #Neverfree : Sparkler and Luster...
+RainBot [03:54:28][log] message -> #Neverfree : Sparkler and...
+RainBot [03:54:31][log] action -> #Neverfree : Reia_Hope still attempts to hide!
+RainBot [03:54:31][log] message -> #Neverfree : Eventide Remelia
+RainBot [03:54:33][log] action -> #Neverfree : Sparkler stops listing names
+RainBot [03:54:39][log] message -> #Neverfree : Eventide all the batpones 
+RainBot [03:55:29][log] action -> #Neverfree : Eventide looks around for Reia, having suddenly lost sight.
+RainBot [03:55:35][log] message -> #Neverfree : Eventide huh...
+RainBot [03:55:50][log] action -> #Neverfree : Reia_Hope is hiding under the nearest couch. She is surprisingly very good at fitting in to small places.
+RainBot [03:55:57][log] message -> #Neverfree : Princess-QRS woah
+RainBot [03:55:59][log] message -> #Neverfree : Princess-QRS it's Reia_Hope!
+RainBot [03:56:01][log] push -> #Neverfree : JandalAdjiel
+RainBot [03:56:04][log] action -> #Neverfree : Princess-QRS gives Reia_Hope a warm hug.
+RainBot [03:56:08][log] message -> #Neverfree : Princess-QRS this pony is like
+RainBot [03:56:14][log] message -> #Neverfree : Princess-QRS one of the kindest any of you will ever meet
+RainBot [03:56:24][log] message -> #Neverfree : Reia_Hope That's a lie XD
+RainBot [03:56:25][log] message -> #Neverfree : Princess-QRS you should be proud of yourselves she chose to come here o3o
+RainBot [03:56:26][log] action -> #Neverfree : Eventide whines! D:
+RainBot [03:56:49][log] action -> #Neverfree : Reia_Hope is bitten and hugged! Fatality!
+RainBot [03:56:59][log] action -> #Neverfree : Princess-QRS bites Reia_Hope 
+RainBot [03:57:01][log] action -> #Neverfree : Eventide grumps at Luster
+RainBot [03:57:01][log] message -> #Neverfree : Princess-QRS oops
+RainBot [03:57:05][log] nick -> #snowybottest : Princess-QRS Gladiolus
+RainBot [03:57:06][log] Pushing nick (Gladiolus) to ACC SRQ
+RainBot [03:57:06][log] Done pushing nick (Gladiolus) to ACC SRQ
+RainBot [03:57:06][log] Added channel #snowybottest to Gladiolus (SRQ)
+RainBot [03:57:08][log] action -> #Neverfree : Gladiolus bites Reia_Hope 
+RainBot [03:57:09][log] message -> #Neverfree : Gladiolus there
+RainBot [03:57:11][log] message -> #Neverfree : Gladiolus batz
+RainBot [03:57:20][log] action -> #Neverfree : Reia_Hope starts crying. "Why is there so much biting?!"
+RainBot [03:57:38][log] action -> #Neverfree : Eventide cradles Reia and nuzzles at her cheek
+RainBot [03:57:55][log] message -> #Neverfree : Gladiolus how can you cradle reia
+RainBot [03:57:57][log] message -> #Neverfree : Gladiolus she's like, reia
+RainBot [03:58:00][log] message -> #Neverfree : Gladiolus and you're a cuteybat
+RainBot [03:58:07][log] action -> #Neverfree : Ethera speaks in hushed tones, "Because the hunger never really goes away Reia_Hope "
+RainBot [03:58:19][log] action -> #Neverfree : Gladiolus bites Ethera 
+RainBot [03:58:19][log] message -> #Neverfree : Eventide a very strong bat!
+RainBot [03:58:25][log] action -> #Neverfree : Eventide flexes
+RainBot [03:58:29][log] action -> #Neverfree : Gladiolus feeds Reia_Hope sticks of butter
+RainBot [03:58:46][log] action -> #Neverfree : Ethera squirts jelly at Gladiolus!
+RainBot [03:58:47][log] action -> #Neverfree : Reia_Hope cuddles in to Eventide tightly as her butt jiggles from the swat. She also eats the sticks of butter happily!
+RainBot [03:58:49][log] message -> #Neverfree : Gladiolus probably... a hundred pounds of it o3o
+RainBot [03:59:00][log] action -> #Neverfree : Gladiolus licks Ethera's jellu
+RainBot [03:59:32][log] message -> #Neverfree : ThatAnonPony Nuu! The glorious reign of Nyan Cat comes to an end...
+RainBot [03:59:38][log] message -> #Neverfree : Gladiolus wat
+RainBot [03:59:41][log] message -> #Neverfree : ThatAnonPony Game.
+RainBot [03:59:43][log] message -> #Neverfree : Eventide what was your score, ThatAnonPony?
+RainBot [03:59:51][log] action -> #Neverfree : Ethera resigns herself to Gladiolus, as it seems that her defensive measures were not enough...
+RainBot [03:59:53][log] message -> #Neverfree : ThatAnonPony 1703.
+RainBot [03:59:56][log] message -> #Neverfree : Eventide ooh nice
+RainBot [03:59:59][log] message -> #Neverfree : Eventide not bad 
+RainBot [04:00:06][log] message -> #Neverfree : ThatAnonPony Was briefly no. 3
+RainBot [04:00:18][log] message -> #Neverfree : Eventide ooh nice
+RainBot [04:00:40][log] message -> #Neverfree : Eventide I've been at the #1 spot twice, but usually I get to just around the very bottom of the leaderboard on a good gaem
+RainBot [04:00:42][log] message -> #Neverfree : Eventide game8
+RainBot [04:00:44][log] message -> #Neverfree : Eventide game*
+RainBot [04:01:03][log] message -> #Neverfree : Eventide you're on the europe server, I presume?
+RainBot [04:01:54][log] action -> #Neverfree : Gladiolus hugs Ethera tightly, best consentacle.
+RainBot [04:03:15][log] action -> #Neverfree : Eventide dips Reia_Hope into a pool of caramel
+RainBot [04:03:18][log] action -> #Neverfree : Ethera huggles Gladiolus, her consentacles making much squishy sounds
+RainBot [04:03:36][log] message -> #Neverfree : Gladiolus :3
+RainBot [04:03:42][log] message -> #Neverfree : Ethera  3:
+RainBot [04:03:45][log] message -> #Neverfree : Gladiolus i think reia would drink the pool
+RainBot [04:03:53][log] action -> #Neverfree : Reia_Hope yays and starts drinking the pool
+RainBot [04:03:58][log] message -> #Neverfree : Eventide she'd still end up covered in caramel!
+RainBot [04:04:19][log] action -> #Neverfree : Reia_Hope is covered in caramel and probably a lot fatter
+RainBot [04:04:25][log] message -> #Neverfree : Gladiolus man a pool of caramel
+RainBot [04:04:38][log] message -> #Neverfree : Gladiolus gotta be like, 500 pounds at least
+RainBot [04:04:40][log] action -> #Neverfree : Eventide rolls the squishypone into some chocolate powder
+RainBot [04:05:07][log] Inspecting #snowybottest for nick Pony_3150
+RainBot [04:05:07][log] pop -> #snowybottest : Pony_3150
+RainBot [04:05:07][log] Channel connected -> true
+RainBot [04:05:07][log] Inspecting #neverfree for nick Pony_3150
+RainBot [04:05:07][log] Channel connected -> false
+RainBot [04:05:07][log] action -> #Neverfree : Reia_Hope squees in delight
+RainBot [04:05:16][log] message -> #Neverfree : Eventide :3
+RainBot [04:05:24][log] push -> #Neverfree : Pony_3150
+RainBot [04:05:49][log] Inspecting #snowybottest for nick Pony_3150
+RainBot [04:05:49][log] Channel connected -> true
+RainBot [04:05:49][log] pop -> #snowybottest : Pony_3150
+RainBot [04:05:49][log] Channel connected -> false
+RainBot [04:05:49][log] Inspecting #neverfree for nick Pony_3150
+RainBot [04:06:03][log] push -> #Neverfree : Pony_3150
+RainBot [04:06:09][log] action -> #Neverfree : Reia_Hope jiggles all over, moaning in delight as she does. She's the caramel chocolate treat that jiggles~!
+RainBot [04:06:13][log] action -> #Neverfree : Gladiolus licks Reia_Hope's belly
+RainBot [04:06:28][log] message -> #Neverfree : Gladiolus belly > butt
+RainBot [04:06:30][log] message -> #Neverfree : Gladiolus fite me
+RainBot [04:06:35][log] message -> #Neverfree : Reia_Hope Luster will win
+RainBot [04:06:37][log] message -> #Neverfree : Reia_Hope No contest
+RainBot [04:06:51][log] action -> #Neverfree : Eventide licks the inside of Reia's mouth
+RainBot [04:07:11][log] action -> #Neverfree : Reia_Hope moans softly and lets Eventide have her way with her
+RainBot [04:08:06][log] action -> #Neverfree : Eventide ponders playing Payday
+RainBot [04:08:31][log] action -> #Neverfree : Reia_Hope cries out in bliss. Being fed like this and having all this attenion? This is heaven~
+RainBot [04:08:33][log] message -> #Neverfree : Sparkler so uh, what is a Reia_Hope?
+RainBot [04:08:38][log] action -> #Neverfree : Gladiolus plays bongos on Reia_Hope's belly
+RainBot [04:08:42][log] message -> #Neverfree : Gladiolus Reia_Hope is a fat sexymare.
+RainBot [04:09:00][log] message -> #Neverfree : Ethera Hmmm.
+RainBot [04:09:04][log] push -> #Neverfree : Dan
+RainBot [04:09:09][log] message -> #Neverfree : Ethera Quers X Reia?
+RainBot [04:09:10][log] message -> #Neverfree : Reia_Hope Sparkler: A Reia Hope is something, usually symbolized by a ray of light, that bring hope to all those that see it.
+RainBot [04:09:16][log] nick -> #snowybottest : Dan Pony_36617
+RainBot [04:09:18][log] Inspecting #snowybottest for nick Pony_36617
+RainBot [04:09:18][log] Channel connected -> true
+RainBot [04:09:18][log] pop -> #snowybottest : Pony_36617
+RainBot [04:09:18][log] Channel connected -> false
+RainBot [04:09:18][log] Inspecting #neverfree for nick Pony_36617
+RainBot [04:09:20][log] Inspecting #snowybottest for nick Pony_3150
+RainBot [04:09:20][log] Channel connected -> true
+RainBot [04:09:20][log] Inspecting #neverfree for nick Pony_3150
+RainBot [04:09:20][log] pop -> #snowybottest : Pony_3150
+RainBot [04:09:20][log] Channel connected -> false
+RainBot [04:09:29][log] message -> #Neverfree : Eventide oh my god
+RainBot [04:09:36][log] message -> #Neverfree : Sparkler wat
+RainBot [04:09:37][log] message -> #Neverfree : Eventide I've been like
+RainBot [04:09:45][log] message -> #Neverfree : Eventide wondering what the 'hope' was for
+RainBot [04:09:45][log] push -> #Neverfree : Pony_3150
+RainBot [04:09:47][log] message -> #Neverfree : Eventide x3
+RainBot [04:09:57][log] message -> #Neverfree : Reia_Hope Reia Hope = Ray o' Hope
+RainBot [04:10:08][log] message -> #Neverfree : Eventide brilliant
+RainBot [04:10:13][log] message -> #Neverfree : Gladiolus yus it's a great name
+RainBot [04:10:17][log] message -> #Neverfree : Gladiolus i figured that out one day and i was like
+RainBot [04:10:18][log] message -> #Neverfree : Gladiolus "woah"
+RainBot [04:10:30][log] message -> #Neverfree : Gladiolus Ethera, Wildcard x Reia owo
+RainBot [04:10:43][log] message -> #Neverfree : Reia_Hope And the shipping wars begin
+RainBot [04:10:55][log] message -> #Neverfree : Gladiolus Quers belongs to only one stallion, ThatAnonPony.
+RainBot [04:11:04][log] message -> #Neverfree : Eventide psshh
+RainBot [04:11:12][log] message -> #Neverfree : Eventide TAP belongs to none
+RainBot [04:11:19][log] message -> #Neverfree : Eventide TAP owns... none
+RainBot [04:11:22][log] action -> #Neverfree : ThatAnonPony is a free sofapone!
+RainBot [04:11:36][log] message -> #Neverfree : Eventide hey, ThatAnonPony, would you sign these papers, please?
+RainBot [04:11:39][log] push -> #Neverfree : DanfromStateFarm
+RainBot [04:11:40][log] message -> #Neverfree : Eventide I've been doing uh... research
+RainBot [04:11:41][log] message -> #Neverfree : Ethera TAP gets all the mares?
+RainBot [04:11:42][log] message -> #Neverfree : Eventide on signatures.
+RainBot [04:12:14][log] action -> #Neverfree : Sparkler lazes on ThatAnonPony
+RainBot [04:12:44][log] action -> #Neverfree : Gladiolus licks ThatAnonPony 
+RainBot [04:12:55][log] action -> #Neverfree : ThatAnonPony shrugs. They take a quill and sign the papers Eventide's holding-- "Wait..." They peer at the batpony, suddenly suspicious. "This is how you got Cobalt, isn't it?" 
+RainBot [04:13:29][log] action -> #Neverfree : ThatAnonPony also snuggles Sparkler, boops Gladiolus.
+RainBot [04:13:46][log] action -> #Neverfree : Gladiolus wiggles nose, shows off fangs.
+RainBot [04:14:10][log] action -> #Neverfree : Eventide flips the pages to let ThatAnonPony sign wherever their name is needed, then quickly files them away somewhere. "Yep, now if you'd just put this on..." She offers the pony a red leather collar with a little bell attached. It's even got their name on it!
+RainBot [04:14:41][log] action -> #Neverfree : Sparkler will have to read those papers later.
+RainBot [04:14:51][log] action -> #Neverfree : Gladiolus licks DanfromStateFarm 
+RainBot [04:15:02][log] message -> #Neverfree : Gladiolus so
+RainBot [04:15:04][log] message -> #Neverfree : Gladiolus did Eventide just buy tap
+RainBot [04:15:06][log] action -> #Neverfree : ThatAnonPony 's eyes narrow as they glare at Eventide. 
+RainBot [04:15:08][log] message -> #Neverfree : Gladiolus or enslave him
+RainBot [04:15:10][log] message -> #Neverfree : Gladiolus or what
+RainBot [04:15:10][log] action -> #Neverfree : Ethera records the moment of impact on a high-speed camera, jiggles ensue.
+RainBot [04:15:13][log] message -> #Neverfree : Eventide no
+RainBot [04:15:16][log] action -> #Neverfree : Gladiolus baps ThatAnonPony 
+RainBot [04:15:19][log] message -> #Neverfree : Eventide they willingly signed those forms
+RainBot [04:15:20][log] message -> #Neverfree : Gladiolus ALWAYS READ THE FINE PRINT
+RainBot [04:15:30][log] message -> #Neverfree : Eventide they agreed to it!
+RainBot [04:15:36][log] action -> #Neverfree : Gladiolus sets Sparkler on Eventide 
+RainBot [04:15:40][log] action -> #Neverfree : Sparkler can't sign her name, is safe from this sort of trickery!
+RainBot [04:15:54][log] action -> #Neverfree : Eventide smiles at ThatAnonPony and puts the collar around their neck for them
+RainBot [04:16:28][log] action -> #Neverfree : ThatAnonPony whines and backs away from Eventide! "I-- I don't think I finished signing that last signature. Could you, uh, bring the papers back?" 
+RainBot [04:16:57][log] action -> #Neverfree : Eventide squints at ThatAnonPony
+RainBot [04:17:05][log] message -> #Neverfree : Eventide I'll go make a copy for you to look at
+RainBot [04:17:21][log] push -> #Neverfree : Stradi|Mobile
+RainBot [04:17:23][log] Pushing nick (Stradi|Mobile) to ACC Stradiverra
+RainBot [04:17:23][log] Done pushing nick (Stradi|Mobile) to ACC Stradiverra
+RainBot [04:17:23][log] message -> #Neverfree : Ethera And thus, TAP's fate is sealed...
+RainBot [04:17:32][log] action -> #Neverfree : Sparkler pokes at Gladiolus
+RainBot [04:17:38][log] message -> #Neverfree : Eventide fate?
+RainBot [04:17:41][log] message -> #Neverfree : Eventide bah
+RainBot [04:17:50][log] action -> #Neverfree : ThatAnonPony nods, the little bell on their collar jingling, much to their annoyance, though they smile innocently all the same. "That works too! I'll just wait here." 
+RainBot [04:18:35][log] message -> #Neverfree : Sparkler to be fair, both sides need a signed copy of the contract otherwise it isn't valid :O
+RainBot [04:19:05][log] action -> #Neverfree : Gladiolus pokes at Sparkler 
+RainBot [04:19:06][log] message -> #Neverfree : Gladiolus i am now afk
+RainBot [04:19:08][log] action -> #Neverfree : Eventide flails
+RainBot [04:20:07][log] action -> #Neverfree : Ethera digs around inside her suit before pulling out a tiny metallic pebble, she puts it up against ThatAnonPony's bell wondering if it'll stick.
+RainBot [04:20:29][log] action -> #Neverfree : ThatAnonPony raises an eyebrow at Ethera, confused.
+RainBot [04:21:21][log] Inspecting #snowybottest for nick Stradi|Mobile
+RainBot [04:21:21][log] Channel connected -> true
+RainBot [04:21:21][log] pop -> #snowybottest : Stradi|Mobile
+RainBot [04:21:21][log] Inspecting #neverfree for nick Stradi|Mobile
+RainBot [04:21:21][log] Channel connected -> false
+RainBot [04:21:25][log] action -> #Neverfree : Ethera pokes at the bell with her metal pebble, "Hmm, seems like it's not magnetic"
+RainBot [04:21:44][log] message -> #Neverfree : Eventide it's a little brass bell
+RainBot [04:22:34][log] message -> #Neverfree : Ethera It might have had a steel or iron rattler inside :v
+RainBot [04:22:40][log] Inspecting #snowybottest for nick Ivory_Keys
+RainBot [04:22:40][log] Channel connected -> true
+RainBot [04:22:40][log] Inspecting #neverfree for nick Ivory_Keys
+RainBot [04:22:40][log] pop -> #snowybottest : Ivory_Keys
+RainBot [04:22:40][log] Channel connected -> false
+RainBot [04:22:58][log] action -> #Neverfree : Reia_Hope has managed to avoid attention! Yay~ She starts sneaking away
+RainBot [04:23:17][log] action -> #Neverfree : Eventide drags Reia_Hope back into the spotlight
+RainBot [04:24:08][log] action -> #Neverfree : ThatAnonPony uses the brief moment of Eventide's distraction to disappear! All that's left is the faint sound of a bell fading into the distance... 
+RainBot [04:24:34][log] action -> #Neverfree : Sparkler clambers onto Reia_Hope's back
+RainBot [04:24:36][log] action -> #Neverfree : Eventide shakes her head as ThatAnonPony vanishes. It's not going to change anything
+RainBot [04:24:49][log] action -> #Neverfree : Reia_Hope looks up at Sparkler. "Hiya~!"
+RainBot [04:25:40][log] action -> #Neverfree : Sparkler takes up the profession of, "sensitive paper disposalist"
+RainBot [04:27:42][log] message -> #Neverfree : Ethera [Operation Free-TAP intensifies]
+RainBot [04:28:10][log] message -> #Neverfree : Eventide everyone's reacting to this as though I'm going to do bad things to TAP
+RainBot [04:28:21][log] action -> #Neverfree : ThatAnonPony but is already free! Has run off into the distance, never to be seen again. Probably.
+RainBot [04:29:10][log] message -> #Neverfree : Ethera It's not that, Eventide, it's just everypone has got something for TAP it seems.
+RainBot [04:29:20][log] message -> #Neverfree : Eventide of course
+RainBot [04:30:42][log] nick -> #snowybottest : Pony_3150 Cloud
+RainBot [04:30:43][log] Pushing nick (Cloud) to ACC Cloudrunner
+RainBot [04:30:43][log] Done pushing nick (Cloud) to ACC Cloudrunner
+RainBot [04:30:47][log] action -> #Neverfree : Googie boops an Eventide
+RainBot [04:30:57][log] action -> #Neverfree : Eventide tackles a Googie!
+RainBot [04:31:38][log] Inspecting #snowybottest for nick DanfromStateFarm
+RainBot [04:31:38][log] pop -> #snowybottest : DanfromStateFarm
+RainBot [04:31:38][log] Channel connected -> true
+RainBot [04:31:38][log] Inspecting #neverfree for nick DanfromStateFarm
+RainBot [04:31:38][log] Channel connected -> false
+RainBot [04:31:49][log] push -> #Neverfree : DanfromStateFarm
+RainBot [04:33:40][log] action -> #Neverfree : Eventide idly wonders how the cuteling is doing
+RainBot [04:35:34][log] action -> #Neverfree : Eventide also wonders what game she should play... hmmm
+RainBot [04:36:09][log] action -> #Neverfree : Reia_Hope just waddles around happily
+RainBot [04:36:59][log] message -> #Neverfree : Eventide :3
+RainBot [04:37:11][log] action -> #Neverfree : Googie is feeling ill and needs to keep working :(
+RainBot [04:37:15][log] action -> #Neverfree : Sparkler lazes in Reia_Hope's mane, wonders what the pone does.
+RainBot [04:37:25][log] nick -> #snowybottest : Gladiolus Valiant_Steed
+RainBot [04:37:58][log] action -> #Neverfree : ThatAnonPony wanders back, grumbling and with an indignant glare, belly jingling. They couldn't get the collar off... 
+RainBot [04:38:24][log] action -> #Neverfree : Reia_Hope does many things. Like eating. And sleeping. And dancing. And singing. And other fun things!
+RainBot [04:40:00][log] action -> #Neverfree : Eventide snuggles ThatAnonPony warmly and tries to reassure them!
+RainBot [04:40:07][log] action -> #Neverfree : Sparkler offers to take it off for ThatAnonPony if they want.
+RainBot [04:40:20][log] action -> #Neverfree : Ethera gnaws on ThatAnonPony's collar, she stops after a few minutes of growling and slobbering.
+RainBot [04:40:33][log] message -> #Neverfree : Eventide it's a cute collar! D:
+RainBot [04:40:43][log] action -> #Neverfree : ThatAnonPony grumbles at Eventide, but then pauses and looks down at Ethera. "Uh... hi?"
+RainBot [04:41:02][log] action -> #Neverfree : Eventide lickylicks ThatAnonPony's cheek and squeezes them tightly!
+RainBot [04:41:21][log] action -> #Neverfree : Ethera looks up at ThatAnonPony, "It's made of the finest Corinthian Leather and is also enchanted!"
+RainBot [04:41:38][log] message -> #Neverfree : Eventide nothing but the best!
+RainBot [04:41:45][log] action -> #Neverfree : ThatAnonPony squeaks at the sudden squeeze. Raises an eyebrow at Ethera. "You can tell that just by chewing on it...?"
+RainBot [04:41:55][log] message -> #Neverfree : Sparkler it is enchanted? with what? o.O
+RainBot [04:42:24][log] message -> #Neverfree : Eventide extra-dimensional protection
+RainBot [04:42:48][log] action -> #Neverfree : Ethera begins to nibble on ThatAnonPony instead of answering.
+RainBot [04:42:48][log] message -> #Neverfree : Eventide the eldritch horrors won't be able to track them while they're wearing it
+RainBot [04:43:10][log] message -> #Neverfree : ThatAnonPony ... Eventide. It has a bell on it. 
+RainBot [04:43:23][log] action -> #Neverfree : Eventide coughs
+RainBot [04:43:27][log] message -> #Neverfree : Eventide I can take that off if you'd like
+RainBot [04:43:39][log] message -> #Neverfree : Eventide and then the eldritch horrors won't be able to hear you either
+RainBot [04:43:42][log] action -> #Neverfree : ThatAnonPony facehoofs. 
+RainBot [04:43:44][log] action -> #Neverfree : Sparkler plays around with the bell, batting it back and forth making it ding.
+RainBot [04:47:12][log] action -> #Neverfree : ThatAnonPony snuggles the odd Ethera. They are delicious, they suppose. 
+RainBot [04:48:36][log] action -> #Neverfree : Ethera wriggles happily!
+RainBot [04:49:58][log] message -> #Neverfree : Eventide https://www.youtube.com/watch?v=nbHt1uIm4ZE
+RainBot [04:50:00][log] message -> #Neverfree : PinkieBot 1,0You0,4Tube 10Title:4 Sponge bob championship boxing scene 10Views:4 5,194 10Length:4 20 10User:4 Hayden Sebastian
+RainBot [04:50:13][log] push -> #snowybottest : MistaWolf
+RainBot [04:50:13][log] push -> #Neverfree : MistaWolf
+RainBot [04:50:13][log] push -> #Neverfree : BaronVonClop
+RainBot [04:50:47][log] action -> #Neverfree : Eventide licks BaronVonClop
+RainBot [04:51:14][log] message -> #Neverfree : Eventide D:
+RainBot [04:51:21][log] action -> #Neverfree : Eventide bites the pone, then!
+RainBot [04:52:47][log] Inspecting #snowybottest for nick Baron_Von_Clop
+RainBot [04:52:47][log] Channel connected -> true
+RainBot [04:52:47][log] Channel connected -> false
+RainBot [04:52:47][log] pop -> #snowybottest : Baron_Von_Clop
+RainBot [04:52:47][log] Inspecting #neverfree for nick Baron_Von_Clop
+RainBot [04:52:53][log] message -> #Neverfree : Eventide :p
+RainBot [04:53:01][log] message -> #Neverfree : Eventide we need to do a thing sometime
+RainBot [04:53:06][log] message -> #Neverfree : ThatAnonPony A thing?
+RainBot [04:53:12][log] message -> #Neverfree : Eventide yes
+RainBot [04:53:13][log] message -> #Neverfree : Eventide a thing
+RainBot [04:53:40][log] message -> #Neverfree : Ethera A happening?
+RainBot [04:54:32][log] message -> #Neverfree : Eventide np
+RainBot [04:54:58][log] action -> #Neverfree : ThatAnonPony sneezes, the sneeze setting off the bell in a fit of jingling. 
+RainBot [04:55:12][log] action -> #Neverfree : Eventide bats at ThatAnonPony's bell and squeaks happily
+RainBot [04:55:25][log] message -> #Neverfree : Eventide I've made ThatAnonPony like... 37% more entertaining
+RainBot [04:55:32][log] action -> #Neverfree : ThatAnonPony eyerolls at Eventide, but nuzzles her mane.
+RainBot [04:55:44][log] message -> #Neverfree : Sparkler we need to finish some things :(
+RainBot [04:55:55][log] message -> #Neverfree : Eventide yes, we have 3 rps to finish
+RainBot [04:56:15][log] action -> #Neverfree : ThatAnonPony headtilts at Eventide. "If i'm 37% more entertaining now, what happpens if you add more bells?"
+RainBot [04:56:45][log] message -> #Neverfree : Eventide you'd get more entertaining!
+RainBot [04:56:51][log] message -> #Neverfree : Eventide but on a logaritmic curve
+RainBot [04:56:54][log] message -> #Neverfree : Eventide logarithmic*
+RainBot [04:57:17][log] message -> #Neverfree : ThatAnonPony So the ideal number of bells would be about three or four then? After that, it's all diminishing returns?
+RainBot [04:57:23][log] message -> #Neverfree : Eventide yes
+RainBot [04:57:58][log] action -> #Neverfree : Sparkler goes off to acquire bells!
+RainBot [04:58:04][log] action -> #Neverfree : ThatAnonPony pokes at the one bell on their collar. "I think I'd rather stick with just the one..."
+RainBot [04:58:40][log] action -> #Neverfree : Eventide nuzzles ThatAnonPony and nods. "That might be best."
+RainBot [04:59:02][log] action -> #Neverfree : Ethera squeaks! "What if we put on on your tail?"
+RainBot [04:59:09][log] message -> #Neverfree : Ethera put one on*
+RainBot [05:00:42][log] message -> #Neverfree : Eventide I think a little pink bow would be cuter
+RainBot [05:01:16][log] action -> #Neverfree : Sparkler returns with bells and ribbon! She ties a bell onto each hoof of ThatAnonPony with the pretty ribbon.
+RainBot [05:01:45][log] action -> #Neverfree : ThatAnonPony is suddenly covered in bells and ribbons. "Um, Sparkler...?"
+RainBot [05:02:34][log] action -> #Neverfree : Ethera quickly drags her bag over and pulls out a perfectly tailored maid outfit for ThatAnonPony!
+RainBot [05:02:47][log] action -> #Neverfree : Eventide GASPS
+RainBot [05:02:49][log] message -> #Neverfree : Eventide yes, Ethera!
+RainBot [05:02:57][log] message -> #Neverfree : Eventide and one of those little duster thingies!
+RainBot [05:03:12][log] nick -> #snowybottest : BaronVonClop Baron_Von_Clop
+RainBot [05:03:17][log] action -> #Neverfree : ThatAnonPony 's ears pin back. "What if I don't want to wear a maids' outfit...?"
+RainBot [05:03:32][log] message -> #Neverfree : Ethera Sadly, Ethera does not own a feather duster...
+RainBot [05:04:14][log] action -> #Neverfree : Eventide whines at ThatAnonPony, "But it would be sooooooo adoooorable! Pleeeeaaaase!" She licks their muzzle and gives them the puppy dog eyes
+RainBot [05:04:16][log] action -> #Neverfree : Sparkler looks around for a pegasus
+RainBot [05:04:40][log] action -> #Neverfree : Starburn waves a wing
+RainBot [05:05:04][log] action -> #Neverfree : ThatAnonPony looks at Eventide, slowly deflated. "I have no choice in this, do I...?" 
+RainBot [05:05:51][log] action -> #Neverfree : Eventide nuzzles ThatAnonPony's cheek and very lightly nibbles at their ear, "Of course you have a choice in it. I'd just like you to put your pride aside and imagine how much fun it could be!"
+RainBot [05:05:53][log] action -> #Neverfree : Ethera quickly snugs DanfromStateFarm as thanks for the duster.
+RainBot [05:06:18][log] message -> #Neverfree : Eventide https://derpicdn.net/img/view/2012/1/28/2472.jpg
+RainBot [05:06:24][log] message -> #Neverfree : Eventide because maid outfits!
+RainBot [05:06:25][log] action -> #Neverfree : ThatAnonPony flicks their free ear and sighs. "Fine..."
+RainBot [05:06:33][log] action -> #Neverfree : Eventide Squeee!
+RainBot [05:06:57][log] action -> #Neverfree : Ethera lays out the maid outfit and grabs a pair of frilly topped stocking from the bag.
+RainBot [05:07:01][log] action -> #Neverfree : ThatAnonPony coughs and glances away from the picture. 
+RainBot [05:08:46][log] message -> #Neverfree : Eventide I /knew/ I saw something from skipsy like this! https://derpicdn.net/img/2012/11/21/158570/tall.jpg
+RainBot [05:08:47][log] message -> #Neverfree : Eventide also NSFW
+RainBot [05:09:38][log] nick -> #snowybottest : Cloud C1ou5r[nn^_
+RainBot [05:11:22][log] nick -> #snowybottest : Starburn CardboardBox
+RainBot [05:11:24][log] Pushing nick (CardboardBox) to ACC eyeburn
+RainBot [05:11:24][log] Done pushing nick (CardboardBox) to ACC eyeburn
+RainBot [05:11:24][log] Added channel #snowybottest to CardboardBox (eyeburn)
+RainBot [05:11:31][log] action -> #Neverfree : ThatAnonPony sighs and offers a hindleg to Ethera.
+RainBot [05:11:54][log] Inspecting #snowybottest for nick DanfromStateFarm
+RainBot [05:11:54][log] Channel connected -> true
+RainBot [05:11:54][log] pop -> #snowybottest : DanfromStateFarm
+RainBot [05:11:54][log] Inspecting #neverfree for nick DanfromStateFarm
+RainBot [05:11:54][log] Channel connected -> false
+RainBot [05:12:12][log] push -> #Neverfree : DanfromStateFarm
+RainBot [05:13:03][log] action -> #Neverfree : Ethera squees as she removes the bell and ribbon from ThatAnonPony's hind hooves and slides the stockings on, finishing each with the bell and ribbon bow.
+RainBot [05:13:59][log] action -> #Neverfree : ThatAnonPony grumbles and shifts their weight on their newly-clad hinglegs. "Are the bells really necessary?"
+RainBot [05:15:57][log] message -> #Neverfree : Sparkler yes, all the bells!
+RainBot [05:16:39][log] nick -> #snowybottest : CardboardBox Starburn
+RainBot [05:16:54][log] message -> #Neverfree : Ethera Now for the dress :3
+RainBot [05:16:54][log] message -> #Neverfree : Sparkler https://derpiboo.ru/909100
+RainBot [05:16:57][log] message -> #Neverfree : MaudBot [ Safe apple bloom applejack artist:alloyrabbit big macintosh couch gameboy human humanized micro monochrome nintendo ds rarity safe size difference sweetie belle tiny ponies ]
+RainBot [05:18:56][log] nick -> #snowybottest : BerryDraft BerryPunch
+RainBot [05:18:58][log] Added channel #snowybottest to BerryPunch (StarlightIronhoof)
+RainBot [05:19:04][log] action -> #Neverfree : Eventide noses at BerryPunch
+RainBot [05:20:00][log] action -> #Neverfree : BerryPunch pulls Eventide into bed
+RainBot [05:20:46][log] message -> #Neverfree : BerryPunch Need sleep
+RainBot [05:21:25][log] push -> #Neverfree : Krystal_the_starfox
+RainBot [05:21:27][log] Pushing nick (Krystal_the_starfox) to ACC scythe_the_batpony
+RainBot [05:21:27][log] Done pushing nick (Krystal_the_starfox) to ACC scythe_the_batpony
+RainBot [05:21:56][log] nick -> #snowybottest : Krystal_the_starfox Pony_39093
+RainBot [05:22:00][log] nick -> #snowybottest : Pony_39093 Scythe_the_batpony
+RainBot [05:22:01][log] Pushing nick (Scythe_the_batpony) to ACC scythe_the_batpony
+RainBot [05:22:01][log] Done pushing nick (Scythe_the_batpony) to ACC scythe_the_batpony
+RainBot [05:22:02][log] Added channel #snowybottest to Scythe_the_batpony (scythe_the_batpony)
+RainBot [05:23:20][log] Inspecting #snowybottest for nick DJ_Vinyl_Scratch
+RainBot [05:23:20][log] Channel connected -> true
+RainBot [05:23:20][log] Inspecting #neverfree for nick DJ_Vinyl_Scratch
+RainBot [05:23:20][log] pop -> #snowybottest : DJ_Vinyl_Scratch
+RainBot [05:23:20][log] Channel connected -> false
+RainBot [05:23:31][log] action -> #Neverfree : Ethera stands ThatAnonPony up on their hindlegs as she slips the lightweight and flexible, but durable, maid outfit onto the pone, it closely hugging their curves.
+RainBot [05:24:42][log] action -> #Neverfree : ThatAnonPony doesn't resist as Ethera dresses them, though they grumble under their breath and blush with embarrassment. 
+RainBot [05:27:03][log] message -> #Neverfree : Eventide DanfromStateFarm, you can't PM?
+RainBot [05:28:41][log] action -> #Neverfree : Ethera takes few step back and admires the newly dressed ThatAnonPony, she begins to drool as a smile overtakes her face.
+RainBot [05:29:20][log] action -> #Neverfree : ThatAnonPony glances away from Ethera, blush still warming their cheeks. 
+RainBot [05:29:22][log] message -> #Neverfree : Eventide yes
+RainBot [05:29:26][log] message -> #Neverfree : Eventide you want low ping
+RainBot [05:33:20][log] message -> #Neverfree : Eventide 2000?
+RainBot [05:33:21][log] message -> #Neverfree : Eventide wat
+RainBot [05:33:52][log] message -> #Neverfree : Dustrunner I have <10ms
+RainBot [05:34:04][log] message -> #Neverfree : Dustrunner err
+RainBot [05:34:05][log] message -> #Neverfree : Dustrunner <100
+RainBot [05:34:06][log] message -> #Neverfree : Dustrunner >.>
+RainBot [05:34:49][log] nick -> #snowybottest : Octave|Bed OctaveSymphony
+RainBot [05:34:51][log] Pushing nick (OctaveSymphony) to ACC OctaveSymphony
+RainBot [05:34:51][log] Done pushing nick (OctaveSymphony) to ACC OctaveSymphony
+RainBot [05:34:51][log] Added channel #snowybottest to OctaveSymphony (OctaveSymphony)
+RainBot [05:35:24][log] Inspecting #snowybottest for nick C1ou5r[nn^_
+RainBot [05:35:24][log] Channel connected -> true
+RainBot [05:35:24][log] pop -> #snowybottest : C1ou5r[nn^_
+RainBot [05:35:24][log] Inspecting #neverfree for nick C1ou5r[nn^_
+RainBot [05:35:24][log] Channel connected -> false
+RainBot [05:35:37][log] push -> #Neverfree : C1ou5r[nn^_
+RainBot [05:35:37][log] message -> #Neverfree : Dustrunner hm
+RainBot [05:35:46][log] action -> #Neverfree : Dustrunner tests something
+RainBot [05:36:10][log] message -> #Neverfree : Dustrunner neato
+RainBot [05:36:40][log] message -> #Neverfree : Dustrunner also, DanfromStateFarm 
+RainBot [05:36:44][log] message -> #Neverfree : Dustrunner I pinged you a minute ago
+RainBot [05:36:46][log] message -> #Neverfree : Dustrunner literally
+RainBot [05:36:56][log] message -> #Neverfree : Dustrunner http://puu.sh/iayaM/da4da828ee.png
+RainBot [05:37:06][log] message -> #Neverfree : Dustrunner http://puu.sh/iaybo/e6b103a4c0.png
+RainBot [05:40:11][log] action -> #Neverfree : Ethera cuddles with ThatAnonPony, rubbing against their dress.
+RainBot [05:40:37][log] action -> #Neverfree : ThatAnonPony whines a little. "It-- it's just a maids' outfit..."
+RainBot [05:44:07][log] message -> #Neverfree : Eventide a sexy maid's outfit
+RainBot [05:44:21][log] action -> #Neverfree : Eventide noses ThatAnonPony's tail out of the way and takes a sniff
+RainBot [05:45:03][log] action -> #Neverfree : ThatAnonPony eeks, their head shooting upright and their whole body stiffening with shock. "E-- Eventide!" 
+RainBot [05:45:21][log] action -> #Neverfree : Eventide pats ThatAnonPony's rump and hugs their rear tightly
+RainBot [05:45:35][log] action -> #Neverfree : ThatAnonPony whines and blushes. 
+RainBot [05:45:40][log] message -> #Neverfree : Eventide :>
+RainBot [05:46:31][log] nick -> #snowybottest : RedHelper[NLR] Creeps|AFK
+RainBot [05:46:32][log] Added channel #snowybottest to Creeps|AFK (RedHelper)
+RainBot [05:47:50][log] message -> #Neverfree : Dustrunner I pinged myself
+RainBot [05:48:04][log] message -> #Neverfree : Dustrunner and I have more latency than Ethera 
+RainBot [05:48:06][log] message -> #Neverfree : Ethera HALP IVE BEEN CTCP PING
+RainBot [05:48:16][log] message -> #Neverfree : Dustrunner wat
+RainBot [05:48:26][log] message -> #Neverfree : Ethera * Received a CTCP PING 3036352240 from Dustrunner
+RainBot [05:48:30][log] message -> #Neverfree : Dustrunner x3
+RainBot [05:48:49][log] message -> #Neverfree : Dustrunner http://puu.sh/iayG0/9b1492eaef.png
+RainBot [05:49:10][log] action -> #Neverfree : Dustrunner pings all the users!
+RainBot [06:06:14][log] reset -> #snowybottest : 
+RainBot [06:06:14][log] start -> #snowybottest : RainBot,Eventide,ChanServ,MistaWolf,SnowBot
+RainBot [06:11:24][log] push -> #snowybottest : Alfreddytest[test]
+RainBot [06:13:49][log] message -> #snowybottest : MistaWolf RainBot, say! test
+RainBot [06:13:49][log] message -> #snowybottest : RainBot test
+RainBot [06:14:07][log] message -> #snowybottest : MistaWolf RainBot, echoArgs! test
+RainBot [06:14:07][log] message -> #snowybottest : RainBot test
+RainBot [06:14:12][log] message -> #snowybottest : MistaWolf RainBot, ++! test
+RainBot [06:14:12][log] message -> #snowybottest : RainBot test1
+RainBot [06:14:19][log] message -> #snowybottest : MistaWolf RainBot, ++! 1
+RainBot [06:14:19][log] message -> #snowybottest : RainBot 11
