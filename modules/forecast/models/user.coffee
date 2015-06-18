@@ -3,8 +3,8 @@ mongoose = require('mongoose')
 memberSchema = mongoose.Schema
   acc: String
   nicks: [String]
-  num: Number
   channels: [{
+    tag: String
     name: String
     stats: {
       messages: [String]

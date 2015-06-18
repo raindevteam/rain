@@ -10,7 +10,9 @@ class Action
 
   onCommandTrigger: (action, callback) ->
     if action.fireOnCommand
-      if action.trigger @properties then return callback(true)
+      if action.trigger @properties
+        @fireTrigger(action)
+    callback(null)
 
   triggered: (action, callback) ->
     if action.trigger @properties then return callback(true)

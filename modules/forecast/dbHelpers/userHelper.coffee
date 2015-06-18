@@ -56,6 +56,7 @@ class UserHelper
     User.findOne nicks: nick, (err, user) ->
       if user and !(_.find user.channels, (chan) -> return chan.name == channel)
         user.channels.push
+          tag: channel.lower()
           name: channel
           stats:
             messages: []

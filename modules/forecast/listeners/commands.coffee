@@ -2,7 +2,34 @@ User = require('./../models/user')
 Channel = require('./../models/channel')
 _    = require('lodash')
 
-channelQuery = (args, respond, done) ->
+quickChanQuery = (chan, respond, done) ->
+  Channel.findOne name: chan, (err, channel) ->
+    if !(_.isEmpty channel)
+      respond.say(
+        chan + " | " +
+        "Current Users: " + channel.usersAsOfNow +
+        " (Highest Ever: " + channel.highestUserCount +
+        ") | Total Messages: " + channel.messages +
+        " | Total actions: " + channel.actions)
+      return done()
+    else return done()
+
+quickCommand = (args, qc, respond, done) ->
+  Channel.findOne name: respond.to, (err, channel) ->
+    switch qc.lower()
+      when "$users"
+        respond.say "There are " + channel.usersAsOfNow + " users in " +
+        channel.name + " right now"
+        return done()
+      when "$messages"
+        respond.say "Total messages for " + channel.name +
+        " has been " + channel.messages
+        return done()
+      else
+        respond.say "Found nothing for query command: " + args[0]
+        return done()
+
+channelQuery = (args, chan, respond, done) ->
   Channel.findOne name: chan, (err, channel) ->
     switch args[0]
       when "users"
@@ -29,10 +56,9 @@ channelQuery = (args, respond, done) ->
         respond.say "Total messages for " + channel.name + " has been " + channel.messages
         return done()
       else
-        respond.say "Found nothing for query: " + args[0]
-        return done()
+        quickChanQuery(channel.name, respond, done)
 
-userQuery = (args, respond, done) ->
+userQuery = (args, user, respond, done) ->
   chan =
     (_.find user.channels, (chan) -> return chan.name == respond.to)
   if !chan
@@ -47,13 +73,9 @@ userQuery = (args, respond, done) ->
     respond.say "(" + args[0] + ") " + '"' + chanStats.messages[rand_index] + '"'
     return done()
   switch args[1]
-    when "average"
+    when "length"
       respond.say "Average message length has been " +
       chanStats.averageMessageLength
-      return done()
-    when "longest"
-      respond.say "Longest message has been " +
-      chanStats.longestMessageLength + " in length"
       return done()
     when "total"
       respond.say "User has a total of " +
@@ -70,9 +92,9 @@ userQuery = (args, respond, done) ->
 module.exports =
   q:
     action: (args, respond, done) ->
-      if args.length == 0 then return done()
       User.findOne nicks: args[0], (err, user) ->
-        if (_.isEmpty user)
+        if !args[0] then quickChanQuery(respond.to, respond, done)
+        else if (_.isEmpty user)
           if args[0][0] == '#'
             chan = args[0]
             args = _.drop(args)
@@ -82,4 +104,5 @@ module.exports =
             args = _.drop(args)
             quickCommand(args, qc, respond, done)
         else
-          userQuery(args, respond, done)
+          if (args[0] != undefined)
+            userQuery(args, user, respond, done)

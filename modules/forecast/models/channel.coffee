@@ -1,6 +1,7 @@
 mongoose = require('mongoose')
 
 channelSchema = mongoose.Schema
+  tag: String
   name: String
   usersSeen: [String]
   currentUsers: [String]

@@ -160,8 +160,8 @@ class Core
           from: nick, to: to, text: text, msg: msg
         if self.command.isCommand(text)
           action.fireCommand text.after(defined.MSG_TRIGGER+1).clean()
-          # async.each self.triggers['message'],
-          # action.onCommandTrigger.bind(action)
+          async.each self.triggers['message'],
+          action.onCommandTrigger.bind(action)
         else
           async.each self.triggers['message'],
           action.handle.bind(action), (err) ->

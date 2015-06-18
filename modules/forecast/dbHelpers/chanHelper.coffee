@@ -10,7 +10,7 @@ Channel = require './../models/channel'
 # for mongo database
 
 worker = (task, callback) ->
-  Channel.findOne name: task.channel, (err, channel) ->
+  Channel.findOne tag: task.tag, (err, channel) ->
     if !(_.isEmpty channel)
       args = task.args
       switch task.event
@@ -29,10 +29,26 @@ worker = (task, callback) ->
         when "action" # channel, nick, message
           action(channel, args[0], args[1])
       save channel, -> callback()
-    else callback()
+    else
+      bucket.push task, null
+      callback()
 
 # queue for database requests
 queue = async.queue(worker, 1)
+
+# bucket for db operations that couldn't be performed due
+# to channel initialization
+bucket = async.queue(worker, 1)
+bucket.drain = ->
+  queue.resume()
+  bucket.pause()
+
+# Flushes bucket if any tasks present, otherwise resumes regular queue
+flushBucket = ->
+  if bucket.length() > 1
+    rainUtil.logf 'forecast', "Flushing bucket"
+    bucket.resume()
+  else queue.resume()
 
 # start (Mongoose Object, String Array)
 #
@@ -42,6 +58,8 @@ queue = async.queue(worker, 1)
 # than highestUserCount of channel document.
 
 start = (channel, nicks) ->
+  queue.pause() # Ensure that after we finish setting up the channel
+                # we don't process anything before the bucket is flushed
   for nick in nicks
     if !(_.contains channel.usersSeen, nick)
       channel.usersSeen.push(nick)
@@ -51,6 +69,7 @@ start = (channel, nicks) ->
       channel.usersAsOfNow = channel.currentUsers.length
       if channel.usersAsOfNow > channel.highestUserCount
         channel.highestUserCount = channel.usersAsOfNow
+  flushBucket() # Flush any operations we couldn't do
 
 # reset (Mongoose Object)
 # Resets current user data for channel document
@@ -91,9 +110,8 @@ push = (channel, nick) ->
 nick = (channel, oldnick, newnick) ->
   if !(_.contains channel.currentUsers, oldnick)
     return
-  _.pull(channel.currentUsers, oldnick)
+  channel.currentUsers = _.without(channel.currentUsers, oldnick)
   channel.currentUsers.push(newnick)
-  channel.markModified 'currentUsers'
   if !(_.contains channel.usersSeen, newnick)
     channel.usersSeen.push(newnick)
     channel.totalUsers++
@@ -131,13 +149,6 @@ class ChanHelper
   connected: (name) ->
     return @connectedChans.indexOf(name.lower()) > -1
 
-  # ChanHelper :: ready (String)
-  # Checks if channel exists in database
-
-  ready: (name) ->
-    Channel.findOne name: name, (err, channel) ->
-      return !(_.isEmpty channel)
-
   # ChanHelper :: init (String, Callback)
   # Creates new channel for specified channel name
 
@@ -146,6 +157,7 @@ class ChanHelper
     Channel.findOne name: name, (err, channel) ->
       if _.isEmpty channel
         channel = new Channel()
+        channel.tag = name.lower()
         channel.name = name
         channel.actions = 0
         channel.messages = 0
@@ -167,8 +179,7 @@ class ChanHelper
       _.dropRight(args) if args.length >  1
       args = [null]     if args.length == 1
     rainUtil.logf 'forecast', event + " -> " + name + ' : ' + args.join ' '
-    if !@ready(name) then return
-    queue.push event: event, channel: name, args: args, ->
+    queue.push event: event, tag: name.lower(), args: args, ->
       return callback() if callback
 
 module.exports = ChanHelper

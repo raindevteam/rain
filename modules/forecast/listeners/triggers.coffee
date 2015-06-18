@@ -97,8 +97,9 @@ module.exports =
     trigger: (message) -> return true
     action: (respond, done) ->
       User.findOne nicks: respond.from,
-      'channels.name': respond.to, (err, user) ->
+      'channels.tag': respond.to.lower(), (err, user) ->
         if !(_.isEmpty user)
+          console.log respond.msg
           channel = respond.to
           message = respond.text
 
