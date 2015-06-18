@@ -8,7 +8,7 @@ module.exports =
   bang     : 'end'
 
   info:
-    description : 'a multipurpose IRC botpony'
+    description : 'the experimental version of RainBot'
     version     : 'EXP 3.5.0'
     versionName : 'Xenith'
     developer   : 'MistaWolf'

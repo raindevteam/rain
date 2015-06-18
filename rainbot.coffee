@@ -10,7 +10,6 @@ irc      = require 'irc'
 config   = require __config
 rainUtil = require __rainUtil
 string   = require './lib/string'
-mongoose = require 'mongoose'
 
 # Set the level of debugging
 rainUtil.loggingLevel config.loggingLevel
