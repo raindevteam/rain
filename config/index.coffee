@@ -1,16 +1,15 @@
 module.exports =
   server   : process.env.IRC_SERVER or 'irc.canternet.org'
-  nick     : process.env.IRC_NICK or 'SnowBot'
+  nick     : process.env.IRC_NICK or 'HailBot'
   password : process.env.IDENTIFY_PASSWORD or undefined
   channels : [ process.env.CHANNEL or '#Snowybottest' ]
-  db       : process.env.DB_URL or 'mongodb://mista:BCo1370S@ds043947.mongolab.com:43947/rainbot'
   helpLink : 'rainbot.info/userguide'
   loggingLevel : true
   bang     : 'end'
 
   info:
     description : 'a multipurpose IRC botpony'
-    version     : 'DEV 3.4.41'
+    version     : 'EXP 3.5.0'
     versionName : 'Xenith'
     developer   : 'MistaWolf'
     writtenIn   : 'node.js'

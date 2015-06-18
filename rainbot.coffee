@@ -16,10 +16,6 @@ mongoose = require 'mongoose'
 rainUtil.loggingLevel config.loggingLevel
 rainUtil.setPrompt "RainBot "
 
-# Connect to the database
-if config.db
-  mongoose.connect config.db
-
 # Create the bot
 bot = new (irc.Client) config.server, config.nick,
   userName: "RainBotDev"
