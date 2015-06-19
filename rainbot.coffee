@@ -1,5 +1,5 @@
 # Globals for use in modules and listeners
-global.__config    = __dirname + '/config'
+global.__config    = __dirname + '/config/config'
 global.__models    = __dirname + '/config/models'
 global.__rainUtil  = __dirname + '/lib/rainUtil'
 
@@ -17,20 +17,21 @@ rainUtil.setPrompt "RainBot "
 
 # Create the bot
 bot = new (irc.Client) config.server, config.nick,
-  userName: "RainBotDev"
-  realName: "RainBot"
+  userName: config.userName
+  realName: config.realName
   autoConnect: false
-  port: 6667
-  debug: true
+  port: config.port
+  debug: config.debug
 
 # Assign bot to core
 __core.setBot(bot)
 
-init = ->
+start = ->
+  require(__dirname + '/config/init')(bot)
   if config.password
     bot.send 'ns', 'identify', config.password
   bot.send 'mode', config.nick, '+B'
   __core.gate channel for channel in config.channels
 
 # Load Modules, Core and connect to IRC
-__core.load () -> __core.listen () -> bot.connect init
+__core.load () -> __core.listen () -> bot.connect start
