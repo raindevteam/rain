@@ -1,0 +1,11 @@
+extends _main
+
+block css
+  link(rel="stylesheet", href="css/error.css")
+
+block content
+  content.container
+    error-box
+      .header= error.status
+      img(src='images/confuss.png', alt='Confused Rainbow Dash')
+      p= error.message

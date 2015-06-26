@@ -1,0 +1,82 @@
+extends _main
+
+block content
+  .content
+    .content-wrap
+      .header User Guide
+      .text-wrap
+        :markdown
+          ### [RainBot on Github](https://github.com/Wolfchase/rainbot)<br><br>
+          ## Changelog for 2.1.42 (Red Eye)<br><br>
+          - Made website separate from RainBot
+          - Added list of all available events to core
+          - Bot listeners are now handled by core
+          - The bang trigger has been removed, the comma trigger is now used for all commands
+          - Core has been moved from modules to library
+          - Modules have been moved out from lib into root
+          - Config no longer uses 'eat', a sleep property has been attached to the bot
+          - Core now stores its own reference to the bot, simplifies command calling
+          - CMD\_TRIGGER now only triggers if command is followed by a bang
+          - Listeners in all modules have been reorganized
+          - Reworked the way modules are loaded:
+            - A module class has been created, now used to create modules
+            - Module class has its own response handler, this way the bot isn't directly passed to modules
+            - Modules must use the addListener method to add listeners, and then return themselves to the module loader
+            - All current modules have already been converted to the new module class
+          - Command nesting has now been implemented
+            - Listeners can define the nest property to be used for command nesting
+            - Command nesting allows you to use values of commands as input for other commands
+            - If the command needs to fire immediately and is nested, it can declare the ASAP property as true to be
+              fire as soon as it is executed
+          - Added command handler class
+          - Added alias handler class
+          - Added trigger handler class
+          - Removed 4 message triggers that were not being used (might be reimplemented)
+          - Due to the new features implemented with commands, core now handles commands before they are fired to listeners
+          - Command parsing is now recursive, this allows command aliasing
+          - With command aliasing, RainBot can remember a command or nest of commands and execute them under the alias name
+          - Forecast module is disabled until the next update (when it hopefully works better)
+          - Added Module X, has random command utilities
+          - Messages longer than 250 characters will not be sent to chat
+          - Added random! command to social module
+          <br><br>
+          ## Changelog for 1.4.7 (Grim Star)<br><br>
+          - All javascript has been converted into coffeescript
+          - More handlers for listeners added
+          - Bot now keeps a list of nicks which include those of every channel RainBot is connected to.
+          - Changed nick from Rainbot to RainBot for correctedness (Keep in mind that RainBot's commands are case insensitive)
+          - New string methods added to aid specific needs in command parsing
+          - Social module now has a mail service, currently not working, development started but unfinished
+          - Debug library added, allows common logging of bot functions for, well... debugging
+          - Forecast module added. Forecast will allow RainBot to data mine information and upload said data to a database
+            Currently, it only stores registered nicks, which hasn't been tested properly due to a development environment. It
+            will however be monitored more extensively with the new debug library while in production
+          <br><br>
+          ## Changelog for 1.3.9 (Windsheer)<br><br>
+          - Config has been reworked, now stores help link and bot general info
+          - Added two new environment variables to config, 'channel' and 'nick'
+          - Bot listeners now only fire when bot is not sleeping
+          - Added a gate for joining channels which puts the bot on idle until all replay messages are sent. This is the permanent fix to the channel join spam bug.
+          - Bot now only sends password if defined in config
+          - Core module is now a global
+          - Config is now a global
+          - Overhauled social module, and added a few goodies
+          - Reworked calculator module a little, shortened the code
+          - Overhauled mlp episode picker module, now also returns title of season and episode with command 'rainbot, name of s[season]e[episode]'' with format s[d]s[dd] where d is a digit.
+          - Expanded core.js in core module from one function to 11. New functions are as follows:
+            * TRIGGER: Checks input for the string passed in as a trigger
+              * S\_TRIGGER: Strictly matches an input to a string as a trigger
+              * CMD\_TRIGGER: Trigger for cmd messages
+              * MSG\_TRIGGER: Trigger for msg messages
+              * R\_CMD\_TRIGGER: Same as CMD\_TRIGGER but returns raw input
+              * R\_MSG\_TRIGGER: Same as MSG\_TRIGGER but returns raw input
+              * IDLE: Puts the bot to sleep and waits for wake command
+              * CHANNEL\_SWITCH: Handles the switching of channels with GATE
+              * WHITELISTED: Handler for whitelisted functions
+              * TEST\_GATE: Tests the gate
+              * GATE: Puts bot on sleep and waits until all replay messages, then wakes bot
+          - Added info command to core messages
+          - Added help command to core messages
+          - Added tuner command to core messages
+          - Added sleep command to core messages
+          - Added whitelisting of core commands: 'tuner', 'sleep'

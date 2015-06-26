@@ -1,30 +1,26 @@
 # Globals for use in modules and listeners
 global.__config    = __dirname + '/config/config'
-global.__models    = __dirname + '/config/models'
-global.__rainUtil  = __dirname + '/lib/rainUtil'
+global.__rainUtil  = __dirname + '/lib/rainlog'
 
-Core          = require './lib/core'
-global.__core = new Core()
+# Core          = require './lib/core'
+# global.__core = new Core()
 
-irc      = require 'irc'
+bot      = require './lib/bot'
 config   = require __config
-rainUtil = require __rainUtil
+# rainUtil = require __rainUtil
 string   = require './lib/string'
 
 # Set the level of debugging
-rainUtil.loggingLevel config.loggingLevel
-rainUtil.setPrompt "RainBot "
+#rainlog.setLoggingModes config.logging
+#rainlog.setPrompt "RainBot "
 
 # Create the bot
-bot = new (irc.Client) config.server, config.nick,
+RainBot = new (bot) config.server, config.nick,
   userName: config.userName
   realName: config.realName
   autoConnect: false
   port: config.port
   debug: config.debug
-
-# Assign bot to core
-__core.setBot(bot)
 
 start = ->
   require(__dirname + '/config/init')(bot)
@@ -33,5 +29,6 @@ start = ->
   bot.send 'mode', config.nick, '+B'
   __core.gate channel for channel in config.channels
 
-# Load Modules, Core and connect to IRC
-__core.load () -> __core.listen () -> bot.connect start
+RainBot.load ->
+  RainBot.listen ->
+    console.log 'done'

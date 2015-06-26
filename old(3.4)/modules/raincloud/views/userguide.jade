@@ -1,0 +1,147 @@
+extends _main
+
+block content
+  .content
+    .content-wrap
+      .header User Guide         
+      .text-wrap
+        p
+          | This guide aims to be a somewhat detailed overview about the commands
+          | and features of Rainbot. It will tell you things about proper input, triggers, errors
+          | and a few other things. Please note that Rainbot is being worked on heavily
+          | and the information here may not stay relevant for future updates of the bot.
+        br  
+        h2 Commands and Triggers
+        br
+        h3 Command triggers
+        br
+        p
+          strong Note that the old command trigger has been removed
+          br
+          | Any message preceded by 'RainBot, ' will be recognized as a command message, and any commands following it
+          | will be parsed and executed.
+        br  
+        h3 Other triggers
+        br
+        p
+          | Any other trigger that is to be triggered non-directly can implement their own means of triggering or
+          | use predefined trigger functions from the trigger handler.
+        br
+        p
+          | As far as the implementation for listeners go, it is worthwhile to mention that a trigger
+          | is different from a command. The next implementation of the module handler will separate
+          | regular triggers from command triggers.
+        br
+        h3 Core Functionality
+        br
+        p
+          | The core of the bot provides some critical functions and non-critical, but useful management listeners. Following
+          | is a list of all core commands. Any commands with an asterisk are whitelisted to Dustrunner and MistaWolf to prevent
+          | abuse.
+          br
+          br
+          table
+            tr
+              td Command
+              td Args
+              td Description
+            tr
+              td RainBot, help!
+              td help! (No args)
+              td Links you to this page.
+            tr
+              td RainBot, info!
+              td info! (No args)
+              td Provides some information about the bot such as the version number.
+            tr
+              td RainBot, alias!
+              td alias! &lt;name&gt;:&lt;cmd&gt;
+              td Aliases a command(s) to the given name
+            tr
+              td *RainBot, chan!
+              td chan! (join)(leave) channel[:password]
+              td Allows the bot to join and leave channels.
+            tr
+              td *RainBot, sleep!
+              td sleep! (No args)
+              td Puts the bot on wake, during which RainBot will not respond to messages except for the wake command.
+            tr
+              td *RainBot, wake!
+              td wake! (No args)
+              td Wakes the bot from idling.
+        br
+        h2 Social Module
+        br
+        p
+          | The social module provides a few commands and some general triggers, just to add a little
+          | spice to the functionality of RainBot.
+        br
+        table
+          tr
+            td Command
+            td Args
+            td Description
+          tr
+            td RainBot, say!
+            td say! [text]
+            td Repeats what you place in for text.
+          tr
+            td RainBot, rules!
+            td rules!
+            td Gives you rules, one way or another (For SRQ's Constellation).
+        br
+        h2 MLP Episode Module
+        br
+        p
+          | The MLP Episode module provides a command that randomly picks an episode for you
+          | and another that returns the title of the episode queried.
+        br
+        table
+          tr
+            td Command
+            td Args
+            td Description
+          tr
+            td RainBot, episode!
+            td episode! (No args)
+            td Gives you a random episode to watch.
+          tr
+            td RainBot, nameof!
+            td nameof! s[season]e[episode]
+            td Returns the title of the specified episode.
+        br
+        h2 Rainbot Calculator Module
+        br
+        p
+          | With the power of the mathjs library (http://mathjs.org), RainBot can parse equations and store
+          | user defined functions.
+        br
+        table
+          tr
+            td Command
+            td Args
+            td Description
+          tr
+            td RainBot, cal!
+            td cal! [equation]
+            td Parses the given equation.
+        br
+        h2 X Module
+        br
+        p 
+          | The X module implements random utilities. This module was used to test the early versions of the
+          | new module class.
+        br
+        table
+          tr
+            td Command
+            td Args
+            td Description
+          tr
+            td RainBot, roll!
+            td roll! [repetitions]
+            td Rolls for the amount of repetitions, once if not specified.
+          tr
+            td RainBot, jrun!
+            td jrun! [javascript snippet]
+            td Evaluates javascript and returns value.
