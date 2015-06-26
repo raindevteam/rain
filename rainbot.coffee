@@ -22,7 +22,7 @@ if config.db
 
 # Create the bot
 bot = new (irc.Client) config.server, config.nick,
-  userName: "RainBotDev"
+  userName: "RainBot"
   realName: "RainBot"
   autoConnect: false
   port: 6667

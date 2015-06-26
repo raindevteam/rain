@@ -59,3 +59,9 @@ module.exports =
     action: (args, respond, done) ->
       respond.say strhash(args[0])
       return done()
+
+  # Give blog link
+  blog:
+    action: (args, respond, done) ->
+      respond.say 'rainbot-irc.blogspot.com'
+      return done()

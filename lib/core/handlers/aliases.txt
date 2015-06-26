@@ -1,4 +1,4 @@
 watpower:roll! | jrun! Array({roll} + 1).join('wat') | say! Your power is {jrun} | jrun! if({roll} > 3) "Nice power bro"; else if({roll} < 3) "Weakling"; else "Meh, Average"
 helloworld:say! Back again
-test:watpower | say! {watpower} | AvgSixRolls
+test:say! test
 aliasTest:!roll | !jrun if ({roll} > 1) "Was greater than 1"

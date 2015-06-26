@@ -31,6 +31,9 @@ quickCommand = (args, qc, respond, done) ->
 
 channelQuery = (args, chan, respond, done) ->
   Channel.findOne name: chan, (err, channel) ->
+    if (_.isEmpty channel)
+      respond.say "I couldn't find that channel"
+      return done()
     switch args[0]
       when "users"
         if !args[1]
@@ -76,10 +79,6 @@ userQuery = (args, user, respond, done) ->
     when "length"
       respond.say "Average message length has been " +
       chanStats.averageMessageLength
-      return done()
-    when "total"
-      respond.say "User has a total of " +
-      chanStats.totalMessages + " messages recorded"
       return done()
     when "word"
       respond.say "Average word count is " +

@@ -99,7 +99,6 @@ module.exports =
       User.findOne nicks: respond.from,
       'channels.tag': respond.to.lower(), (err, user) ->
         if !(_.isEmpty user)
-          console.log respond.msg
           channel = respond.to
           message = respond.text
 

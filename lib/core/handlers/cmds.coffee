@@ -42,10 +42,10 @@ class CmdHandler
   getCommandName: (commandRaw) ->
     if config.bang == 'front'
       if commandRaw.match(/^!/)
-        return commandRaw.match(/^!(\S+)/)[1]
+        return commandRaw.match(/^!(\S+)/)[1].lower()
     else
       if commandRaw.has('!')
-        return commandRaw.before('!').trim()
+        return commandRaw.before('!').trim().lower()
       else null
 
   getCommandArgs: (commandRaw) ->

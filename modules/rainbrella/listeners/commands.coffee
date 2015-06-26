@@ -5,6 +5,7 @@ randomIntFromInterval = (min,max) ->
   return Math.floor(Math.random()*(max-min+1)+min);
 
 module.exports =
+  # Run a javascript snippet
   jrun:
     action: (args, respond, done) ->
       rainbox.run args.join(" "), (output) ->
@@ -13,6 +14,7 @@ module.exports =
         respond.say text
         return done()
 
+  # Roll some dice
   roll:
     action: (args, respond, done) ->
       console.log args + " " + args.length

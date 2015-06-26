@@ -36,7 +36,7 @@ class Core
       for module in modules
         module = require(__dirname + '/../../modules/' + module)(self.Module)
         for command in module.commands
-          self.commands.set(command.name, command.command)
+          self.commands.set(command.name.lower(), command.command)
         for event, listeners of module.triggers
           for listener in listeners
             self.triggers[event].push listener
@@ -82,7 +82,7 @@ class Core
         command = require(__dirname + '/listeners/commands/' + modfile)
         Core.addCommands(command)
       for command in Core.commands
-        self.commands.set(command.name, command.command)
+        self.commands.set(command.name.lower(), command.command)
 
     # Load core triggers
     fs.readdir __dirname + '/listeners/triggers', (err, modfiles) ->

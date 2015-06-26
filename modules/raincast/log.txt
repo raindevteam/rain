@@ -3325,3 +3325,190 @@ RainBot [04:51:13][log] reset -> #snowybottest :
 RainBot [04:51:13][log] start -> #snowybottest : RainBot,Eventide|Sleepies,MistaWolf,ChanServ,SnowBot
 RainBot [04:51:42][log] message -> #snowybottest : MistaWolf SnowBot, q!
 RainBot [04:51:54][log] message -> #snowybottest : MistaWolf SnowBot, q! #Neverfree
+RainBot [03:58:37][log] reset -> #snowybottest : 
+RainBot [03:58:38][log] start -> #snowybottest : MistaWolf,RainBot,Eventide|Sleepies,ChanServ,SnowBot
+RainBot [03:59:35][log] push -> #snowybottest : SnowBot1
+RainBot [03:59:36][log] reset -> #snowybottest : 
+RainBot [03:59:36][log] start -> #snowybottest : MistaWolf,RainBot,Eventide|Sleepies,ChanServ,SnowBot,SnowBot1
+RainBot [04:00:29][log] push -> #snowybottest : SnowBot1
+RainBot [04:00:29][log] reset -> #snowybottest : 
+RainBot [04:00:29][log] start -> #snowybottest : MistaWolf,RainBot,Eventide|Sleepies,ChanServ,SnowBot,SnowBot1
+RainBot [04:02:47][log] Inspecting #snowybottest for nick SnowBot
+RainBot [04:02:47][log] Channel connected -> true
+RainBot [04:02:47][log] pop -> #snowybottest : SnowBot
+RainBot [04:06:54][log] reset -> #snowybottest : 
+RainBot [04:06:55][log] start -> #snowybottest : MistaWolf,RainBot,Eventide|Sleepies,ChanServ,SnowBot
+RainBot [04:08:06][log] reset -> #snowybottest : 
+RainBot [04:08:07][log] start -> #snowybottest : MistaWolf,RainBot,Eventide|Sleepies,ChanServ,SnowBot
+RainBot [18:09:33][log] reset -> #snowybottest : 
+RainBot [18:09:33][log] start -> #snowybottest : SnowBot,RainBot,Eventide,ChanServ
+RainBot [18:10:10][log] push -> #snowybottest : MistaWolf
+RainBot [18:11:49][log] reset -> #snowybottest : 
+RainBot [18:11:49][log] start -> #snowybottest : RainBot,Eventide,ChanServ,MistaWolf,SnowBot
+RainBot [18:50:47][log] reset -> #snowybottest : 
+RainBot [18:50:47][log] start -> #snowybottest : ChanServ,Eventide,RainBot,SnowBot,MistaWolf
+RainBot [20:47:53][log] pop -> #snowybottest : MistaWolf
+RainBot [20:47:53][log] Inspecting #snowybottest for nick MistaWolf
+RainBot [20:47:53][log] Channel connected -> true
+RainBot [23:40:44][log] reset -> #snowybottest : 
+RainBot [23:40:44][log] start -> #snowybottest : MistaWolf,RainBot,Eventide,ChanServ,SnowBot
+RainBot [23:42:20][log] reset -> #snowybottest : 
+RainBot [23:42:23][log] start -> #snowybottest : MistaWolf,RainBot,Eventide,ChanServ,SnowBot
+RainBot [23:42:39][log] message -> #snowybottest : MistaWolf test
+RainBot [23:44:10][log] reset -> #snowybottest : 
+RainBot [23:44:10][log] start -> #snowybottest : MistaWolf,RainBot,Eventide,ChanServ,SnowBot
+RainBot [23:47:01][log] reset -> #snowybottest : 
+RainBot [23:47:01][log] start -> #snowybottest : MistaWolf,RainBot,Eventide,ChanServ,SnowBot
+RainBot [23:48:00][log] reset -> #snowybottest : 
+RainBot [23:48:00][log] start -> #snowybottest : MistaWolf,RainBot,Eventide,ChanServ,SnowBot
+RainBot [23:48:05][log] message -> #snowybottest : MistaWolf test
+RainBot [23:48:16][log] message -> #snowybottest : MistaWolf test
+RainBot [23:53:33][log] reset -> #snowybottest : 
+RainBot [23:53:33][log] start -> #snowybottest : MistaWolf,RainBot,Eventide,ChanServ,SnowBot
+RainBot [23:53:40][log] message -> #snowybottest : MistaWolf test
+RainBot [23:54:25][log] reset -> #snowybottest : 
+RainBot [23:54:26][log] start -> #snowybottest : MistaWolf,RainBot,Eventide,ChanServ,SnowBot
+RainBot [23:54:41][log] message -> #snowybottest : MistaWolf test
+RainBot [23:58:06][log] reset -> #snowybottest : 
+RainBot [23:58:07][log] start -> #snowybottest : MistaWolf,RainBot,Eventide,ChanServ,SnowBot
+RainBot [23:58:56][log] reset -> #snowybottest : 
+RainBot [23:58:57][log] start -> #snowybottest : ChanServ,Eventide,RainBot,SnowBot,MistaWolf
+RainBot [23:59:44][log] message -> #snowybottest : MistaWolf test
+RainBot [00:00:07][log] message -> #snowybottest : MistaWolf Another test
+RainBot [00:00:38][log] message -> #snowybottest : MistaWolf Testing yet again
+RainBot [00:00:59][log] message -> #snowybottest : MistaWolf holeee sheeet it works
+RainBot [00:02:46][log] message -> #snowybottest : MistaWolf more testing
+RainBot [00:18:43][log] reset -> #snowybottest : 
+RainBot [00:18:43][log] start -> #snowybottest : MistaWolf,RainBot,Eventide,ChanServ,SnowBot
+RainBot [00:19:44][log] reset -> #snowybottest : 
+RainBot [00:19:45][log] start -> #snowybottest : MistaWolf,RainBot,Eventide,ChanServ,SnowBot
+RainBot [00:22:28][log] reset -> #snowybottest : 
+RainBot [00:22:28][log] start -> #snowybottest : MistaWolf,RainBot,Eventide,ChanServ,SnowBot
+RainBot [00:30:50][log] message -> #snowybottest : MistaWolf test again
+RainBot [00:35:57][log] message -> #snowybottest : MistaWolf test
+RainBot [00:36:35][log] message -> #snowybottest : MistaWolf test
+RainBot [00:37:03][log] message -> #snowybottest : MistaWolf long message test very long not spam, mostly spam, but long message is long, because of testing, spam spam spam
+RainBot [00:44:01][log] reset -> #snowybottest : 
+RainBot [00:44:01][log] start -> #snowybottest : MistaWolf,RainBot,Eventide,ChanServ,SnowBot
+RainBot [00:45:55][log] reset -> #snowybottest : 
+RainBot [00:45:56][log] start -> #snowybottest : SnowBot,ChanServ,Eventide,RainBot,MistaWolf
+RainBot [00:58:14][log] message -> #snowybottest : MistaWolf test
+RainBot [03:09:50][log] reset -> #snowybottest : 
+RainBot [03:09:50][log] start -> #snowybottest : MistaWolf,RainBot,Eventide,ChanServ,SnowBot
+RainBot [03:10:55][log] message -> #snowybottest : MistaWolf SnowBot, chan! join #snowybottest2
+RainBot [03:10:55][log] reset -> #snowybottest2 : 
+RainBot [03:10:56][log] start -> #snowybottest2 : MistaWolf,SnowBot
+RainBot [03:11:05][log] message -> #snowybottest : MistaWolf test
+RainBot [03:11:11][log] message -> #snowybottest2 : MistaWolf test
+RainBot [03:11:23][log] message -> #snowybottest : MistaWolf test
+RainBot [03:30:17][log] message -> #snowybottest : MistaWolf test
+RainBot [03:30:22][log] message -> #snowybottest2 : MistaWolf test
+RainBot [03:50:34][log] message -> #snowybottest : MistaWolf test
+RainBot [03:50:50][log] message -> #snowybottest : MistaWolf test
+RainBot [04:13:21][log] reset -> #snowybottest : 
+RainBot [04:13:21][log] start -> #snowybottest : MistaWolf,RainBot,Eventide,ChanServ,SnowBot
+RainBot [04:13:33][log] message -> #snowybottest : MistaWolf test
+RainBot [04:15:31][log] message -> #snowybottest : MistaWolf test
+RainBot [04:15:50][log] message -> #snowybottest : MistaWolf SnowBot, chan! join #snowybottest2
+RainBot [04:15:50][log] reset -> #snowybottest2 : 
+RainBot [04:15:50][log] start -> #snowybottest2 : MistaWolf,SnowBot
+RainBot [04:16:15][log] message -> #snowybottest : MistaWolf test
+RainBot [04:17:06][log] message -> #snowybottest : MistaWolf test
+RainBot [04:19:47][log] reset -> #snowybottest : 
+RainBot [04:19:48][log] start -> #snowybottest : MistaWolf,RainBot,Eventide,ChanServ,SnowBot
+RainBot [04:19:52][log] message -> #snowybottest : MistaWolf SnowBot, chan! join #snowybottest2
+RainBot [04:19:53][log] reset -> #snowybottest2 : 
+RainBot [04:19:55][log] start -> #snowybottest2 : MistaWolf,SnowBot
+RainBot [04:20:03][log] message -> #snowybottest : MistaWolf SnowBot, chan! join #snowybottest2
+RainBot [04:20:11][log] message -> #snowybottest : MistaWolf test
+RainBot [04:23:52][log] reset -> #snowybottest : 
+RainBot [04:23:54][log] start -> #snowybottest : MistaWolf,RainBot,Eventide,ChanServ,SnowBot
+RainBot [04:25:45][log] reset -> #snowybottest : 
+RainBot [04:25:47][log] start -> #snowybottest : ChanServ,Eventide,RainBot,SnowBot,MistaWolf
+RainBot [04:26:50][log] message -> #snowybottest : MistaWolf test
+RainBot [04:27:30][log] reset -> #snowybottest : 
+RainBot [04:27:31][log] start -> #snowybottest : ChanServ,Eventide,RainBot,SnowBot,MistaWolf
+RainBot [04:27:43][log] message -> #snowybottest : MistaWolf test
+RainBot [04:27:59][log] reset -> #snowybottest2 : 
+RainBot [04:27:59][log] message -> #snowybottest : MistaWolf SnowBot, chan! join #snowybottest2
+RainBot [04:28:01][log] start -> #snowybottest2 : SnowBot,MistaWolf
+RainBot [04:30:45][log] reset -> #snowybottest : 
+RainBot [04:30:45][log] message -> #snowybottest : MistaWolf SnowBot, chan! join #snowybottest2
+RainBot [04:30:46][log] start -> #snowybottest : ChanServ,Eventide,RainBot,SnowBot,MistaWolf
+RainBot [04:30:46][log] reset -> #snowybottest2 : 
+RainBot [04:30:54][log] start -> #snowybottest2 : SnowBot,MistaWolf
+RainBot [04:31:08][log] message -> #snowybottest : MistaWolf test
+RainBot [04:33:08][log] message -> #snowybottest : MistaWolf test
+RainBot [04:37:24][log] message -> #snowybottest : MistaWolf test
+RainBot [04:38:17][log] message -> #snowybottest2 : MistaWolf test
+RainBot [04:41:10][log] reset -> #snowybottest : 
+RainBot [04:41:11][log] start -> #snowybottest : MistaWolf,RainBot,Eventide,ChanServ,SnowBot
+RainBot [04:41:33][log] reset -> #snowybottest2 : 
+RainBot [04:41:33][log] message -> #snowybottest : MistaWolf SnowBot, chan! join #snowybottest2
+RainBot [04:41:34][log] start -> #snowybottest2 : MistaWolf,SnowBot
+RainBot [04:43:29][log] reset -> #snowybottest : 
+RainBot [04:43:30][log] start -> #snowybottest : MistaWolf,RainBot,Eventide,ChanServ,SnowBot
+RainBot [04:43:40][log] message -> #snowybottest : MistaWolf SnowBot, chan! join #snowybottest2
+RainBot [04:43:41][log] reset -> #snowybottest2 : 
+RainBot [04:43:42][log] start -> #snowybottest2 : MistaWolf,SnowBot
+RainBot [17:49:15][log] reset -> #snowybottest : 
+RainBot [17:49:15][log] start -> #snowybottest : Eventide,SnowBot,RainBot,MistaWolf,ChanServ
+RainBot [17:52:30][log] message -> #snowybottest : MistaWolf test
+RainBot [17:53:47][log] message -> #snowybottest : MistaWolf test
+RainBot [18:23:03][log] message -> #snowybottest : MistaWolf I remember when RainBot was just a 10 line program
+RainBot [18:23:11][log] message -> #snowybottest : MistaWolf Oh how they do grow up so fast
+RainBot [20:46:49][log] message -> #snowybottest : Eventide lol
+RainBot [02:45:46][log] nick -> #snowybottest : Eventide Eventide|Sleepies
+RainBot [03:08:34][log] reset -> #snowybottest : 
+RainBot [03:08:34][log] start -> #snowybottest : ChanServ,Eventide,Dustrunner,SnowBot,RainBot,MistaWolf
+RainBot [03:08:40][log] message -> #snowybottest : MistaWolf SnowBot, blog!
+RainBot [03:19:52][log] message -> #snowybottest : Eventide Oh neato
+RainBot [03:22:26][log] nick -> #snowybottest : Eventide Eventide|Sleepies
+RainBot [05:06:03][log] message -> #snowybottest : MistaWolf Snowbot, q!
+RainBot [05:06:24][log] message -> #snowybottest : MistaWolf Snowbot, q! MistaWolf
+RainBot [05:06:51][log] message -> #snowybottest : MistaWolf Snowbot, q! Eventide
+RainBot [05:07:07][log] message -> #snowybottest : MistaWolf Snowbot, q! $users
+RainBot [23:53:12][log] reset -> #snowybottest : 
+RainBot [23:53:13][log] start -> #snowybottest : Dustrunner,ChanServ,Eventide,RainBot,MistaWolf,SnowBot
+RainBot [23:53:25][log] message -> #snowybottest : MistaWolf SnowBot, q!
+RainBot [23:53:40][log] message -> #snowybottest : MistaWolf SnowBot, q! #DoesNotExist
+RainBot [23:53:51][log] message -> #snowybottest : MistaWolf SnowBot, q! #snowybottest
+RainBot [23:53:57][log] message -> #snowybottest : MistaWolf SnowBot, q! #snowybottest users
+RainBot [23:54:04][log] message -> #snowybottest : MistaWolf SnowBot, q! #snowybottest messages
+RainBot [23:54:14][log] message -> #snowybottest : MistaWolf SnowBot, q! #snowybottest users now
+RainBot [23:54:21][log] message -> #snowybottest : MistaWolf SnowBot, q! #snowybottest users highest
+RainBot [23:54:26][log] message -> #snowybottest : MistaWolf SnowBot, q! #snowybottest users total
+RainBot [23:54:36][log] message -> #snowybottest : MistaWolf SnowBot, q! #snowybottest users total irrelavant
+RainBot [23:54:44][log] message -> #snowybottest : MistaWolf SnowBot, q! #snowybottest users irrelevant
+RainBot [23:55:16][log] message -> #snowybottest : MistaWolf SnowBot, q! #snowybottest junktext
+RainBot [23:55:43][log] message -> #snowybottest : MistaWolf SnowBot, q! junktext
+RainBot [23:55:57][log] message -> #snowybottest : MistaWolf SnowBot, q! $users
+RainBot [23:56:06][log] message -> #snowybottest : MistaWolf SnowBot, q! $messages
+RainBot [23:56:15][log] message -> #snowybottest : MistaWolf SnowBot, q! Eventide
+RainBot [23:56:23][log] message -> #snowybottest : MistaWolf SnowBot, q! MistaWolf junktext
+RainBot [23:56:28][log] message -> #snowybottest : Eventide lol
+RainBot [23:56:30][log] message -> #snowybottest : Eventide ">
+RainBot [23:56:31][log] message -> #snowybottest : Eventide :>
+RainBot [23:56:38][log] message -> #snowybottest : MistaWolf ;p
+RainBot [23:56:55][log] message -> #snowybottest : MistaWolf SnowBot, q! MistaWolf length
+RainBot [23:56:59][log] message -> #snowybottest : MistaWolf SnowBot, q! MistaWolf total
+RainBot [23:57:12][log] message -> #snowybottest : MistaWolf Oh no
+RainBot [23:57:17][log] message -> #snowybottest : MistaWolf I broke my messages
+RainBot [23:57:43][log] message -> #snowybottest : Eventide lel
+RainBot [23:58:05][log] message -> #snowybottest : Eventide you've got n/0 messages
+RainBot [23:58:43][log] message -> #snowybottest : MistaWolf its just indeterminant
+RainBot [23:58:45][log] message -> #snowybottest : MistaWolf is all
+RainBot [23:59:00][log] message -> #snowybottest : MistaWolf SnowBot, q! MistaWolf word
+RainBot [23:59:13][log] message -> #snowybottest : MistaWolf Sounds about right
+RainBot [23:59:15][log] message -> #snowybottest : MistaWolf SnowBot, q! MistaWolf word
+RainBot [00:01:25][log] message -> #snowybottest : MistaWolf SnowBot, Q! MistaWolf word
+RainBot [00:01:31][log] message -> #snowybottest : MistaWolf oh
+RainBot [00:01:36][log] message -> #snowybottest : MistaWolf I never fixed that on dev
+RainBot [00:04:48][log] push -> #snowybottest : Alfreddy
+RainBot [00:11:13][log] message -> #snowybottest : MistaWolf SnowBot, sleep!
+RainBot [00:13:22][log] reset -> #snowybottest : 
+RainBot [00:13:23][log] start -> #snowybottest : Eventide,ChanServ,Alfreddy,MistaWolf,Dustrunner,RainBot,SnowBot
+RainBot [00:13:52][log] message -> #snowybottest : MistaWolf SnowBot, SAY! test
+RainBot [00:13:57][log] message -> #snowybottest : MistaWolf SnowBot, say! test
+RainBot [00:14:26][log] message -> #snowybottest : MistaWolf SnowBot, alias! test say! test
+RainBot [00:14:53][log] message -> #snowybottest : MistaWolf SnowBot, TEST!

@@ -3,14 +3,14 @@ module.exports =
   nick     : process.env.IRC_NICK or 'SnowBot'
   password : process.env.IDENTIFY_PASSWORD or undefined
   channels : [ process.env.CHANNEL or '#Snowybottest' ]
-  db       : process.env.DB_URL or 'mongodb://mista:BCo1370S@ds043947.mongolab.com:43947/rainbot'
+  db       : process.env.DB_URL or undefined
   helpLink : 'rainbot.info/userguide'
   loggingLevel : true
   bang     : 'end'
 
   info:
     description : 'a multipurpose IRC botpony'
-    version     : 'DEV 3.4.41'
+    version     : 'STG 3.4.45'
     versionName : 'Xenith'
     developer   : 'MistaWolf'
     writtenIn   : 'node.js'
@@ -24,7 +24,7 @@ module.exports =
   ]
 
   whitelisted_funcs: [
-    'tuner'
+    'chan'
     'sleep'
     'wake'
   ]
