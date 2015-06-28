@@ -3512,3 +3512,413 @@ RainBot [00:13:52][log] message -> #snowybottest : MistaWolf SnowBot, SAY! test
 RainBot [00:13:57][log] message -> #snowybottest : MistaWolf SnowBot, say! test
 RainBot [00:14:26][log] message -> #snowybottest : MistaWolf SnowBot, alias! test say! test
 RainBot [00:14:53][log] message -> #snowybottest : MistaWolf SnowBot, TEST!
+RainBot [16:38:27][log] message -> #snowybottest : PinkDawn SnowBot, info!
+RainBot [16:43:54][log] reset -> #snowybottest : 
+RainBot [16:44:10][log] reset -> #snowybottest : 
+RainBot [16:45:24][log] reset -> #snowybottest : 
+RainBot [16:45:29][log] reset -> #snowybottest : 
+RainBot [16:45:44][log] reset -> #snowybottest : 
+RainBot [16:45:54][log] reset -> #snowybottest : 
+RainBot [16:48:25][log] reset -> #snowybottest : 
+RainBot [16:48:51][log] reset -> #snowybottest : 
+RainBot [16:49:00][log] reset -> #snowybottest : 
+RainBot [16:49:08][log] reset -> #snowybottest : 
+RainBot [16:49:38][log] reset -> #snowybottest : 
+RainBot [16:49:53][log] reset -> #snowybottest : 
+RainBot [16:50:29][log] reset -> #snowybottest : 
+RainBot [17:10:45][log] reset -> #snowybottest : 
+RainBot [17:10:46][log] start -> #snowybottest : [object Object]
+RainBot [17:14:25][log] reset -> #snowybottest : 
+RainBot [17:14:25][log] start -> #snowybottest : [object Object]
+RainBot [17:14:32][log] Creating user for Alfreddytest
+RainBot [17:14:32][log] Done creating user for Alfreddytest
+RainBot [17:14:33][log] Added channel #snowybottest to Alfreddytest (Alfreddytest)
+RainBot [17:15:29][log] message -> #snowybottest : PinkDawn SnowBot, chan! join #snowybottest2
+RainBot [17:16:34][log] reset -> #snowybottest : 
+RainBot [17:16:34][log] start -> #snowybottest : [object Object]
+RainBot [17:16:39][log] message -> #snowybottest : PinkDawn SnowBot, chan! join #snowybottest2
+RainBot [17:16:39][log] reset -> #snowybottest2 : 
+RainBot [17:16:39][log] start -> #snowybottest2 : [object Object]
+RainBot [17:16:41][log] Added channel #snowybottest2 to Alfreddytest (Alfreddytest)
+RainBot [17:17:15][log] pop -> #snowybottest2 : Alfreddytest function () {
+        return responseHandler.respond();
+      }
+RainBot [17:17:31][log] message -> #snowybottest : PinkDawn SnowBot, q! #snowybottest2
+RainBot [17:19:55][log] reset -> #snowybottest : 
+RainBot [17:19:55][log] start -> #snowybottest : [object Object]
+RainBot [17:20:13][log] message -> #snowybottest : PinkDawn SnowBot, chan! join #snowybottest2
+RainBot [17:20:14][log] reset -> #snowybottest2 : 
+RainBot [17:20:15][log] start -> #snowybottest2 : [object Object]
+RainBot [17:20:31][log] nick -> #snowybottest : Alfreddy Alfreddytest
+RainBot [17:20:31][log] nick -> #snowybottest2 : Alfreddy Alfreddytest
+RainBot [17:20:32][log] Alfreddytest is connected to #snowybottest
+RainBot [17:20:32][log] Alfreddytest is connected to #snowybottest2
+RainBot [17:40:09][log] reset -> #snowybottest : 
+RainBot [17:40:09][log] start -> #snowybottest : [object Object]
+RainBot [17:40:27][log] message -> #snowybottest : PinkDawn SnowBot, chan! join #snowybottest2
+RainBot [17:40:28][log] reset -> #snowybottest2 : 
+RainBot [17:40:28][log] start -> #snowybottest2 : [object Object]
+RainBot [17:40:38][log] nick -> #snowybottest : Alfreddytest Alfreddy
+RainBot [17:40:38][log] nick -> #snowybottest2 : Alfreddytest Alfreddy
+RainBot [17:40:39][log] Pushing nick (Alfreddy) to ACC Alfreddytest
+RainBot [17:40:39][log] Done pushing nick (Alfreddy) to ACC Alfreddytest
+RainBot [17:53:55][log] reset -> #snowybottest : 
+RainBot [17:53:55][log] start -> #snowybottest : [object Object]
+RainBot [17:54:02][log] message -> #snowybottest : PinkDawn SnowBot, chan! join #snowybottest2
+RainBot [17:54:03][log] reset -> #snowybottest2 : 
+RainBot [17:54:03][log] start -> #snowybottest2 : [object Object]
+RainBot [17:54:13][log] nick -> #snowybottest : Alfreddy Alfreddytest
+RainBot [17:54:13][log] nick -> #snowybottest2 : Alfreddy Alfreddytest
+RainBot [17:55:39][log] reset -> #snowybottest : 
+RainBot [17:55:39][log] start -> #snowybottest : [object Object]
+RainBot [17:55:43][log] message -> #snowybottest : PinkDawn SnowBot, chan! join #snowybottest2
+RainBot [17:55:43][log] reset -> #snowybottest2 : 
+RainBot [17:55:44][log] start -> #snowybottest2 : [object Object]
+RainBot [17:55:52][log] nick -> #snowybottest : Alfreddytest Alfreddy
+RainBot [17:55:52][log] nick -> #snowybottest2 : Alfreddytest Alfreddy
+RainBot [17:58:05][log] reset -> #snowybottest : 
+RainBot [17:58:05][log] start -> #snowybottest : [object Object]
+RainBot [17:58:13][log] nick -> #snowybottest : Alfreddy Alfreddytest
+RainBot [18:06:06][log] reset -> #snowybottest : 
+RainBot [18:06:06][log] start -> #snowybottest : [object Object]
+RainBot [18:06:27][log] nick -> #snowybottest : Alfreddytest Alfreddy
+RainBot [18:13:05][log] reset -> #snowybottest : 
+RainBot [18:13:06][log] start -> #snowybottest : [object Object]
+RainBot [18:13:16][log] nick -> #snowybottest : Alfreddy Alfreddytest function () {
+            if (called) throw new Error("Callback was already called.");
+            called = true;
+            fn.apply(this, arguments);
+        }
+RainBot [18:15:02][log] reset -> #snowybottest : 
+RainBot [18:15:03][log] start -> #snowybottest : [object Object]
+RainBot [18:15:15][log] nick -> #snowybottest : Alfreddytest Alfreddy function () {
+            if (called) throw new Error("Callback was already called.");
+            called = true;
+            fn.apply(this, arguments);
+        }
+RainBot [18:18:31][log] reset -> #snowybottest : 
+RainBot [18:18:31][log] start -> #snowybottest : [object Object]
+RainBot [18:18:46][log] nick -> #snowybottest : Alfreddy Alfreddytest function () {
+            if (called) throw new Error("Callback was already called.");
+            called = true;
+            fn.apply(this, arguments);
+        }
+RainBot [18:19:10][log] push -> #snowybottest : SnowBot1
+RainBot [18:19:11][log] reset -> #snowybottest : 
+RainBot [18:19:11][log] start -> #snowybottest : [object Object]
+RainBot [18:19:14][log] message -> #snowybottest : PinkDawn SnowBot, chan! join #snowybottest2
+RainBot [18:20:48][log] push -> #snowybottest : SnowBot1
+RainBot [18:20:48][log] reset -> #snowybottest : 
+RainBot [18:20:48][log] start -> #snowybottest : [object Object]
+RainBot [18:21:01][log] message -> #snowybottest : PinkDawn SnowBot, chan! join #snowybottest2
+RainBot [18:21:01][log] push -> #snowybottest2 : SnowBot1
+RainBot [18:21:01][log] reset -> #snowybottest2 : 
+RainBot [18:21:02][log] start -> #snowybottest2 : [object Object]
+RainBot [18:21:14][log] nick -> #snowybottest : Alfreddytest Alfreddy function () {
+            if (called) throw new Error("Callback was already called.");
+            called = true;
+            fn.apply(this, arguments);
+        }
+RainBot [18:21:14][log] nick -> #snowybottest2 : Alfreddytest Alfreddy function () {
+            if (called) throw new Error("Callback was already called.");
+            called = true;
+            fn.apply(this, arguments);
+        }
+RainBot [18:21:15][log] Alfreddy is connected to true
+RainBot [18:23:06][log] reset -> #snowybottest : 
+RainBot [18:23:06][log] start -> #snowybottest : [object Object]
+RainBot [18:23:08][log] message -> #snowybottest : PinkDawn SnowBot, chan! join #snowybottest2
+RainBot [18:23:08][log] reset -> #snowybottest2 : 
+RainBot [18:23:09][log] start -> #snowybottest2 : [object Object]
+RainBot [18:23:24][log] nick -> #snowybottest : Alfreddy Alfreddytest function () {
+            if (called) throw new Error("Callback was already called.");
+            called = true;
+            fn.apply(this, arguments);
+        }
+RainBot [18:23:24][log] nick -> #snowybottest2 : Alfreddy Alfreddytest function () {
+            if (called) throw new Error("Callback was already called.");
+            called = true;
+            fn.apply(this, arguments);
+        }
+RainBot [18:23:25][log] Alfreddytest is connected to #snowybottest
+RainBot [18:23:25][log] Alfreddytest is connected to #snowybottest2
+RainBot [18:50:28][log] reset -> #snowybottest : 
+RainBot [18:50:28][log] start -> #snowybottest : [object Object]
+RainBot [18:50:32][log] message -> #snowybottest : PinkDawn SnowBot, chan! join #snowybottest2
+RainBot [18:50:33][log] reset -> #snowybottest2 : 
+RainBot [18:50:33][log] start -> #snowybottest2 : [object Object]
+RainBot [18:50:44][log] nick -> #snowybottest : Alfreddytest Alfreddy function () {
+            if (called) throw new Error("Callback was already called.");
+            called = true;
+            fn.apply(this, arguments);
+        }
+RainBot [18:50:44][log] nick -> #snowybottest2 : Alfreddytest Alfreddy function () {
+            if (called) throw new Error("Callback was already called.");
+            called = true;
+            fn.apply(this, arguments);
+        }
+RainBot [18:50:45][log] Alfreddy is connected to #snowybottest
+RainBot [18:50:45][log] Alfreddy is connected to #snowybottest2
+RainBot [18:58:16][log] message -> #snowybottest : Eventide one thing about the stats that were generated by people like Unixkitty is that it only updates once every 24 hours
+RainBot [18:58:22][log] message -> #snowybottest : Eventide do you think we could make ours live?
+RainBot [18:58:26][log] message -> #snowybottest : Eventide when it goes up on the site
+RainBot [19:03:23][log] message -> #snowybottest : PinkDawn Yeah, live was plan A ;)
+RainBot [19:04:00][log] message -> #snowybottest : PinkDawn It will require a lot of javascript finesse 
+RainBot [19:04:02][log] message -> #snowybottest : PinkDawn on my part
+RainBot [19:04:10][log] message -> #snowybottest : PinkDawn but it is totally possible
+RainBot [19:04:38][log] message -> #snowybottest : PinkDawn Right now just trying to squash all the bugs I found yesterday from staging
+RainBot [19:05:29][log] message -> #snowybottest : PinkDawn Uh, squash wasn't the right word to use there
+RainBot [19:05:40][log] message -> #snowybottest : PinkDawn let's say crush
+RainBot [19:05:51][log] message -> #snowybottest : PinkDawn for lack of a better word
+RainBot [19:06:32][log] reset -> #snowybottest : 
+RainBot [19:06:32][log] start -> #snowybottest : [object Object]
+RainBot [19:06:48][log] nick -> #snowybottest : Alfreddy Alfreddytest function () {
+            if (called) throw new Error("Callback was already called.");
+            called = true;
+            fn.apply(this, arguments);
+        }
+RainBot [19:06:49][log] Alfreddytest is connected to #snowybottest
+RainBot [19:09:34][log] reset -> #snowybottest : 
+RainBot [19:09:34][log] start -> #snowybottest : [object Object]
+RainBot [19:10:59][log] reset -> #snowybottest : 
+RainBot [19:11:00][log] start -> #snowybottest : [object Object]
+RainBot [19:11:18][log] nick -> #snowybottest : Alfreddy Alfreddytest function () {
+            if (called) throw new Error("Callback was already called.");
+            called = true;
+            fn.apply(this, arguments);
+        }
+RainBot [19:11:20][log] Alfreddytest is connected to #snowybottest
+RainBot [19:11:42][log] message -> #snowybottest : PinkDawn SnowBot, chan! join #snowybottest2
+RainBot [19:11:43][log] reset -> #snowybottest2 : 
+RainBot [19:11:43][log] start -> #snowybottest2 : [object Object]
+RainBot [19:11:53][log] nick -> #snowybottest : Alfreddytest Alfreddy function () {
+            if (called) throw new Error("Callback was already called.");
+            called = true;
+            fn.apply(this, arguments);
+        }
+RainBot [19:11:53][log] nick -> #snowybottest2 : Alfreddytest Alfreddy function () {
+            if (called) throw new Error("Callback was already called.");
+            called = true;
+            fn.apply(this, arguments);
+        }
+RainBot [19:11:54][log] Alfreddy is connected to #snowybottest
+RainBot [19:11:54][log] Alfreddy is connected to #snowybottest2
+RainBot [19:26:38][log] message -> #snowybottest : PinkDawn dammit, I relied on the already matured backbone library for IRC to not repeat this same issue I had when dealing with nick changes
+RainBot [19:32:17][log] message -> #snowybottest : PinkDawn #RainBot
+RainBot [19:32:49][log] message -> #snowybottest : PinkDawn SnowBot, chan! join #RainBot
+RainBot [19:32:50][log] #RainBot was initialized in DB
+RainBot [19:32:50][log] reset -> #RainBot : 
+RainBot [19:32:50][log] start -> #RainBot : [object Object]
+RainBot [19:32:51][log] Added channel #RainBot to PinkDawn (Mista)
+RainBot [19:33:04][log] nick -> #snowybottest : Alfreddy Alfreddytest function () {
+            if (called) throw new Error("Callback was already called.");
+            called = true;
+            fn.apply(this, arguments);
+        }
+RainBot [19:33:04][log] nick -> #snowybottest2 : Alfreddy Alfreddytest function () {
+            if (called) throw new Error("Callback was already called.");
+            called = true;
+            fn.apply(this, arguments);
+        }
+RainBot [19:33:04][log] nick -> #rainbot : Alfreddy Alfreddytest function () {
+            if (called) throw new Error("Callback was already called.");
+            called = true;
+            fn.apply(this, arguments);
+        }
+RainBot [19:33:05][log] Alfreddytest is connected to #snowybottest
+RainBot [19:33:05][log] Alfreddytest is connected to #snowybottest2
+RainBot [19:33:06][log] Alfreddytest is connected to #RainBot
+RainBot [19:33:06][log] Added channel #RainBot to Alfreddytest (Alfreddytest)
+RainBot [19:40:35][log] reset -> #snowybottest : 
+RainBot [19:40:35][log] start -> #snowybottest : [object Object]
+RainBot [19:41:07][log] message -> #snowybottest : PinkDawn SnowBot, chan! join #RainBot
+RainBot [19:41:07][log] reset -> #RainBot : 
+RainBot [19:41:07][log] start -> #RainBot : [object Object]
+RainBot [19:41:16][log] nick -> #snowybottest : Alfreddytest Alfreddy function () {
+            if (called) throw new Error("Callback was already called.");
+            called = true;
+            fn.apply(this, arguments);
+        }
+RainBot [19:41:17][log] Alfreddy is connected to #snowybottest
+RainBot [20:42:42][log] push -> #RainBot : ChanServ
+RainBot [20:50:18][log] reset -> #snowybottest : 
+RainBot [20:50:18][log] reset -> #snowybottest2 : 
+RainBot [20:50:18][log] reset -> #RainBot : 
+RainBot [20:50:19][log] start -> #snowybottest : [object Object]
+RainBot [20:50:19][log] start -> #snowybottest2 : [object Object]
+RainBot [20:50:19][log] start -> #RainBot : [object Object]
+RainBot [20:54:46][log] reset -> #snowybottest : 
+RainBot [20:54:46][log] reset -> #RainBot : 
+RainBot [20:54:46][log] reset -> #snowybottest2 : 
+RainBot [20:54:48][log] start -> #snowybottest : [object Object]
+RainBot [20:54:52][log] start -> #RainBot : [object Object]
+RainBot [20:54:54][log] start -> #snowybottest2 : [object Object]
+RainBot [20:56:11][log] message -> #snowybottest : PinkDawn SnowBot, chan! Leave #Snowybottest2
+RainBot [20:56:12][log] pop -> #snowybottest2 : SnowBot function () {
+        return responseHandler.respond();
+      }
+RainBot [20:56:35][log] message -> #snowybottest : PinkDawn SnowBot, chan! JOIN #Snowybottest2 
+RainBot [20:56:36][log] reset -> #snowybottest2 : 
+RainBot [20:56:37][log] start -> #snowybottest2 : [object Object]
+RainBot [21:45:11][log] reset -> #snowybottest : 
+RainBot [21:45:11][log] reset -> #RainBot : 
+RainBot [21:45:11][log] reset -> #snowybottest2 : 
+RainBot [21:45:11][log] start -> #snowybottest : [object Object]
+RainBot [21:45:11][log] start -> #RainBot : [object Object]
+RainBot [21:45:12][log] start -> #snowybottest2 : [object Object]
+RainBot [21:45:23][log] message -> #snowybottest : PinkDawn SnowBot, mem!
+RainBot [21:45:28][log] message -> #snowybottest : PinkDawn SnowBot, mem! begin
+RainBot [21:45:30][log] message -> #snowybottest : PinkDawn SnowBot, mem!
+RainBot [21:49:42][log] reset -> #snowybottest : 
+RainBot [21:49:42][log] reset -> #RainBot : 
+RainBot [21:49:42][log] reset -> #snowybottest2 : 
+RainBot [21:49:42][log] start -> #snowybottest : [object Object]
+RainBot [21:49:43][log] start -> #RainBot : [object Object]
+RainBot [21:49:43][log] start -> #snowybottest2 : [object Object]
+RainBot [21:49:56][log] message -> #snowybottest : PinkDawn SnowBot, mem! begin
+RainBot [21:50:38][log] reset -> #snowybottest : 
+RainBot [21:50:38][log] reset -> #RainBot : 
+RainBot [21:50:38][log] reset -> #snowybottest2 : 
+RainBot [21:50:38][log] start -> #snowybottest : [object Object]
+RainBot [21:50:38][log] start -> #RainBot : [object Object]
+RainBot [21:50:39][log] start -> #snowybottest2 : [object Object]
+RainBot [21:50:43][log] message -> #snowybottest : PinkDawn SnowBot, mem! begin
+RainBot [21:54:12][log] reset -> #snowybottest : 
+RainBot [21:54:12][log] reset -> #RainBot : 
+RainBot [21:54:12][log] reset -> #snowybottest2 : 
+RainBot [21:54:12][log] start -> #snowybottest : [object Object]
+RainBot [21:54:12][log] start -> #RainBot : [object Object]
+RainBot [21:54:13][log] start -> #snowybottest2 : [object Object]
+RainBot [21:54:26][log] message -> #snowybottest : PinkDawn SnowBot, mem! begin
+RainBot [22:06:53][log] reset -> #snowybottest : 
+RainBot [22:06:53][log] reset -> #RainBot : 
+RainBot [22:06:53][log] reset -> #snowybottest2 : 
+RainBot [22:06:53][log] start -> #snowybottest : [object Object]
+RainBot [22:06:57][log] start -> #RainBot : [object Object]
+RainBot [22:06:57][log] start -> #snowybottest2 : [object Object]
+RainBot [22:18:32][log] reset -> #snowybottest : 
+RainBot [22:18:32][log] reset -> #RainBot : 
+RainBot [22:18:32][log] reset -> #snowybottest2 : 
+RainBot [22:18:33][log] start -> #snowybottest : [object Object]
+RainBot [22:18:33][log] start -> #RainBot : [object Object]
+RainBot [22:18:33][log] start -> #snowybottest2 : [object Object]
+RainBot [22:18:40][log] message -> #snowybottest : PinkDawn SnowBot, mem! diff
+RainBot [22:19:02][log] message -> #snowybottest : PinkDawn SnowBot, mem! diff
+RainBot [22:21:43][log] reset -> #snowybottest : 
+RainBot [22:21:43][log] reset -> #RainBot : 
+RainBot [22:21:43][log] reset -> #snowybottest2 : 
+RainBot [22:21:50][log] start -> #snowybottest : [object Object]
+RainBot [22:21:51][log] start -> #RainBot : [object Object]
+RainBot [22:22:44][log] reset -> #snowybottest : 
+RainBot [22:22:44][log] reset -> #snowybottest2 : 
+RainBot [22:22:44][log] reset -> #RainBot : 
+RainBot [22:22:44][log] start -> #snowybottest : [object Object]
+RainBot [22:22:45][log] start -> #snowybottest2 : [object Object]
+RainBot [22:22:45][log] start -> #RainBot : [object Object]
+RainBot [22:22:47][log] message -> #snowybottest : PinkDawn SnowBot, mem! diff
+RainBot [22:23:28][log] reset -> #snowybottest : 
+RainBot [22:23:28][log] reset -> #snowybottest2 : 
+RainBot [22:23:28][log] reset -> #RainBot : 
+RainBot [22:23:28][log] start -> #snowybottest : [object Object]
+RainBot [22:23:29][log] start -> #snowybottest2 : [object Object]
+RainBot [22:23:29][log] start -> #RainBot : [object Object]
+RainBot [22:24:26][log] message -> #snowybottest : PinkDawn SnowBot, mem! diff
+RainBot [22:26:56][log] reset -> #snowybottest : 
+RainBot [22:26:56][log] reset -> #snowybottest2 : 
+RainBot [22:26:56][log] reset -> #RainBot : 
+RainBot [22:26:56][log] start -> #snowybottest : [object Object]
+RainBot [22:26:57][log] start -> #snowybottest2 : [object Object]
+RainBot [22:26:57][log] start -> #RainBot : [object Object]
+RainBot [22:27:13][log] message -> #snowybottest : PinkDawn SnowBot, mem! diff
+RainBot [22:30:33][log] message -> #snowybottest : PinkDawn SnowBot, mem! diff
+RainBot [22:32:42][log] reset -> #snowybottest : 
+RainBot [22:32:42][log] reset -> #RainBot : 
+RainBot [22:32:43][log] reset -> #snowybottest2 : 
+RainBot [22:32:43][log] start -> #snowybottest : [object Object]
+RainBot [22:32:43][log] start -> #RainBot : [object Object]
+RainBot [22:32:43][log] start -> #snowybottest2 : [object Object]
+RainBot [22:34:57][log] reset -> #snowybottest : 
+RainBot [22:34:57][log] reset -> #snowybottest2 : 
+RainBot [22:34:57][log] reset -> #RainBot : 
+RainBot [22:34:57][log] start -> #snowybottest : [object Object]
+RainBot [22:34:57][log] start -> #snowybottest2 : [object Object]
+RainBot [22:34:57][log] start -> #RainBot : [object Object]
+RainBot [22:35:16][log] message -> #snowybottest : PinkDawn SnowBot, mem! diff
+RainBot [22:36:50][log] reset -> #snowybottest : 
+RainBot [22:36:50][log] reset -> #RainBot : 
+RainBot [22:36:50][log] reset -> #snowybottest2 : 
+RainBot [22:36:50][log] start -> #snowybottest : [object Object]
+RainBot [22:36:51][log] start -> #RainBot : [object Object]
+RainBot [22:36:51][log] start -> #snowybottest2 : [object Object]
+RainBot [22:36:54][log] message -> #snowybottest : PinkDawn SnowBot, mem! diff
+RainBot [22:37:33][log] reset -> #snowybottest : 
+RainBot [22:37:33][log] reset -> #snowybottest2 : 
+RainBot [22:37:33][log] reset -> #RainBot : 
+RainBot [22:37:33][log] start -> #snowybottest : [object Object]
+RainBot [22:37:33][log] start -> #snowybottest2 : [object Object]
+RainBot [22:37:34][log] start -> #RainBot : [object Object]
+RainBot [22:38:08][log] message -> #snowybottest : PinkDawn SnowBot, mem! diff
+RainBot [22:38:57][log] reset -> #snowybottest : 
+RainBot [22:38:57][log] reset -> #RainBot : 
+RainBot [22:38:57][log] reset -> #snowybottest2 : 
+RainBot [22:38:57][log] start -> #snowybottest : [object Object]
+RainBot [22:38:58][log] start -> #RainBot : [object Object]
+RainBot [22:38:58][log] start -> #snowybottest2 : [object Object]
+RainBot [22:38:59][log] message -> #snowybottest : PinkDawn SnowBot, mem! diff
+RainBot [22:57:03][log] reset -> #snowybottest : 
+RainBot [22:57:03][log] reset -> #RainBot : 
+RainBot [22:57:03][log] reset -> #snowybottest2 : 
+RainBot [22:57:03][log] start -> #snowybottest : [object Object]
+RainBot [22:57:04][log] start -> #RainBot : [object Object]
+RainBot [22:57:04][log] start -> #snowybottest2 : [object Object]
+RainBot [23:20:43][log] reset -> #snowybottest : 
+RainBot [23:20:43][log] reset -> #RainBot : 
+RainBot [23:20:43][log] reset -> #snowybottest2 : 
+RainBot [23:20:44][log] start -> #snowybottest : [object Object]
+RainBot [23:20:44][log] start -> #RainBot : [object Object]
+RainBot [23:20:44][log] start -> #snowybottest2 : [object Object]
+RainBot [23:21:46][log] reset -> #snowybottest : 
+RainBot [23:21:46][log] reset -> #snowybottest2 : 
+RainBot [23:21:47][log] reset -> #RainBot : 
+RainBot [23:21:47][log] start -> #snowybottest : [object Object]
+RainBot [23:21:47][log] start -> #snowybottest2 : [object Object]
+RainBot [23:21:48][log] start -> #RainBot : [object Object]
+RainBot [23:22:06][log] message -> #snowybottest : PinkDawn SnowBot, mem! diff
+RainBot [23:25:25][log] message -> #snowybottest : PinkDawn SnowBot, mem! begin
+RainBot [00:14:18][log] reset -> #snowybottest : 
+RainBot [00:14:18][log] reset -> #snowybottest2 : 
+RainBot [00:14:18][log] reset -> #RainBot : 
+RainBot [00:14:18][log] start -> #snowybottest : [object Object]
+RainBot [00:14:18][log] start -> #snowybottest2 : [object Object]
+RainBot [00:14:18][log] start -> #RainBot : [object Object]
+RainBot [00:15:11][log] message -> #snowybottest : PinkDawn test
+RainBot [00:25:42][log] reset -> #snowybottest : 
+RainBot [00:25:42][log] reset -> #RainBot : 
+RainBot [00:25:42][log] reset -> #snowybottest2 : 
+RainBot [00:25:42][log] start -> #snowybottest : [object Object]
+RainBot [00:25:43][log] start -> #RainBot : [object Object]
+RainBot [00:25:43][log] start -> #snowybottest2 : [object Object]
+RainBot [00:28:26][log] message -> #snowybottest : PinkDawn test
+RainBot [00:28:27][log] message -> #snowybottest : PinkDawn test
+RainBot [00:28:36][log] message -> #snowybottest : PinkDawn snowbot, chan! join# RainBot
+RainBot [00:28:43][log] message -> #snowybottest : PinkDawn snowbot, chan! join #RainBot
+RainBot [00:32:00][log] message -> #snowybottest : PinkDawn test
+RainBot [00:32:02][log] message -> #snowybottest : PinkDawn another test
+RainBot [00:32:14][log] message -> #snowybottest : PinkDawn SnowBot, chan! join #snowybottest2
+RainBot [00:32:28][log] message -> #snowybottest2 : PinkDawn test
+RainBot [00:32:29][log] message -> #snowybottest2 : PinkDawn test
+RainBot [00:32:30][log] message -> #snowybottest2 : PinkDawn tes
+RainBot [00:32:36][log] pop -> #snowybottest : Alfreddytest function () {
+        return responseHandler.respond();
+      }
+RainBot [00:32:38][log] push -> #snowybottest : Alfreddytest
+RainBot [00:32:45][log] nick -> #snowybottest : Alfreddytest Alfreddy function () {
+            if (called) throw new Error("Callback was already called.");
+            called = true;
+            fn.apply(this, arguments);
+        }
+RainBot [00:32:47][log] Alfreddy is connected to #snowybottest
+RainBot [00:32:49][log] pop -> #snowybottest : Alfreddy function () {
+        return responseHandler.respond();
+      }
+RainBot [00:32:50][log] push -> #snowybottest : Alfreddy

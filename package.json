@@ -2,12 +2,13 @@
   "name": "rainbot",
   "main": "index.coffee",
   "dependencies": {
-    "async": "^0.9.0",
+    "async":"*",
     "hashmap": "^2.0.1",
     "irc": "^0.3.12",
     "lodash": "^3.7.0",
     "mathjs": "^1.5.2",
-    "mongoose": "^3.8.24",
+    "mongoose": "^3.9.7",
+    "pastebin-js": "^0.3.1",
     "sandbox": "^0.8.6"
   },
   "devDependencies": {

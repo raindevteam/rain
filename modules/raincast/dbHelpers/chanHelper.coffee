@@ -4,6 +4,21 @@ _  = require 'lodash'
 
 Channel = require './../models/channel'
 
+# Keep track of connected channels locally
+# (I think the bot already keeps this in check though, must double check)
+
+connectedChans = []
+
+# connected (String, callback)
+# Checks if bot is connected to channel
+
+connected = (name, callback) ->
+  console.log 'checking'
+  for channel in connectedChans
+    console.log name.lower() + ' against ' + channel.lower()
+    if channel.lower() == name.lower() then return callback(true)
+  return callback(false)
+
 # worker (task Object, Callback)
 #
 # Handles task objects holding event, channel, and argument data
@@ -60,7 +75,7 @@ flushBucket = ->
 start = (channel, nicks) ->
   queue.pause() # Ensure that after we finish setting up the channel
                 # we don't process anything before the bucket is flushed
-  for nick in nicks
+  for nick, rank of nicks
     if !(_.contains channel.usersSeen, nick)
       channel.usersSeen.push(nick)
       channel.totalUsers++
@@ -135,25 +150,25 @@ save = (channel, callback) ->
   channel.save (err) ->
     return callback()
 
-class ChanHelper
+module.exports =
 
-  # ChanHelper :: constructor ()
-  # Initializes connectedChans (Array)
+  # export connected function
 
-  constructor: () ->
-    @connectedChans = []
+  connected: connected
 
-  # ChanHelper :: connected (String)
-  # Checks if bot is connected to channel
+  # getName (String)
+  # Returns original name of channel
 
-  connected: (name) ->
-    return @connectedChans.indexOf(name.lower()) > -1
+  getName: (name) ->
+    for channel in connectedChans
+      if channel.lower() == name.lower() then return channel
 
-  # ChanHelper :: init (String, Callback)
+  # init (String, Callback)
   # Creates new channel for specified channel name
 
   init: (name, callback) ->
-    if !@connected(name) then @connectedChans.push(name.lower())
+    connected name, (result) ->
+       if result == false then connectedChans.push(name)
     Channel.findOne name: name, (err, channel) ->
       if _.isEmpty channel
         channel = new Channel()
@@ -166,11 +181,11 @@ class ChanHelper
         channel.highestUserCount = 0
         channel.save (err) ->
           rainUtil.logf 'forecast', name + " was initialized in DB"
-          if callback then return callback()
+          return callback() if callback
       else
-        if callback then return callback()
+        return callback() if callback
 
-  # ChanHelper :: do (String, String, Args...)
+  # do (String, String, Args...)
   # Takes database operation requests
 
   do: (event, name, args...) ->
@@ -181,5 +196,3 @@ class ChanHelper
     rainUtil.logf 'forecast', event + " -> " + name + ' : ' + args.join ' '
     queue.push event: event, tag: name.lower(), args: args, ->
       return callback() if callback
-
-module.exports = ChanHelper

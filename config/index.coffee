@@ -2,7 +2,7 @@ module.exports =
   server   : process.env.IRC_SERVER or 'irc.canternet.org'
   nick     : process.env.IRC_NICK or 'SnowBot'
   password : process.env.IDENTIFY_PASSWORD or undefined
-  channels : [ process.env.CHANNEL or '#Snowybottest' ]
+  channels : [ process.env.CHANNEL or '#Snowybottest', '#RainBot', '#snowybottest2' ]
   db       : process.env.DB_URL or undefined
   helpLink : 'rainbot.info/userguide'
   loggingLevel : true
@@ -10,7 +10,7 @@ module.exports =
 
   info:
     description : 'a multipurpose IRC botpony'
-    version     : 'STG 3.4.45'
+    version     : 'STG 3.5.15'
     versionName : 'Xenith'
     developer   : 'MistaWolf'
     writtenIn   : 'node.js'
@@ -20,6 +20,7 @@ module.exports =
     'Eventide'
     'Powderprancer'
     'King_Sombra'
+    'PinkDawn'
     'MistaWolf'
   ]
 

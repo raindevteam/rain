@@ -10,8 +10,8 @@ module.exports =
     action: (args, respond, done) ->
       cmd   = args.join(' ')
 
-      JOIN  = cmd.match(/\bjoin\s*(.*(?= leave)|(?=leave)|.*)/)
-      LEAVE = cmd.match(/\bleave\s*(.*(?= join)|(?=join)|.*)/)
+      JOIN  = cmd.match(/\bjoin\s*(.*(?= leave)|(?=leave)|.*)/i)
+      LEAVE = cmd.match(/\bleave\s*(.*(?= join)|(?=join)|.*)/i)
 
       if JOIN and JOIN[1] and JOIN[1].match(RegExp(' '))
         respond.say 'Too many arguments to command join'

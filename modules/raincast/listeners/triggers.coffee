@@ -8,25 +8,19 @@ rainUtil.newLog 'forecast', __dirname + '/../log.txt'
 User     = require './../models/user'
 Channel  = require './../models/channel'
 
-UserHelper = require './../dbHelpers/userHelper'
-ChanHelper = require './../dbHelpers/chanHelper'
-
-user = new UserHelper()
-chan = new ChanHelper()
+user = require './../dbHelpers/userHelper'
+chan = require './../dbHelpers/chanHelper'
 
 module.exports =
-  update:
+  updateOnNames:
     event: 'names'
     trigger: (message) -> return true
     action: (respond, done) ->
-      nicks = []
-      for nick, rank of respond.nicks
-        nicks.push nick
       chan.init respond.channel, ->
         chan.do "reset", respond.channel, ->
-          chan.do "start", respond.channel, nicks
-          async.eachSeries nicks, ((nick, next) ->
-            user.resolveNick nick, respond.channel, ->
+          chan.do "start", respond.channel, respond.nicks
+          async.forEachOfSeries respond.nicks, ((rank, nick, next) ->
+            user.resolveNick nick, ->
               user.addChannel nick, respond.channel, next
           ), (err) -> return done()
 
@@ -36,7 +30,7 @@ module.exports =
     action: (respond, done) ->
       if respond.nick == config.nick then return done()
       chan.do "push", respond.channel, respond.nick
-      user.resolveNick respond.nick, respond.channel, ->
+      user.resolveNick respond.nick, ->
         user.addChannel respond.nick, respond.channel, done
 
   updateOnPart:
@@ -52,35 +46,44 @@ module.exports =
       for channel in respond.channels
         rainUtil.logf 'forecast', "Inspecting " + channel + " for nick " + respond.nick
         rainUtil.logf 'forecast', "Channel connected -> " + chan.connected(channel)
-        if chan.connected(channel)
-          chan.do "pop", channel, respond.nick
-      done()
+        chan.connected channel, (result) ->
+          if result == true
+            chan.do "pop", channel, respond.nick
+      return done()
 
   updateOnNickChange:
     event: 'nick'
     trigger: (message) -> return true
     action: (respond, done) ->
-      for channel in respond.channels
-        if chan.connected(channel)
-          chan.do "nick", channel, respond.oldnick, respond.newnick
-      user.resolveNick respond.newnick, respond.channel, -> # (created) ->
-        for channel in respond.channels
-          if chan.connected(channel)
-            user.addChannel respond.newnick, channel, null
-        done()
+      async.forEachSeries respond.channels, ((channel, next) ->
+        if user.connectedTo(channel, respond.newnick)
+          chan.do "nick", channel, respond.oldnick, respond.newnick, next
+      ), (err) ->
+      user.resolveNick respond.newnick, -> # (created) ->
+        async.forEachSeries respond.channels, ((channel, next) ->
+          if user.connectedTo(channel, respond.newnick)
+            chan.connected channel, (result) ->
+              if result == true
+                rainUtil.logf 'forecast',
+                  respond.newnick + ' is connected to ' + chan.getName(channel)
+                user.addChannel respond.newnick, chan.getName(channel), next
+          else
+            next()
+        ), (err) ->
+          return done()
 
   actionUpdate:
     event: 'action'
     trigger: (message) -> return true
     action: (respond, done) ->
+      # Update Channel's recorded messages
+      chan.do "action", channel, respond.from, respond.text
+
       User.findOne nicks: respond.from,
       'channels.name': respond.to, (err, user) ->
         if !(_.isEmpty user)
           channel = respond.to
           message = respond.text
-
-          # Update Channel's recorded messages
-          chan.do "action", channel, respond.from, respond.text
 
           # User stats
           chanStats =
@@ -96,14 +99,14 @@ module.exports =
     fireOnCommand: true
     trigger: (message) -> return true
     action: (respond, done) ->
+      # Update Channel's recorded messages
+      chan.do "message", respond.to, respond.from, respond.text
+
       User.findOne nicks: respond.from,
       'channels.tag': respond.to.lower(), (err, user) ->
         if !(_.isEmpty user)
           channel = respond.to
           message = respond.text
-
-          # Update Channel's recorded messages
-          chan.do "message", channel, respond.from, respond.text
 
           # User stats
           chanStats =

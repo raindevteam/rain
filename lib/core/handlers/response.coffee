@@ -1,3 +1,5 @@
+#pastebin = require('./../lib/pastebin')
+async = require('async')
 bot = undefined
 
 class ResponseHandler
