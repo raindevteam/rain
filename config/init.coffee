@@ -1,3 +1,4 @@
-module.exports = init(bot) ->
+module.exports = (bot, callback) ->
   # If there is anything you want to do with the bot before
-  # the core is loaded, there is where you do it
+  # it connects to IRC, here is where you do it
+  return callback()

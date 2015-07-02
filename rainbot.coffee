@@ -1,34 +1,26 @@
-# Globals for use in modules and listeners
-global.__config    = __dirname + '/config/config'
-global.__rainUtil  = __dirname + '/lib/rainlog'
+# RainBot 4.0 "Pyrelight"
 
-# Core          = require './lib/core'
-# global.__core = new Core()
+# To encourage use of the rainlog utility class, we declare it here
+# as a global for easy use within modules
 
-bot      = require './lib/bot'
-config   = require __config
-# rainUtil = require __rainUtil
+global.rainlog  = require __dirname + '/lib/rainlog'
+global.__config = require './config/config'
+
+bot      = require './lib/bot/bot'
 string   = require './lib/string'
 
 # Set the level of debugging
+
 #rainlog.setLoggingModes config.logging
 #rainlog.setPrompt "RainBot "
 
-# Create the bot
-RainBot = new (bot) config.server, config.nick,
-  userName: config.userName
-  realName: config.realName
+# Instantiate a new bot with config settings
+
+RainBot = new (bot) __config.server, __config.nick,
+  userName: __config.userName
+  realName: __config.realName
   autoConnect: false
-  port: config.port
-  debug: config.debug
+  port: __config.port
+  debug: __config.debug
 
-start = ->
-  require(__dirname + '/config/init')(bot)
-  if config.password
-    bot.send 'ns', 'identify', config.password
-  bot.send 'mode', config.nick, '+B'
-  __core.gate channel for channel in config.channels
-
-RainBot.load ->
-  RainBot.listen ->
-    console.log 'done'
+RainBot.start()

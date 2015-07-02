@@ -1,0 +1,42 @@
+_ = require 'lodash'
+
+nester = require './nest'
+hooks = require './hooks'
+
+module.exports =
+
+  # packageData (String, params Object, Module Object [, String Args])
+  # --
+  # Packages arguments into a data object. If called for commands, also
+  # packages that command's arguments
+
+  packageData: (event, params, parent, args) ->
+    data = {}
+    data.event = event
+    data.hooks = hooks
+    data[key] = val for key, val of params
+    data.parent = parent
+    data.bot = parent.bot
+    if args then data.args = args
+    return data
+
+
+
+  getCommandName: (command) ->
+    if __config.preBang
+      if command.match(/^!/)
+        return command.match(/^!(\S+)/)[1].lower()
+    else
+      if command.has('!')
+        return command.before('!').trim().lower()
+      else null
+
+
+  getCommandArgs: (command) ->
+    args = _.drop(command.split(' '))
+    if args
+      args = args.join(' ')
+      args = nester.fillNests(args)
+      return args.split(' ')
+    else
+      return []
