@@ -1,6 +1,6 @@
 expect = require('chai').expect
 
-Hook = require './../hook'
+Hook = require './../module/hook'
 
 testtrigger =
   event: 'message'

@@ -1,7 +1,5 @@
 # RainBot 4.0 "Pyrelight"
-
-# To encourage use of the rainlog utility class, we declare it here
-# as a global for easy use within modules
+# An extensible, multipurpose IRC bot written in CoffeeScript with node.js
 
 global.rainlog  = require __dirname + '/lib/rainlog'
 global.__config = require './config/config'
@@ -13,8 +11,6 @@ string   = require './lib/string'
 
 #rainlog.setLoggingModes config.logging
 #rainlog.setPrompt "RainBot "
-
-# Instantiate a new bot with config settings
 
 RainBot = new (bot) __config.server, __config.nick,
   userName: __config.userName

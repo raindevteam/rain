@@ -1,17 +1,26 @@
+# Requires
+# --------
+
+# From node_modules
+
 hashmap = require 'hashmap'
 _ = require 'lodash'
 
+# From Project
+
 mpi = require './mpi'
 Hook = require './hook'
-events = require './events'
+events = require './../events'
 
-HookHandler = require './hookhandler'
+# isValidCommand (command Object)
 
 isValidCommand = (command) ->
   return false if !command
   return false if !command.action
   return false if !(_.isFunction command.action)
   return true
+
+# isValidTrigger (trigger Object)
 
 isValidTrigger = (trigger) ->
   return false if !trigger
@@ -23,6 +32,9 @@ isValidTrigger = (trigger) ->
   return true
 
 module.exports = (bot) ->
+
+  # Module class
+  # ------------
 
   class Module
 
@@ -42,9 +54,7 @@ module.exports = (bot) ->
         @triggers[event] = []
 
     # Module :: addCommand (String, command Object) throws Error
-    #
-    # Takes a command and its name and sets it to the module's hashmap.
-    # If the command is invalid, the method throws.
+    # Creates a new command hook and adds it to the command hashmap
 
     addCommand: (name, command) ->
       if !isValidCommand(command) then throw new Error('Invalid command')
@@ -52,9 +62,7 @@ module.exports = (bot) ->
       @commands.set(name, hook)
 
     # Module :: addCommands (commands Object) throws Error
-    #
-    # Very similar to @addCommand, except iterates over an
-    # object collection
+    # Similar to @addCommand, but adds from an object collection
 
     addCommands: (commands) ->
       for name, command of commands
@@ -63,9 +71,7 @@ module.exports = (bot) ->
         @commands.set(name, hook)
 
     # Module :: addTrigger (String, trigger Object) throws Error
-    #
-    # Takes a trigger and its name and loads it into the module's
-    # trigger object.
+    # Creates new hook trigger and adds it to the triggers object
 
     addTrigger: (name, trigger) ->
       if !isValidTrigger(trigger) then throw new Error('Invalid trigger')
@@ -73,7 +79,7 @@ module.exports = (bot) ->
       @triggers[trigger.event].push(hook)
 
     # Module :: addTriggers (triggers Object) throws Error
-    # Similar to addTrigger, except iterates over an object collection
+    # Similar to @addTrigger, but adds from an object collection
 
     addTriggers: (triggers) ->
       for name, trigger of triggers
@@ -99,20 +105,19 @@ module.exports = (bot) ->
 
     enableTrigger: (name) ->
 
+    # Module :: enable ()
+    # Enables module
+
     enable: () -> @enabled = true
 
+    # Module :: disable ()
+    # Disables module
+
     disable: () -> @enabled = false
+
+    # Module :: status ()
+    # Returns @enabled
 
     status: () -> return @enabled
 
   return Module
-
-###
-Module.getBot()
-Module.disableCommand('paste')
-Module.enableCommand('paste')
-Module.disable()
-Module.enable()
-Module.status()
-Module.getWhitelist()
-###
