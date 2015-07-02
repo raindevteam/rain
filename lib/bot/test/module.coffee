@@ -21,6 +21,10 @@ describe 'Module', () ->
     expect(testModule.abbrev).to.equal('t')
 
   it 'Should add good Commands', ->
+    testModule.addCommands __dirname + '/helpers/commands'
+
+    expect(testModule.commands.get('testcmd4')).to.exist
+
     testModule.addCommand 'testCmd1',
       ASAP: false,
       action: (data, respond, done) ->

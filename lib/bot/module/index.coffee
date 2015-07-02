@@ -4,6 +4,8 @@
 # From node_modules
 
 hashmap = require 'hashmap'
+callsite = require 'callsite'
+fs = require 'fs'
 _ = require 'lodash'
 
 # From Project
@@ -65,10 +67,20 @@ module.exports = (bot) ->
     # Similar to @addCommand, but adds from an object collection
 
     addCommands: (commands) ->
-      for name, command of commands
-        if !isValidCommand(command) then throw new Error('Invalid command')
-        hook = new Hook(name, 'command', @, command)
-        @commands.set(name, hook)
+      if _.isObject(commands)
+        @addCommand(name, command) for name, command of commands
+      else
+        try
+          if fs.lstatSync(commands).isDirectory()
+            files = fs.readdirSync(commands)
+            for file in files
+              command = require(commands + '/' + file)(@)
+              @addCommand(key, val) for key, val of command
+        catch e
+          rainlog.err
+          'Caught an error while trying to add commands to'
+          'module ' + @.name + '. '
+          rainlog.err 'Double check your directory path if you used one'
 
     # Module :: addTrigger (String, trigger Object) throws Error
     # Creates new hook trigger and adds it to the triggers object
