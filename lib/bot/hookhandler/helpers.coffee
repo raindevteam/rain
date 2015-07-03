@@ -25,10 +25,10 @@ module.exports =
   getCommandName: (command) ->
     if __config.preBang
       if command.match(/^!/)
-        return command.match(/^!(\S+)/)[1].lower()
+        return X(command.match(/^!(\S+)/)[1]).lower().s
     else
-      if command.has('!')
-        return command.before('!').trim().lower()
+      if X(command).has('!')
+        return X(command).before('!').lower().s.trim()
       else null
 
 

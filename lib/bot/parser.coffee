@@ -8,10 +8,10 @@ minimal = __config.commandSymbol
 # Just removes the command denotion header if any
 
 getRawCommands = (text) ->
-  if text.has(normal, 0)
-    return text.after(normal)
-  if text.has(minimal, 0)
-    return text.after(minimal)
+  if X(text).has(normal, 0)
+    return X(text).after(normal).s
+  if X(text).has(minimal, 0)
+    return X(text).after(minimal).s
   else return text
 
 module.exports =
@@ -23,22 +23,22 @@ module.exports =
   # and finally uses the experimental method last.
 
   isCommand: (text) ->
-    if text.has(normal, 0) then return true
-    if text.has(minimal, 0) then return true
+    if X(text).has(normal, 0) then return true
+    if X(text).has(minimal, 0) then return true
     if __config.preBang
-      start = text.before(' ')
+      start = X(text).before(' ').s
       if !start then start = text
       if !start.match(/^!/) then return false
       matches = text.match(/!(\w+)/g)
       for match in matches
         if hooks.getCommand(match[1..]) then return true
     else
-      start = text.before(' ')
+      start = X(text).before(' ').s
       if !start.match(/!$/) then return false
       if !start then start = text
       matches = text.match(/(\w+)!/g)
       for match in matches
-        match = match.before('!')
+        match = X(match).before('!').s
         if hooks.getCommand(match) then return true
     return false
 
@@ -67,7 +67,7 @@ module.exports =
         text = text.substring(0, eAmp) + "&" + text.substring(eAmp+2)
       else if eAmp + 1 != amp and dAmp != amp # We encountered a single amp
         # Grab everything before amp
-        cmd = text.before('&', lastAmp)
+        cmd = X(text).before('&', lastAmp).s
         # Push to cmds array if cmd exists
         if cmd.trim() then cmds.push(cmd.trim())
         # Remove the cmd we just pushed from the original text
