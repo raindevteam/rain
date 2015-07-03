@@ -11,7 +11,7 @@ moduleHelper = require './helpers/moduleHelper'
 module = moduleHelper.makeTestModule()
 moduleHelper.addValidCommands(module)
 
-hookHandler.extractCommands(module)
+hookHandler.extractHooks(module)
 
 responder = undefined
 

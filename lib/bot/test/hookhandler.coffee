@@ -16,7 +16,7 @@ params = from: 'me', to: 'test', msg: {}
 describe 'HookHandler', () ->
 
   before ->
-    hookHandler.extractCommands(module)
+    hookHandler.extractHooks(module)
 
   describe 'HookHandler -> nest', () ->
 
@@ -63,7 +63,7 @@ describe 'HookHandler', () ->
   # End tests for HookHandler -> helpers
 
   it 'Should extract commands', ->
-    hookHandler.extractCommands(module)
+    hookHandler.extractHooks(module)
     expect(hooks.getCommand('say')).to.exist
 
   it 'Should run commands (Test #1)', (done) ->

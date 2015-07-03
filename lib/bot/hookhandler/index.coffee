@@ -7,6 +7,15 @@ nester = require './nest'
 hooks = require './hooks'
 parser = require './../parser'
 
+extractTriggers = (module) ->
+  for event, triggers of module.triggers
+    for trigger in triggers
+      hooks.setTrigger(trigger)
+
+extractCommands = (module) ->
+  module.commands.forEach (command, name) ->
+    hooks.setCommand(name, command)
+
 execute = (command, params, callback) ->
   commandName = helpers.getCommandName(command)
   commandArgs = helpers.getCommandArgs(command)
@@ -55,22 +64,10 @@ run = (commands, params, alias, done) ->
       rainlog.err 'Was aliased set of commands: ' + alias
 
 module.exports =
-  # extractTriggers (Module Object)
-  # --
-  # Takes triggers from a module and stores them for firing
 
-  extractTriggers: (module) ->
-    for event, triggers of module.triggers
-      for trigger in triggers
-        hooks.setTrigger(trigger)
-
-  # extractCommands (Module Object)
-  # --
-  # Takes commands from a module and stores them for running
-
-  extractCommands: (module) ->
-    module.commands.forEach (command, name) ->
-      hooks.setCommand(name, command)
+  extractHooks: (module) ->
+    extractTriggers(module)
+    extractCommands(module)
 
   execute: execute
 
