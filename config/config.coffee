@@ -34,11 +34,11 @@ module.exports =
   #  To log all output (and include file logging) use '+af'
   #  To exclude output (as an example, no info logging) use '+af-i'
 
-  logging: true
+  logging: 'iwe'
 
   # debug: Set to true if you want debug logs from the backbone IRC library
 
-  debug: true
+  debug: false
 
   # Option to set the bang for commands in front of the command names
   # True: '!cmd'

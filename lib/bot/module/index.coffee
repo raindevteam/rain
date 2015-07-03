@@ -59,7 +59,10 @@ module.exports = (bot) ->
     # Creates a new command hook and adds it to the command hashmap
 
     addCommand: (name, command) ->
-      if !isValidCommand(command) then throw new Error('Invalid command')
+      if !isValidCommand(command)
+        err = new Error('Invalid command: ' + name)
+        rainlog.err @.name, err.message
+        return err
       hook = new Hook(name, 'command', @, command)
       @commands.set(name, hook)
 
@@ -77,10 +80,8 @@ module.exports = (bot) ->
               command = require(commands + '/' + file)(@)
               @addCommand(key, val) for key, val of command
         catch e
-          rainlog.err
-          'Caught an error while trying to add commands to'
-          'module ' + @.name + '. '
-          rainlog.err 'Double check your directory path if you used one'
+          rainlog.err @.name, 'Caught an error while trying to add commands'
+          rainlog.err @.name, 'Double check your directory path if you used one'
 
     # Module :: addTrigger (String, trigger Object) throws Error
     # Creates new hook trigger and adds it to the triggers object

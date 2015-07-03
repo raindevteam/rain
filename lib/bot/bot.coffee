@@ -16,6 +16,7 @@ class bot extends irc.Client
   # superclass is also instantiated.
 
   constructor: (server, nick, options) ->
+    rainlog.info 'Bot', 'Initializing bot...'
     @version = 'EXP pre:4.0.0 (Pyrelight)'
     @Module = require('./module')(@)
     @alias = new Alias()
@@ -28,25 +29,39 @@ class bot extends irc.Client
   # Loads up the modules
 
   loadModules: (callback) ->
+    rainlog.info 'Bot', 'Loading modules...'
     self = @
     fs.readdir MODULES_DIRECTORY, (err, modules) ->
-      # Check err
-      for module in modules
-        # check if is actually a module
-        module = require(MODULES_DIRECTORY + module)(self.Module)
+      for moduleDir in modules
+        if !fs.lstatSync(MODULES_DIRECTORY + moduleDir).isDirectory
+          rainlog.warn 'Bot', moduleDir + ' is not a module directory'
+          continue
+        try
+          module = require(MODULES_DIRECTORY + moduleDir)(self.Module)
+        catch e
+          rainlog.err 'Bot', 'Couldn\'t load module: ' + moduleDir
+          rainlog.err 'Bot', 'Check if the module has a (proper) index file!'
+          continue
+        if !(module instanceof self.Module)
+          rainlog.err 'Bot', moduleDir + ' is not a module'
+          rainlog.err 'Bot', 'Make sure that module exports a Module instance'
+          continue
         self.modules.push(module)
-        HookHandler.extractCommands(module)
-        HookHandler.extractTriggers(module)
+        HookHandler.extractHooks(module)
+        rainlog.info 'Bot', 'Loaded module: ' + module.name
       return callback()
 
   start: () ->
     self = @
+    rainlog.info 'Bot', 'Starting bot...'
     self.loadModules -> self.attachHooks ->
       require('./../../config/init')(@, ->
         self.connect ->
+          rainlog.info 'Bot', 'Bot connected to IRC'
           if __config.nsPassword
             self.send 'ns', 'identify', __config.nsPassword
           self.send 'mode', __config.nick, '+B'
+          rainlog.info 'Bot', 'Connecting to channels'
           self.join '#snowybottest'
       )
 
@@ -79,8 +94,16 @@ class bot extends irc.Client
     @.addListener 'pm', (nick, text, msg) ->
       self.dispatch 'pm', from: nick, text: text, msg: msg
 
+    # Ping events
+
+    @.addListener 'ping', (server) ->
+      rainlog.info 'Bot', ':Pong ' + server
+      self.dispatch 'ping', server: server
+
+    # Error events
+
     @.addListener 'error', (message) ->
-      console.log "from error " + message
+      rainlog.err 'Server', message.args[1]
 
     return callback() # Finished attaching hooks
 
