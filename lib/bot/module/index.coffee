@@ -73,15 +73,11 @@ module.exports = (bot) ->
       if _.isObject(commands)
         @addCommand(name, command) for name, command of commands
       else
-        try
-          if fs.lstatSync(commands).isDirectory()
-            files = fs.readdirSync(commands)
-            for file in files
-              command = require(commands + '/' + file)(@)
-              @addCommand(key, val) for key, val of command
-        catch e
-          rainlog.err @.name, 'Caught an error while trying to add commands'
-          rainlog.err @.name, 'Double check your directory path if you used one'
+        if fs.lstatSync(commands).isDirectory()
+          files = fs.readdirSync(commands)
+          for file in files
+            command = require(commands + '/' + file)(@)
+            @addCommand(key, val) for key, val of command
 
     # Module :: addTrigger (String, trigger Object) throws Error
     # Creates new hook trigger and adds it to the triggers object
@@ -96,9 +92,7 @@ module.exports = (bot) ->
 
     addTriggers: (triggers) ->
       for name, trigger of triggers
-        if !isValidTrigger(trigger) then throw new Error('Invalid trigger')
-        hook = new Hook(name, 'trigger', @, trigger)
-        @triggers[trigger.event].push(hook)
+        @addTrigger(name, trigger)
 
     # Module :: disableCommand (String)
     # Disables named command
