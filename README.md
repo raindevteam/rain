@@ -15,15 +15,18 @@ RainBot is just another IRC bot among the many already made; it started as somet
 #### Modules
 The Bot has been reworked quite a few times to provide easy extensibility via modules. Writing modules for the bot is a short and sweet process, but still aims to provide as much flexibility as it can.
 
-Here's a small example showing how you can make a module sporting and an echo command!
+Here's a small example showing how you can make a module sporting an echo command!
 
     module.exports = (Module) ->
+      # Make a new module!
       myModule = new Module('myModule')
+      # What good is a module without hooks!
       myModule.addCommand 'echo',
         help: "Repeats its arguments!"
         action: (data, respond, done) ->
           respond.say data.args.join ' ' if data.args
           return done()
+      # Shut up and take my module!
       return myModule
 
 
