@@ -1,7 +1,12 @@
 hashmap = require 'hashmap'
 
+events = require './../events'
+
 CommandHooks = new hashmap()
 TriggerHooks = {}
+
+for event in events
+  TriggerHooks[event] = []
 
 module.exports =
 

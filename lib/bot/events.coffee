@@ -3,4 +3,12 @@
 module.exports = [
   'notice'
   'message'
+  'action'
+  'names'
+  'join'
+  'part'
+  'quit'
+  'nick'
+  'pm'
+  'ping'
 ]

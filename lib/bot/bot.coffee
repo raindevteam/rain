@@ -4,6 +4,7 @@ fs = require 'fs'
 HookHandler = require './hookhandler'
 RespondQueue = require './responders/respondqueue'
 Alias = require './alias'
+ircHelpers = require './irc'
 
 MODULES_DIRECTORY = __dirname + '/../../modules/'
 
@@ -17,9 +18,10 @@ class bot extends irc.Client
 
   constructor: (server, nick, options) ->
     rainlog.info 'Bot', 'Initializing bot...'
-    @version = 'EXP pre:4.0.0 (Pyrelight)'
+    @version = '0.4.0 (Pyrelight)'
     @Module = require('./module')(@)
     @alias = new Alias()
+    @irc = ircHelpers(@)
     @modules = []
     @config = __config
     RespondQueue.setBot(@)
@@ -33,15 +35,10 @@ class bot extends irc.Client
     self = @
     fs.readdir MODULES_DIRECTORY, (err, modules) ->
       for moduleDir in modules
-        if !fs.lstatSync(MODULES_DIRECTORY + moduleDir).isDirectory
+        if !fs.lstatSync(MODULES_DIRECTORY + moduleDir).isDirectory()
           rainlog.warn 'Bot', moduleDir + ' is not a module directory'
           continue
-        try
-          module = require(MODULES_DIRECTORY + moduleDir)(self.Module)
-        catch e
-          rainlog.err 'Bot', 'Couldn\'t load module: ' + moduleDir
-          rainlog.err 'Bot', 'Check if the module has a (proper) index file!'
-          continue
+        module = require(MODULES_DIRECTORY + moduleDir)(self.Module)
         if !(module instanceof self.Module)
           rainlog.err 'Bot', moduleDir + ' is not a module'
           rainlog.err 'Bot', 'Make sure that module exports a Module instance'
@@ -51,19 +48,28 @@ class bot extends irc.Client
         rainlog.info 'Bot', 'Loaded module: ' + module.name
       return callback()
 
+  prestart: (callback) ->
+    self = @
+    self.loadModules -> self.attachHooks callback
+
   start: () ->
     self = @
     rainlog.info 'Bot', 'Starting bot...'
-    self.loadModules -> self.attachHooks ->
-      require('./../../config/init')(@, ->
+    rainlog.info 'Bot', 'Temporarily caching nsPassword and Pastebin API'
+    if @config.nsPassword then nsPassword = @config.nsPassword
+    if @config.pastebinApi then pastebinApi = @config.pastebinApi
+    rainlog.info 'Bot', 'Unsetting nsPassword and Pastebin API in config'
+    @config.nsPassword = ''
+    @config.pastebinApi = ''
+    @prestart ->
+      require('./../../config/init') @, ->
         self.connect ->
           rainlog.info 'Bot', 'Bot connected to IRC'
           if __config.nsPassword
-            self.send 'ns', 'identify', __config.nsPassword
+            self.send 'ns', 'identify', nsPassword
           self.send 'mode', __config.nick, '+B'
           rainlog.info 'Bot', 'Connecting to channels'
-          self.join '#snowybottest'
-      )
+          self.gate channel for channel in __config.channels
 
   # bot :: dispatch (String, params Object)
   # Dispatches events to modules
@@ -89,6 +95,32 @@ class bot extends irc.Client
     @.addListener 'message', (nick, to, text, msg) ->
       self.dispatch 'message', from: nick, to: to, text: text, msg: msg
 
+    @.addListener 'action', (from, to, text, msg) ->
+      self.dispatch 'action', from: from, to: to, text: text, msg: msg
+
+    # Names events
+
+    @.addListener 'names', (channel, nicks) ->
+      self.dispatch 'names', channel: channel, nicks: nicks
+
+    # Join Events
+    @.addListener 'join', (channel, nick, msg) ->
+      self.dispatch 'join', channel: channel, nick: nick, msg: msg
+
+    # Part events
+
+    @.addListener 'part', (channel, nick, reason, msg) ->
+      self.dispatch 'part', channel: channel, nick: nick, reason: reason, msg: msg
+
+    # Quit events
+
+    @.addListener 'quit', (nick, reason, channels, msg) ->
+      self.dispatch 'quit', nick: nick, reason: reason, channels: channels, msg: msg
+
+    # Nicks Events
+    @.addListener 'nick', (oldnick, newnick, channels, msg) ->
+      self.dispatch 'nick', oldnick: oldnick, newnick: newnick, channels: channels, msg: msg
+
     # PM events
 
     @.addListener 'pm', (nick, text, msg) ->
@@ -107,7 +139,6 @@ class bot extends irc.Client
 
     return callback() # Finished attaching hooks
 
-  ###
   gate: (channel) ->
     self = @
     self.addListener 'raw', gate = (message) ->
@@ -116,7 +147,7 @@ class bot extends irc.Client
         self.bot.sleep = false
       if message.args[1]?.indexOf('Replaying up to') > -1
         self.sleep = true
-    if channel then @bot.join channel
-  ###
+    if channel then @.join channel
+    rainlog.info 'Bot', 'Joined ' + channel
 
 module.exports = bot

@@ -66,8 +66,7 @@ run = (commands, params, alias, done) ->
 module.exports =
 
   extractHooks: (module) ->
-    extractTriggers(module)
-    extractCommands(module)
+    extractTriggers(module) and extractCommands(module)
 
   execute: execute
 
@@ -76,7 +75,9 @@ module.exports =
     if event == 'message' and parser.isCommand(params.text)
       run parser.getCommands(params.text), params, false, null
       onCommandOnly = true
-    async.each (hooks.getTriggers)[event], ((hook) ->
+    triggers = hooks.getTriggers()
+    if triggers[event].length == 0 then return
+    async.each triggers[event], ((hook) ->
       if onCommandOnly then return if !hook.fireOnCommand
       if hook.trigger(params)
         data = helpers.packageData(event, params, hook.parent)

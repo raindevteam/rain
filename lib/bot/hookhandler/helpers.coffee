@@ -16,6 +16,7 @@ module.exports =
     data.hooks = hooks
     data[key] = val for key, val of params
     data.parent = parent
+    data.irc = parent.bot.irc
     data.bot = parent.bot
     if args then data.args = args
     return data

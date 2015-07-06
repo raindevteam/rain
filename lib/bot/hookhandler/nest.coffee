@@ -12,7 +12,7 @@ module.exports =
 
   nest: (name, respondData) ->
     thisNest = resultNest[name] = {}
-    if respondData.output then thisNest.response = output
+    if respondData.output then thisNest.response = respondData.output
     else
       thisNest.response = ''
       for response in respondData.responses
