@@ -13,10 +13,10 @@ module.exports =
 
   nick: process.env.IRC_NICK or 'HailBot'
   realName: process.env.IRC_REAL or 'RainBotExp'
-  userName: process.env. IRC_USER or 'RainBot'
+  userName: process.env.IRC_USER or 'RainBot'
 
-  # If your server supports NickServ, enter your password here
-  # to be authed when the bot connects or set it to false or undefined
+  # If your server supports NickServ, enter your password here to
+  # be authed when the bot connects or set it to false or undefined
 
   nsPassword: process.env.IDENTIFY_PASSWORD or undefined
 
@@ -26,13 +26,8 @@ module.exports =
 
   # logging: A string specifying logging modes, all modes include:
   #
-  #   x: No logging      a: Log everything
   #   i: Log info        e: Log errors
   #   w: Log warnings    f: Allow file logging (regular logs are file logged)
-  #   F: Only file log when logf is used (regular logs are not file logged)
-  #
-  #  To log all output (and include file logging) use '+af'
-  #  To exclude output (as an example, no info logging) use '+af-i'
 
   logging: 'iwe'
 
@@ -46,20 +41,8 @@ module.exports =
 
   preBang: true
 
+  # The command symbol is used to directly specify to the bot that
+  # your message is a command message. Use it at the beginning of
+  # new message, i.e. "$ !say this is a command message"
+
   commandSymbol: '$'
-
-  # Universal Whitelist for commands, only nicks listed here
-  # can use any commands from core
-  #
-  # If you want to whitelist module commands, use the module class method
-  # 'addToWhitelist(name, function)'
-
-  whitelist:
-    Wolf: [
-      'tuner'
-      'sleep'
-      'wake'
-    ]
-    Fox: [
-      'wake'
-    ]
