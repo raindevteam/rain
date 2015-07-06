@@ -1,3 +1,5 @@
+# Test Integrity: 1
+
 expect = require('chai').expect
 globals = require './helpers/globals'
 

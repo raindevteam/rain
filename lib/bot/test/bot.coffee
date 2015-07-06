@@ -1,3 +1,5 @@
+# Test integrity: 2
+
 expect = require('chai').expect
 globals = require './helpers/globals'
 
@@ -15,7 +17,7 @@ describe 'Bot', () ->
     expect(bot.modules.length).to.not.equal(0)
     foundModule = undefined
     for module in bot.modules
-      if module.name == 'RainEcho'
+      if module.name == 'RainCore'
         foundModule = module
     expect(foundModule).to.exist
 

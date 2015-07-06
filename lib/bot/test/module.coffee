@@ -1,3 +1,5 @@
+# Test Integrity: 1
+
 expect = require('chai').expect
 
 botHelper = require './helpers/botHelper'

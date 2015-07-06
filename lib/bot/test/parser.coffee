@@ -1,3 +1,5 @@
+# Test Integrity: 4
+
 expect = require('chai').expect
 #HookHandler = require './../hookhandler'
 
