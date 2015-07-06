@@ -14,10 +14,10 @@ describe 'Parser', () ->
     #HookHandler.extractCommands(Module)
 
   it 'Should check if text is a command (normal)', ->
-    expect(parser.isCommand('HailBot, !say is a command?')).to.equal(true)
+    expect(parser.isCommand(__config.nick + ', !say is a command?')).to.equal(true)
 
   it 'Should check if text is a command (minimal)', ->
-    expect(parser.isCommand('$ !say is a command?')).to.equal(true)
+    expect(parser.isCommand(__config.commandSymbol + ' !say is a command?')).to.equal(true)
 
   it 'Should check if text is a command (experimental)', ->
     __config.preBang = true
@@ -36,7 +36,7 @@ describe 'Parser', () ->
     commands =
       parser
         .getCommands(
-          'HailBot, say! testing \\&\\&\\&\\&&&\\&& say! commands \\& & say! test')
+          'say! testing \\&\\&\\&\\&&&\\&& say! commands \\& & say! test')
     expect(commands[0]).to.equal('say! testing &&&&&&&')
     expect(commands[1]).to.equal('say! commands &')
     expect(commands[2]).to.equal('say! test')
@@ -45,7 +45,7 @@ describe 'Parser', () ->
     commands =
       parser
         .getCommands(
-          'HailBot, say! testing &&&&&&&&&& commands&say! &&')
+          'say! testing &&&&&&&&&& commands&say! &&')
     expect(commands[0]).to.equal('say! testing &&&&&&&&&& commands')
     expect(commands[1]).to.equal('say! &&')
 
@@ -53,7 +53,7 @@ describe 'Parser', () ->
     commands =
       parser
         .getCommands(
-          'HailBot, say! testing \\&\\& commands & ' +
+          'say! testing \\&\\& commands & ' +
           'jrun! true && false & cal! 4 + 5')
     expect(commands[0]).to.equal('say! testing && commands')
     expect(commands[1]).to.equal('jrun! true && false')
@@ -63,6 +63,6 @@ describe 'Parser', () ->
     commands =
       parser
         .getCommands(
-          'HailBot, say! testing \\&\\& commands & & say! test')
+          'say! testing \\&\\& commands & & say! test')
     expect(commands[0]).to.equal('say! testing && commands')
     expect(commands[1]).to.equal('say! test')
