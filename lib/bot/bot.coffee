@@ -3,7 +3,7 @@ fs = require 'fs'
 
 HookHandler = require './hookhandler'
 RespondQueue = require './responders/respondqueue'
-Alias = require './alias'
+alias = require './alias'
 ircHelpers = require './irc'
 
 MODULES_DIRECTORY = __dirname + '/../../modules/'
@@ -20,10 +20,12 @@ class bot extends irc.Client
     rainlog.info 'Bot', 'Initializing bot...'
     @version = '0.4.0 (Pyrelight)'
     @Module = require('./module')(@)
-    @alias = new Alias()
+    @alias = alias
     @irc = ircHelpers(@)
     @modules = []
     @config = __config
+    @sleep = false
+    alias.loadAliases()
     RespondQueue.setBot(@)
     super server, nick, options
 

@@ -6,6 +6,7 @@ helpers = require './helpers'
 nester = require './nest'
 hooks = require './hooks'
 parser = require './../parser'
+alias = require './../alias'
 
 extractTriggers = (module) ->
   for event, triggers of module.triggers
@@ -20,9 +21,11 @@ execute = (command, params, callback) ->
   commandName = helpers.getCommandName(command)
   commandArgs = helpers.getCommandArgs(command)
   return callback(null) if !commandName
-  # if alias.isAlias(commandName)
-  #  commands = alias.get(commandName)
-  #  run commands, params, (responder) -> return callback(responder)
+  if alias.isAlias(commandName)
+    commands = parser.getCommands(alias.get(commandName))
+    run commands, params, (responder) ->
+      nester.nest(commandName, responder.getResponse())
+      return callback(responder)
   if true
     hook = hooks.getCommand(commandName)
     if !hook
@@ -53,8 +56,9 @@ run = (commands, params, alias, done) ->
   async.forEachOfSeries commands, ((command, i, next) ->
     execute command, params, (responder) ->
       return next() if !responder
-      if i + 1 == commands.length and !responder.flushed() and !alias
-        responder.flush()
+      if i + 1 == commands.length
+        if !responder.flushed() and !alias
+          responder.flush()
         return done(responder) if done
       else
         next()

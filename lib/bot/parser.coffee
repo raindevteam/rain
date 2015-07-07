@@ -1,4 +1,5 @@
 hooks = require './hookhandler/hooks'
+alias = require './alias'
 
 normal = __config.nick + ","
 minimal = __config.commandSymbol
@@ -31,7 +32,8 @@ module.exports =
       if !start.match(/^!/) then return false
       matches = text.match(/!(\w+)/g)
       for match in matches
-        if hooks.getCommand(match[1..]) then return true
+        if hooks.getCommand(match[1..]) or alias.isAlias(match[1..])
+          return true
     else
       start = X(text).before(' ').s
       if !start.match(/!$/) then return false
@@ -39,7 +41,8 @@ module.exports =
       matches = text.match(/(\w+)!/g)
       for match in matches
         match = X(match).before('!').s
-        if hooks.getCommand(match) then return true
+        if hooks.getCommand(match) or alias.isAlias(match)
+          return true
     return false
 
   # getCommands (String)

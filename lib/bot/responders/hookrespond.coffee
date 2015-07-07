@@ -4,6 +4,7 @@ class Responder
   constructor: (name) ->
     @name = name
     @responses = []
+    @flushedResponses = []
     @outputData = undefined
     @deftarget = undefined
     @drained = false
@@ -48,17 +49,18 @@ class Responder
     return @
 
   now: () ->
-    RespondQueue.push(@responses.pop())
+    response = @responses.pop()
+    RespondQueue.push response
+    @flushedResponses.push response
     if @responses.length == 0 then @drained == true
 
   flush: () ->
-    oldResponses = []
     for response in @responses
-      oldResponses.push response
-      RespondQueue.push(response)
+      @flushedResponses.push response
+      RespondQueue.push response
     @drained = true
     @responses = []
-    return {output: @outputData, responses: oldResponses}
+    return {output: @outputData, responses: @flushedResponses}
 
   flushed: () ->
     return @drained
@@ -67,7 +69,7 @@ class Responder
     @outputData = data
 
   getResponse: () ->
-    return {output: @outputData, responses: @responses}
+    return {output: @outputData, responses: @flushedResponses}
 
   reset: () ->
     @responses = []
