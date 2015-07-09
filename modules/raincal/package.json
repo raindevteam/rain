@@ -1,0 +1,7 @@
+{
+  "name": "raincal",
+  "main": "index.coffee",
+  "dependencies": {
+    "mathjs": "^1.7.0"
+  }
+}

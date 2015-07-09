@@ -93,3 +93,17 @@ s4e23:Inspiration Manifestation
 s4e24:Equestria Games
 s4e25:Twilight's Kingdom Part 1
 s4e26:Twilight's Kingdom Part 2
+# Season 5
+s5e01:The Cutie Map Part 1
+s5e02:The Cutie Map Part 2
+s5e03:Castle Sweet Castle
+s5e04:Bloom & Gloom
+s5e05:Tanks for the Memories
+s5e06:Appleoosa's Most Wanted
+s5e07:Make New Friends but Keep Discord
+s5e08:The Lost Treasure of Griffonstone
+s5e09:Slice of Life
+s5e10:Princess Spike
+s5e11:Party Pooped
+s5e12:Amending Fences
+s5e13:Do Princesses Dream of Magic Sheep?
