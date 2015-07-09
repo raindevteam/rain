@@ -4,7 +4,7 @@ module.exports = (Module) ->
   # ----
 
   'blog':
-    help: 'Gives link to blog (rainbot.info/userguide#blog)'
+    help: 'Gives link to "The RainBot Blog" (rainbot.info/userguide#blog)'
     ASAP: false
     action: (data, respond, done) ->
       respond.say 'rainbot-irc.blogspot.com'

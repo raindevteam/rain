@@ -4,7 +4,7 @@ module.exports = (Module) ->
   # -----
 
   rules:
-    help: 'Spits out rules (rainbot.info/userguide#rules)'
+    help: 'Gives you the link to rules, one way or another (rainbot.info/userguide#rules)'
     ASAP: false
     action: (data, respond, done) ->
       irc = data.irc

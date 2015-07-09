@@ -3,6 +3,7 @@ eplist  = require('../lib/eplist')
 module.exports =
   # Suggest an episode
   'ep':
+    help: 'Recommends a random episode, or finds the title from a key (rainbot.info/userguide#ep)'
     action: (data, respond, done) ->
       if data.args.length > 2
         respond.say 'Too many params, try something like \'1 12\''
