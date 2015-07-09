@@ -83,5 +83,5 @@ describe 'HookHandler', () ->
     commands = parser.getCommands('!testcmd2')
     hookHandler.execute commands[0], params, (responder)->
       response = responder.getResponse()
-      expect(response.responses[0]).to.not.exist
+      expect(response.responses[1]).to.not.exist
       return done()
