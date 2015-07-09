@@ -69,7 +69,11 @@ class Responder
     @outputData = data
 
   getResponse: () ->
-    return {output: @outputData, responses: @flushedResponses}
+    responses = @flushedResponses.concat(@responses)
+    return {
+      output: @outputData,
+      responses: responses
+    }
 
   reset: () ->
     @responses = []
