@@ -146,7 +146,7 @@ class bot extends irc.Client
     self.addListener 'raw', gate = (message) ->
       if self.sleep and message.command != 'PRIVMSG'
         self.removeListener 'raw', gate
-        self.bot.sleep = false
+        self.sleep = false
       if message.args[1]?.indexOf('Replaying up to') > -1
         self.sleep = true
     if channel then @.join channel
