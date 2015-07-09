@@ -11,8 +11,8 @@ module.exports =
   # realName -> Your 'realName'
   # userName -> (Optional) Your username
 
-  nick: process.env.IRC_NICK or 'HailBot'
-  realName: process.env.IRC_REAL or 'RainBotExp'
+  nick: process.env.IRC_NICK or 'SnowBot'
+  realName: process.env.IRC_REAL or 'RainBotDev'
   userName: process.env.IRC_USER or 'RainBot'
 
   # If your server supports NickServ, enter your password here to
