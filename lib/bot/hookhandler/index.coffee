@@ -23,7 +23,7 @@ execute = (command, params, callback) ->
   return callback(null) if !commandName
   if alias.isAlias(commandName)
     commands = parser.getCommands(alias.get(commandName))
-    run commands, params, (responder) ->
+    run commands, params, true, (responder) ->
       nester.nest(commandName, responder.getResponse())
       return callback(responder)
   if true
@@ -59,6 +59,7 @@ run = (commands, params, alias, done) ->
       if i + 1 == commands.length
         if !responder.flushed() and !alias
           responder.flush()
+          nester.reset()
         return done(responder) if done
       else
         next()

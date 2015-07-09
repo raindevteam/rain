@@ -1,3 +1,0 @@
-test:!say hello & !echo hello again
-test3:!say test
-test2:!say hello again

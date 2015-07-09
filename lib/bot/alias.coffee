@@ -1,17 +1,18 @@
 hashmap = require('hashmap')
 fs      = require('fs')
+async   = require('async')
 
 parser = require './parser'
 
 aliases = new hashmap()
 file = '/aliases/aliases.txt'
 
-writeAlias = (alias, cmd) ->
-  f = fs.createWriteStream(__dirname + file)
+writeAlias = (done) ->
+  string = ""
   aliases.forEach (value, key) ->
-    if value
-      f.write(key + ':' + value + '\n')
-  f.end()
+    if value then string += (key + ':' + value + '\r\n')
+  fs.writeFile __dirname + file, string, 'utf8', (err, written, string) ->
+    return done()
 
 module.exports =
 
@@ -21,13 +22,13 @@ module.exports =
   get: (alias) ->
     return aliases.get(alias)
 
-  add: (alias, cmd) ->
+  add: (alias, cmd, done) ->
     aliases.set(alias, cmd)
-    writeAlias()
+    writeAlias(done)
 
-  delete: (alias) ->
+  delete: (alias, done) ->
     aliases.remove(alias)
-    writeAlias()
+    writeAlias(done)
 
   isAliasCmd: (text) ->
     if __config.preBang
