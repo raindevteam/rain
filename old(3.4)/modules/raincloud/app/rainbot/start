@@ -1,8 +1,0 @@
-#!/bin/bash
-
-export IRC_SERVER=irc.canternet.org
-export IRC_NICK=RainBot
-export IDENTIFY_PASSWORD=zv0vg2qn
-export CHANNEL=#snowybottest
-
-pm2 start rainbot.coffee
