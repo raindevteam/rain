@@ -2,7 +2,7 @@
   "name": "rainbot",
   "version": "0.4.0",
   "description": "A multipurpose, extensible IRC bot",
-  "homepage": "rainbot.info",
+  "homepage": "http://rainbot.info",
   "license": "GPL-3.0",
   "main": "rainbot.coffee",
   "dependencies": {
