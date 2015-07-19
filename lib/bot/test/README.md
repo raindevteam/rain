@@ -8,6 +8,6 @@ the tests that lie therein are. Following are the index definitions
 - 0: Nothing has been tested
 - 1: The tests are in the process of being developed
 - 2: Most or all of the tests are done, but not exhaustive by any means
-- 3: All tests are done, and some may or may not be exhaustive enough
-- 4: All tests are done, All tests are at least becoming exhaustive
-- 5: All tests done, all are exhaustive to a considerable amount
+- 3: All tests are done, but some may or may not be exhaustive enough
+- 4: All tests are done, and all tests are at least becoming exhaustive
+- 5: All tests done, and all are exhaustive to a considerable amount

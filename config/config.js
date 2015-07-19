@@ -1,7 +1,9 @@
 module.exports = {
 
-  // server - address to IRC server
-  //  port  - port number
+  /*
+   *    server - address to IRC server
+   *     port  - port number
+   */
 
   server: process.env.IRC_SERVER || 'irc.canternet.org',
   port: process.env.IRC_PORT || 6667,
@@ -29,25 +31,40 @@ module.exports = {
 
   channels: [ process.env.CHANNELS || '#snowybottest', '#RainBot' ],
 
-  // logging: A string specifying logging modes, all modes include:
-  //
-  //   i: Log info        e: Log errors
-  //   w: Log warnings    f: Allow file logging (regular logs are file logged)
+  /*
+   *    logging: A string specifying logging modes, all modes include:
+   *
+   *    i: Log info           e: Log errors
+   *    w: Log warnings       d: Log debug messages
+   *    f: Allow file logging (regular logs are file logged)
+   */    
 
-  logging: 'iwe',
+  logging: 'diwe',
 
-  // The logging prompt
+  /*
+   *    prompt - Sets the prompt used for logging.
+   */
 
   prompt: 'SnowBot ',
 
-  // debug: Set to true if you want debug logs from the backbone IRC library
+  /*
+   *    debug - Set to true if you want debug logs from the backbone IRC library
+   */
 
   debug: false,
 
-  // The command symbol is used to directly specify to the bot that
-  // your message is a command message. Use it at the beginning of
-  // new message, i.e. "$ !say this is a command message"
+  /*
+   *    The prefix to denote commands, for example if set to ';', then ';say'
+   *    would be a command.
+   */
 
-  commandPrefix: ';',
+   commandPrefix: ';',
+
+  /*
+   *    The command symbol is used to directly specify to the bot that
+   *    your message is a command message. Use it at the beginning of
+   *    new message, i.e. "$ ;say this is a command message"
+   */
+
   commandSymbol: '$'
 };
