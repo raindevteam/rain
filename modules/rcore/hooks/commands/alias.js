@@ -15,7 +15,10 @@ const alias = {
       });
     } else {
       const aliasName = args[0];
-      const command = _.drop(args).join(' ');
+      const aliasArgs = X(_.drop(args).join(' ')).s;
+      const params = X(aliasArgs).before('->').clean().s.trim().split(' ');
+      const command = X(aliasArgs).after('->').clean().s;
+      console.log(params);
       if (!aliasName) {
         respond.say('No alias name entered!');
         return done();
@@ -24,7 +27,7 @@ const alias = {
         return done();
       }
       respond.say('Added command alias: ' + aliasName);
-      alias.add(aliasName, command, done);
+      alias.add(aliasName, {args: params, cmd: command}, done);
     }
   }
 };
