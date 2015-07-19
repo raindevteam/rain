@@ -1,10 +1,10 @@
 {
   "name": "rainbot",
-  "version": "0.4.0",
+  "main": "rainbot.js",
+  "version": "0.5.0",
   "description": "A multipurpose, extensible IRC bot",
   "homepage": "http://rainbot.info",
   "license": "GPL-3.0",
-  "main": "rainbot.coffee",
   "dependencies": {
     "async": "^1.3.0",
     "cli-color": "^1.0.0",
@@ -14,7 +14,6 @@
   },
   "devDependencies": {
     "chai": "^2.2.0",
-    "coffee-script": "^1.9.1",
     "mocha": "^2.2.4"
   }
 }
