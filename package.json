@@ -9,7 +9,7 @@
     "async": "^1.3.0",
     "cli-color": "^1.0.0",
     "hashmap": "^2.0.3",
-    "irc": "^0.3.12",
+    "irc": "https://github.com/Wolfchase/node-irc-rainbot.git#master",
     "lodash": "^3.10.0"
   },
   "devDependencies": {
