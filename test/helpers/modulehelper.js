@@ -2,7 +2,7 @@
 // I pass a "dummy" bot to the module. As long as the mock gets passed around
 // correctly (regardless of it not being a real bot instance) everything
 // should be fine.
-Module = require('./../../module')({ iambroot: true });
+Module = require('./../../lib/bot/module')({ iambroot: true });
 
 module.exports = {
 
@@ -20,9 +20,9 @@ module.exports = {
         }
       },
       'say': {
-        ASAP: false,
+        ASAP: true,
         action(data, respond, done) {
-          respond.say('from say');
+          respond.say('test command 3');
           return done();
         }
       }
