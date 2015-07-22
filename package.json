@@ -1,7 +1,9 @@
 {
   "name": "rainbot",
   "main": "rainbot.js",
-  "scripts": { "test": "./node_modules/tape/bin/tape test/*.js" },
+  "scripts": {
+    "test": "./node_modules/tape/bin/tape test/*.js"
+  },
   "version": "0.6.0",
   "description": "A multipurpose, extensible IRC bot",
   "homepage": "http://rainbot.info",
@@ -14,7 +16,7 @@
     "lodash": "^3.10.0"
   },
   "devDependencies": {
-
-    "tap-nyan": "0.0.2"
+    "tap-nyan": "0.0.2",
+    "tape": "^4.0.1"
   }
 }
