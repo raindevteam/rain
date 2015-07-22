@@ -13,8 +13,6 @@
     "lodash": "^3.10.0"
   },
   "devDependencies": {
-    "chai": "^2.2.0",
-    "mocha": "^2.2.4",
     "tap-nyan": "0.0.2"
   }
 }
