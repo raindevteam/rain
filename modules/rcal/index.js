@@ -19,8 +19,8 @@ const cal = {
   }
 };
 
-module.exports = function(Module) {
+module.exports = function(Module, done) {
   const rainCal = new Module('RainCal', 'rcal');
   rainCal.addCommand('cal', cal);
-  return rainCal;
+  return done(rainCal);
 };
