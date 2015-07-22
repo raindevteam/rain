@@ -3,8 +3,6 @@
 const chan = {
   help: 'Allows the bot to join and leave channels (rainbot.info/userguide#chan)',
   ASAP: false,
-  whitelist: ['MistaWolf', 'PinkDawn', 'Eventide',
-              'Dustrunner', 'King_Sombra'],
   action: function(data, respond, done) {
     const cmd = data.args.join(' ');
 

@@ -12,8 +12,6 @@ function getModule(name, modules) {
 const mod = {
   help: 'Lists, enables, and disables modules (rainbot.info/userguide#module)',
   ASAP: false,
-  whitelist: ['MistaWolf', 'PinkDawn', 'Eventide',
-              'Dustrunner', 'King_Sombra'],
   action: function(data, respond, done) {
     const args = data.args;
     if (!args[0]) return done();
