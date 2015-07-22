@@ -10,7 +10,7 @@ const Bot = botHelper.makeBot();
 
 test("bot should load modules", function(t) {
   Bot.loadModules(function() {
-    t.equal(5, Bot.modules.length, "all modules loaded");
+    t.equal(Bot.modules.length, 6, "all modules loaded");
     t.end();
   });
 });

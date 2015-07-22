@@ -29,7 +29,7 @@ test("hook handler -> nest should add and fill", function(t) {
   });
 
   // If the nest was added correctly, it should fill a nest properly.
-  t.equal(';say iambroot', nester.fillNests(';say {test}'));
+  t.equal(nester.fillNests(';say {test}'), ';say iambroot', "Nester fills nest");
   t.end();
 });
 
@@ -40,11 +40,11 @@ test("hook handler -> nest should add and fill", function(t) {
 test('hook handler -> helpers should package data', function(t) {
   const data = helpers
                 .packageData('test', mockParams, testModule, ['iambroot']);
-  t.equal('test', data.event, "data.event");
-  t.equal('broot', data.from, "data.from");
-  t.equal('iambroot', data.text, "data.text");
-  t.equal(testModule, data.parent, "data.parent");
-  t.equal('iambroot', data.args[0], "data.args");
+  t.equal(data.event, 'test', "data.event");
+  t.equal(data.from, 'broot', "data.from");
+  t.equal(data.text, 'iambroot', "data.text");
+  t.equal(data.parent, testModule, "data.parent");
+  t.equal(data.args[0], 'iambroot',"data.args");
   t.ok(data.bot, "data.bot");
   t.end();
 });
@@ -53,14 +53,14 @@ test('hook handler -> helpers should get command names', function(t) {
   __config.commandPrefix = ';';
   const command = ';SAY i am broot';
   const commandName = helpers.getCommandName(command);
-  t.equal('say', commandName);
+  t.equal(commandName, 'say', 'Command name should be say');
   t.end();
 });
 
 test('hook handler -> helpers should get command args', function(t) {
   const command = ';SAY i am broot';
   const commandArgs = helpers.getCommandArgs(command);
-  t.deepEqual(['i', 'am', 'broot'], commandArgs);
+  t.deepEqual(commandArgs, ['i', 'am', 'broot'], 'Command arguments are parsed');
   t.end();
 });
 
@@ -72,7 +72,7 @@ test('hook handler -> hooks sets command', function(t) {
   hooks.setCommand('test', {
     name: 'test'
   });
-  t.equal('test', hooks.getCommand('test').name);
+  t.equal(hooks.getCommand('test').name, 'test', 'Gets the command \'test\'');
   t.end();
 });
 
@@ -82,14 +82,14 @@ test('hook handler -> hooks sets trigger', function(t) {
     event: 'message'
   });
   hooks.getTrigger('test', function(trigger) {
-    t.equal('test', trigger.name);
+    t.equal(trigger.name, 'test', 'Gets the trigger \'test\'');
     t.end();
   });
 });
 
 test('hook handler -> hooks gets triggers', function(t) {
   const triggers = hooks.getTriggers();
-  t.equal('test', triggers.message[0].name);
+  t.equal(triggers.message[0].name, 'test', 'Returns a filled triggers object');
   t.end();
 });
 
@@ -99,17 +99,16 @@ test('hook handler -> hooks gets triggers', function(t) {
 
 test('hook handler should extract commands', function(t) {
   hookHandler.extractHooks(testModule);
-  t.ok(hooks.getCommand('say'));
+  t.ok(hooks.getCommand('say'), 'Properly extracts hooks');
   t.end();
 });
 
 test('hook handler should run commands', function(t) {
   hookHandler.execute(';echo', mockParams, function(responder) {
     const response = responder.getResponse();
-    console.log(response);
-    t.equal('say', response.responses[0].method, "method is say");
-    t.equal('you', response.responses[0].to, "to is you");
-    t.equal('from echo', response.responses[0].data, "data is from echo");
+    t.equal(response.responses[0].method, 'say', "method is say");
+    t.equal(response.responses[0].to, 'you', "to is you");
+    t.equal(response.responses[0].data, 'from echo', "data is from echo");
     t.end();
   });
 });
