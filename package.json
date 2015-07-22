@@ -3,7 +3,7 @@
   "main": "rainbot.js",
   "scripts": {
     "preinstall": "cd ./modules/rcal && npm install && cd ./../rbrella && npm install"
-  , "test": "./node_modules/tape/bin/tape test/*.js"
+  , "test": "./node_modules/tape/bin/tape test/*.js | ./node_modules/.bin/tnyan"
   },
   "version": "0.6.0",
   "description": "A multipurpose, extensible IRC bot",
