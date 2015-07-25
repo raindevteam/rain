@@ -3,7 +3,7 @@
 
 const globals = require('./helpers/globals');
 const test = require('tape');
-const parser = require('./../lib/bot/parser');
+const parser = require('./../lib/parser');
 
 __config.commandPrefix = ';';
 

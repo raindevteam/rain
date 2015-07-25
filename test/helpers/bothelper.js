@@ -1,7 +1,7 @@
 /* globals __config */
 "use strict";
 
-const Bot = require('./../../lib/bot/bot');
+const Bot = require('./../../lib/bot');
 
 module.exports = {
 

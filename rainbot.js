@@ -8,7 +8,7 @@ global.rainlog  = require(__dirname + '/lib/rainlog');
 global.__config = require('./config/config');
 global.X        = require('./lib/weave');
 
-var Bot = require('./lib/bot/bot');
+var Bot = require('./lib/bot');
 
 // Set the level of debugging
 

@@ -4,11 +4,11 @@
 const test = require('tape');
 const globals = require('./helpers/globals');
 
-const hookHandler = require('./../lib/bot/hookhandler');
-const hooks = require('./../lib/bot/hookhandler/hooks');
-const helpers = require('./../lib/bot/hookhandler/helpers');
+const hookHandler = require('./../lib/hookhandler');
+const hooks = require('./../lib/hookhandler/hooks');
+const helpers = require('./../lib/hookhandler/helpers');
 
-const respond = require('./../lib/bot/responders');
+const respond = require('./../lib/responders');
 
 const moduleHelper = require('./helpers/modulehelper');
 const testModule = moduleHelper.makeModule();
@@ -23,7 +23,7 @@ test('respond should assign a hook responder', function(t) {
   const hook = hooks.getCommand('echo');
   const data = helpers.packageData('message', mockParams,
                                    testModule, ['i', 'am', 'broot']);
-  responder = respond.assign('hook', mockParams);
+  responder = respond.assign('hook', 'test', mockParams);
   t.ok(responder, "Responder created");
   t.equal( responder.deftarget, 'you', "Has a default target");
   t.end();

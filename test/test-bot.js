@@ -4,7 +4,7 @@
 const globals = require('./helpers/globals');
 const test = require('tape');
 const botHelper = require('./helpers/bothelper');
-const events = require('./../lib/bot/events');
+const events = require('./../lib/events');
 
 const Bot = botHelper.makeBot();
 
