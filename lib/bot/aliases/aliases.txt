@@ -1,4 +1,0 @@
-enlighten:x:;help & ;say Hey {x}, you can get a full list of commands and other things from this link {help}
-sum:x y z:;cal {x} + {y} + {z}
-randm::;roll 5d & ;jip switch({roll}) { case 1
-rand:min max:;cal randomInt({min}, {max})
