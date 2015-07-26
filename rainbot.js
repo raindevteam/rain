@@ -1,3 +1,4 @@
+/// <reference path="typings/node/node.d.ts"/>
 /* global rainlog, __config */
 "use strict";
 
