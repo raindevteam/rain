@@ -8,5 +8,6 @@ module.exports = function(Module, done) {
   });
 
   rainCore.load(__dirname + '/hooks/commands');
+  rainCore.load(__dirname + '/hooks/triggers');
   return done(rainCore);
 };
