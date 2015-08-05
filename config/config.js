@@ -19,6 +19,23 @@ module.exports = {
   userName: process.env.IRC_USER || 'RainBot',
 
   /*
+   *    modeList - (Optional) Modes to send after conecting to IRC
+   */
+
+  modeList: '+B',
+
+  /*
+   *    If you wish to use pastebin, you can enter your
+   *    pastebin information here.
+   */
+
+  pastebinApi: {
+    'api_dev_key' : undefined,
+    'api_user_name': undefined,
+    'api_user_password': undefined
+  },
+
+  /*
    *    If your server supports NickServ, enter your password here to
    *    be authed when the bot connects or set it to false or undefined
    */
@@ -37,7 +54,7 @@ module.exports = {
    *    i: Log info           e: Log errors
    *    w: Log warnings       d: Log debug messages
    *    f: Allow file logging (regular logs are file logged)
-   */    
+   */
 
   logging: 'diwe',
 
@@ -48,7 +65,8 @@ module.exports = {
   prompt: 'SnowBot ',
 
   /*
-   *    debug - Set to true if you want debug logs from the backbone IRC library
+   *    debug - Set to true if you want debug logs
+   *            from the backbone IRC library
    */
 
   debug: false,
@@ -58,7 +76,7 @@ module.exports = {
    *    would be a command.
    */
 
-   commandPrefix: ';',
+   commandPrefix: '%',
 
   /*
    *    The command symbol is used to directly specify to the bot that

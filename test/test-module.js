@@ -5,9 +5,9 @@ const test = require('tape');
 const globals = require('./helpers/globals');
 const moduleHelper = require('./helpers/modulehelper');
 
-const Module = require('./../lib/bot/module');
-const Hook = require('./../lib/bot/module/hook');
-//const mpi = require('./../lib/bot/module/mpi');
+const Module = require('./../lib/module');
+const Hook = require('./../lib/module/hook');
+//const mpi = require('./../lib/module/mpi');
 
 const testModule = moduleHelper.makeModule();
 

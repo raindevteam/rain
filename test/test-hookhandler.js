@@ -6,10 +6,10 @@ const globals = require('./helpers/globals');
 const moduleHelper = require('./helpers/modulehelper');
 
 const testModule = moduleHelper.makeModule();
-const hookHandler = require('./../lib/bot/hookhandler');
-const nester = require('./../lib/bot/hookhandler/nest');
-const helpers = require('./../lib/bot/hookhandler/helpers');
-const hooks = require('./../lib/bot/hookhandler/hooks');
+const hookHandler = require('./../lib/hookhandler');
+const nester = require('./../lib/hookhandler/nest');
+const helpers = require('./../lib/hookhandler/helpers');
+const hooks = require('./../lib/hookhandler/hooks');
 
 moduleHelper.addValidCommands(testModule);
 const mockParams = {from: 'broot', to: 'you', text: 'iambroot', msg: {}};
@@ -58,9 +58,11 @@ test('hook handler -> helpers should get command names', function(t) {
 });
 
 test('hook handler -> helpers should get command args', function(t) {
-  const command = ';SAY i am broot';
-  const commandArgs = helpers.getCommandArgs(command);
+  const commands = [';SAY i am broot', ';say'];
+  let commandArgs = helpers.getCommandArgs(commands[0]);
   t.deepEqual(commandArgs, ['i', 'am', 'broot'], 'Command arguments are parsed');
+  commandArgs = helpers.getCommandArgs(commands[1]);
+  t.deepEqual(commandArgs, [], 'Returns empty param list on no args');
   t.end();
 });
 
