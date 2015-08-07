@@ -20,8 +20,8 @@ some proper module api documentation. However, I do believe that a quick glance 
 the already developed modules should show you a thing or two!
 
 So now for the million dollar question, should you use RainBot? No and yes. No because
-there is probably better bots out there with a better ecosystem, documentation, etc. Hell,
-**there is** better bots out there. RainBot isn't meant to compete with any IRC bots out there
+there are probably better bots out there with a better ecosystem, documentation, etc. Hell,
+**there are** better bots out there. RainBot isn't meant to compete with any IRC bots out there
 already, the main goal from the start was to have fun doing something fun and maybe get some
 development experience from doing it. So what's the reason behind yes? You'll make me feel good.
 Okay humor aside (but really you will!), other people using the bot would mean better development.
