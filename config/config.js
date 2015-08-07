@@ -76,7 +76,7 @@ module.exports = {
    *    would be a command.
    */
 
-   commandPrefix: '%',
+   commandPrefix: ';',
 
   /*
    *    The command symbol is used to directly specify to the bot that
