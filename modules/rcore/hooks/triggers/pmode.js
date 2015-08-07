@@ -5,7 +5,6 @@ const pmode = {
   trigger(data) { return true; },
   action(data, respond, done) {
     const chans = data.bot.chans;
-    console.log(data);
   }
 }
 
