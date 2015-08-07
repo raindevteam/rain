@@ -7,27 +7,23 @@ const alias = {
   ASAP: 'false',
   action: function(data, respond, done) {
     const args = data.args;
-    const alias = data.bot.alias;
+    const aliaser = data.bot.alias;
     if (args[0] === 'rm') {
-      alias.delete(args[1], function() {
+      aliaser.delete(args[1], function() {
         respond.say('Removed Alias: ' + args[1]);
         return done();
       });
     } else {
-      const aliasName = args[0];
-      const aliasArgs = X(_.drop(args).join(' ')).s;
-      const params = X(aliasArgs).before('->').clean().s.trim().split(' ');
-      const command = X(aliasArgs).after('->').clean().s;
-      console.log(params);
-      if (!aliasName) {
-        respond.say('No alias name entered!');
-        return done();
-      } if (!command) {
-        respond.say('No command to alias entered!');
-        return done();
-      }
-      respond.say('Added command alias: ' + aliasName);
-      alias.add(aliasName, {args: params, cmd: command}, done);
+      aliaser.parseAlias(args.join(" "), function(err, alias) {
+        if (err) {
+          respond.say(err.message);
+          return done();
+        }
+        respond.say('Added alias: ' + alias.name);
+        aliaser.add( alias.name
+                  , { params: alias.params, alias: alias.alias }
+                  , done );
+      });
     }
   }
 };
