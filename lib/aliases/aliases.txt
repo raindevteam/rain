@@ -1,5 +1,0 @@
-sum:x y z:;cal {x} + {y} + {z}
-randm::;roll 5d & ;jip switch({roll}) { case 1
-rand:min max:;cal randomInt({min}, {max})
-test:x:;say {x}
-hug:person:;do hugs {person}
