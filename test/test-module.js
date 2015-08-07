@@ -59,7 +59,7 @@ test("module -> hook should set trigger properties", function(t) {
 
 test("module -> hook should set command properties", function(t) {
   t.plan(3);
-  t.ok(hookCommand.help, "Has a whitelist");
+  t.ok(hookCommand.help, "Has help text");
   t.ok(hookCommand.ASAP, "Has ASAP");
   t.ok(hookCommand.whitelist, "Has whitelist");
   t.end();
