@@ -91,7 +91,7 @@ test('hook handler -> hooks sets trigger', function(t) {
 
 test('hook handler -> hooks gets triggers', function(t) {
   const triggers = hooks.getTriggers();
-  t.equal(triggers.message[0].name, 'test', 'Returns a filled triggers object');
+  t.ok(triggers.message[0], 'Returns a filled triggers object');
   t.end();
 });
 
