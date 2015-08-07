@@ -11,7 +11,34 @@ start work on API documentation!
 Multipurpose, extensible IRC bot written with node.js
 
 ## Overview
-RainBot is just another IRC bot among the many already made; it started as something for fun rather than need. That being said, plenty of development has still been going into RainBot, well at least as much as a college student can do without drowning themself in work. The master branch is for versions of the bot that are somewhat stable, but not entirely, stable enough that the bot can be used to a reasonable extent. The development branch is where I do all my work and reflects the most up-to-date changes, bugs, and features.
+RainBot is just another IRC bot among the many already made; it started as something for fun rather than need. That being said, plenty of development has still been going into RainBot, well at least as much as a college student can do without drowning themself in work.
+
+#### What RainBot is not
+Let me start off by saying, RainBot isn't really meant to be used by others. Not because
+I don't want you to, but mostly because I'm a lazy \*\*\*\* and haven't written for you
+some proper module api documentation. However, I do believe that a quick glance through
+the already developed modules should show you a thing or two!
+
+So now for the million dollar question, should you use RainBot? No and yes. No because
+there is probably better bots out there with a better ecosystem, documentation, etc. Hell,
+**there is** better bots out there. RainBot isn't meant to compete with any IRC bots out there
+already, the main goal from the start was to have fun doing something fun and maybe get some
+development experience from doing it. So what's the reason behind yes? You'll make me feel good.
+Okay humor aside (but really you will!), other people using the bot would mean better development.
+RainBot being used by others means I can potentially receive feedback, which is something I feel
+I really need.
+
+#### What RainBot is
+Alrighty, so what is RainBot then? It's **just another** IRC bot. As mentioned, its just a
+fun little side project for me. But it's been ever more exciting since it actually sees some
+use in its home channel, and I guess that for me is enough to mark a success for RainBot. But if
+up to this point you're still interested, you can get a small idea of how RainBot works by
+reading the "A Few Things RainBot Can Do" section a little more down below.
+
+#### The Branches, What do They Mean Mason?
+
+The master branch is for versions of the bot that are somewhat stable, but not entirely, stable enough that the bot can be used to a reasonable extent. The development branch is where I do all my work and reflects the most up-to-date changes, bugs, and features. If you want actual release
+builds, check the releases!
 
 ### A Few Things RainBot Can Do
 
@@ -61,6 +88,8 @@ Currently you can only set and remove aliases, but listing aliases will be imple
 
 
 ## Cool, I Want One!
+**-- Begin BS**
+
 Back in the day, when RainBot was just a teeny-tiny little bot, growing up
 all adorably in a sweetful laid back environment, RainBot wasn't meant to
 be used by others. It's main purpose was to serve it's home channel #Neverfree.
@@ -70,22 +99,34 @@ bot."
 
 So here it is! My first attempt ever at guiding you through an installation.
 
+**-- End BS**
+
 #### Get io.js Installed
 
 First thing you will need to do is download io.js and get it working on your system.
 You can find it [here](https://iojs.org/en/index.html). It is basically node.js with default harmony features set (which the bot uses, so don't think you can get away easily with just node.js). You could also use the nvm manager found [here](https://github.com/creationix/nvm) (if on windows, check [here](https://github.com/coreybutler/nvm-windows))
 
-Speaking of windows, this installation might go much smoother on linux systems, just
-an fyi.
-
 Once you have made certain that io.js is installed, you should also now have npm!
 It's the package manager for node modules, and you'll be using it a bit to get RainBot
 on its feet.
 
+#### Windows People
+Switch to a linux distro. Kthx.
+
+Ok no, I want to show some love for Windows here, I've personally used it more than any
+other OS. But I am currently using linux as my primary, so I have no idea how future
+installations for the bot will go on Windows.
+
+However, do install some kind of terminal with unix commands, like cygwin or git bash
+or anything with 'cd' really. It's used by RainBot to preinstall some modules, so if you
+get any Windows errors about the command 'cd' not found, not my fault. You have been warned.
+
 #### Download RainBot
 
 Let us now download RainBot, you're most likely on the repo page already if you're
-reading this, if not here it [is](https://github.com/Wolfchase/rainbot). You can go ahead and download from the releases, download a zip or tar from the master branch or just clone it and pull when you need to update, there's a thought!
+reading this, if not here it [is](https://github.com/Wolfchase/rainbot). You can go ahead and download from the releases, download a zip or tar or just clone it and pull for updates! If you
+do the latter cases, make sure its from the master branch, or if you're feeling pretty
+couragous, you can try the develop branch, I can't promise you anything from there though.
 
 #### Run npm on RainBot and Modules
 
@@ -99,22 +140,19 @@ that contains the source of the bot, you should see a package.json file),
 After running that command a few things should happen, and may vary if you're on...
 yep windows!
 
-If you're on Linux the installation probably had a build error but installed anyway. If the build error was about some optional dependency from the IRC library then there's no need to worry, it was an optional dependency afterall (the problem seems common too, but really there's no need to worry).
+If you're on Linux the installation probably had a build error but installed anyway. If the build error was about some optional dependency from the IRC library then there's no need to worry.
 
 On Windows however, you may have some more fatal errors. If one such error happens to be
-a node-gyp build error, you might need to install [MS Visual C++](https://www.visualstudio.com/en-us/downloads/download-visual-studio-vs). Yeah, sorry
+a node-gyp build error for a dependency actually needed for the IRC library, you might need to install [MS Visual C++](https://www.visualstudio.com/en-us/downloads/download-visual-studio-vs). Yeah, sorry
 about that. If you got any other problems related to node-gyp go read it's installation
 section on the readme [here](https://github.com/TooTallNate/node-gyp/). You don't have
-to actually install anything, just make sure you meet the requirements.
-
-RainBot also comes with some modules that need the npm install command ran for. If you
-look at the modules directory, perform what just did for the modules rcal and rbrella. Both their directories will have a package.json. And for Windows users... there should
-be no gotcha this time.
+to actually install anything, just make sure you meet the requirements (Ok, you might need
+to install missing requirements if you're actually missing them, I partially lied).
 
 #### Set up the Config
 
 At this point you're practically done, just set up your settings in the config.js
-file found in the config file. The process.env things are for those who know about node, and if you don't, you should totally read up on it a little! Otherwise feel free to get rid of them and put your own settings in there. I've left comments to guide you!
+file found in the config folder. The process.env things are for those who know about node, and if you don't, you should totally read up on it a little! Otherwise feel free to get rid of them and put your own settings in there. I've left comments to guide you!
 
 #### Fly!
 
@@ -151,8 +189,8 @@ listing and a pointer showing the file,
         hooks...
           commands...
             alias.js
-            chan.js <--
-            die.js
+            chan.js
+            die.js <--
             help.js
             mod.js
             ver.js
