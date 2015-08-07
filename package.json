@@ -5,7 +5,7 @@
     "preinstall": "cd ./modules/rcal && npm install && cd ./../rbrella && npm install",
     "test": "./node_modules/tape/bin/tape test/*.js"
   },
-  "version": "0.7.0",
+  "version": "0.8.0",
   "description": "A multipurpose, extensible IRC bot",
   "homepage": "http://rainbot.info",
   "repository": "https://github.com/Wolfchase/rainbot",
