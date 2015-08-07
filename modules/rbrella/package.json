@@ -1,12 +1,9 @@
 {
   "name": "rainbrella",
-  "main": "index.coffee",
+  "description": "Random utils",
+  "main": "index.js",
+  "version": "0.1.0",
   "dependencies": {
     "sandbox": "^0.8.6"
-  },
-  "devDependencies": {
-    "chai": "^2.2.0",
-    "coffee-script": "^1.9.1",
-    "mocha": "^2.2.4"
   }
 }

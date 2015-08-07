@@ -1,0 +1,6 @@
+{
+  "name": "raincore",
+  "description": "Core commands for RainBot",
+  "main": "index.js",
+  "version": "0.1.0"
+}
