@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/Wolfchase/rainbot.svg?branch=master)](https://travis-ci.org/Wolfchase/rainbot)
+[![Build Status](https://travis-ci.org/Wolfchase/RainBot.svg?branch=master)](https://travis-ci.org/Wolfchase/RainBot)
 
 ## Blog For Development Updates!
 http://rainbot-irc.blogspot.com/
