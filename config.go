@@ -1,9 +1,8 @@
-package config
+package rainbot
 
 import (
 	"encoding/json"
 	"os"
-	"fmt"
 )
 
 type Config struct {
@@ -18,16 +17,16 @@ type Config struct {
 	CmdPrefix string
 }
 
-func ReadConfig(string path) ($Config, err) {
+func ReadConfig(path string) (*Config, error) {
 	config := Config{}
 
 	file, _ := os.Open(path)
 	decoder := json.NewDecoder(file)
-	
+
 	err := decoder.Decode(&config)
 	if err != nil {
 		return nil, err
 	}
 
-	return config, nil
+	return &config, nil
 }
