@@ -3,7 +3,6 @@ package config
 import (
 	"encoding/json"
 	"os"
-	"fmt"
 )
 
 type Config struct {
