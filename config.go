@@ -18,7 +18,7 @@ type Config struct {
 }
 
 func ReadConfig(path string) (*Config, error) {
-	config := Config{}
+	config := &Config{}
 
 	file, _ := os.Open(path)
 	decoder := json.NewDecoder(file)
@@ -28,5 +28,5 @@ func ReadConfig(path string) (*Config, error) {
 		return nil, err
 	}
 
-	return &config, nil
+	return config, nil
 }
