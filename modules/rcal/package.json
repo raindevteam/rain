@@ -1,9 +1,0 @@
-{
-  "name": "raincal",
-  "description": "Behold the power of the mathjs",
-  "main": "index.js",
-  "version": "0.1.0",
-  "dependencies": {
-    "mathjs": "^1.7.0"
-  }
-}

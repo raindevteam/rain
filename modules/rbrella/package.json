@@ -1,9 +1,0 @@
-{
-  "name": "rainbrella",
-  "description": "Random utils",
-  "main": "index.js",
-  "version": "0.1.0",
-  "dependencies": {
-    "sandbox": "^0.8.6"
-  }
-}

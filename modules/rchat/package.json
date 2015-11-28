@@ -1,6 +1,0 @@
-{
-  "name": "rainchat",
-  "description": "Some social commands for RainBot",
-  "main": "index.js",
-  "version": "0.1.0"
-}
