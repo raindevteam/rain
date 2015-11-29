@@ -8,7 +8,7 @@ import (
     //"net/rpc/jsonrpc"
 
     "github.com/RyanPrintup/nimbus"
-    "github.com/sorcix/irc"
+    //"github.com/sorcix/irc"
     "github.com/natefinch/pie"
 )
 
@@ -50,16 +50,16 @@ func moduleRPC(name string) {
 }
 
 type ModuleApi struct {
-    B *Bot
 }
 
-func (mpi ModuleApi) Register(m *Module, res *string) error {
+func (ModuleApi) Register(m *Module, result *string) error {
     listeners := m.Listeners
-    *res = "ok"
     if len(listeners) > 0 {
-        for _, listener := range listeners {
-            mpi.B.C.AddListener(irc.PRIVMSG, listener) //yuck
-        }
+        //for _, listener := range listeners {
+        //    mpi.B.C.AddListener(irc.PRIVMSG, listener) //yuck
+        //}
+        fmt.Println("found listener")
     }
+    *result = "good"
     return nil
 }

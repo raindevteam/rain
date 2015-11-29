@@ -7,7 +7,7 @@ import (
     "github.com/Wolfchase/rainbot-go/rainbot"
     //"strings"
     "fmt"
-    //"strconv"
+    "strconv"
 )
 
 func main() {
@@ -43,7 +43,7 @@ func main() {
         bot.C.AddListener(irc.PRIVMSG, func(msg *irc.Message) {
             text := msg.Trailing
             if text == "listeners" {
-                bot.LoadModules()
+                bot.C.Say(msg.Params[0], strconv.Itoa(len(bot.C.Listeners[irc.PRIVMSG])))
             }
         })
 
