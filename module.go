@@ -49,10 +49,6 @@ func (m *Module) startRpcServer() {
     }()
 }
 
-func (m *Module) GetName() string {
-    return m.Name
-}
-
 func (m *Module) Say(ch string, text string) {
     result := ""
     m.Master.Call("Master.Send", ch + " :" + text, &result)
@@ -65,7 +61,8 @@ func (m *Module) RawListener(event Event, l func(*irc.Message)) bool {
 
 func (m *Module) CommandHook(name CommandName, c *Command) {
     result := ""
-    err := m.Master.Call("Master.RegisterCommand", CommandRequest{name, execName()}, &result)
+    err := m.Master.Call("Master.RegisterCommand",
+                         CommandRequest{name, execName()}, &result)
     if err != nil {
         return
     }
