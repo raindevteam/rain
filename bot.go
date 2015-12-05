@@ -61,7 +61,6 @@ func (b *Bot) startRPCServer() {
 // the bot to dispatch events outbound to the module. The module
 // can then communicate back via the master rpc server.
 func (b *Bot) moduleRun(name string) {
-
 }
 
 func (b *Bot) LoadModules() {
@@ -99,6 +98,7 @@ func (bpi BotApi) RegisterCommand(cr CommandRequest, result *string) error {
 	return nil
 }
 
+// Keeps a module alive
 func (bpi BotApi) Loop(n string, result *string) error {
 	c := make(chan bool)
 	func(ch chan bool) {
