@@ -1,13 +1,13 @@
 package main
 
 import (
-    "github.com/RyanPrintup/nimbus"
-    "github.com/sorcix/irc"
-    //"github.com/Wolfchase/rainbot-go/module"
-    "github.com/Wolfchase/rainbot-go"
     "strings"
     "fmt"
     "strconv"
+
+    "github.com/RyanPrintup/nimbus"
+    "github.com/sorcix/irc"
+    "github.com/Wolfchase/rainbot"
 )
 
 func main() {
