@@ -29,6 +29,7 @@ type CommandRequest struct {
 type Bot struct {
 	Client      *nimbus.Client
 	ModuleNames []string
+	Parser      *Parser
 	Handler     *Handler
 }
 

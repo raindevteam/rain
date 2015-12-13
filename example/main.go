@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"os"
-	"strings"
 
 	"github.com/RyanPrintup/nimbus"
 	"github.com/Wolfchase/rainbot"
@@ -37,6 +36,7 @@ func main() {
 	bot := &rainbot.Bot{
 		Client:      nimbus.NewClient(rainConfig.Host, rainConfig.Nick, *nimConfig),
 		ModuleNames: rainConfig.GoModules,
+		Parser:      rainbot.NewParser(rainConfig.CmdPrefix),
 		Handler:     rainbot.NewHandler(),
 	}
 
@@ -53,9 +53,8 @@ func main() {
 		bot.LoadModules()
 
 		bot.Client.AddListener(nimbus.PRIVMSG, func(msg *nimbus.Message) {
-			if string(msg.Trailing[0]) == ";" {
-				splitMessage := strings.Split(string(msg.Trailing[1:]), " ")
-				command, args := splitMessage[0], splitMessage[1:]
+			if bot.Parser.IsCommand(msg.Trailing) {
+				command, args := bot.Parser.ParseCommand(msg.Trailing)
 				bot.Handler.Invoke(msg, rainbot.CommandName(command), args)
 			}
 		})

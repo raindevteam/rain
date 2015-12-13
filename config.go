@@ -15,6 +15,8 @@ type Config struct {
 	UserName string
 
 	CmdPrefix string
+
+	GoModules []string
 }
 
 func ReadConfig(path string) (*Config, error) {

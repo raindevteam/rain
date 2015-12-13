@@ -7,5 +7,7 @@
 	"realName": "RainBotGo",
 	"userName": "RainBotGo",
 
-	"cmdPrefix": "."
+	"cmdPrefix": ".",
+
+	"goModules": ["rcore"]
 }
