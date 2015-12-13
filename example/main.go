@@ -7,7 +7,6 @@ import (
 
 	"github.com/RyanPrintup/nimbus"
 	"github.com/Wolfchase/rainbot"
-	"github.com/sorcix/irc"
 )
 
 func main() {
@@ -37,7 +36,7 @@ func main() {
 
 	bot := &rainbot.Bot{
 		Client:      nimbus.NewClient(rainConfig.Host, rainConfig.Nick, *nimConfig),
-		ModuleNames: []string{"rcore"},
+		ModuleNames: rainConfig.GoModules,
 		Handler:     rainbot.NewHandler(),
 	}
 
@@ -53,14 +52,7 @@ func main() {
 
 		bot.LoadModules()
 
-		bot.Client.AddListener(irc.PRIVMSG, func(msg *nimbus.Message) {
-
-		})
-
-		bot.Client.AddListener(irc.PRIVMSG, func(msg *nimbus.Message) {
-		})
-
-		bot.Client.AddListener(irc.PRIVMSG, func(msg *nimbus.Message) {
+		bot.Client.AddListener(nimbus.PRIVMSG, func(msg *nimbus.Message) {
 			if string(msg.Trailing[0]) == ";" {
 				splitMessage := strings.Split(string(msg.Trailing[1:]), " ")
 				command, args := splitMessage[0], splitMessage[1:]
@@ -68,7 +60,7 @@ func main() {
 			}
 		})
 
-		bot.Client.AddListener(irc.PRIVMSG, func(msg *nimbus.Message) {
+		bot.Client.AddListener(nimbus.PRIVMSG, func(msg *nimbus.Message) {
 			text := msg.Trailing
 			if text == "Hello, "+bot.Client.Nick {
 				bot.Client.Say(msg.Args[0], "Hello there!")
