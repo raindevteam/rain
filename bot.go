@@ -27,6 +27,7 @@ type CommandRequest struct {
 // listeners for irc. ModuleNames is used to look up which plugins to start.
 // The Handler provides management of commands, listeners and triggers.
 type Bot struct {
+	Version     string
 	Client      *nimbus.Client
 	ModuleNames []string
 	Parser      *Parser
@@ -87,6 +88,11 @@ func (bpi BotApi) Send(raw string, result *string) error {
 // Register a command from a module using a command request. The command request
 func (bpi BotApi) RegisterCommand(cr CommandRequest, result *string) error {
 	bpi.B.Handler.AddCommand(cr.Name, cr.Module)
+	return nil
+}
+
+func (bpi BotApi) GetVersion(mName string, result *string) error {
+	*result = bpi.B.Version
 	return nil
 }
 

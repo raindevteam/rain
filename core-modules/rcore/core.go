@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/RyanPrintup/nimbus"
-	"github.com/Wolfchase/rainbot"
+	"github.com/wolfchase/rainbot"
 )
 
 type Core struct{ *rainbot.Module }
@@ -16,7 +16,8 @@ func (m *Core) Info(msg *nimbus.Message, args []string) {
 }
 
 func (m *Core) Ver(msg *nimbus.Message, args []string) {
-	m.Say(msg.Args[0], "Alpha 0.1.0")
+	ver := m.GetBotVersion()
+	m.Say(msg.Args[0], ver)
 }
 
 func main() {

@@ -66,6 +66,11 @@ func (m *Module) GetName() string {
 	return m.Name
 }
 
+func (m *Module) GetBotVersion() (result string) {
+	m.Master.Call("Master.GetVersion", m.Name, &result)
+	return result
+}
+
 func (m *Module) Say(ch string, text string) {
 	result := ""
 	m.Master.Call("Master.Send", ch+" :"+text, &result)
