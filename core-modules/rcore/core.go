@@ -16,15 +16,11 @@ func (m *Core) Info(msg *nimbus.Message, args []string) {
 }
 
 func (m *Core) Ver(msg *nimbus.Message, args []string) {
-	if len(args) > 0 && args[0] == "long" {
-		m.Say(msg.Args[0], "DEV pre-0.1.0 Stability: Highly Unstable, Tests Passing: Unknown, Tests Failing: Unknown")
-	} else {
-		m.Say(msg.Args[0], "DEV pre-0.1.0")
-	}
+	m.Say(msg.Args[0], "Alpha 0.1.0")
 }
 
 func main() {
-	m := &Core{rainbot.MakeModule("core", "core module")}
+	m := &Core{rainbot.MakeModule("rCore", "The official core module for RainBot")}
 
 	m.CommandHook("about", &rainbot.Command{
 		Help: "Tells you a little something about the bot",
