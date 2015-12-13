@@ -1,11 +1,11 @@
 {
 	"host": "irc.canternet.org",
 	"port": "6667",
-	"channel": "#snowybottest",
+	"channel": ["#snowybottest"],
 
-	"nick": "RainBot",
-	"realName": "RainBot",
-	"userName": "RainBot",
+	"nick": "SnowBot",
+	"realName": "RainBotGo",
+	"userName": "RainBotGo",
 
-	"cmdPrefix": "!"
+	"cmdPrefix": "."
 }

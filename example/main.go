@@ -1,40 +1,47 @@
 package main
 
 import (
-<<<<<<< HEAD
-    "strings"
-    "fmt"
-    "strconv"
-
-    "github.com/RyanPrintup/nimbus"
-    "github.com/sorcix/irc"
-    "github.com/Wolfchase/rainbot"
-=======
-	"github.com/RyanPrintup/nimbus"
-	"github.com/sorcix/irc"
-	//"github.com/Wolfchase/rainbot-go/module"
 	"fmt"
-	"strconv"
+	"os"
 	"strings"
 
+	"github.com/RyanPrintup/nimbus"
 	"github.com/Wolfchase/rainbot"
->>>>>>> f566621d22929af7cd06b686af8c13c9ffcd6bd0
+	"github.com/sorcix/irc"
 )
 
 func main() {
-	config := nimbus.Config{
-		Port:     "6667",
-		Channels: []string{"#snowybottest"},
-		RealName: "RainBotGo",
-		UserName: "RainBotGo",
-		Password: "",
+	var rainConfig *rainbot.Config
+	var nimConfig *nimbus.Config
+
+	var err error
+
+	if len(os.Args) > 1 {
+		rainConfig, err = rainbot.ReadConfig(os.Args[1])
+
+		if err != nil {
+			fmt.Println(err)
+		}
+
+		nimConfig = &nimbus.Config{
+			Port:     rainConfig.Port,
+			Channels: rainConfig.Channel,
+			RealName: rainConfig.RealName,
+			UserName: rainConfig.UserName,
+			Password: "",
+		}
+	} else {
+		fmt.Println("Usage: rainbot <config_file>")
+		os.Exit(1)
 	}
 
 	bot := &rainbot.Bot{
-		Client:      nimbus.NewClient("irc.canternet.org", "HailBot", config),
-		ModuleNames: []string{"rainbot-core"},
+		Client:      nimbus.NewClient(rainConfig.Host, rainConfig.Nick, *nimConfig),
+		ModuleNames: []string{"rcore"},
 		Handler:     rainbot.NewHandler(),
 	}
+
+	fmt.Print("Connecting... ")
 
 	bot.Client.Connect(func(e error) {
 		if e != nil {
@@ -42,16 +49,18 @@ func main() {
 			return
 		}
 
+		fmt.Println("Done")
+
 		bot.LoadModules()
 
-		bot.Client.AddListener(irc.PRIVMSG, func(msg *irc.Message) {
+		bot.Client.AddListener(irc.PRIVMSG, func(msg *nimbus.Message) {
 
 		})
 
-		bot.Client.AddListener(irc.PRIVMSG, func(msg *irc.Message) {
+		bot.Client.AddListener(irc.PRIVMSG, func(msg *nimbus.Message) {
 		})
 
-		bot.Client.AddListener(irc.PRIVMSG, func(msg *irc.Message) {
+		bot.Client.AddListener(irc.PRIVMSG, func(msg *nimbus.Message) {
 			if string(msg.Trailing[0]) == ";" {
 				splitMessage := strings.Split(string(msg.Trailing[1:]), " ")
 				command, args := splitMessage[0], splitMessage[1:]
@@ -59,17 +68,10 @@ func main() {
 			}
 		})
 
-		bot.Client.AddListener(irc.PRIVMSG, func(msg *irc.Message) {
+		bot.Client.AddListener(irc.PRIVMSG, func(msg *nimbus.Message) {
 			text := msg.Trailing
 			if text == "Hello, "+bot.Client.Nick {
-				bot.Client.Say(msg.Params[0], "Hello there!")
-			}
-		})
-
-		bot.Client.AddListener(irc.PRIVMSG, func(msg *irc.Message) {
-			text := msg.Trailing
-			if text == "listeners" {
-				bot.Client.Say(msg.Params[0], strconv.Itoa(len(bot.Client.Listeners[irc.PRIVMSG])))
+				bot.Client.Say(msg.Args[0], "Hello there!")
 			}
 		})
 

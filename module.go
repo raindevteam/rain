@@ -7,12 +7,12 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/sorcix/irc"
+	"github.com/RyanPrintup/nimbus"
 )
 
-type CommandFun func(*irc.Message, []string)
-type TriggerFun func(*irc.Message) bool
-type Listener func(*irc.Message)
+type CommandFun func(*nimbus.Message, []string)
+type TriggerFun func(*nimbus.Message) bool
+type Listener func(*nimbus.Message)
 
 type Event string
 
@@ -71,7 +71,7 @@ func (m *Module) Say(ch string, text string) {
 	m.Master.Call("Master.Send", ch+" :"+text, &result)
 }
 
-func (m *Module) RawListener(event Event, l func(*irc.Message)) bool {
+func (m *Module) RawListener(event Event, l func(*nimbus.Message)) bool {
 	m.Listeners[event] = append(m.Listeners[event], l)
 	return true
 }

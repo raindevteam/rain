@@ -57,11 +57,10 @@ func (b *Bot) startRpcServer() {
 // the bot to dispatch events outbound to the module. The module
 // can then communicate back via the master rpc server.
 func (b *Bot) moduleRun(name string) {
-	out, err := exec.Command(name).Output()
+	err := exec.Command(name).Start()
 	if err != nil {
 		panic(err)
 	}
-	fmt.Println(out)
 }
 
 // It firstly starts the master consumer server for the bot.
