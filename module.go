@@ -78,7 +78,8 @@ func (m *Module) RawListener(event Event, l func(*irc.Message)) bool {
 
 func (m *Module) CommandHook(name CommandName, c *Command) {
 	result := ""
-	err := m.Master.Call("Master.RegisterCommand", CommandRequest{name, execName()}, &result)
+	err := m.Master.Call("Master.RegisterCommand",
+		CommandRequest{name, execName()}, &result)
 	if err != nil {
 		return
 	}

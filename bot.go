@@ -23,7 +23,9 @@ type CommandRequest struct {
 	Module ModuleName
 }
 
-// The bot struct. Used to keep together all the big pieces.
+// The Bot struct holds the internal nimbus.Client, used to register
+// listeners for irc. ModuleNames is used to look up which plugins to start.
+// The Handler provides management of commands, listeners and triggers.
 type Bot struct {
 	Client      *nimbus.Client
 	ModuleNames []string
@@ -83,13 +85,12 @@ func (bpi BotApi) Send(raw string, result *string) error {
 }
 
 // Register a command from a module using a command request. The command request
-// contains the command name and module name used by the handler to invoke.
 func (bpi BotApi) RegisterCommand(cr CommandRequest, result *string) error {
 	bpi.B.Handler.AddCommand(cr.Name, cr.Module)
 	return nil
 }
 
-// Keeps a module alive.
+// Keeps a module alive
 func (bpi BotApi) Loop(n string, result *string) error {
 	c := make(chan bool)
 	func(ch chan bool) {
