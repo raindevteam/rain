@@ -5,7 +5,7 @@ import (
 	"os"
 
 	"github.com/RyanPrintup/nimbus"
-	"github.com/wolfchase/rainbot"
+	"github.com/wolfchase/rainbot/lib"
 )
 
 func main() {

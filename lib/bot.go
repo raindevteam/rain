@@ -50,7 +50,7 @@ func (b *Bot) startRpcServer() {
 	go func() {
 		for {
 			conn, _ := master.Accept()
-			rpc.ServeCodec(rpcCodecServer(conn))
+			rpc.ServeCodec(RpcCodecServer(conn))
 		}
 	}()
 }
@@ -111,7 +111,7 @@ func (bpi BotApi) Loop(n string, result *string) error {
 // to the module. The name is kept in the handler for event dispatching
 // and module management.
 func (bpi BotApi) Reg(t Ticket, result *string) error {
-	module := rpc.NewClientWithCodec(rpcCodecClientWithPort(t.Port))
+	module := rpc.NewClientWithCodec(RpcCodecClientWithPort(t.Port))
 	bpi.B.Handler.AddModule(t.Name, module)
 	return nil
 }
