@@ -27,6 +27,7 @@ type CommandRequest struct {
 // listeners for irc. ModuleNames is used to look up which plugins to start.
 // The Handler provides management of commands, listeners and triggers.
 type Bot struct {
+	Version     string
 	Client      *nimbus.Client
 	ModuleNames []string
 	Parser      *Parser
@@ -49,7 +50,7 @@ func (b *Bot) startRpcServer() {
 	go func() {
 		for {
 			conn, _ := master.Accept()
-			rpc.ServeCodec(rpcCodecServer(conn))
+			rpc.ServeCodec(RpcCodecServer(conn))
 		}
 	}()
 }
@@ -90,6 +91,11 @@ func (bpi BotApi) RegisterCommand(cr CommandRequest, result *string) error {
 	return nil
 }
 
+func (bpi BotApi) GetVersion(mName string, result *string) error {
+	*result = bpi.B.Version
+	return nil
+}
+
 // Keeps a module alive
 func (bpi BotApi) Loop(n string, result *string) error {
 	c := make(chan bool)
@@ -105,7 +111,7 @@ func (bpi BotApi) Loop(n string, result *string) error {
 // to the module. The name is kept in the handler for event dispatching
 // and module management.
 func (bpi BotApi) Reg(t Ticket, result *string) error {
-	module := rpc.NewClientWithCodec(rpcCodecClientWithPort(t.Port))
+	module := rpc.NewClientWithCodec(RpcCodecClientWithPort(t.Port))
 	bpi.B.Handler.AddModule(t.Name, module)
 	return nil
 }

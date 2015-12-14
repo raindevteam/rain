@@ -5,7 +5,7 @@ import (
 	"os"
 
 	"github.com/RyanPrintup/nimbus"
-	"github.com/Wolfchase/rainbot"
+	"github.com/wolfchase/rainbot/lib"
 )
 
 func main() {
@@ -34,6 +34,7 @@ func main() {
 	}
 
 	bot := &rainbot.Bot{
+		Version:     "Alpha 0.1.0 (Second Wind)",
 		Client:      nimbus.NewClient(rainConfig.Host, rainConfig.Nick, *nimConfig),
 		ModuleNames: rainConfig.GoModules,
 		Parser:      rainbot.NewParser(rainConfig.CmdPrefix),

@@ -7,6 +7,16 @@ import (
 	"github.com/RyanPrintup/nimbus"
 )
 
+type CommandFun func(*nimbus.Message, []string)
+type TriggerFun func(*nimbus.Message) bool
+type Listener func(*nimbus.Message)
+
+type Event string
+
+type CommandName string
+type ModuleName string
+type Numeric int
+
 type Command struct {
 	Help string
 	Fun  CommandFun
@@ -18,10 +28,6 @@ type Trigger struct {
 	Check TriggerFun
 	Fun   Listener
 }
-
-type CommandName string
-type ModuleName string
-type Numeric int
 
 type Handler struct {
 	Commands map[CommandName]ModuleName
