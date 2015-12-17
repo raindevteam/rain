@@ -6,15 +6,17 @@ import (
 )
 
 type Config struct {
-	Host string
-	Port string
-	Channel string
+	Host    string
+	Port    string
+	Channel []string
 
-	Nick string
+	Nick     string
 	RealName string
 	UserName string
 
 	CmdPrefix string
+
+	GoModules []string
 }
 
 func ReadConfig(path string) (*Config, error) {

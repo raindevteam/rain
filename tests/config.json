@@ -1,0 +1,13 @@
+{
+	"host": "irc.canternet.org",
+	"port": "6667",
+	"channel": ["#snowybottest"],
+
+	"nick": "SnowBot",
+	"realName": "RainBotGo",
+	"userName": "RainBotGo",
+
+	"cmdPrefix": ".",
+
+	"goModules": ["rcore"]
+}
