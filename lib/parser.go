@@ -19,3 +19,8 @@ func (p *Parser) ParseCommand(raw string) (string, []string) {
 	splitMessage := strings.Split(string(raw[1:]), " ")
 	return splitMessage[0], splitMessage[1:]
 }
+
+func (p *Parser) ParsePrefix(raw string) (string, string) {
+	splitPrefix := strings.Split(raw, "!")
+	return splitPrefix[0], splitPrefix[1]
+}

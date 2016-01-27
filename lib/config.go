@@ -3,6 +3,8 @@ package rainbot
 import (
 	"encoding/json"
 	"os"
+
+	"github.com/RyanPrintup/nimbus"
 )
 
 type Config struct {
@@ -31,4 +33,22 @@ func ReadConfig(path string) (*Config, error) {
 	}
 
 	return config, nil
+}
+
+func GetConfigs(file string) (ncon *nimbus.Config, rcon *Config, err error) {
+	rcon, err = ReadConfig(file)
+
+	if err != nil {
+		return nil, nil, err
+	}
+
+	ncon = &nimbus.Config{
+		Port:     rcon.Port,
+		Channels: rcon.Channel,
+		RealName: rcon.RealName,
+		UserName: rcon.UserName,
+		Password: "",
+	}
+
+	return ncon, rcon, nil
 }

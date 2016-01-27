@@ -7,87 +7,91 @@ import (
 	"github.com/RyanPrintup/nimbus"
 )
 
-type CommandFun func(*nimbus.Message, []string)
-type TriggerFun func(*nimbus.Message) bool
-type Listener func(*nimbus.Message)
-
-type Event string
-
-type CommandName string
-type ModuleName string
-type Numeric int
-
-type Command struct {
-	Help string
-	Fun  CommandFun
-	PM   bool
-	CM   bool
-}
-
-type Trigger struct {
-	Check TriggerFun
-	Fun   Listener
-}
-
 type Handler struct {
 	Commands map[CommandName]ModuleName
-	//Commands map[]
-	NumericHooks map[ModuleName][]Numeric
+	Triggers map[Event][]ModuleName
+	Numerics map[Numeric][]ModuleName
 
 	InternalCommands map[CommandName]*Command
-	InternalTriggers map[string]*Trigger
+	InternalTriggers map[Event][]*Trigger
+	InternalNumerics map[Numeric][]*Listener
 
 	Modules map[ModuleName]*rpc.Client
 }
 
-type IrcData struct {
-	Event Event
-	Msg   *nimbus.Message
-}
-
-type CommandData struct {
-	Msg  *nimbus.Message
-	Name CommandName
-	Args []string
-}
-
 func NewHandler() *Handler {
 	handler := &Handler{
-		Commands:     make(map[CommandName]ModuleName),
-		NumericHooks: make(map[ModuleName][]Numeric),
+		Commands: make(map[CommandName]ModuleName),
+		Triggers: make(map[Event][]ModuleName),
+		Numerics: make(map[Numeric][]ModuleName),
 
 		InternalCommands: make(map[CommandName]*Command),
-		InternalTriggers: make(map[string]*Trigger),
+		InternalTriggers: make(map[Event][]*Trigger),
+		InternalNumerics: make(map[Numeric][]*Listener),
 
 		Modules: make(map[ModuleName]*rpc.Client),
 	}
 	return handler
 }
 
+/*
+ * AddModule adds a new module to the handler by adding its
+ * respective rpc client.
+ */
+
 func (h *Handler) AddModule(mName ModuleName, module *rpc.Client) {
-	if _, ok := h.Modules[mName]; !ok {
-		h.Modules[mName] = module
-	}
+	h.Modules[mName] = module
 }
 
+/*
+ * AddCommand adds a command to the handler by using its name
+ * as a key for the module's name. The module name is then used
+ * to invoke the command via rpc.
+ */
+
 func (h *Handler) AddCommand(cmd CommandName, mName ModuleName) {
-	if _, ok := h.Commands[cmd]; !ok {
-		h.Commands[cmd] = mName
-	}
+	h.Commands[cmd] = mName
 }
+
+/*
+ * AddInternalCommand adds an internal command to the handler. It
+ * uses the name as a key for the command's respective struct.
+ */
 
 func (h *Handler) AddInternalCommand(cname CommandName, cfunc *Command) {
 	h.InternalCommands[cname] = cfunc
 }
 
-func (h *Handler) AddNumeric() {
+/*
+ * AddTrigger adds an event to the handler using the event as a key
+ */
 
+func (h *Handler) AddTrigger(mName ModuleName, e Event) {
+	h.Triggers[e] = append(h.Triggers[e], mName)
 }
+
+/*
+ * AddInternalTrigger does the same as AddTrigger except it adds
+ * a trigger struct to the list of internal triggers.
+ */
+
+func (h *Handler) AddInternalTrigger(event Event, trigger *Trigger) {
+	h.InternalTriggers[event] = append(h.InternalTriggers[event], trigger)
+}
+
+/*
+ * Checks if a command name is an internal command.
+ */
 
 func (h *Handler) IsInternalCommand(cmd CommandName) bool {
 	_, ok := h.InternalCommands[cmd]
 	return ok
 }
+
+/*
+ * Invoke runs a command. Commands are ran by calling the respective module's
+ * "InvokeCommand" rpc method. The module then handles the firing.
+ */
 
 func (h *Handler) Invoke(msg *nimbus.Message, cmd CommandName, args []string) {
 	if h.IsInternalCommand(cmd) {
@@ -98,7 +102,7 @@ func (h *Handler) Invoke(msg *nimbus.Message, cmd CommandName, args []string) {
 			return
 		}
 		result := ""
-		h.Modules[mName].Call(string(mName)+".InvokeCommand",
+		h.Modules[mName].Call(string(mName) + ".InvokeCommand",
 			&CommandData{msg, cmd, args}, &result)
 		// Handle Error
 	}
@@ -107,4 +111,23 @@ func (h *Handler) Invoke(msg *nimbus.Message, cmd CommandName, args []string) {
 func (h *Handler) InvokeInternal(msg *nimbus.Message, cmd CommandName, args []string) {
 	hook := h.InternalCommands[cmd]
 	hook.Fun(msg, args)
+}
+
+func (h *Handler) Fire(msg *nimbus.Message, e Event) {
+	h.FireInternal(msg, e)
+
+	for _, mName := range h.Triggers[e] {
+		result := ""
+		go h.Modules[mName].Call(string(mName)+".FireTriggers", msg, &result)
+	}
+}
+
+func (h *Handler) FireInternal(msg *nimbus.Message, e Event) {
+	for _, trigger := range h.InternalTriggers[e] {
+		go func (msg *nimbus.Message) {
+			if trigger.Check(msg) {
+				trigger.Fun(msg)
+			}
+		}(msg)
+	}
 }
