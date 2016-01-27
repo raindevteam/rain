@@ -11,8 +11,8 @@ import (
 )
 
 func main() {
-	if len(os.Args) < 1 {
-		fmt.Println("Usage: rainbot <config_file>")
+	if len(os.Args) < 2 {
+		fmt.Println("Usage: rainbot \"config\"")
 		os.Exit(1)
 	}
 
@@ -26,7 +26,7 @@ func main() {
 	bot := &rainbot.Bot{
 		/* Client      */ nimbus.NewClient(rainConfig.Host,
 							rainConfig.Nick, *nimConfig),
-		/* Version     */ "Alpha 0.2.0 (Iron Clad)",
+		/* Version     */ "Alpha 0.3.0 (Steeljack)",
 		/* ModuleNames */ rainConfig.GoModules,
 		/* Channels    */ make(map[string]*rainbot.Channel),
 		/* Parser      */ rainbot.NewParser(rainConfig.CmdPrefix),
@@ -46,7 +46,7 @@ func main() {
 
 		bot.LoadModules()
 
-		bot.Handler.AddInternalCommand("rmm", &rainbot.Command{
+		bot.Handler.AddInternalCommand("m", &rainbot.Command{
 			Help: "The RainBot Module Manager helps manage modules.",
 			Fun: func (msg *nimbus.Message, args []string) {
 				bot.Say(msg.Args[0], "Not exactly working yet")
@@ -110,11 +110,11 @@ func main() {
 			defer bot.Mu.Unlock()
 
 			who, _ := bot.Parser.ParsePrefix(msg.Prefix)
-			where  := msg.Args[0]
+			where  := msg.Args[0][1:]
 
 			if who == bot.Nick {
 				channel := rainbot.NewChannel(where)
-				bot.Channels[where] = channel
+				bot.Channels[strings.ToLower(where)] = channel
 				return
 			}
 
@@ -138,8 +138,9 @@ func main() {
 		bot.AddListener(nimbus.KILL, func (msg *nimbus.Message) {
 			bot.Mu.Lock()
 
+			// Implement getInfo(msg) function?
 			who, _ := bot.Parser.ParsePrefix(msg.Prefix)
-			where  := msg.Args[0]
+			where  := msg.Args[0][1:]
 
 			bot.RemoveUser(who, where)
 
@@ -151,7 +152,7 @@ func main() {
 			bot.Mu.Lock()
 
 			who, _ := bot.Parser.ParsePrefix(msg.Prefix)
-			where  := msg.Args[0]
+			where  := msg.Args[0][1:]
 
 			bot.RemoveUser(who, where)
 
@@ -163,7 +164,7 @@ func main() {
 			bot.Mu.Lock()
 
 			who, _ := bot.Parser.ParsePrefix(msg.Prefix)
-			where  := msg.Args[0]
+			where  := msg.Args[0][1:]
 
 			if who == bot.Nick {
 				delete(bot.Channels, strings.ToLower(where))

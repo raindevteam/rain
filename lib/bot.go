@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net"
 	"net/rpc"
+	"os"
 	"os/exec"
 	"sync"
 	"strings"
@@ -95,7 +96,8 @@ func (b *Bot) startRpcServer() {
 func (b *Bot) moduleRun(name string) {
 	err := exec.Command(name).Start()
 	if err != nil {
-		panic(err)
+		fmt.Println(err)
+		os.Exit(1)
 	}
 }
 
