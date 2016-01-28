@@ -110,7 +110,7 @@ func main() {
 			defer bot.Mu.Unlock()
 
 			who, _ := bot.Parser.ParsePrefix(msg.Prefix)
-			where  := msg.Args[0][1:]
+			where  := msg.Args[0]
 
 			if who == bot.Nick {
 				channel := rainbot.NewChannel(where)
@@ -140,7 +140,7 @@ func main() {
 
 			// Implement getInfo(msg) function?
 			who, _ := bot.Parser.ParsePrefix(msg.Prefix)
-			where  := msg.Args[0][1:]
+			where  := msg.Args[0]
 
 			bot.RemoveUser(who, where)
 
@@ -152,7 +152,7 @@ func main() {
 			bot.Mu.Lock()
 
 			who, _ := bot.Parser.ParsePrefix(msg.Prefix)
-			where  := msg.Args[0][1:]
+			where  := msg.Args[0]
 
 			bot.RemoveUser(who, where)
 
@@ -164,7 +164,7 @@ func main() {
 			bot.Mu.Lock()
 
 			who, _ := bot.Parser.ParsePrefix(msg.Prefix)
-			where  := msg.Args[0][1:]
+			where  := msg.Args[0]
 
 			if who == bot.Nick {
 				delete(bot.Channels, strings.ToLower(where))
