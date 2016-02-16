@@ -34,13 +34,18 @@ func NewHandler() *Handler {
 	return handler
 }
 
-/*
- * AddModule adds a new module to the handler by adding its
- * respective rpc client.
- */
-
+// AddModule adds a new module to the handler by adding its
+// respective rpc client.
 func (h *Handler) AddModule(mName ModuleName, module *rpc.Client) {
 	h.Modules[mName] = module
+}
+
+/*
+ * Checks if a module exists
+ */
+func (h *Handler) ModuleExists(mName string) bool {
+	_, ok := h.Modules[ModuleName(mName)]
+	return ok
 }
 
 /*
@@ -102,7 +107,7 @@ func (h *Handler) Invoke(msg *nimbus.Message, cmd CommandName, args []string) {
 			return
 		}
 		result := ""
-		h.Modules[mName].Call(string(mName) + ".InvokeCommand",
+		h.Modules[mName].Call(string(mName)+".InvokeCommand",
 			&CommandData{msg, cmd, args}, &result)
 		// Handle Error
 	}
@@ -124,7 +129,7 @@ func (h *Handler) Fire(msg *nimbus.Message, e Event) {
 
 func (h *Handler) FireInternal(msg *nimbus.Message, e Event) {
 	for _, trigger := range h.InternalTriggers[e] {
-		go func (msg *nimbus.Message) {
+		go func(msg *nimbus.Message) {
 			if trigger.Check(msg) {
 				trigger.Fun(msg)
 			}

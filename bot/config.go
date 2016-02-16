@@ -15,10 +15,11 @@ type Config struct {
 	Nick     string
 	RealName string
 	UserName string
+	Modes    string
 
 	CmdPrefix string
 
-	GoModules []string
+	GoModules map[string]string
 }
 
 func ReadConfig(path string) (*Config, error) {
@@ -48,6 +49,7 @@ func GetConfigs(file string) (ncon *nimbus.Config, rcon *Config, err error) {
 		RealName: rcon.RealName,
 		UserName: rcon.UserName,
 		Password: "",
+		Modes: rcon.Modes,
 	}
 
 	return ncon, rcon, nil

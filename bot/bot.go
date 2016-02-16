@@ -1,13 +1,14 @@
 package rainbot
 
 import (
+	"errors"
 	"fmt"
 	"net"
 	"net/rpc"
 	"os"
 	"os/exec"
-	"sync"
 	"strings"
+	"sync"
 
 	"github.com/RyanPrintup/nimbus"
 	"github.com/sorcix/irc"
@@ -27,8 +28,8 @@ type CommandRequest struct {
 }
 
 type TriggerRequest struct {
-	Name   ModuleName
-	Event  Event
+	Name  ModuleName
+	Event Event
 }
 
 type Channel struct {
@@ -40,7 +41,7 @@ type Channel struct {
 
 func NewChannel(name string) *Channel {
 	channel := &Channel{
-		Name: name,
+		Name:  name,
 		Topic: "",
 		Users: make(map[string]string),
 	}
@@ -53,7 +54,7 @@ func NewChannel(name string) *Channel {
 type Bot struct {
 	*nimbus.Client
 	Version     string
-	ModuleNames []string
+	ModuleNames map[string]string
 	Channels    map[string]*Channel
 	Parser      *Parser
 	Handler     *Handler
@@ -101,12 +102,23 @@ func (b *Bot) moduleRun(name string) {
 	}
 }
 
+func (b *Bot) ModuleReload(name string) error {
+	output, err := exec.Command("go", "install", b.ModuleNames[name]+"/"+name).CombinedOutput()
+	s := string(output[:])
+	if err != nil {
+		fmt.Println(s)
+		return err
+	}
+	b.moduleRun(name)
+	return nil
+}
+
 // It firstly starts the master consumer server for the bot.
 // It then starts every module via exec.
 func (b *Bot) LoadModules() {
 	b.startRpcServer()
-	for _, moduleName := range b.ModuleNames {
-		b.moduleRun(moduleName)
+	for name, _ := range b.ModuleNames {
+		b.moduleRun(name)
 	}
 }
 
@@ -131,7 +143,7 @@ func (bpi BotApi) RegisterCommand(cr CommandRequest, result *string) error {
 func (bpi BotApi) RegisterTrigger(tr TriggerRequest, result *string) error {
 	listeners := bpi.B.GetListeners(string(tr.Event))
 	if len(listeners) == 0 {
-		bpi.B.AddListener(string(tr.Event), func (msg *nimbus.Message) {
+		bpi.B.AddListener(string(tr.Event), func(msg *nimbus.Message) {
 			bpi.B.Handler.Fire(msg, tr.Event)
 		})
 	}
@@ -141,6 +153,21 @@ func (bpi BotApi) RegisterTrigger(tr TriggerRequest, result *string) error {
 
 func (bpi BotApi) GetVersion(mName string, result *string) error {
 	*result = bpi.B.Version
+	return nil
+}
+
+func (bpi BotApi) GetConnectedUsers(channel string, result *map[string]string) error {
+	*result = bpi.B.Channels[strings.ToLower(channel)].Users
+	return nil
+}
+
+func (bpi BotApi) GetTopic(channel string, result *string) error {
+	if _, ok := bpi.B.Channels[strings.ToLower(channel)]; !ok {
+		*result = ""
+		return errors.New("Channel doesn't exist")
+	}
+
+	*result = bpi.B.Channels[strings.ToLower(channel)].Topic
 	return nil
 }
 
