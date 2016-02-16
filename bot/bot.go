@@ -1,10 +1,14 @@
 package rainbot
 
 import (
+	"errors"
 	"fmt"
 	"net"
 	"net/rpc"
+	"os"
 	"os/exec"
+	"strings"
+	"sync"
 
 	"github.com/RyanPrintup/nimbus"
 	"github.com/sorcix/irc"
@@ -23,15 +27,47 @@ type CommandRequest struct {
 	Module ModuleName
 }
 
+type TriggerRequest struct {
+	Name  ModuleName
+	Event Event
+}
+
+type Channel struct {
+	Name  string
+	Topic string
+	Users map[string]string
+	Modes string
+}
+
+func NewChannel(name string) *Channel {
+	channel := &Channel{
+		Name:  name,
+		Topic: "",
+		Users: make(map[string]string),
+	}
+	return channel
+}
+
 // The Bot struct holds the internal nimbus.Client, used to register
 // listeners for irc. ModuleNames is used to look up which plugins to start.
 // The Handler provides management of commands, listeners and triggers.
 type Bot struct {
+	*nimbus.Client
 	Version     string
-	Client      *nimbus.Client
-	ModuleNames []string
+	ModuleNames map[string]string
+	Channels    map[string]*Channel
 	Parser      *Parser
 	Handler     *Handler
+	Mu          sync.Mutex
+}
+
+func (b *Bot) RemoveUser(nick string, channel string) {
+	if nick == b.Nick {
+		delete(b.Channels, strings.ToLower(channel))
+		return
+	}
+
+	delete(b.Channels[strings.ToLower(channel)].Users, nick)
 }
 
 // startRpcServer registers the master consumer for plugins.
@@ -50,7 +86,7 @@ func (b *Bot) startRpcServer() {
 	go func() {
 		for {
 			conn, _ := master.Accept()
-			rpc.ServeCodec(RpcCodecServer(conn))
+			go rpc.ServeCodec(RpcCodecServer(conn))
 		}
 	}()
 }
@@ -61,16 +97,28 @@ func (b *Bot) startRpcServer() {
 func (b *Bot) moduleRun(name string) {
 	err := exec.Command(name).Start()
 	if err != nil {
-		panic(err)
+		fmt.Println(err)
+		os.Exit(1)
 	}
+}
+
+func (b *Bot) ModuleReload(name string) error {
+	output, err := exec.Command("go", "install", b.ModuleNames[name]+"/"+name).CombinedOutput()
+	s := string(output[:])
+	if err != nil {
+		fmt.Println(s)
+		return err
+	}
+	b.moduleRun(name)
+	return nil
 }
 
 // It firstly starts the master consumer server for the bot.
 // It then starts every module via exec.
 func (b *Bot) LoadModules() {
 	b.startRpcServer()
-	for _, moduleName := range b.ModuleNames {
-		b.moduleRun(moduleName)
+	for name, _ := range b.ModuleNames {
+		b.moduleRun(name)
 	}
 }
 
@@ -88,11 +136,38 @@ func (bpi BotApi) Send(raw string, result *string) error {
 // Register a command from a module using a command request. The command request
 func (bpi BotApi) RegisterCommand(cr CommandRequest, result *string) error {
 	bpi.B.Handler.AddCommand(cr.Name, cr.Module)
+	fmt.Println(string(cr.Name) + " " + string(cr.Module))
+	return nil
+}
+
+func (bpi BotApi) RegisterTrigger(tr TriggerRequest, result *string) error {
+	listeners := bpi.B.GetListeners(string(tr.Event))
+	if len(listeners) == 0 {
+		bpi.B.AddListener(string(tr.Event), func(msg *nimbus.Message) {
+			bpi.B.Handler.Fire(msg, tr.Event)
+		})
+	}
+	bpi.B.Handler.AddTrigger(tr.Name, tr.Event)
 	return nil
 }
 
 func (bpi BotApi) GetVersion(mName string, result *string) error {
 	*result = bpi.B.Version
+	return nil
+}
+
+func (bpi BotApi) GetConnectedUsers(channel string, result *map[string]string) error {
+	*result = bpi.B.Channels[strings.ToLower(channel)].Users
+	return nil
+}
+
+func (bpi BotApi) GetTopic(channel string, result *string) error {
+	if _, ok := bpi.B.Channels[strings.ToLower(channel)]; !ok {
+		*result = ""
+		return errors.New("Channel doesn't exist")
+	}
+
+	*result = bpi.B.Channels[strings.ToLower(channel)].Topic
 	return nil
 }
 
@@ -111,6 +186,7 @@ func (bpi BotApi) Loop(n string, result *string) error {
 // to the module. The name is kept in the handler for event dispatching
 // and module management.
 func (bpi BotApi) Reg(t Ticket, result *string) error {
+	fmt.Println("================== Registering: " + t.Name)
 	module := rpc.NewClientWithCodec(RpcCodecClientWithPort(t.Port))
 	bpi.B.Handler.AddModule(t.Name, module)
 	return nil
