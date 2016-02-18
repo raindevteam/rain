@@ -1,3 +1,7 @@
 language: go
+
 go:
-  - tip
+  - 1.5
+  - 1.6
+
+script: go get -d ./... && go test ./...
