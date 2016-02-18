@@ -48,6 +48,17 @@ func (h *Handler) ModuleExists(mName string) bool {
 	return ok
 }
 
+func (h *Handler) SignalKill(mName string) error {
+	result := ""
+	err := h.Modules[ModuleName(mName)].Call(mName+".Cleanup", nil, &result)
+
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
 /*
  * AddCommand adds a command to the handler by using its name
  * as a key for the module's name. The module name is then used
