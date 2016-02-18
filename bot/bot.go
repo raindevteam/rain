@@ -119,7 +119,10 @@ func (b *Bot) ModuleReload(name string) (err error) {
 // can then communicate back via the master rpc server.
 func (b *Bot) moduleRun(name string) {
 	c := b.Modules[name].Cmder
-	c.Start()
+	err := c.Start()
+	if err != nil {
+		fmt.Println("Could not start: " + name + "(" + err.Error() + ")")
+	}
 }
 
 /*** IRC specific methods ***/
