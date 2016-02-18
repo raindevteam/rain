@@ -25,7 +25,7 @@ func main() {
 
 	bot := &rainbot.Bot{
 		/* Client      */ nimbus.NewClient(rainConfig.Host, rainConfig.Nick, *nimConfig),
-		/* Version     */ "Alpha 0.3.0 (Steeljack)",
+		/* Version     */ "Alpha 0.4.0 (Monterey Jack)",
 		/* Modules     */ make(map[string]*rainbot.Module),
 		/* Channels    */ make(map[string]*rainbot.Channel),
 		/* Parser      */ rainbot.NewParser(rainConfig.CmdPrefix),
