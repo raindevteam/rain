@@ -24,15 +24,16 @@ func main() {
 	}
 
 	bot := &rainbot.Bot{
-		/* Client      */ nimbus.NewClient(rainConfig.Host,
-			rainConfig.Nick, *nimConfig),
+		/* Client      */ nimbus.NewClient(rainConfig.Host, rainConfig.Nick, *nimConfig),
 		/* Version     */ "Alpha 0.3.0 (Steeljack)",
-		/* ModuleNames */ rainConfig.GoModules,
+		/* Modules     */ make(map[string]*rainbot.Module),
 		/* Channels    */ make(map[string]*rainbot.Channel),
 		/* Parser      */ rainbot.NewParser(rainConfig.CmdPrefix),
 		/* Handler     */ rainbot.NewHandler(),
 		/* Mutex       */ sync.Mutex{},
 	}
+
+	bot.SetupModules(rainConfig)
 
 	fmt.Print("Connecting... ")
 
@@ -60,18 +61,20 @@ func main() {
 						return
 					}
 
-					// TODO: Check for module internally
-					if bot.Handler.ModuleExists(args[1]) {
-						err := bot.ModuleReload(args[1])
-						if err != nil {
-							bot.Say(msg.Args[0], "Error: Could not reload module, view output in console")
-							return
-						}
-						bot.Say(msg.Args[0], "Reloaded module: "+args[1])
-					} else {
-						bot.Say(msg.Args[0], "Error: Module does not exist")
+					err := bot.ModuleReload(args[1])
+					if err != nil {
+						bot.Say(msg.Args[0], "Error: Could not reload module, view output in console")
+						return
 					}
+					bot.Say(msg.Args[0], "Reloaded module: "+args[1])
+				case "kill":
+					if len(args) == 1 {
+						bot.Say(msg.Args[0], "Error: No module specified")
+						return
+					}
+
 				}
+
 			},
 			PM: true,
 			CM: true,
