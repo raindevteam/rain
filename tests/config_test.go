@@ -1,11 +1,13 @@
-package rainbot
+package rainbot_testing
 
-import "testing"
+import (
+	"testing"
 
-//"github.com/Wolfchase/rainbot"
+	"github.com/wolfchase/rainbot/bot"
+)
 
 func TestReadConfig(t *testing.T) {
-	config, err := ReadConfig("../tests/config.json")
+	config, err := rainbot.ReadConfig("../tests/config.json")
 
 	if err != nil || config.Host != "irc.canternet.org" {
 		t.Fatalf("Couldn't read config file: ", err)
