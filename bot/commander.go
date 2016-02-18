@@ -6,6 +6,8 @@ import (
 	"os/exec"
 )
 
+// A Commander handles an individual process of a module. The Commander can recompile and invoke
+// a module as well as terminate its process. Mostly used by the bot for module management.
 type Commander struct {
 	Name string
 	Type string
@@ -13,6 +15,7 @@ type Commander struct {
 	Cmd  *exec.Cmd
 }
 
+// NewCommander will return a Commander of the correct type for a given module name and its path.
 func NewCommander(name string, cmdtype string, path string) *Commander {
 	commander := &Commander{
 		Name: name,
@@ -22,6 +25,8 @@ func NewCommander(name string, cmdtype string, path string) *Commander {
 	return commander
 }
 
+// Recompile will attempt to compile any source code of a module if needed. If compilation fails,
+// an error is returned.
 func (c *Commander) Recompile() error {
 	switch c.Type {
 	case "js":
@@ -38,6 +43,8 @@ func (c *Commander) Recompile() error {
 	return nil
 }
 
+// Start creates a new exec.Command and stores it. Will return an error if the Command fails to
+// start.
 func (c *Commander) Start() (err error) {
 	switch c.Type {
 	case "js":
@@ -55,6 +62,7 @@ func (c *Commander) Start() (err error) {
 	return nil
 }
 
+// Kill attempts to kill its Cmd process, an error is returned if a failure occurs.
 func (c *Commander) Kill() error {
 	err := c.Cmd.Process.Kill()
 	if err != nil {
