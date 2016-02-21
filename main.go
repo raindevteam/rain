@@ -1,36 +1,101 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"os"
 	"strings"
 	"sync"
 
-	"github.com/RyanPrintup/nimbus"
 	"github.com/wolfchase/rainbot/bot"
+	"github.com/wolfchase/rainbot/cli"
+	"github.com/wolfchase/rainbot/template"
+
+	"github.com/RyanPrintup/nimbus"
 )
+
+var t = flag.String("t", "", "template type to create (mod or test)")
+var i = flag.Bool("i", false, "run the bot in interactive mode (does not connect to IRC)")
+
+func ValidLibraryOpt(opt string) bool {
+	switch opt {
+	case
+		"bot",
+		"db",
+		"template":
+		return true
+	}
+	return false
+}
+
+func HandleFlags() {
+	if *t != "" {
+		switch *t {
+		case "test":
+			if len(flag.Args()) != 2 {
+				fmt.Println("RainBot: Invalid number of arguments")
+				fmt.Println("RainBot: Valid Args for (-t test): lib name")
+				os.Exit(1)
+			}
+
+			if !ValidLibraryOpt(flag.Args()[0]) {
+				fmt.Println("RainBot: " + flag.Args()[0] + " not a testable library")
+				os.Exit(1)
+			}
+
+			tmpl.CreateTestTemplate(flag.Args()[0], flag.Args()[1])
+		}
+		os.Exit(0)
+	}
+
+}
 
 func main() {
 	if len(os.Args) < 2 {
-		fmt.Println("Usage: rainbot \"config\"")
+		fmt.Println("Usage: rainbot [-t | -m] | config")
 		os.Exit(1)
 	}
 
-	nimConfig, rainConfig, err := rainbot.GetConfigs(os.Args[1])
+	flag.Parse()
+	HandleFlags()
 
-	if err != nil {
-		fmt.Println(err)
-		os.Exit(1)
-	}
+	var bot *rainbot.Bot
+	var rainConfig *rainbot.Config
+	var nimConfig *nimbus.Config
+	var err error
 
-	bot := &rainbot.Bot{
-		/* Client      */ nimbus.NewClient(rainConfig.Host, rainConfig.Nick, *nimConfig),
-		/* Version     */ "Alpha 0.4.0 (Monterey Jack)",
-		/* Modules     */ make(map[string]*rainbot.Module),
-		/* Channels    */ make(map[string]*rainbot.Channel),
-		/* Parser      */ rainbot.NewParser(rainConfig.CmdPrefix),
-		/* Handler     */ rainbot.NewHandler(),
-		/* Mutex       */ sync.Mutex{},
+	if *i {
+		rainConfig, err = rainbot.ReadConfig(os.Args[2])
+		fmt.Println(os.Args[2])
+
+		fmt.Println(rainConfig.Host)
+
+		if err != nil {
+			fmt.Println(err)
+			fmt.Println("here?")
+			os.Exit(1)
+		}
+
+		bot = clibot.NewCLIBot(rainConfig)
+	} else {
+		nimConfig, rainConfig, err = rainbot.GetConfigs(os.Args[1])
+
+		fmt.Println(os.Args[1])
+
+		if err != nil {
+			fmt.Println(err)
+			os.Exit(1)
+		}
+
+		bot = &rainbot.Bot{
+			/* Client      */ nimbus.NewClient(rainConfig.Host, rainConfig.Nick, *nimConfig),
+			/* Version     */ "Alpha 0.4.0 (Monterey Jack)",
+			/* Modules     */ make(map[string]*rainbot.Module),
+			/* Channels    */ make(map[string]*rainbot.Channel),
+			/* Parser      */ rainbot.NewParser(rainConfig.CmdPrefix),
+			/* Handler     */ rainbot.NewHandler(),
+			/* Mutex       */ sync.Mutex{},
+		}
 	}
 
 	bot.SetupModules(rainConfig)
@@ -90,7 +155,7 @@ func main() {
 
 		bot.AddListener(nimbus.PRIVMSG, func(msg *nimbus.Message) {
 			text := msg.Trailing
-			if text == "Hello, "+bot.Client.Nick {
+			if text == "Hello, "+bot.GetNick() {
 				bot.Client.Say(msg.Args[0], "Hello there!")
 			}
 		})
@@ -137,7 +202,7 @@ func main() {
 			who, _ := bot.Parser.ParsePrefix(msg.Prefix)
 			where := msg.Args[0]
 
-			if who == bot.Nick {
+			if who == bot.GetNick() {
 				channel := rainbot.NewChannel(where)
 				bot.Channels[strings.ToLower(where)] = channel
 				return
@@ -190,7 +255,7 @@ func main() {
 
 			who, _ := bot.Parser.ParsePrefix(msg.Prefix)
 
-			if who == bot.Nick {
+			if who == bot.GetNick() {
 				// We quit
 			}
 
@@ -211,7 +276,7 @@ func main() {
 		})
 
 		bot.Listen()
-		result := <-bot.Quit
+		result := <-bot.Quit()
 
 		fmt.Println(result)
 	})
