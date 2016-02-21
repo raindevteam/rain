@@ -28,6 +28,9 @@ func (p *Parser) ParseCommand(raw string) (string, []string) {
 
 // ParsePrefix takes an IRC prefix and returns the user and host.
 func (p *Parser) ParsePrefix(raw string) (string, string) {
+	if !strings.Contains(raw, "!") {
+		return raw, ""
+	}
 	splitPrefix := strings.Split(raw, "!")
 	return splitPrefix[0], splitPrefix[1]
 }
