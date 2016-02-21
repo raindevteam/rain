@@ -1,0 +1,17 @@
+{
+	"host": "irc.canternet.org",
+	"port": "6667",
+	"channel": ["#snowybottest"],
+
+	"nick": "SnowBot",
+	"realName": "RainBotGo",
+	"userName": "RainBotGo",
+
+	"modes": "+B",
+
+	"cmdPrefix": ".",
+
+	"goModules": {
+		"rcore": "github.com/wolfchase"
+	}
+}
