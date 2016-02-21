@@ -46,12 +46,25 @@ func NewModule(name string, path string, cmdtype string) *Module {
 	return m
 }
 
+type Client interface {
+	GetNick() string
+	GetChannels() []string
+	Connect(callback func(error)) error
+	Listen()
+	Quit() chan error
+	Send(raw ...string)
+	Say(channel string, text string)
+	AddListener(event string, l nimbus.Listener)
+	GetListeners(event string) []nimbus.Listener
+	Emit(event string, msg *nimbus.Message)
+}
+
 // The Bot struct holds the internal nimbus.Client, used to register listeners for irc. ModuleNames
 // is used to look up which plugins to start and are eventually passed to the handler. The Handler
 // provides management of commands, listeners and triggers. Since listeners act independently of
 // each other, a mutex is used to keep bot writes (such as channel updates) synchronised.
 type Bot struct {
-	*nimbus.Client
+	Client
 	Version  string
 	Modules  map[string]*Module
 	Channels map[string]*Channel
@@ -130,7 +143,7 @@ func (b *Bot) moduleRun(name string) {
 // RemoveUser will delete a user entry from the given channel. If the user is the bot itself, the
 // bot will isntead remove the channel from the bot's channel list.
 func (b *Bot) RemoveUser(nick string, channel string) {
-	if nick == b.Nick {
+	if nick == b.GetNick() {
 		delete(b.Channels, strings.ToLower(channel))
 		return
 	}
@@ -233,6 +246,15 @@ func (b BotAPI) GetTopic(channel string, result *string) error {
 	}
 
 	*result = b.bot.Channels[strings.ToLower(channel)].Topic
+	return nil
+}
+
+func (bpi BotAPI) Loop(n string, result *string) error {
+	c := make(chan bool)
+	func(ch chan bool) {
+
+	}(c)
+	<-c
 	return nil
 }
 
