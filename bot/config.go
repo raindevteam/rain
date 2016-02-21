@@ -49,7 +49,7 @@ func GetConfigs(file string) (ncon *nimbus.Config, rcon *Config, err error) {
 		RealName: rcon.RealName,
 		UserName: rcon.UserName,
 		Password: "",
-		Modes: rcon.Modes,
+		Modes:    rcon.Modes,
 	}
 
 	return ncon, rcon, nil
