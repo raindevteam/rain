@@ -35,9 +35,9 @@ RainBot Module Libraries (RMLS)
 In an effort to abstract the details of RPC when building your modules, we are current supporting
 three RainBot Module Libraries called RMLS.
 
-- [**gorml**](githbu.com/wolfchase/gorml) for Golang
-- [**pyrml**](github.com/wolfchase/pyrml) for Python and,
-- [**jsrml**](github.com/wolfchase/jsrml) for Javascript
+- [**gorml**](https://github.com/wolfchase/gorml) for Golang
+- [**pyrml**](https://github.com/wolfchase/pyrml) for Python and,
+- [**jsrml**](https://github.com/wolfchase/jsrml) for Javascript
 
 Most of our efforts are being put into gorml currently, so you might find the other libraries lacking for now.
 
