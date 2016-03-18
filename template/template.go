@@ -7,11 +7,7 @@ import (
 	"text/template"
 )
 
-type JsModuleConstruct struct {
-	Name string
-}
-
-type GoModuleConstruct struct {
+type ModuleConstruct struct {
 	Name string
 }
 
@@ -41,7 +37,6 @@ func CreateTestTemplate(lib string, name string) {
 	f.Close()
 }
 
-/*
 func GetModTemplate(m string) string {
 	switch m {
 	case "go":
@@ -49,24 +44,39 @@ func GetModTemplate(m string) string {
 	case "js":
 		return JSMTemplate
 	}
+	return ""
 }
 
-func CreateModTemplate(lib string, name string) {
-	construct := TestConstruct{lib, strings.Title(name)}
-
-	t := template.New("test")
-	t, err = t.Parse(TestTemplate)
+func CreateModFile(tmpl string, name string, ext string) error {
+	t := template.New(name)
+	t, err := t.Parse(tmpl)
 
 	if err != nil {
 		fmt.Println(err)
 	}
 
-	f, err := os.Create(name + "_test.go")
-
+	construct := ModuleConstruct{strings.Title(name)}
+	f, err := os.Create(strings.ToLower(name) + "." + ext)
 	if err != nil {
-		fmt.Println(err)
+		return err
 	}
-
 	t.Execute(f, construct)
+	f.Close()
+	return nil
 }
-*/
+
+func CreateModTemplate(mod string, name string) {
+	tmpl := GetModTemplate(mod)
+
+	var err error
+	switch tmpl {
+	case GOMTemplate:
+		err = CreateModFile(tmpl, name, "go")
+	case JSMTemplate:
+		err = CreateModFile(tmpl, name, "js")
+	}
+
+	if err != nil {
+		fmt.Println(err)
+	}
+}

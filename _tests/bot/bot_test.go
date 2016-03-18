@@ -87,11 +87,13 @@ func (s *BotSuite) TestNewChannel() {
 }
 
 // TODO: TestNewModule (First test commander)
+// TODO: TestSetupModules(First test commander and modules)
+// TODO: TestLoadModules(First test commander and modules)
+// TODO: TestLoadModules(First test commander and modules)
 
 func (s *BotSuite) TestConnect() {
 	s.bot.Connect(func(e error) {
 		s.Nil(e)
-		//s.bot.Listen()
 	})
 }
 

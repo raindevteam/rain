@@ -53,6 +53,9 @@ func (c *Commander) Start() (err error) {
 	case "go":
 		c.Cmd = exec.Command(c.Name)
 		err = c.Cmd.Start()
+	case "py":
+		c.Cmd = exec.Command("python " + c.Path + "/" + c.Name)
+		err = c.Cmd.Start()
 	}
 
 	if err != nil {

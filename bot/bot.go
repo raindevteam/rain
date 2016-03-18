@@ -200,6 +200,7 @@ type TriggerRequest struct {
 
 // Send transmits a message over irc as a PRIVMSG
 func (b BotAPI) Send(raw string, result *string) error {
+	fmt.Println("Got request to send " + raw)
 	b.bot.Send(nimbus.PRIVMSG, raw)
 	return nil
 }
@@ -209,6 +210,7 @@ func (b BotAPI) Send(raw string, result *string) error {
 // command).
 func (b BotAPI) RegisterCommand(cr CommandRequest, result *string) error {
 	b.bot.Handler.AddCommand(cr.Name, cr.Module)
+	fmt.Println("Added: " + string(cr.Name) + " for module: " + string(cr.Module))
 	return nil
 }
 
@@ -263,6 +265,12 @@ func (bpi BotAPI) Loop(n string, result *string) error {
 // for event dispatching and module management.
 func (b BotAPI) Register(t Ticket, result *string) error {
 	module := rpc.NewClientWithCodec(RpcCodecClientWithPort(t.Port))
+	if module == nil {
+		fmt.Println("Could not register:" + t.Name)
+		return errors.New("Failed to regsiter module")
+	}
 	b.bot.Handler.AddModule(t.Name, module)
+	fmt.Println("[Registered] " + t.Name)
+	fmt.Println("[Port] " + t.Port)
 	return nil
 }
