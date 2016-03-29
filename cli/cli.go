@@ -5,8 +5,8 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/Bowery/prompt"
 	"github.com/RyanPrintup/nimbus"
+	"github.com/peterh/liner"
 	"github.com/wolfchase/rainbot/bot"
 )
 
@@ -38,16 +38,7 @@ func (c CLIClient) Send(raw ...string) {
 	case IrcMode:
 		fmt.Println("RainBot >> " + strings.Join(raw[:len(raw)-2], " "))
 	case MsgMode:
-		lasti := len(raw) - 1
-
-		var rawjoined string
-
-		if raw[lasti][0] == ':' {
-			rawjoined = strings.Join(raw[:lasti], " ") + raw[lasti]
-		} else {
-			rawjoined = strings.Join(raw, " ")
-		}
-
+		rawjoined := strings.Join(raw, " ")
 		msg, err := nimbus.ParseMessage(rawjoined)
 
 		if err != nil {
@@ -55,7 +46,7 @@ func (c CLIClient) Send(raw ...string) {
 		}
 
 		if msg.Command == nimbus.PRIVMSG {
-			fmt.Println(c.GetNick() + "> " + msg.Trailing)
+			fmt.Println(c.GetNick() + "> " + strings.Join(msg.Args[1:], " "))
 		} else {
 			fmt.Println(c.GetNick() + "> " + "(" + msg.Command + ") ")
 		}
@@ -63,7 +54,7 @@ func (c CLIClient) Send(raw ...string) {
 }
 
 func (c CLIClient) Say(channel string, text string) {
-	c.Send(nimbus.PRIVMSG, channel+" :", text)
+	c.Send(nimbus.PRIVMSG, channel, text)
 }
 
 func NewCLIBot(rainConfig *rainbot.Config) *rainbot.Bot {
@@ -98,8 +89,20 @@ func (c CLIClient) Quit() chan error {
 }
 
 func (c CLIClient) Listen() {
+	l := liner.NewLiner()
+	defer l.Close()
+	l.SetCtrlCAborts(true)
+
+	if !liner.TerminalSupported() {
+		fmt.Println("The cli will fallback to dumb mode for user interaction\nconsider using a native console/terminal.")
+	}
+
 	for {
-		line, err := prompt.Basic("> ", true)
+		line, err := l.Prompt("> ")
+
+		if err != nil {
+			break
+		}
 
 		raw := ":RainBot " + nimbus.PRIVMSG + " #cli :" + line
 		msg, err := nimbus.ParseMessage(raw)
@@ -108,6 +111,6 @@ func (c CLIClient) Listen() {
 			fmt.Println(err)
 		}
 
-		c.Emit(nimbus.PRIVMSG, msg)
+		go c.Emit(nimbus.PRIVMSG, msg)
 	}
 }

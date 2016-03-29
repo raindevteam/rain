@@ -58,19 +58,19 @@ for a list of supported RML libraries. RainBot also has some scaffolding generat
 create biolerplate code for your module. If you have RainBot installed, you can create a scaffold by using
 the following command in a terminal or command prompt
 
-    rainbot -m rml-prefix YourModuleName
+    rainbot -m <rml-prefix> <module-name>
 
 Replace the rml-prefix with your rml of choice, so if you wish to create a Golang module scaffolding,
 running
 
-    rainbot -m go YourModuleName
+    rainbot -m go <module-name>
 
 Will do the trick.
 
 RainBot also has a builtin internal command that that lets you reload modules. If you have the bot
 connected to IRC, and your command prefix is set to ".", you can run:
 
-    .m reload ModuleName
+    .m reload <module-name>
 
 which will reload a module given its module name (it will recompile if need be).
 
@@ -79,6 +79,6 @@ which will reload a module given its module name (it will recompile if need be).
 We also have a CLI client for the bot that let's you run IRC commands in a terminal or command prompt.
 Simply start the bot with the -i flag:
 
-    rainbot -i config.json
+    rainbot -i <config>
 
  Do note that this feature is not tested in version 0.4.0 and is to be considered experimental.

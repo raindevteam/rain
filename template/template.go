@@ -43,6 +43,8 @@ func GetModTemplate(m string) string {
 		return GOMTemplate
 	case "js":
 		return JSMTemplate
+	case "py":
+		return PYMTemplate
 	}
 	return ""
 }
@@ -69,11 +71,17 @@ func CreateModTemplate(mod string, name string) {
 	tmpl := GetModTemplate(mod)
 
 	var err error
+
 	switch tmpl {
+
 	case GOMTemplate:
 		err = CreateModFile(tmpl, name, "go")
+
 	case JSMTemplate:
 		err = CreateModFile(tmpl, name, "js")
+
+	case PYMTemplate:
+		err = CreateModFile(tmpl, name, "py")
 	}
 
 	if err != nil {

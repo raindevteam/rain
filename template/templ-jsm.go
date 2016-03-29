@@ -4,15 +4,17 @@ const JSMTemplate = `"use strict";
 
 const Module = require('jsrml');
 
-class {{.Name}} {
-    constructor() { super("{{.Name}}", "An echo module") }
+class {{.Name}} extends Module {
+    constructor() { 
+        super("{{.Name}}", "An echo module");
+    }
 
-    echo(irc, msg, args) {
-        irc.say(args.join(" "));
+    echo(msg, args) {
+        this.say(args.join(" "));
 	}
 }
 
-function main() {
+if (require.main === module) {
     const m = new {{.Name}}();
 
     m.initialize()
@@ -27,9 +29,5 @@ function main() {
     .fail((error) => {
         console.error(error);
     });
-}
-
-if (require.main === module) {
-    main();
 }
 `

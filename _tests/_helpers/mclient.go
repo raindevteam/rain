@@ -1,4 +1,4 @@
-package RBThelpers
+package Thelpers
 
 import (
 	"strings"
@@ -8,18 +8,16 @@ import (
 )
 
 type MockClient struct {
-	listeners  map[string][]nimbus.Listener
-	MsgsToEmit []string
-	config     *rainbot.Config
-	quit       chan error
+	listeners map[string][]nimbus.Listener
+	config    *rainbot.Config
+	quit      chan error
 }
 
 func NewMockClient(config *rainbot.Config, msgs []string) *MockClient {
 	mc := &MockClient{
-		listeners:  make(map[string][]nimbus.Listener),
-		MsgsToEmit: msgs,
-		config:     config,
-		quit:       make(chan error),
+		listeners: make(map[string][]nimbus.Listener),
+		config:    config,
+		quit:      make(chan error),
 	}
 	return mc
 }

@@ -1,4 +1,4 @@
-package RBTbot
+package Tbot
 
 import (
 	"strings"
@@ -26,7 +26,7 @@ func (s *BotSuite) SetupTest() {
 		s.FailNow("Couldn't read config file")
 	}
 
-	s.bot = RBThelpers.NewMockBot(rcon)
+	s.bot = Thelpers.NewMockBot(rcon)
 	s.done = make(chan bool)
 
 	s.bot.AddListener(nimbus.JOIN, func(msg *nimbus.Message) {

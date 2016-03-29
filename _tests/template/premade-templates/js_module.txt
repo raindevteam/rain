@@ -2,15 +2,17 @@
 
 const Module = require('jsrml');
 
-class Test {
-    constructor() { super("Test", "An echo module") }
+class Test extends Module {
+    constructor() { 
+        super("Test", "An echo module");
+    }
 
-    echo(irc, msg, args) {
-        irc.say(args.join(" "));
+    echo(msg, args) {
+        this.say(args.join(" "));
 	}
 }
 
-function main() {
+if (require.main === module) {
     const m = new Test();
 
     m.initialize()
@@ -25,8 +27,4 @@ function main() {
     .fail((error) => {
         console.error(error);
     });
-}
-
-if (require.main === module) {
-    main();
 }

@@ -1,4 +1,4 @@
-package RBTbot
+package Tbot
 
 import (
 	"testing"
@@ -16,7 +16,7 @@ type CommanderSuite struct {
 }
 
 func (s *CommanderSuite) SetupTest() {
-	GoModCmder := rainbot.NewCommander("GoMod", "go",
+	s.GoModCmder = rainbot.NewCommander("gomod", "go",
 		"github.com/wolfchase/rainbot/_tests/_helpers/modules")
 }
 
@@ -24,9 +24,21 @@ func (s *CommanderSuite) SetupTest() {
 
 /****                                      Tests Go Here                                       ****/
 
-func (s *CommanderSuite) TestRecompile() {
-	err := s.GoModCmder.Recompile()
-	s.Nil(err)
+func (s *CommanderSuite) TestGoCommander() {
+	var err error
+
+	err = s.GoModCmder.Recompile()
+	// In the future, implement a last command status struct
+	s.Nil(err, "No error while recompiling")
+
+	err = s.GoModCmder.Start()
+	s.Nil(err, "No error from starting the module")
+
+	s.True(s.Registered, "The module successfully registered upon starting")
+	s.Registered = false
+
+	err = s.GoModCmder.Kill()
+	s.Nil(err, "No error from killing the module")
 }
 
 /**************************************************************************************************/

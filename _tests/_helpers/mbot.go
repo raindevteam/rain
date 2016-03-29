@@ -1,4 +1,4 @@
-package RBThelpers
+package Thelpers
 
 import (
 	"sync"

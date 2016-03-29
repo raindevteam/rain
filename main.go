@@ -100,7 +100,7 @@ func main() {
 
 	bot.SetupModules(rainConfig)
 
-	rlog.info("Bot", "Connecting")
+	//rlog.info("Bot", "Connecting")
 
 	fmt.Print("Connecting... ")
 
