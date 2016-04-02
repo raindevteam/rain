@@ -200,7 +200,6 @@ type TriggerRequest struct {
 
 // Send transmits a message over irc as a PRIVMSG
 func (b BotAPI) Send(raw string, result *string) error {
-	fmt.Println("Got request to send " + raw)
 	b.bot.Send(nimbus.PRIVMSG, raw)
 	return nil
 }
@@ -234,7 +233,7 @@ func (b BotAPI) GetVersion(mName string, result *string) error {
 	return nil
 }
 
-// GetConnectedUsers will return a user map (where every user has a IRC rank as a value).
+// GetConnectedUsers will return a user map (where every user has an IRC rank as a value).
 func (b BotAPI) GetConnectedUsers(channel string, result *map[string]string) error {
 	*result = b.bot.Channels[strings.ToLower(channel)].Users
 	return nil
