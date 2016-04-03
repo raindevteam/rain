@@ -48,13 +48,13 @@ func (c *Commander) Recompile() error {
 func (c *Commander) Start() (err error) {
 	switch c.Type {
 	case "js":
-		c.Cmd = exec.Command("node " + c.Path + "/" + c.Name)
+		c.Cmd = exec.Command("node", c.Path+"/"+c.Name)
 		err = c.Cmd.Start()
 	case "go":
 		c.Cmd = exec.Command(c.Name)
 		err = c.Cmd.Start()
 	case "py":
-		c.Cmd = exec.Command("python " + c.Path + "/" + c.Name)
+		c.Cmd = exec.Command("python", c.Path+"/"+c.Name)
 		err = c.Cmd.Start()
 	}
 

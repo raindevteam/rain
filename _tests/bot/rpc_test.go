@@ -1,4 +1,4 @@
-package RBTbot
+package Tbot
 
 import (
 	"errors"
@@ -54,7 +54,10 @@ func (s *RpcSuite) Test1RpcCodecServerInit() {
 
 	go func() {
 		for {
-			conn, _ := s.RpcServer.Accept()
+			conn, err := s.RpcServer.Accept()
+			if err != nil {
+				break
+			}
 			go rpc.ServeCodec(rainbot.RpcCodecServer(conn))
 		}
 	}()
@@ -70,6 +73,10 @@ func (s *RpcSuite) Test3RpcCodecServerClientComm() {
 	err := s.RpcClient.Call("TestMaster.Send", "Got RPC?", &result)
 	s.Nil(err)
 	s.True(s.GotMessage, "Communication between rpc server and client successful")
+}
+
+func (s *RpcSuite) TearDownSuite() {
+	s.RpcServer.Close()
 }
 
 /**************************************************************************************************/
