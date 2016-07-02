@@ -29,10 +29,10 @@ func NewCommander(name string, cmdtype string, path string) *Commander {
 func (c *Commander) Recompile() error {
 	switch c.Type {
 	case "go":
-		_, err := exec.Command("go", "install", c.Path+"/"+c.Name).CombinedOutput()
-		//s := string(output[:])
+		output, err := exec.Command("go", "install", c.Path+"/"+c.Name).CombinedOutput()
+		s := string(output[:])
 		if err != nil {
-			return errors.New("Could not recompile")
+			return errors.New("Could not recompile: " + s)
 		}
 	default:
 	}
