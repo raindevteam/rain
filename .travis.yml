@@ -5,8 +5,19 @@ go:
   - 1.5
   - 1.6
 
-install:
+addons:
+  apt:
+    sources:
+    - deadsnakes
+
+before_install:
   - go get github.com/stretchr/testify
-  - go get ./...
-    
-script: cd _tests && go test ./...
+  - sudo apt-get install python3.5
+  - curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash - && sudo apt-get install -y nodejs
+
+install:
+  - cd tests/_helpers/modules/jsmod && npm install
+  - pip install pyrml
+  - go get -d ./...
+
+script: cd tests && go test ./...
