@@ -4,7 +4,6 @@ import (
 	"strings"
 
 	"github.com/RyanPrintup/nimbus"
-	"github.com/wolfchase/rainbot/bot"
 )
 
 type MockClient struct {
@@ -36,8 +35,7 @@ func (mc *MockClient) GetChannels() []string {
 
 /****                                          IRC                                             ****/
 
-func (mc *MockClient) Connect(callback func(error)) error {
-	callback(nil)
+func (mc *MockClient) Connect() error {
 	return nil
 }
 
