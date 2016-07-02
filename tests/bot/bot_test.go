@@ -92,9 +92,7 @@ func (s *BotSuite) TestNewChannel() {
 // TODO: TestLoadModules(First test commander and modules)
 
 func (s *BotSuite) TestConnect() {
-	s.bot.Connect(func(e error) {
-		s.Nil(e)
-	})
+	s.bot.Connect()
 }
 
 func (s *BotSuite) TestJoinListener() {
