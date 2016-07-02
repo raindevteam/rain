@@ -1,33 +1,54 @@
 [![Build Status](https://travis-ci.org/wolfchase/rainbot.svg?branch=develop)](https://travis-ci.org/wolfchase/rainbot)
 
-RainBot
-=======
+ RainBot
+ =======
 
-A multi-purpose and extensible IRC bot aimed at providing you as much freedom as possible.
+A multi-purpose IRC library for quickly developing useful IRC bots.
+
+#### A Note on Development
+
+College proved rather difficult last quarter and therefore I was not able to work on RainBot as I
+had wished. However, now that I am on summer break, I have plenty of time to waste! If you are 
+viewing this message on the master branch, then 0.4.0 has been pushed out! And honsetly, is very
+sloppy! This was due to ill-mannered development (shame on me!). However, with 0.5.0 development,
+a new repo for documentation has been created and features the **Development Tracks**, an effort
+to go from chaos to organized chaos when it comes to developing RainBot. I have no idea how it will
+work, but it is obvious what I am doing right now is definitely not working! The Development Track
+System will be matured along the way as development pushes on.
+
+And yes, this README is pretty lame, but hopefully will be much more cooler when 0.5.0 comes around!
+
+----------------------------------
 
 Overview
 --------
 
-RainBot is built off the [Nimbus IRC library](https://github.com/RyanPrintup/Nimbus) leveraging its
-event driven API to handle IRC. Nimbus is very simple in that it only provides event listening functionality,
-RainBot is meant to add on to that by internally handling information such as joined channels and
-users. On top of that, it also provides an RPC API that allows you to write plugable modules. Since
-RPC is used, you can technically write your own module in any language provided you properly handle
-the Bot's RPC protocol (Specs coming in v0.5.0).
+RainBot was essentially just another IRC bot. However, the goal now is to give a user an API, or
+rather a framework, that they can leverage to quickly develop IRC bots, simple or complex. This
+package already includes two predefined installs of the bot, the default install shows how one
+can build a simple but very useful IRC bot that leverages RPC to enable pluggable modules. The
+second install is more of an example, and shows almost the bare mininmum of code to get an IRC
+bot up and running. With future development, we hope to provide more installs to garner to the
+needs that users may have. 
 
 Installation
 ------------
-
 First make sure you have properly installed go on your system (paths set and everything)
 
 Then simply find the nearest terminal or command prompt and run:
 
-    go get github.com/wolfchase/rainbot
+    $ go get github.com/wolfchase/rainbot
 
-Configuration
+Using the Premade Installations
 -------------
 
-// Todo
+If you're content enough with using one of the premade installation packages, you can 
+leverage this packages commandline utilities to install. After successfully installing 
+via go get, you may run:
+
+    $ rainbot mk <install> <bot-name>
+
+This will build a new bot from the specified install package to your GOPATH/bin.
 
 RainBot Module Libraries (RMLS)
 -------------------------------
@@ -52,6 +73,10 @@ via modules to any event that you may want to listen to as long as that event is
 a list](https://github.com/RyanPrintup/Nimbus/blob/master/commons.go)).
 
 #### Modules
+
+**RainBot received a huge reimplemenation for its cli capabilities and this section is no longer
+correct, sorry about that! Since 0.4.0 was also a bit of a slogged mess, we hope to reimpelment
+the following functionality in 0.5.0. We hope 0.5.0 will be much smoother of an update!**
 
 As mentioned, you can use the bot's RPC API to write your own modules using a RML. See the RMLS section
 for a list of supported RML libraries. RainBot also has some scaffolding generation to let you quickly
