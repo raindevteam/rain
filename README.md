@@ -1,7 +1,7 @@
 [![Build Status](https://travis-ci.org/wolfchase/rainbot.svg?branch=develop)](https://travis-ci.org/wolfchase/rainbot)
 
- RainBot
- =======
+RainBot
+=======
 
 A multi-purpose IRC library for quickly developing useful IRC bots.
 
@@ -16,7 +16,7 @@ to go from chaos to organized chaos when it comes to developing RainBot. I have 
 work, but it is obvious what I am doing right now is definitely not working! The Development Track
 System will be matured along the way as development pushes on.
 
-And yes, this README is pretty lame, but hopefully will be much more cooler when 0.5.0 comes around!
+And yes, this README is pretty lame, but hopefully it will be much more cooler when 0.5.0 comes around!
 
 ----------------------------------
 
