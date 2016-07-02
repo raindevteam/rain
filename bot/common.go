@@ -1,4 +1,4 @@
-package rainbot
+package rbot
 
 import "github.com/RyanPrintup/nimbus"
 

@@ -8,19 +8,19 @@ type Handle struct {
 }
 
 func (h *Handle) Run(msg *nimbus.Message) {
-	h.done <- true
 	h.listener(msg)
+	h.done <- true
 }
 
-func (c *CLIClient) AddListener(event string, l nimbus.Listener) {
+func (c *CliClient) AddListener(event string, l nimbus.Listener) {
 	c.listeners[event] = append(c.listeners[event], l)
 }
 
-func (c *CLIClient) GetListeners(event string) []nimbus.Listener {
+func (c *CliClient) GetListeners(event string) []nimbus.Listener {
 	return c.listeners[event]
 }
 
-func (c *CLIClient) Emit(event string, msg *nimbus.Message) {
+func (c *CliClient) Emit(event string, msg *nimbus.Message) {
 	for _, listener := range c.listeners[event] {
 		h := Handle{listener, make(chan bool)}
 		go h.Run(msg)

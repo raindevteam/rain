@@ -73,13 +73,10 @@ func CreateModTemplate(mod string, name string) {
 	var err error
 
 	switch tmpl {
-
 	case GOMTemplate:
 		err = CreateModFile(tmpl, name, "go")
-
 	case JSMTemplate:
 		err = CreateModFile(tmpl, name, "js")
-
 	case PYMTemplate:
 		err = CreateModFile(tmpl, name, "py")
 	}

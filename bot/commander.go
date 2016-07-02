@@ -1,8 +1,7 @@
-package rainbot
+package rbot
 
 import (
 	"errors"
-	"fmt"
 	"os/exec"
 )
 
@@ -26,18 +25,16 @@ func NewCommander(name string, cmdtype string, path string) *Commander {
 }
 
 // Recompile will attempt to compile any source code of a module if needed. If compilation fails,
-// an error is returned.
+// an error is returned. Nothing will be done for types that do not require compilation.
 func (c *Commander) Recompile() error {
 	switch c.Type {
-	case "js":
-		// No need to recompile js
 	case "go":
-		output, err := exec.Command("go", "install", c.Path+"/"+c.Name).CombinedOutput()
-		s := string(output[:])
+		_, err := exec.Command("go", "install", c.Path+"/"+c.Name).CombinedOutput()
+		//s := string(output[:])
 		if err != nil {
-			fmt.Println(s)
 			return errors.New("Could not recompile")
 		}
+	default:
 	}
 
 	return nil
@@ -45,6 +42,7 @@ func (c *Commander) Recompile() error {
 
 // Start creates a new exec.Command and stores it. Will return an error if the Command fails to
 // start.
+// TODO: Cleanup and Refactor
 func (c *Commander) Start() (err error) {
 	switch c.Type {
 	case "js":

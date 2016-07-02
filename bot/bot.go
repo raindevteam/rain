@@ -1,19 +1,21 @@
-package rainbot
+package rbot
 
 import (
 	"errors"
-	"fmt"
 	"net"
 	"net/rpc"
 	"strings"
 	"sync"
 
 	"github.com/RyanPrintup/nimbus"
+	"github.com/wolfchase/rainbot/rlog"
 )
 
-/*** Bot internals ***/
+//////////////////////////////          Bot Internals         //////////////////////////////////////
 
-// The Channel struct is used to store information about connected channels.
+// The Channel struct is used to store information about connected channels. Channels should be
+// added when the bot receives the JOIN event from the IRC server. Topic should be set to an empty
+// string and filled when the bot receives the RPL_TOPIC event.
 type Channel struct {
 	Name  string
 	Topic string
@@ -21,7 +23,8 @@ type Channel struct {
 	Modes string
 }
 
-// NewChannel creates a new channel.
+// NewChannel creates a new channel. Note that topic is set to an empty string in hopes that it
+// will be filled upon receiving the RPL_TOPIC event from the IRC server.
 func NewChannel(name string) *Channel {
 	channel := &Channel{
 		Name:  name,
@@ -31,25 +34,32 @@ func NewChannel(name string) *Channel {
 	return channel
 }
 
-// The Module struct holds the name of the module and its corresponding commander helper.
+// The Module struct serves as a container for a module's commander. The struct holds its
+// module's corresponding name to make it easier for reference.
 type Module struct {
 	Name  string
 	Cmder *Commander
 }
 
-// NewModule creates a new module.
+// NewModule returns a module struct with an assigned commander appropriated to the module's type.
 func NewModule(name string, path string, cmdtype string) *Module {
-	m := &Module{
+	module := &Module{
 		Name:  name,
 		Cmder: NewCommander(name, cmdtype, path),
 	}
-	return m
+	return module
 }
 
+// The Client interface allows the bot to have a systematic plugabble nature to its IRC
+// capabilities. Any IRC library that complies to this Client interface can be popped in and in
+// theory, the bot should operate as normal. The Nimbus IRC library has been implemented to
+// fulfill this interface and should work appropriately. This modular nature also allows the bot
+// to implement different types of clients meant for different purposes, such as command line
+// interfacing and mockable testing.
 type Client interface {
 	GetNick() string
 	GetChannels() []string
-	Connect(callback func(error)) error
+	Connect() error
 	Listen()
 	Quit() chan error
 	Send(raw ...string)
@@ -59,10 +69,12 @@ type Client interface {
 	Emit(event string, msg *nimbus.Message)
 }
 
-// The Bot struct holds the internal nimbus.Client, used to register listeners for irc. ModuleNames
+// The Bot struct holds the internal Client, used to register listeners for irc. ModuleNames
 // is used to look up which plugins to start and are eventually passed to the handler. The Handler
 // provides management of commands, listeners and triggers. Since listeners act independently of
-// each other, a mutex is used to keep bot writes (such as channel updates) synchronised.
+// each other, a mutex is used to keep bot writes (such as channel updates) synchronised. The bot
+// struct can be realized as a core to glue all modular components together, whilst keeping them
+// separate in operation.
 type Bot struct {
 	Client
 	Version  string
@@ -73,19 +85,69 @@ type Bot struct {
 	Mu       sync.Mutex
 }
 
-/*** Module specific methods ***/
+func NewBot(version string, rconf *Config) *Bot {
+	rlog.SetFlags(rlog.Linfo | rlog.Lwarn | rlog.Lerror)
+	rlog.SetLogFlags(0)
+
+	nconf := GetNimbusConfig(rconf)
+
+	bot := &Bot{
+		/* Client   */ nimbus.NewClient(rconf.Host, rconf.Nick, *nconf),
+		/* Version  */ version,
+		/* Modules  */ make(map[string]*Module),
+		/* Channels */ make(map[string]*Channel),
+		/* Parser   */ NewParser(rconf.CmdPrefix),
+		/* Handler  */ NewHandler(),
+		/* Mutex    */ sync.Mutex{},
+	}
+
+	return bot
+}
+
+func (b *Bot) DefaultConnect() {
+	b.Connect()
+	b.Listen()
+	result := <-b.Quit()
+	rlog.Info("Bot", "Quitting Now: "+result.Error())
+}
+
+func (b *Bot) DefaultConnectWithMsg(pre string, post string) {
+	if pre != "" {
+		rlog.Info("Bot", pre)
+	}
+
+	b.Connect()
+
+	if post != "" {
+		rlog.Info("Bot", post)
+	}
+
+	b.Listen()
+	result := <-b.Quit()
+	rlog.Info("Bot", "Quitting Now: "+result.Error())
+}
+
+/////////////////////////          Module Specific Methods         /////////////////////////////////
 
 // SetupModules goes through every module list found in the config and sets them up appropriately.
-func (b *Bot) SetupModules(rainConfig *Config) {
+func (b *Bot) EnableModules(rainConfig *Config) {
 	var name, path string
 
 	for name, path = range rainConfig.GoModules {
-		b.Modules[name] = NewModule(name, path, "go")
+		lowerName := strings.ToLower(name)
+		b.Modules[lowerName] = NewModule(lowerName, path, "go")
 	}
+
+	for name, path = range rainConfig.JsModules {
+		lowerName := strings.ToLower(name)
+		b.Modules[lowerName] = NewModule(lowerName, path, "js")
+	}
+
+	b.loadModules()
 }
 
 // LoadModules starts the bot's rpc master server and then calls moduleRun() on all modules.
-func (b *Bot) LoadModules() {
+func (b *Bot) loadModules() {
 	b.startRPCServer()
 	for name := range b.Modules {
 		b.moduleRun(name)
@@ -97,6 +159,8 @@ func (b *Bot) LoadModules() {
 // will be aborted. If the module complies, the module's corresponding process will be killed. The
 // module will then be recompiled if need be and will be restarted after.
 func (b *Bot) ModuleReload(name string) (err error) {
+	name = strings.ToLower(name)
+
 	if !b.Handler.ModuleExists(name) {
 		return errors.New("Module does not exist")
 	}
@@ -106,8 +170,7 @@ func (b *Bot) ModuleReload(name string) (err error) {
 	err = b.Handler.SignalKill(name)
 
 	if err != nil {
-		s := err.Error()
-		fmt.Println(s)
+		rlog.Error("Bot", err.Error())
 		return errors.New("Module refused to stop, aborting reload")
 	}
 
@@ -134,11 +197,11 @@ func (b *Bot) moduleRun(name string) {
 	c := b.Modules[name].Cmder
 	err := c.Start()
 	if err != nil {
-		fmt.Println("Could not start: " + name + "(" + err.Error() + ")")
+		rlog.Warn("Bot", "Could not start: "+name+"("+err.Error()+")")
 	}
 }
 
-/*** IRC specific methods ***/
+///////////////////////////          IRC Specific Methods         //////////////////////////////////
 
 // RemoveUser will delete a user entry from the given channel. If the user is the bot itself, the
 // bot will isntead remove the channel from the bot's channel list.
@@ -151,7 +214,7 @@ func (b *Bot) RemoveUser(nick string, channel string) {
 	delete(b.Channels[strings.ToLower(channel)].Users, nick)
 }
 
-/*** RPC specifc methods ***/
+///////////////////////////          RPC Specific Methods         //////////////////////////////////
 
 // startRPCServer registers the master consumer for plugins. The master consumer allows plugins to
 // communicate with the bot, allowing access to connected channels, users and registered modules.
@@ -161,7 +224,7 @@ func (b *Bot) startRPCServer() {
 	master, err := net.Listen("tcp", ":5555")
 
 	if err != nil {
-		fmt.Println(err)
+		rlog.Error("Bot", err.Error())
 	}
 
 	// Start accepting connections
@@ -173,7 +236,7 @@ func (b *Bot) startRPCServer() {
 	}()
 }
 
-/*** Bot's master consumer API ***/
+/////////////////////////          Bot Master Consumer API         /////////////////////////////////
 
 // BotAPI is the exposed api served via the bot's master consumer connection
 type BotAPI struct {
@@ -200,6 +263,7 @@ type TriggerRequest struct {
 
 // Send transmits a message over irc as a PRIVMSG
 func (b BotAPI) Send(raw string, result *string) error {
+
 	b.bot.Send(nimbus.PRIVMSG, raw)
 	return nil
 }
@@ -209,7 +273,7 @@ func (b BotAPI) Send(raw string, result *string) error {
 // command).
 func (b BotAPI) RegisterCommand(cr CommandRequest, result *string) error {
 	b.bot.Handler.AddCommand(cr.Name, cr.Module)
-	fmt.Println("Added: " + string(cr.Name) + " for module: " + string(cr.Module))
+	rlog.Debug("Bot", "Added: "+string(cr.Name)+" for module: "+string(cr.Module))
 	return nil
 }
 
@@ -265,11 +329,10 @@ func (bpi BotAPI) Loop(n string, result *string) error {
 func (b BotAPI) Register(t Ticket, result *string) error {
 	module := rpc.NewClientWithCodec(RpcCodecClientWithPort(t.Port))
 	if module == nil {
-		fmt.Println("Could not register:" + t.Name)
+		rlog.Warn("Bot", "Could not register:"+string(t.Name))
 		return errors.New("Failed to regsiter module")
 	}
-	b.bot.Handler.AddModule(t.Name, module)
-	fmt.Println("[Registered] " + t.Name)
-	fmt.Println("[Port] " + t.Port)
+	b.bot.Handler.AddModule(ModuleName(strings.ToLower(string(t.Name))), module)
+	rlog.Debug("Bot", "Registered "+string(t.Name)+" on port "+t.Port)
 	return nil
 }

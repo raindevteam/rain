@@ -1,17 +1,20 @@
-package rainbot
+package rbot
 
 import (
 	"net/rpc"
 	"strings"
 
+
 	"github.com/RyanPrintup/nimbus"
 )
 
 type Handler struct {
+	// Listeners for modules 
 	Commands map[CommandName]ModuleName
 	Triggers map[Event][]ModuleName
 	Numerics map[Numeric][]ModuleName
 
+	// Listeners for Bot
 	InternalCommands map[CommandName]*Command
 	InternalTriggers map[Event][]*Trigger
 	InternalNumerics map[Numeric][]*Listener
@@ -35,13 +38,13 @@ func NewHandler() *Handler {
 }
 
 // AddModule adds a new module to the handler by adding its respective rpc client.
-func (h *Handler) AddModule(mName ModuleName, module *rpc.Client) {
-	h.Modules[mName] = module
+func (h *Handler) AddModule(name ModuleName, module *rpc.Client) {
+	h.Modules[name] = module
 }
 
 // ModuleExists checks if a module exists within the handler.
-func (h *Handler) ModuleExists(mName string) bool {
-	_, ok := h.Modules[ModuleName(mName)]
+func (h *Handler) ModuleExists(name string) bool {
+	_, ok := h.Modules[ModuleName(name)]
 	return ok
 }
 
@@ -60,8 +63,8 @@ func (h *Handler) SignalKill(mName string) error {
 
 // AddCommand adds a command to the handler by using its name as a key for the module's name. The
 // module name is then used to invoke the command via rpc.
-func (h *Handler) AddCommand(cmd CommandName, mName ModuleName) {
-	h.Commands[cmd] = mName
+func (h *Handler) AddCommand(cmd CommandName, name ModuleName) {
+	h.Commands[cmd] = ModuleName(strings.ToLower(string(name)))
 }
 
 // AddInternalCommand adds an internal command to the handler. It uses the name as a key for the
@@ -98,6 +101,7 @@ func (h *Handler) Invoke(msg *nimbus.Message, cmd CommandName, args []string) {
 			return
 		}
 		result := ""
+
 		h.Modules[mName].Call(string(mName)+".InvokeCommand",
 			&CommandData{msg, cmd, args}, &result)
 		// Handle Error
@@ -106,8 +110,8 @@ func (h *Handler) Invoke(msg *nimbus.Message, cmd CommandName, args []string) {
 
 // InvokeInternal runs an internal command.
 func (h *Handler) InvokeInternal(msg *nimbus.Message, cmd CommandName, args []string) {
-	hook := h.InternalCommands[cmd]
-	hook.Fun(msg, args)
+	listener := h.InternalCommands[cmd]
+	listener.Fun(msg, args)
 }
 
 func (h *Handler) Fire(msg *nimbus.Message, e Event) {

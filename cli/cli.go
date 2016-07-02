@@ -1,14 +1,16 @@
 package clibot
 
 import (
-	"fmt"
 	"strings"
 	"sync"
 
 	"github.com/RyanPrintup/nimbus"
-	"github.com/peterh/liner"
+	"github.com/chzyer/readline"
 	"github.com/wolfchase/rainbot/bot"
+	"github.com/wolfchase/rainbot/rlog"
 )
+
+var rl *readline.Instance
 
 type CLIMode string
 
@@ -17,48 +19,53 @@ const (
 	MsgMode CLIMode = "msg"
 )
 
-type CLIClient struct {
+type CliClient struct {
 	Mode      CLIMode
 	CLIPrefix string
 	listeners map[string][]nimbus.Listener
-	config    *rainbot.Config
+	config    *rbot.Config
 	quit      chan error
 }
 
-func (c CLIClient) GetNick() string {
+func (c CliClient) GetNick() string {
 	return c.config.Nick
 }
 
-func (c CLIClient) GetChannels() []string {
+func (c CliClient) GetChannels() []string {
 	return c.config.Channel
 }
 
-func (c CLIClient) Send(raw ...string) {
+func (c CliClient) Send(raw ...string) {
+	rl.Clean()
 	switch c.Mode {
 	case IrcMode:
-		fmt.Println("RainBot >> " + strings.Join(raw[:len(raw)-2], " "))
+		rlog.Println("RainBot >> " + strings.Join(raw[:len(raw)-2], " "))
 	case MsgMode:
 		rawjoined := strings.Join(raw, " ")
 		msg, err := nimbus.ParseMessage(rawjoined)
 
 		if err != nil {
-			fmt.Println(c.GetNick() + "> " + err.Error())
+			rlog.Println(c.GetNick() + "> " + err.Error())
 		}
 
 		if msg.Command == nimbus.PRIVMSG {
-			fmt.Println(c.GetNick() + "> " + strings.Join(msg.Args[1:], " "))
+			rlog.Println(" " + c.GetNick() + " » " + strings.Join(msg.Args[1:], " "))
 		} else {
-			fmt.Println(c.GetNick() + "> " + "(" + msg.Command + ") ")
+			rlog.Println(" " + c.GetNick() + " » " + "(" + msg.Command + ") ")
 		}
+		rl.Refresh()
 	}
 }
 
-func (c CLIClient) Say(channel string, text string) {
+func (c CliClient) Say(channel string, text string) {
 	c.Send(nimbus.PRIVMSG, channel, text)
 }
 
-func NewCLIBot(rainConfig *rainbot.Config) *rainbot.Bot {
-	cli := &CLIClient{
+func NewCLIBot(rainConfig *rbot.Config) *rbot.Bot {
+	rlog.SetFlags(rlog.Linfo | rlog.Lwarn | rlog.Lerror)
+	rlog.SetLogFlags(0)
+
+	cli := &CliClient{
 		MsgMode,
 		rainConfig.CmdPrefix + ":",
 		make(map[string][]nimbus.Listener),
@@ -66,39 +73,46 @@ func NewCLIBot(rainConfig *rainbot.Config) *rainbot.Bot {
 		make(chan error),
 	}
 
-	bot := &rainbot.Bot{
+	bot := &rbot.Bot{
 		/* Client      */ cli,
-		/* Version     */ "Alpha 0.4.0 (Monterey Jack)",
-		/* Modules     */ make(map[string]*rainbot.Module),
-		/* Channels    */ make(map[string]*rainbot.Channel),
-		/* Parser      */ rainbot.NewParser(rainConfig.CmdPrefix),
-		/* Handler     */ rainbot.NewHandler(),
+		/* Version     */ "CLI",
+		/* Modules     */ make(map[string]*rbot.Module),
+		/* Channels    */ make(map[string]*rbot.Channel),
+		/* Parser      */ rbot.NewParser(rainConfig.CmdPrefix),
+		/* Handler     */ rbot.NewHandler(),
 		/* Mutex       */ sync.Mutex{},
 	}
 
 	return bot
 }
 
-func (c CLIClient) Connect(callback func(error)) error {
-	callback(nil)
+func (c CliClient) Connect() error {
 	return nil
 }
 
-func (c CLIClient) Quit() chan error {
+func (c CliClient) Quit() chan error {
 	return c.quit
 }
 
-func (c CLIClient) Listen() {
-	l := liner.NewLiner()
-	defer l.Close()
-	l.SetCtrlCAborts(true)
+func (c CliClient) Listen() {
+	var err error
 
-	if !liner.TerminalSupported() {
-		fmt.Println("The cli will fallback to dumb mode for user interaction\nconsider using a native console/terminal.")
+	rl, err = readline.New(" » ")
+
+	if err != nil {
+		panic(err)
 	}
 
+	defer rl.Close()
+
+	rlog.SetOutput(rl.Stdout())
+
 	for {
-		line, err := l.Prompt("> ")
+		line, err := rl.Readline()
+
+		if len(line) == 0 {
+			continue
+		}
 
 		if err != nil {
 			break
@@ -108,9 +122,9 @@ func (c CLIClient) Listen() {
 		msg, err := nimbus.ParseMessage(raw)
 
 		if err != nil {
-			fmt.Println(err)
+			rlog.Error("cli", err.Error())
 		}
 
-		go c.Emit(nimbus.PRIVMSG, msg)
+		c.Emit(nimbus.PRIVMSG, msg)
 	}
 }
