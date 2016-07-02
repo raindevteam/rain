@@ -34,7 +34,7 @@ func (r MasterAPI) Register(t rbot.Ticket, result *string) error {
 
 func (s *CommanderSuite) SetupSuite() {
 	s.GoModCmder = rbot.NewCommander("gomod", "go",
-		"github.com/wolfchase/rainbot/_tests/_helpers/modules")
+		"github.com/wolfchase/rainbot/tests/_helpers/modules")
 	s.PyModCmder = rbot.NewCommander("pymod", "py", "../_helpers/modules")
 	s.JsModCmder = rbot.NewCommander("jsmod", "js", "../_helpers/modules")
 
