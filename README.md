@@ -32,7 +32,7 @@ Configuration
 RainBot Module Libraries (RMLS)
 -------------------------------
 
-In an effort to abstract the details of RPC when building your modules, we are current supporting
+In an effort to abstract the details of RPC when building your modules, we are currently supporting
 three RainBot Module Libraries called RMLS.
 
 - [**gorml**](https://github.com/wolfchase/gorml) for Golang
