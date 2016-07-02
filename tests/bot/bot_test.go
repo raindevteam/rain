@@ -5,8 +5,8 @@ import (
 	"testing"
 
 	"github.com/RyanPrintup/nimbus"
-	"github.com/wolfchase/rainbot/_tests/_helpers"
 	"github.com/wolfchase/rainbot/bot"
+	"github.com/wolfchase/rainbot/tests/_helpers"
 
 	"github.com/stretchr/testify/suite"
 )
@@ -15,12 +15,12 @@ import (
 
 type BotSuite struct {
 	suite.Suite
-	bot  *rainbot.Bot
+	bot  *rbot.Bot
 	done chan bool
 }
 
 func (s *BotSuite) SetupTest() {
-	rcon, err := rainbot.ReadConfig("../_helpers/tconfig.json")
+	rcon, err := rbot.ReadConfig("../_helpers/tconfig.json")
 
 	if err != nil {
 		s.FailNow("Couldn't read config file")
@@ -37,7 +37,7 @@ func (s *BotSuite) SetupTest() {
 		where := msg.Args[0]
 
 		if who == s.bot.GetNick() {
-			channel := rainbot.NewChannel(where)
+			channel := rbot.NewChannel(where)
 			s.bot.Channels[strings.ToLower(where)] = channel
 			s.done <- true
 			return
@@ -79,7 +79,7 @@ func (s *BotSuite) sendBatch(raws []string) {
 /****                                      Tests Go Here                                       ****/
 
 func (s *BotSuite) TestNewChannel() {
-	channel := rainbot.NewChannel("#rainbottest")
+	channel := rbot.NewChannel("#rainbottest")
 	s.NotNil(channel)
 	s.Equal("#rainbottest", channel.Name, "Name should be #rainbottest")
 	s.Equal("", channel.Topic, "Topic should not be set")

@@ -12,11 +12,11 @@ import (
 
 type ParserSuite struct {
 	suite.Suite
-	Parser *rainbot.Parser
+	Parser *rbot.Parser
 }
 
 func (s *ParserSuite) SetupTest() {
-	s.Parser = rainbot.NewParser(".")
+	s.Parser = rbot.NewParser(".")
 }
 
 /**************************************************************************************************/

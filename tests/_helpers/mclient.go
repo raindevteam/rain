@@ -4,15 +4,16 @@ import (
 	"strings"
 
 	"github.com/RyanPrintup/nimbus"
+	"github.com/wolfchase/rainbot/bot"
 )
 
 type MockClient struct {
 	listeners map[string][]nimbus.Listener
-	config    *rainbot.Config
+	config    *rbot.Config
 	quit      chan error
 }
 
-func NewMockClient(config *rainbot.Config, msgs []string) *MockClient {
+func NewMockClient(config *rbot.Config, msgs []string) *MockClient {
 	mc := &MockClient{
 		listeners: make(map[string][]nimbus.Listener),
 		config:    config,
@@ -40,13 +41,6 @@ func (mc *MockClient) Connect() error {
 }
 
 func (mc *MockClient) Listen() {
-	for _, raw := range mc.MsgsToEmit {
-		msg, err := nimbus.ParseMessage(raw)
-		if err != nil {
-			mc.quit <- err
-		}
-		mc.handleMsg(msg)
-	}
 }
 
 func (mc *MockClient) Quit() chan error {

@@ -14,9 +14,9 @@ import (
 
 type CommanderSuite struct {
 	suite.Suite
-	GoModCmder *rainbot.Commander
-	PyModCmder *rainbot.Commander
-	JsModCmder *rainbot.Commander
+	GoModCmder *rbot.Commander
+	PyModCmder *rbot.Commander
+	JsModCmder *rbot.Commander
 	RpcServer  net.Listener
 }
 
@@ -24,19 +24,19 @@ type MasterAPI struct {
 	s *CommanderSuite
 }
 
-func (r MasterAPI) RegisterCommand(cr rainbot.CommandRequest, result *string) error {
+func (r MasterAPI) RegisterCommand(cr rbot.CommandRequest, result *string) error {
 	return nil
 }
 
-func (r MasterAPI) Register(t rainbot.Ticket, result *string) error {
+func (r MasterAPI) Register(t rbot.Ticket, result *string) error {
 	return nil
 }
 
 func (s *CommanderSuite) SetupSuite() {
-	s.GoModCmder = rainbot.NewCommander("gomod", "go",
+	s.GoModCmder = rbot.NewCommander("gomod", "go",
 		"github.com/wolfchase/rainbot/_tests/_helpers/modules")
-	s.PyModCmder = rainbot.NewCommander("pymod", "py", "../_helpers/modules")
-	s.JsModCmder = rainbot.NewCommander("jsmod", "js", "../_helpers/modules")
+	s.PyModCmder = rbot.NewCommander("pymod", "py", "../_helpers/modules")
+	s.JsModCmder = rbot.NewCommander("jsmod", "js", "../_helpers/modules")
 
 	rpc.RegisterName("Master", MasterAPI{s})
 
@@ -52,7 +52,7 @@ func (s *CommanderSuite) SetupSuite() {
 			if err != nil {
 				break
 			}
-			go rpc.ServeCodec(rainbot.RpcCodecServer(conn))
+			go rpc.ServeCodec(rbot.RpcCodecServer(conn))
 		}
 	}()
 }

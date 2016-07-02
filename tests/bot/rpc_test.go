@@ -58,13 +58,13 @@ func (s *RpcSuite) Test1RpcCodecServerInit() {
 			if err != nil {
 				break
 			}
-			go rpc.ServeCodec(rainbot.RpcCodecServer(conn))
+			go rpc.ServeCodec(rbot.RpcCodecServer(conn))
 		}
 	}()
 }
 
 func (s *RpcSuite) Test2RpcCodecClientConnect() {
-	s.RpcClient = rpc.NewClientWithCodec(rainbot.RpcCodecClientWithPort(s.TestPort))
+	s.RpcClient = rpc.NewClientWithCodec(rbot.RpcCodecClientWithPort(s.TestPort))
 	s.NotNil(s.RpcClient, "Client Created")
 }
 

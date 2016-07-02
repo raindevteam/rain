@@ -4,17 +4,18 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/suite"
+	"github.com/wolfchase/rainbot/bot"
 )
 
 /****                                 Suite Configuration                                      ****/
 
 type HandlerSuite struct {
 	suite.Suite
-	h *rainbot.Handler
+	h *rbot.Handler
 }
 
 func (s *HandlerSuite) SetupTest() {
-	s.h = rainbot.NewHandler()
+	s.h = rbot.NewHandler()
 }
 
 /**************************************************************************************************/

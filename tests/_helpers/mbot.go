@@ -6,17 +6,17 @@ import (
 	"github.com/wolfchase/rainbot/bot"
 )
 
-func NewMockBot(rcon *rainbot.Config) *rainbot.Bot {
-	bot := &rainbot.Bot{
+func NewMockBot(rcon *rbot.Config) *rbot.Bot {
+	bot := &rbot.Bot{
 		/* Client      */ NewMockClient(rcon, []string{
 			"JOIN #snowybottest",
 			"JOIN #rainbot",
 		}),
 		/* Version     */ "Alpha 0.4.0 (Monterey Jack)",
-		/* Modules     */ make(map[string]*rainbot.Module),
-		/* Channels    */ make(map[string]*rainbot.Channel),
-		/* Parser      */ rainbot.NewParser(rcon.CmdPrefix),
-		/* Handler     */ rainbot.NewHandler(),
+		/* Modules     */ make(map[string]*rbot.Module),
+		/* Channels    */ make(map[string]*rbot.Channel),
+		/* Parser      */ rbot.NewParser(rcon.CmdPrefix),
+		/* Handler     */ rbot.NewHandler(),
 		/* Mutex       */ sync.Mutex{},
 	}
 	return bot

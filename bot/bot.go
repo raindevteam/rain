@@ -55,7 +55,9 @@ func NewModule(name string, path string, cmdtype string) *Module {
 // theory, the bot should operate as normal. The Nimbus IRC library has been implemented to
 // fulfill this interface and should work appropriately. This modular nature also allows the bot
 // to implement different types of clients meant for different purposes, such as command line
-// interfacing and mockable testing.
+// interfacing and mockable testing. It is currently being decided whether this should be part
+// of the public API avaible to the user. There are significant obstacles in the way that
+// currently undermine this idea which include a generalized IRC message struct and IRC config.
 type Client interface {
 	GetNick() string
 	GetChannels() []string
@@ -69,7 +71,7 @@ type Client interface {
 	Emit(event string, msg *nimbus.Message)
 }
 
-// The Bot struct holds the internal Client, used to register listeners for irc. ModuleNames
+// The Bot struct holds the internal Client, used to register listeners for IRC. ModuleNames
 // is used to look up which plugins to start and are eventually passed to the handler. The Handler
 // provides management of commands, listeners and triggers. Since listeners act independently of
 // each other, a mutex is used to keep bot writes (such as channel updates) synchronised. The bot

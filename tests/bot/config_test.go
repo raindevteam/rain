@@ -14,14 +14,14 @@ import (
 type ConfigSuite struct {
 	suite.Suite
 	testConfig string
-	trcon      *rainbot.Config
+	trcon      *rbot.Config
 	tncon      *nimbus.Config
 }
 
 func (s *ConfigSuite) SetupTest() {
 	s.testConfig = "../_helpers/tconfig.json"
 
-	s.trcon = &rainbot.Config{
+	s.trcon = &rbot.Config{
 		Host:    "irc.canternet.org",
 		Port:    "6667",
 		Channel: []string{"#snowybottest"},
@@ -53,7 +53,7 @@ func (s *ConfigSuite) SetupTest() {
 /****                                      Tests Go Here                                       ****/
 
 func (s *ConfigSuite) TestReadConfig() {
-	config, err := rainbot.ReadConfig(s.testConfig)
+	config, err := rbot.ReadConfig(s.testConfig)
 
 	s.Nil(err)
 	s.Exactly(s.trcon, config, "Parsed tconfig.json")
