@@ -43,7 +43,7 @@ func main() {
 	} else {
 		preConnectMsg = "Connecting... "
 		postConnectMsg = "Done"
-		bot = rbot.NewBot("Alpha 0.4.0 (Monterey Jack)", rconf)
+		bot = rbot.NewBot("0.4.1 (Monterey Jack)", rconf)
 	}
 
 	setup.Default(bot)
