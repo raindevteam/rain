@@ -1,6 +1,7 @@
 package Ttemplate
 
 import (
+	"fmt"
 	"io/ioutil"
 	"os"
 	"testing"
@@ -32,6 +33,9 @@ func (s *TemplateSuite) CheckTmplAgainst(premade string, created string) (bool, 
 	if err != nil {
 		return false, err
 	}
+
+	fmt.Println(string(file[:]))
+	fmt.Println(string(templ[:]))
 
 	return string(file[:]) == string(templ[:]), nil
 }
@@ -90,9 +94,9 @@ func (s *TemplateSuite) TestPyModTemplate() {
 }
 
 func (s *TemplateSuite) TearDownSuite() {
-	if err := os.Remove("testing_test.go"); err != nil {
-		s.FailNow("Could not remove file", err.Error())
-	}
+	//if err := os.Remove("testing_test.go"); err != nil {
+	//	s.FailNow("Could not remove file", err.Error())
+	//}
 
 	if err := os.Remove("test.go"); err != nil {
 		s.FailNow("Could not remove file", err.Error())
