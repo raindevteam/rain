@@ -23,6 +23,7 @@ func validInstallOption(opt string) bool {
 	switch opt {
 	case
 		"default",
+		"neverfree",
 		"simple":
 		return true
 	}
@@ -74,7 +75,7 @@ func createNewBot(c *cli.Context) error {
 		path := os.Getenv("GOPATH") + "/bin/" + c.Args().Get(1) + ".exe"
 
 		output, err := exec.Command("go", "build", "-o", path,
-			"github.com/wolfchase/rainbot/install/"+c.Args().First()).CombinedOutput()
+			"github.com/raindevteam/rain/install/"+c.Args().First()).CombinedOutput()
 
 		s := string(output[:])
 		if err != nil {
