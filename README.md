@@ -1,13 +1,18 @@
-[![GoDoc](https://godoc.org/github.com/raindevteam/rain?status.svg)](https://godoc.org/github.com/raindevteam/rain)
 [![Build Status](https://travis-ci.org/raindevteam/rain.svg?branch=develop)](https://travis-ci.org/raindevteam/rain)
 [![GitHub version](https://badge.fury.io/gh/raindevteam%2Frain.svg)](https://badge.fury.io/gh/raindevteam%2Frain)
 [![Go Report Card](https://goreportcard.com/badge/github.com/raindevteam/rain)](https://goreportcard.com/report/github.com/raindevteam/rain)
 [![codebeat badge](https://codebeat.co/badges/1e03860e-db6d-4751-81d1-1ed3e414537e)](https://codebeat.co/projects/github-com-raindevteam-rain)
+[![GoDoc](https://godoc.org/github.com/raindevteam/rain?status.svg)](https://godoc.org/github.com/raindevteam/rain)
+[![DTS](https://img.shields.io/badge/dts-0.5.0-blue.svg)](https://github.com/raindevteam/rain-doc/tree/master/DTS/0.5.0)
 
 ----------------------------------------------------------------------------------------------------
 
 Rain, an IRC Bot Library for Go
 ===============================
+
+**We are currently in _rapid_ development! This should continue to be the case for a good while**
+
+if you want to follow along with development, see the [DTS](https://github.com/raindevteam/rain-doc/tree/master/DTS/0.5.0)
 
 Overview
 --------
