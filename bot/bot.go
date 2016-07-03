@@ -87,6 +87,9 @@ type Bot struct {
 	Mu       sync.Mutex
 }
 
+// NewBot initializes a number of things for proper operation. It will set appropriate flags
+// for rlog. It then creates a Nimbus config to pass to the internal nimbus IRC client. This
+// client is embedded into an instance of Bot and returned. It has its fields initialized.
 func NewBot(version string, rconf *Config) *Bot {
 	rlog.SetFlags(rlog.Linfo | rlog.Lwarn | rlog.Lerror)
 	rlog.SetLogFlags(0)
@@ -106,6 +109,8 @@ func NewBot(version string, rconf *Config) *Bot {
 	return bot
 }
 
+// DefaultConnect will connect to IRC and start listening. It will not log anything. It also
+// waits on Client.Quit(), and when the chan is served, it logs the quit result.
 func (b *Bot) DefaultConnect() {
 	b.Connect()
 	b.Listen()
@@ -113,6 +118,8 @@ func (b *Bot) DefaultConnect() {
 	rlog.Info("Bot", "Quitting Now: "+result.Error())
 }
 
+// DefaultConnectWithMsg is similar to DefaultConnect, except a user may pass a pre-connect and
+// post-connect message.
 func (b *Bot) DefaultConnectWithMsg(pre string, post string) {
 	if pre != "" {
 		rlog.Info("Bot", pre)
@@ -131,7 +138,7 @@ func (b *Bot) DefaultConnectWithMsg(pre string, post string) {
 
 /////////////////////////          Module Specific Methods         /////////////////////////////////
 
-// SetupModules goes through every module list found in the config and sets them up appropriately.
+// EnableModules goes through every module list found in the config and sets them up appropriately.
 func (b *Bot) EnableModules(rainConfig *Config) {
 	var name, path string
 
@@ -313,15 +320,6 @@ func (b BotAPI) GetTopic(channel string, result *string) error {
 	}
 
 	*result = b.bot.Channels[strings.ToLower(channel)].Topic
-	return nil
-}
-
-func (bpi BotAPI) Loop(n string, result *string) error {
-	c := make(chan bool)
-	func(ch chan bool) {
-
-	}(c)
-	<-c
 	return nil
 }
 
