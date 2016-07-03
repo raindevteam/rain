@@ -94,9 +94,9 @@ func (s *TemplateSuite) TestPyModTemplate() {
 }
 
 func (s *TemplateSuite) TearDownSuite() {
-	//if err := os.Remove("testing_test.go"); err != nil {
-	//	s.FailNow("Could not remove file", err.Error())
-	//}
+	if err := os.Remove("testing_test.go"); err != nil {
+		s.FailNow("Could not remove file", err.Error())
+	}
 
 	if err := os.Remove("test.go"); err != nil {
 		s.FailNow("Could not remove file", err.Error())
