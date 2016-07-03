@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/wolfchase/rainbot.svg?branch=develop)](https://travis-ci.org/wolfchase/rainbot)
+[![Build Status](https://travis-ci.org/wolfchase/rainbot.svg?branch=master)](https://travis-ci.org/wolfchase/rainbot)
 [![GitHub version](https://badge.fury.io/gh/wolfchase%2Frainbot.svg)](https://badge.fury.io/gh/wolfchase%2Frainbot)
 RainBot
 =======
