@@ -5,8 +5,8 @@ import (
 	"os"
 	"testing"
 
+	"github.com/raindevteam/rain/template"
 	"github.com/stretchr/testify/suite"
-	"github.com/wolfchase/rainbot/template"
 )
 
 /****                                 Suite Configuration                                      ****/

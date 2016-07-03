@@ -6,8 +6,8 @@ import (
 
 	"github.com/RyanPrintup/nimbus"
 	"github.com/chzyer/readline"
-	"github.com/wolfchase/rainbot/bot"
-	"github.com/wolfchase/rainbot/rlog"
+	"github.com/raindevteam/rain/bot"
+	"github.com/raindevteam/rain/rlog"
 )
 
 var rl *readline.Instance

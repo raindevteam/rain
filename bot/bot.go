@@ -8,7 +8,7 @@ import (
 	"sync"
 
 	"github.com/RyanPrintup/nimbus"
-	"github.com/wolfchase/rainbot/rlog"
+	"github.com/raindevteam/rain/rlog"
 )
 
 //////////////////////////////          Bot Internals         //////////////////////////////////////

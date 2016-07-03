@@ -5,8 +5,8 @@ import (
 	"testing"
 
 	"github.com/RyanPrintup/nimbus"
-	"github.com/wolfchase/rainbot/bot"
-	"github.com/wolfchase/rainbot/tests/_helpers"
+	"github.com/raindevteam/rain/bot"
+	"github.com/raindevteam/rain/tests/_helpers"
 
 	"github.com/stretchr/testify/suite"
 )
