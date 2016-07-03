@@ -6,10 +6,8 @@
 
 ----------------------------------------------------------------------------------------------------
 
-RainBot
-=======
-
-A multi-purpose IRC library for quickly developing useful IRC bots.
+Rain, an IRC Bot Library for Go
+===============================
 
 Overview
 --------
