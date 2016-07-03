@@ -7,6 +7,8 @@
 	"realName": "RainBotGo",
 	"userName": "RainBotGo",
 
+	"modes": "+B",
+
 	"cmdPrefix": ".",
 
 	"goModules": {
