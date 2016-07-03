@@ -33,7 +33,7 @@ func main() {
 	app := cli.NewApp()
 	app.Name = "rainbot"
 	app.Usage = "Command line tool for the management of everything rainbot"
-	app.Version = "Alpha 0.4.0 (Monterey Jack)"
+	app.Version = "0.4.0 (Monterey Jack)"
 
 	app.Commands = []cli.Command{
 		{
