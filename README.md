@@ -1,24 +1,15 @@
-[![Build Status](https://travis-ci.org/raindevteam/rain.svg?branch=develop)](https://travis-ci.org/wolfchase/rainbot)
+[![GoDoc](https://godoc.org/github.com/raindevteam/rain?status.svg)](https://godoc.org/github.com/raindevteam/rain)
+[![Build Status](https://travis-ci.org/raindevteam/rain.svg?branch=develop)](https://travis-ci.org/raindevteam/rain)
+[![GitHub version](https://badge.fury.io/gh/raindevteam%2Frain.svg)](https://badge.fury.io/gh/raindevteam%2Frain)
+[![Go Report Card](https://goreportcard.com/badge/github.com/raindevteam/rain)](https://goreportcard.com/report/github.com/raindevteam/rain)
+[![codebeat badge](https://codebeat.co/badges/1e03860e-db6d-4751-81d1-1ed3e414537e)](https://codebeat.co/projects/github-com-raindevteam-rain)
+
+----------------------------------------------------------------------------------------------------
 
 RainBot
 =======
 
 A multi-purpose IRC library for quickly developing useful IRC bots.
-
-#### A Note on Development
-
-College proved rather difficult last quarter and therefore I was not able to work on RainBot as I
-had wished. However, now that I am on summer break, I have plenty of time to waste! If you are 
-viewing this message on the master branch, then 0.4.0 has been pushed out! And honsetly, is very
-sloppy! This was due to ill-mannered development (shame on me!). However, with 0.5.0 development,
-a new repo for documentation has been created and features the **Development Tracks**, an effort
-to go from chaos to organized chaos when it comes to developing RainBot. I have no idea how it will
-work, but it is obvious what I am doing right now is definitely not working! The Development Track
-System will be matured along the way as development pushes on.
-
-And yes, this README is pretty lame, but hopefully it will be much more cooler when 0.5.0 comes around!
-
-----------------------------------
 
 Overview
 --------
