@@ -29,7 +29,7 @@ Overview
 4. [Current Features](#features)
 5. [Setups](#setups)
 
-RainBot was essentially just another IRC bot. However, the goal now is to give a user an API, or
+Rain(Bot) was essentially just another IRC bot. However, the goal now is to give a user an API, or
 rather a framework, that they can leverage to quickly develop IRC bots, simple or complex. This
 package already includes three predefined installs of the bot, the default install shows how one
 can build a simple but very useful IRC bot that leverages RPC to enable pluggable modules. The
