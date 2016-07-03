@@ -37,14 +37,14 @@ func main() {
 
 	app.Commands = []cli.Command{
 		{
-			Name: "make",
+			Name:      "make",
 			Aliases:   []string{"mk"},
 			Usage:     "Creates a bot",
 			UsageText: "new - Creates a new bot with given name and type. Possible types are: default, simple",
 			Action:    createNewBot,
 		},
 		{
-			Name: "template",
+			Name:      "template",
 			Aliases:   []string{"t", "templ"},
 			Usage:     "template <type>",
 			UsageText: "template - Create a template for either a test or module.",
@@ -53,8 +53,8 @@ func main() {
 			},
 		},
 		{
-			Name: "mkconfig"
-		}
+			Name: "mkconfig",
+		},
 	}
 
 	app.Run(os.Args)
