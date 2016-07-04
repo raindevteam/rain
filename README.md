@@ -37,8 +37,16 @@ Installation<a name="installation"></a>
 First make sure you have properly installed go on your system (paths set and everything)
 
 Then simply find the nearest terminal or command prompt and run:
-
+    
     $ go get github.com/raindevteam/rain
+
+If you don't plan on using the cli tools then you can 'go get' the packages you wish to
+use, i.e.
+
+    $ go get github.com/raindevteam/rain/bot
+
+
+Will suffice
 
 Using the Premade Installations<a name="premade"></a>
 -----------------------------------------------------
@@ -49,7 +57,8 @@ via go get, you may run:
 
     $ rain mk <install> <bot-name>
 
-This will build a new bot from the specified install package to your GOPATH/bin.
+This will build a new bot from the specified install package to your GOPATH/bin. It will also
+install dependencies of any of the sub packages for Rain.
 
 Rain Module Libraries (RMLS)<a name="rmls"></a>
 --------------------------------------------------
