@@ -3,77 +3,191 @@ package main
 import (
 	"fmt"
 	"os"
+	"os/exec"
 
-	"github.com/RyanPrintup/nimbus"
-	"github.com/wolfchase/rainbot/lib"
+	"github.com/raindevteam/rain/template"
+	"github.com/urfave/cli"
 )
 
+const exConfig = `{
+	"Host":    "irc.examplehost.net",
+	"Port":    "6667",
+	"Channel": ["#Your", "#Channels"],
+
+	"Nick":     "MyBot",
+	"RealName": "Wolfstein Jr. II",
+	"UserName": "wolfstein",
+	"Modes":    "+B",
+
+	"CmdPrefix": "."
+}`
+
+func validLibraryOption(opt string) bool {
+	switch opt {
+	case
+		"bot",
+		"db",
+		"rlog",
+		"setup",
+		"cli",
+		"template":
+		return true
+	}
+	return false
+}
+
+func validRmlOption(opt string) bool {
+	switch opt {
+	case
+		"go",
+		"js",
+		"py":
+		return true
+	}
+	return false
+}
+
+func validInstallOption(opt string) bool {
+	switch opt {
+	case
+		"default",
+		"neverfree",
+		"simple":
+		return true
+	}
+	return false
+}
+
 func main() {
-	var rainConfig *rainbot.Config
-	var nimConfig *nimbus.Config
+	app := cli.NewApp()
+	app.Name = "rainbot"
+	app.Usage = "Command line tool for the management of everything rainbot"
+	app.Version = "Alpha 0.5.0"
 
-	var err error
+	app.Commands = []cli.Command{
+		{
+			Name:    "make",
+			Aliases: []string{"mk"},
+			Usage:   "Creates a new bot with a given install and name",
+			Description: "Creates a new bot by buidling it using the \"go build\" command.\n\n" +
+				"   Possible build types are:\n    	default\n   	neverfree\n   	simple",
+			ArgsUsage: "install name",
+			Action:    createNewBot,
+		},
+		{
+			Name:        "test",
+			Aliases:     []string{"t"},
+			Usage:       "Creates a template for either a test or module.",
+			Description: "Creates a test template with the specified library to test",
+			ArgsUsage:   "library filename",
+			Action:      createTest,
+			Hidden:      true,
+		},
+		{
+			Name:        "mod",
+			Aliases:     []string{"m"},
+			Usage:       "Creates boilerplate for a module",
+			Description: "Creates a template for a module tailored to the specified RML.",
+			ArgsUsage:   "rml-prefix module-name",
+			Action:      createModule,
+		},
+		{
+			Name:        "config",
+			Aliases:     []string{"c"},
+			Usage:       "Creates a new JSON config",
+			Description: "Will create a new config.json file in the current directory.",
+			Action:      createConfig,
+		},
+	}
 
-	if len(os.Args) > 1 {
-		rainConfig, err = rainbot.ReadConfig(os.Args[1])
+	app.Run(os.Args)
+}
 
-		if err != nil {
-			fmt.Println(err)
+func createNewBot(c *cli.Context) error {
+	if !c.Args().Present() {
+		fmt.Println(c.App.ArgsUsage)
+	}
+	if validInstallOption(c.Args().First()) {
+		if c.Args().Get(1) == "" {
+			fmt.Println(" No name specified")
+			fmt.Println(" Usage: " + c.Command.Name + " <install> <name>")
+			return nil
 		}
 
-		nimConfig = &nimbus.Config{
-			Port:     rainConfig.Port,
-			Channels: rainConfig.Channel,
-			RealName: rainConfig.RealName,
-			UserName: rainConfig.UserName,
-			Password: "",
+		path := os.Getenv("GOPATH") + "/bin/" + c.Args().Get(1) + ".exe"
+
+		output, err := exec.Command("go", "build", "-o", path,
+			"github.com/raindevteam/rain/install/"+c.Args().First()).CombinedOutput()
+
+		s := string(output[:])
+		if err != nil {
+			fmt.Println(" Internal command error >>>\n" + s)
 		}
 	} else {
-		fmt.Println("Usage: rainbot <config_file>")
-		os.Exit(1)
+		fmt.Println(" Not a valid install type. Valid install types are:\n - default\n - neverfree\n - simple")
 	}
 
-	bot := &rainbot.Bot{
-		Version:     "Alpha 0.1.0 (Second Wind)",
-		Client:      nimbus.NewClient(rainConfig.Host, rainConfig.Nick, *nimConfig),
-		ModuleNames: rainConfig.GoModules,
-		Parser:      rainbot.NewParser(rainConfig.CmdPrefix),
-		Handler:     rainbot.NewHandler(),
+	return nil
+}
+
+func createTest(c *cli.Context) error {
+	if !c.Args().Present() {
+		fmt.Println(c.App.ArgsUsage)
 	}
 
-	fmt.Print("Connecting... ")
-
-	bot.Client.Connect(func(e error) {
-		if e != nil {
-			fmt.Println(e)
-			return
+	if validLibraryOption(c.Args().First()) {
+		if c.Args().Get(1) == "" {
+			fmt.Println(" No filename specified")
+			fmt.Println(" Usage: " + c.Command.Name + " library filename")
+			return nil
 		}
 
-		fmt.Println("Done")
+		tmpl.CreateTestTemplate(c.Args().Get(0), c.Args().Get(1))
+	} else {
+		// TODO: This is extremely inefficient and needs to be fixed!
+		fmt.Println(" Not a valid library. Valid libraries are:\n - rlog\n - db\n - bot\n - template\n - cli\n - setup")
+	}
 
-		bot.LoadModules()
+	return nil
+}
 
-		bot.Client.AddListener(nimbus.PRIVMSG, func(msg *nimbus.Message) {
-			if bot.Parser.IsCommand(msg.Trailing) {
-				command, args := bot.Parser.ParseCommand(msg.Trailing)
-				bot.Handler.Invoke(msg, rainbot.CommandName(command), args)
-			}
-		})
+func createModule(c *cli.Context) error {
+	if !c.Args().Present() {
+		fmt.Println(c.App.ArgsUsage)
+	}
 
-		bot.Client.AddListener(nimbus.PRIVMSG, func(msg *nimbus.Message) {
-			text := msg.Trailing
-			if text == "Hello, "+bot.Client.Nick {
-				bot.Client.Say(msg.Args[0], "Hello there!")
-			}
-		})
-
-		ch := make(chan error)
-		go bot.Client.Listen(ch)
-		err := <-ch
-
-		if err != nil {
-			fmt.Println("boom")
-			fmt.Println(err)
+	if validRmlOption(c.Args().First()) {
+		if c.Args().Get(1) == "" {
+			fmt.Println(" No name specified")
+			fmt.Println(" Usage: " + c.Command.Name + " rml-prefix module-name")
+			return nil
 		}
-	})
+
+		tmpl.CreateModTemplate(c.Args().Get(0), c.Args().Get(1))
+	} else {
+		// TODO: Ok, seriously
+		fmt.Println(" Not a valid install type. Valid install types are:\n   go\n   js\n   py")
+	}
+
+	return nil
+}
+
+func createConfig(c *cli.Context) error {
+	fmt.Println(" Making an example config.json...")
+
+	f, err := os.Create("config.json")
+	if err != nil {
+		fmt.Println(" Oops, something went wrong: " + err.Error())
+		return nil
+	}
+
+	_, err = f.Write([]byte(exConfig))
+	if err != nil {
+		fmt.Println("Couldn't write config: " + err.Error())
+		return nil
+	}
+
+	f.Close()
+	fmt.Println(" All done!")
+	return nil
 }

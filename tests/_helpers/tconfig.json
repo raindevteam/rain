@@ -7,7 +7,11 @@
 	"realName": "RainBotGo",
 	"userName": "RainBotGo",
 
+	"modes": "+B",
+
 	"cmdPrefix": ".",
 
-	"goModules": ["rcore"]
+	"goModules": {
+		"rcore": "github.com/wolfchase"
+	}
 }

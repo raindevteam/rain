@@ -1,8 +1,10 @@
-package rainbot
+package rbot
 
 import (
 	"encoding/json"
 	"os"
+
+	"github.com/RyanPrintup/nimbus"
 )
 
 type Config struct {
@@ -13,10 +15,12 @@ type Config struct {
 	Nick     string
 	RealName string
 	UserName string
+	Modes    string
 
 	CmdPrefix string
 
-	GoModules []string
+	GoModules map[string]string
+	JsModules map[string]string
 }
 
 func ReadConfig(path string) (*Config, error) {
@@ -31,4 +35,17 @@ func ReadConfig(path string) (*Config, error) {
 	}
 
 	return config, nil
+}
+
+func GetNimbusConfig(rconf *Config) (nconf *nimbus.Config) {
+	nconf = &nimbus.Config{
+		Port:     rconf.Port,
+		Channels: rconf.Channel,
+		RealName: rconf.RealName,
+		UserName: rconf.UserName,
+		Password: "",
+		Modes:    rconf.Modes,
+	}
+
+	return nconf
 }
