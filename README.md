@@ -36,15 +36,19 @@ Installation<a name="installation"></a>
 ---------------------------------------
 First make sure you have properly installed go on your system (paths set and everything)
 
-Then simply find the nearest terminal or command prompt and run:
+##### Installing the Rain cli
+Find the nearest terminal or command prompt and run:
     
     $ go get github.com/raindevteam/rain
 
-If you don't plan on using the cli tools then you can 'go get' the packages you wish to
-use, i.e.
+##### Installing the subpackages
+If you plan on using the subpackages, you may install their dependencies with the cli:
 
-    $ go get github.com/raindevteam/rain/bot
+    $ rain deps
 
+If you don't give a care for the cli (I think it's useful! Don't knock it til' you try it):
+
+    $ go get -d github.com/raindevteam/rain/...
 
 Will suffice
 
