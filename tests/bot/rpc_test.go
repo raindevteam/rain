@@ -6,8 +6,7 @@ import (
 	"net/rpc"
 	"testing"
 
-	"github.com/wolfchase/rainbot/bot"
-
+	"github.com/raindevteam/rain/bot"
 	"github.com/stretchr/testify/suite"
 )
 

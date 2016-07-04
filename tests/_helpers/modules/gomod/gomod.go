@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/RyanPrintup/nimbus"
-	"github.com/wolfchase/gorml"
+	"github.com/raindevteam/gorml"
 )
 
 type GoMod struct{ *module.Module }

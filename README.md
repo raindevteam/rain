@@ -1,109 +1,138 @@
-[![Build Status](https://travis-ci.org/wolfchase/rainbot.svg?branch=master)](https://travis-ci.org/wolfchase/rainbot)
-[![GitHub version](https://badge.fury.io/gh/wolfchase%2Frainbot.svg)](https://badge.fury.io/gh/wolfchase%2Frainbot)
-RainBot
-=======
+[![Build Status](https://travis-ci.org/raindevteam/rain.svg?branch=develop)](https://travis-ci.org/raindevteam/rain)
+[![GitHub version](https://badge.fury.io/gh/raindevteam%2Frain.svg)](https://badge.fury.io/gh/raindevteam%2Frain)
+[![Go Report Card](https://goreportcard.com/badge/github.com/raindevteam/rain)](https://goreportcard.com/report/github.com/raindevteam/rain)
+[![codebeat badge](https://codebeat.co/badges/1e03860e-db6d-4751-81d1-1ed3e414537e)](https://codebeat.co/projects/github-com-raindevteam-rain)
+[![GoDoc](https://godoc.org/github.com/raindevteam/rain?status.svg)](https://godoc.org/github.com/raindevteam/rain)
+[![DTS](https://img.shields.io/badge/dts-0.5.0-blue.svg)](https://github.com/raindevteam/rain-doc/tree/master/DTS/0.5.0)
 
-A multi-purpose IRC library for quickly developing useful IRC bots.
+----------------------------------------------------------------------------------------------------
 
-#### A Note on Development
+Rain, an IRC Bot Library for Go
+===============================
 
-College proved rather difficult last quarter and therefore I was not able to work on RainBot as I
-had wished. However, now that I am on summer break, I have plenty of time to waste! If you are 
-viewing this message on the master branch, then 0.4.0 has been pushed out! And honsetly, is very
-sloppy! This was due to ill-mannered development (shame on me!). However, with 0.5.0 development,
-a new repo for documentation has been created and features the **Development Tracks**, an effort
-to go from chaos to organized chaos when it comes to developing RainBot. I have no idea how it will
-work, but it is obvious what I am doing right now is definitely not working! The Development Track
-System will be matured along the way as development pushes on.
+**We are currently in _rapid_ development! This should continue to be the case for a good while**
 
-And yes, this README is pretty lame, but hopefully it will be much more cooler when 0.5.0 comes around!
-
-----------------------------------
+if you want to follow along with development, see the [DTS](https://github.com/raindevteam/rain-doc/tree/master/DTS/0.5.0)
 
 Overview
 --------
 
-RainBot was essentially just another IRC bot. However, the goal now is to give a user an API, or
+1. [Installation](#installation)
+2. [Using the Premade Installations](#premade)
+3. [Rain Module Libraries (RMLs)](#rmls)
+4. [Current Features](#features)
+5. [Setups](#setups)
+
+Rain(Bot) was essentially just another IRC bot. However, the goal now is to give a user an API, or
 rather a framework, that they can leverage to quickly develop IRC bots, simple or complex. This
-package already includes two predefined installs of the bot, the default install shows how one
+package already includes three predefined installs of the bot, the default install shows how one
 can build a simple but very useful IRC bot that leverages RPC to enable pluggable modules. The
 second install is more of an example, and shows almost the bare mininmum of code to get an IRC
-bot up and running. With future development, we hope to provide more installs to garner to the
+bot up and running. The third install is the build off the unofficial #Neverfree bot on the 
+irc.canternet.org server! With future development, we hope to provide more installs to garner to the
 needs that users may have. 
 
-Installation
-------------
+Installation<a name="installation"></a>
+---------------------------------------
 First make sure you have properly installed go on your system (paths set and everything)
 
-Then simply find the nearest terminal or command prompt and run:
+##### Installing the Rain cli
+Find the nearest terminal or command prompt and run:
+    
+    $ go get github.com/raindevteam/rain
 
-    $ go get github.com/wolfchase/rainbot
+##### Installing the subpackages
+If you plan on using the subpackages, you may install their dependencies with the cli:
 
-Using the Premade Installations
--------------
+    $ rain deps
+
+If you don't give a care for the cli (I think it's useful! Don't knock it til' you try it):
+
+    $ go get -d github.com/raindevteam/rain/...
+
+Will suffice
+
+Using the Premade Installations<a name="premade"></a>
+-----------------------------------------------------
 
 If you're content enough with using one of the premade installation packages, you can 
-leverage this packages commandline utilities to install. After successfully installing 
+leverage Rain's commandline utilities to install. After successfully installing 
 via go get, you may run:
 
-    $ rainbot mk <install> <bot-name>
+    $ rain mk <install> <bot-name>
 
-This will build a new bot from the specified install package to your GOPATH/bin.
+This will build a new bot from the specified install package to your GOPATH/bin. It will also
+install dependencies of any of the sub packages for Rain. If you wish to install the premade
+installations then make sure you install the libraries you will use from Rain before hand, as to
+resolve dependencies.
 
-RainBot Module Libraries (RMLS)
--------------------------------
+Rain Module Libraries (RMLS)<a name="rmls"></a>
+--------------------------------------------------
 
 In an effort to abstract the details of RPC when building your modules, we are currently supporting
 three RainBot Module Libraries called RMLS.
 
 - [**gorml**](https://github.com/wolfchase/gorml) for Golang
 - [**pyrml**](https://github.com/wolfchase/pyrml) for Python and,
-- [**jsrml**](https://github.com/wolfchase/jsrml) for Javascript
+- [**jsrml**](https://github.com/wolfchase/jsrml) for JavaScript
 
 Most of our efforts are being put into gorml currently, so you might find the other libraries lacking for now.
 
-Current features
-----------------
+Current features<a name="features"></a>
+---------------------------------------
 
-#### Common IRC Events handling
+#### Prepackaging of Listeners via Setups
 
-RainBot can handle the management of channels and users. As early development pushes on, we hope to
-handle a wider range of common IRC events as need be. Do keep in mind however that you may add listeners
-via modules to any event that you may want to listen to as long as that event is handled by Nimbus ([here's
-a list](https://github.com/RyanPrintup/Nimbus/blob/master/commons.go)).
+__You can view all available setups in the [setup](#setups) section__
+
+The setup library for Rain provides predefined listeners you can attach to your bot. This allows
+you to quickly setup listeners that you may need but do not want to bother having to go through
+the sloggish process of writing them! We provide listeners for common tasks such as keeping track
+of IRC channels and users.
+
+#### As Close To the Metal as We Can Get You
+
+Rain exports as many functions as it can to provide you as much customization as possible. As a 
+matter of fact, one can recreate all the premade installs and setups by hand if you wish, giving you
+access to the lower abstractions.
 
 #### Modules
 
-**RainBot received a huge reimplemenation for its cli capabilities and this section is no longer
-correct, sorry about that! Since 0.4.0 was also a bit of a slogged mess, we hope to reimpelment
-the following functionality in 0.5.0. We hope 0.5.0 will be much smoother of an update!**
-
 As mentioned, you can use the bot's RPC API to write your own modules using a RML. See the RMLS section
-for a list of supported RML libraries. RainBot also has some scaffolding generation to let you quickly
-create biolerplate code for your module. If you have RainBot installed, you can create a scaffold by using
-the following command in a terminal or command prompt
+for a list of supported RML libraries. Rain also has some scaffolding generation to let you quickly
+create biolerplate code for your module. If you have Rain installed, you can create a scaffold by using
+the following command in a terminal or command prompt:
 
-    rainbot -m <rml-prefix> <module-name>
+    rain m <rml-prefix> <module-name>
 
 Replace the rml-prefix with your rml of choice, so if you wish to create a Golang module scaffolding,
-running
+running:
 
-    rainbot -m go <module-name>
+    rain m go MyGolangModule
 
 Will do the trick.
 
-RainBot also has a builtin internal command that that lets you reload modules. If you have the bot
-connected to IRC, and your command prefix is set to ".", you can run:
+Setups<a name="setups"></a>
+--------------------------
 
-    .m reload <module-name>
+Setups provide prepackaged listeners and commands to help in bot development of common IRC
+tasks. These are bound to change rapidly within the next few version updates, we also hope
+to add more starting with 0.6.0.
 
-which will reload a module given its module name (it will recompile if need be).
+#### Default
 
-#### CLI
+| Commands | Action                                                           |
+|----------|------------------------------------------------------------------|
+| m        | Provides module management tools, such as reload, list, and more |
 
-We also have a CLI client for the bot that let's you run IRC commands in a terminal or command prompt.
-Simply start the bot with the -i flag:
+| Listeners                       | Event        |
+|---------------------------------|--------------|
+| Add/Update Topic                | RPL_TOPIC    |
+| Update Users on Channel Connect | RPL_NAMREPLY |
+| Update User/Self on Join        | JOIN         |
+| Update User/Self on Kick        | KICK         |
+| Update User/Self on Kill        | KILL         |
+| Update User/Self on Part        | PART         |
+| Update User/Self on Quit        | QUIT         |
+| Update User/Self on Nick        | NICK         |
 
-    rainbot -i <config>
-
- Do note that this feature is not tested in version 0.4.0 and is to be considered experimental.
