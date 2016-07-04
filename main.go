@@ -98,6 +98,12 @@ func main() {
 			Description: "Will create a new config.json file in the current directory.",
 			Action:      createConfig,
 		},
+		{
+			Name:    "deps",
+			Aliases: []string{"d"},
+			Usage:   "Gets the dependencies needed for using the subpackages",
+			Action:  getDeps,
+		},
 	}
 
 	app.Run(os.Args)
@@ -216,5 +222,24 @@ func createConfig(c *cli.Context) error {
 
 	f.Close()
 	fmt.Println(" All done!")
+	return nil
+}
+
+func getDeps(c *cli.Context) error {
+	fmt.Println(" Getting dependencies...")
+	// Repetitive much?
+	output, err := exec.Command("go", "get", "github.com/RyanPrintup/nimbus").CombinedOutput()
+	if err != nil {
+		fmt.Println(" Internal command error >>>\n" + string(output[:]))
+		return err
+	}
+
+	output, err = exec.Command("go", "get", "github.com/chzyer/readline").CombinedOutput()
+	if err != nil {
+		fmt.Println(" Internal command error >>>\n" + string(output[:]))
+		return err
+	}
+
+	fmt.Println(" Dependencies installed!")
 	return nil
 }
