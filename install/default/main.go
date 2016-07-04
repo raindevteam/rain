@@ -23,7 +23,7 @@ func main() {
 		os.Exit(1)
 	}
 
-	bot := rbot.NewBot("Alpha 0.5.0", rconf)
+	bot := rbot.NewBot("0.5.0", rconf)
 	setup.Default(bot)
 
 	bot.EnableModules(rconf)
