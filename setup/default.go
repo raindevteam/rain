@@ -4,7 +4,7 @@ import (
 	"strings"
 
 	"github.com/RyanPrintup/nimbus"
-	"github.com/wolfchase/rainbot/bot"
+	"github.com/raindevteam/rain/bot"
 )
 
 type commands struct{ bot *rbot.Bot }
@@ -51,13 +51,6 @@ func Default(b *rbot.Bot) {
 		if b.Parser.IsCommand(msg.Trailing) {
 			command, args := b.Parser.ParseCommand(msg.Trailing)
 			b.Handler.Invoke(msg, rbot.CommandName(command), args)
-		}
-	})
-
-	b.AddListener(nimbus.PRIVMSG, func(msg *nimbus.Message) {
-		text := msg.Trailing
-		if text == "Hello, "+b.GetNick() {
-			b.Client.Say(msg.Args[0], "Hello there!")
 		}
 	})
 

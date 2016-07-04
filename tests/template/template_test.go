@@ -1,12 +1,13 @@
 package Ttemplate
 
 import (
+	"fmt"
 	"io/ioutil"
 	"os"
 	"testing"
 
+	"github.com/raindevteam/rain/template"
 	"github.com/stretchr/testify/suite"
-	"github.com/wolfchase/rainbot/template"
 )
 
 /****                                 Suite Configuration                                      ****/
@@ -32,6 +33,9 @@ func (s *TemplateSuite) CheckTmplAgainst(premade string, created string) (bool, 
 	if err != nil {
 		return false, err
 	}
+
+	fmt.Println(string(file[:]))
+	fmt.Println(string(templ[:]))
 
 	return string(file[:]) == string(templ[:]), nil
 }

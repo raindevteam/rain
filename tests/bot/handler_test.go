@@ -3,8 +3,8 @@ package Tbot
 import (
 	"testing"
 
+	"github.com/raindevteam/rain/bot"
 	"github.com/stretchr/testify/suite"
-	"github.com/wolfchase/rainbot/bot"
 )
 
 /****                                 Suite Configuration                                      ****/

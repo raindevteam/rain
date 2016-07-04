@@ -4,7 +4,7 @@ import (
 	"strings"
 
 	"github.com/RyanPrintup/nimbus"
-	"github.com/wolfchase/rainbot/bot"
+	"github.com/raindevteam/rain/bot"
 )
 
 type MockClient struct {

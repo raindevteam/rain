@@ -1,28 +1,29 @@
 package main
 
 import (
-	"github.com/wolfchase/rainbot/bot"
+	"fmt"
+
 	"github.com/RyanPrintup/nimbus"
+	"github.com/raindevteam/rain/bot"
+	"github.com/raindevteam/rain/setup"
 )
 
 func main() {
-	bot := rbot.NewBot("Alpha 0.4.0 (Monterey Jack)", &rbot.Config{
-		Host:    "irc.canternet.org",
-		Port:    "6667",
-		Channel: []string{"#snowybottest"},
+	bot := rbot.NewBot("Alpha 0.5.0", &rbot.Config{
+		Host:     "irc.canternet.org",
+		Port:     "6667",
+		Channel:  []string{"#snowybottest"},
 		Nick:     "SnowBot",
-		RealName: "RainBotGo",
-		UserName: "RainBotGo",
+		RealName: "Rain",
+		UserName: "Rain",
 		Modes:    "+B",
 	})
 
-	bot.DefaultSetup()
+	setup.Default(bot)
 	bot.DefaultConnect()
 
-	// Echo
-	bot.AddListener("PRIVMSG", func (msg *nimbus.Message) {
-		if len(msg.Args) > 0 {
-			bot.Say(msg.Args[0], msg.Trailing)
-		}
+	// Logs privmsgs from connected channels
+	bot.AddListener("PRIVMSG", func(msg *nimbus.Message) {
+		fmt.Println(msg.Args[0], msg.Trailing)
 	})
 }

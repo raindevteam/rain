@@ -5,8 +5,7 @@ import (
 	"net/rpc"
 	"testing"
 
-	"github.com/wolfchase/rainbot/bot"
-
+	"github.com/raindevteam/rain/bot"
 	"github.com/stretchr/testify/suite"
 )
 
@@ -34,7 +33,7 @@ func (r MasterAPI) Register(t rbot.Ticket, result *string) error {
 
 func (s *CommanderSuite) SetupSuite() {
 	s.GoModCmder = rbot.NewCommander("gomod", "go",
-		"github.com/wolfchase/rainbot/tests/_helpers/modules")
+		"github.com/raindevteam/rain/tests/_helpers/modules")
 	s.PyModCmder = rbot.NewCommander("pymod", "py", "../_helpers/modules")
 	s.JsModCmder = rbot.NewCommander("jsmod", "js", "../_helpers/modules")
 
