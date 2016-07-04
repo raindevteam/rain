@@ -9,7 +9,7 @@ import (
 )
 
 func main() {
-	bot := rbot.NewBot("Beta 0.5.0", &rbot.Config{
+	bot := rbot.NewBot("0.5.0", &rbot.Config{
 		Host:     "irc.canternet.org",
 		Port:     "6667",
 		Channel:  []string{"#snowybottest"},
