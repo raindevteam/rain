@@ -58,7 +58,9 @@ via go get, you may run:
     $ rain mk <install> <bot-name>
 
 This will build a new bot from the specified install package to your GOPATH/bin. It will also
-install dependencies of any of the sub packages for Rain.
+install dependencies of any of the sub packages for Rain. If you wish to install the premade
+installations then make sure you install the libraries you will use from Rain before hand, as to
+resolve dependencies.
 
 Rain Module Libraries (RMLS)<a name="rmls"></a>
 --------------------------------------------------
