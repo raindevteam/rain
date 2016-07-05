@@ -6,7 +6,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/raindevteam/rain/bot"
+	"github.com/raindevteam/rain/rbot"
 	"github.com/raindevteam/rain/setup"
 )
 

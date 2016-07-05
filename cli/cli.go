@@ -6,7 +6,7 @@ import (
 
 	"github.com/RyanPrintup/nimbus"
 	"github.com/chzyer/readline"
-	"github.com/raindevteam/rain/bot"
+	"github.com/raindevteam/rain/rbot"
 	"github.com/raindevteam/rain/rlog"
 )
 

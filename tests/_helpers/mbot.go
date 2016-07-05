@@ -3,7 +3,7 @@ package Thelpers
 import (
 	"sync"
 
-	"github.com/raindevteam/rain/bot"
+	"github.com/raindevteam/rain/rbot"
 )
 
 func NewMockBot(rcon *rbot.Config) *rbot.Bot {

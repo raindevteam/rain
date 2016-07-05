@@ -5,7 +5,7 @@ import (
 	"os"
 	"os/exec"
 
-	"github.com/raindevteam/rain/template"
+	"github.com/raindevteam/rain/tmpl"
 	"github.com/urfave/cli"
 )
 

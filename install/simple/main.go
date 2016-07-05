@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	"github.com/RyanPrintup/nimbus"
-	"github.com/raindevteam/rain/bot"
+	"github.com/raindevteam/rain/rbot"
 	"github.com/raindevteam/rain/setup"
 )
 

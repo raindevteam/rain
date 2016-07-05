@@ -4,7 +4,7 @@ import (
 	"strings"
 
 	"github.com/RyanPrintup/nimbus"
-	"github.com/raindevteam/rain/bot"
+	"github.com/raindevteam/rain/rbot"
 )
 
 type commands struct{ bot *rbot.Bot }

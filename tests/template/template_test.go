@@ -6,7 +6,7 @@ import (
 	"os"
 	"testing"
 
-	"github.com/raindevteam/rain/template"
+	"github.com/raindevteam/rain/tmpl"
 	"github.com/stretchr/testify/suite"
 )
 

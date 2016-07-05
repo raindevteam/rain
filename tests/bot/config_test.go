@@ -4,7 +4,7 @@ import (
 	"testing"
 
 	"github.com/RyanPrintup/nimbus"
-	"github.com/raindevteam/rain/bot"
+	"github.com/raindevteam/rain/rbot"
 
 	"github.com/stretchr/testify/suite"
 )
