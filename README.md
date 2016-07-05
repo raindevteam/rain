@@ -10,8 +10,7 @@
 Rain, an IRC Bot Library for Go
 ===============================
 
-Overview
---------
+### Overview
 
 1. [Installation](#installation)
 2. [Using the Premade Installations](#premade)
