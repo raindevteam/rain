@@ -13,6 +13,8 @@ addons:
 before_install:
   - go get github.com/stretchr/testify
   - go get github.com/raindevteam/gorml
+  - go get golang.org/x/tools/cmd/cover
+  - go get github.com/mattn/goveralls
   - sudo apt-get update
   - sudo apt-get install python3.5
   - curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash - && sudo apt-get install -y nodejs
@@ -22,4 +24,5 @@ install:
   - sudo pip install pyrml
   - go get -d ./...
 
-script: cd tests && go test ./...
+script: cd tests && go test -v -covermode=count -coverprofile=coverage.out
+$HOME/gopath/bin/goveralls -coverprofile=coverage.out -service=travis-ci ./...
