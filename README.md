@@ -6,13 +6,9 @@
 [![DTS](https://img.shields.io/badge/dts-0.5.0-blue.svg)](https://github.com/raindevteam/rain-doc/tree/master/DTS/0.5.0)
 
 ----------------------------------------------------------------------------------------------------
-
+<img align="right" src="https://avatars1.githubusercontent.com/u/20262521?v=3&s=200">
 Rain, an IRC Bot Library for Go
 ===============================
-
-**We are currently in _rapid_ development! This should continue to be the case for a good while**
-
-if you want to follow along with development, see the [DTS](https://github.com/raindevteam/rain-doc/tree/master/DTS/0.5.0)
 
 Overview
 --------
