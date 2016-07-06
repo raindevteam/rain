@@ -1,50 +1,141 @@
 package rbot
 
 import (
-	"encoding/json"
-	"os"
+	"io/ioutil"
+
+	"gopkg.in/yaml.v2"
 
 	"github.com/RyanPrintup/nimbus"
 )
 
-type Config struct {
-	Host    string
-	Port    string
-	Channel []string
+var ExampleConfig = `# Rain config
+# 0.6.0-alpha.1
 
+# Server information
+host : irc.examplehost.net
+port : 6667
+
+# Channel Information
+# Channels listed here will be automatically joined upon server connect
+channels :
+  - "#Your"
+  - "#Channels"
+
+# User information
+nick     : MyBot
+realname : Wolfstein Jr. II
+username : wolfstein
+modes    : +B
+
+# Command Information
+# The command prefix is used to denote commands from IRC users
+commandprefix : .
+
+# Modules
+# These are all optional. A '.' as a module path means its located in the default path. You may 
+# set a specific path if you wish. You may specify extra options for the module as a comma separated
+# list by putting a ':' after its route. We currently only support a few options.
+Modules :
+  # JavaScript Modules
+  js :
+    umbrella : modulesOverHere/js:npm,
+    mlpshow  : .
+
+  # Python Modules
+  py :
+    echo  : ../andSomeMoreOverHere/py:pip
+    ltest : .
+
+  # Go Modules
+  go :
+    raincore : github.com/raindevteam
+
+# These are optional
+# We don't recommend setting a default go route as you may have packages installed in different
+# places such as github.com and gopkg.in. You also can't move go packages outside you GOPATH.
+DefaultRoutes :
+  js : "modules/js"
+  py : "modules/py"
+`
+
+// The ServerInfo struct holds information about the IRC server.
+type ServerInfo struct {
+	Host     string
+	Port     string
+	Channels []string
+}
+
+// UserInfo holds information pertaining to the bot.
+type UserInfo struct {
 	Nick     string
 	RealName string
 	UserName string
 	Modes    string
-
-	CmdPrefix string
-
-	GoModules map[string]string
-	JsModules map[string]string
 }
 
-func ReadConfig(path string) (*Config, error) {
-	config := &Config{}
+// CommandInfo holds information needed for parsing commands
+type CommandInfo struct {
+	Prefix string `yaml:"commandprefix"`
+}
 
-	file, _ := os.Open(path)
-	decoder := json.NewDecoder(file)
+// ModuleInfo holds information for managing modules
+type ModuleInfo struct {
+	//      Modules -> Type -> Module
+	// i.e. Modules["js"]["umbrella"] = "/modules/js"
+	Modules          map[string]map[string]string
+	DefaultRoutes    map[string]string
+	GlobalModOptions map[string]string
+}
 
-	err := decoder.Decode(&config)
-	if err != nil {
-		return nil, err
+// Config keeps together all modular components of configuration
+type Config struct {
+	Server  ServerInfo
+	User    UserInfo
+	Command CommandInfo
+	Module  ModuleInfo
+}
+
+// ReadConfigFile takes a path to a config file and parses it.
+func ReadConfigFile(path string) (*Config, error) {
+	file, _ := ioutil.ReadFile(path)
+	return ReadConfig(string(file))
+}
+
+// ReadConfig parses the passed configuration string
+func ReadConfig(configstr string) (*Config, error) {
+	subconfigs := []interface{}{
+		ServerInfo{},
+		UserInfo{},
+		CommandInfo{},
+		ModuleInfo{},
+	}
+
+	for i, subconfig := range subconfigs {
+		err := yaml.Unmarshal([]byte(configstr), &subconfig)
+		if err != nil {
+			return nil, err
+		}
+	}
+
+	config := &Config{
+		subconfigs[0].(ServerInfo),
+		subconfigs[1].(UserInfo),
+		subconfigs[2].(CommandInfo),
+		subconfigs[3].(ModuleInfo),
 	}
 
 	return config, nil
 }
 
+// GetNimbusConfig takes an rbot.Config and uses to create a nimbus.Config
 func GetNimbusConfig(rconf *Config) (nconf *nimbus.Config) {
 	nconf = &nimbus.Config{
-		Port:     rconf.Port,
-		Channels: rconf.Channel,
-		RealName: rconf.RealName,
-		UserName: rconf.UserName,
+		Port:     rconf.Server.Port,
+		Channels: rconf.Server.Channels,
+		RealName: rconf.User.RealName,
+		UserName: rconf.User.UserName,
 		Password: "",
-		Modes:    rconf.Modes,
+		Modes:    rconf.User.Modes,
 	}
 
 	return nconf
