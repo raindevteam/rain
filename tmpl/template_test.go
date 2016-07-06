@@ -9,6 +9,8 @@ import (
 	"github.com/wolfchase/rainbot/template"
 )
 
+var testTemplDir = "../tests/premade-templates/"
+
 var modtypes = map[string]string{
 	"go": GOMTemplate,
 	"js": JSMTemplate,
@@ -52,7 +54,7 @@ func TestCreateModFile(t *testing.T) {
 		t.Error("Could not create file: " + err.Error())
 	}
 
-	checks, err := checkTmplAgainst("premade-templates/go_module.txt", "mine.go")
+	checks, err := checkTmplAgainst(testTemplDir+"go_module.txt", "mine.go")
 	if err != nil {
 		t.Error("Error while checking templates: " + err.Error())
 	}
@@ -65,7 +67,7 @@ func TestCreateModFile(t *testing.T) {
 func TestCreateModTemplate(t *testing.T) {
 	for mod, templ := range modtypes {
 		tmpl.CreateModTemplate(mod, templ)
-		checks, err := checkTmplAgainst("premade-templates/"+mod+"_module.txt", "test."+mod)
+		checks, err := checkTmplAgainst(testTemplDir+mod+"_module.txt", "test."+mod)
 		if err != nil {
 			t.Error("Error while checking templates: " + err.Error())
 		}

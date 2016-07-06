@@ -8,22 +8,24 @@ import (
 	"github.com/raindevteam/rain/setup"
 )
 
+var config = `
+host     : irc.canternet.org
+port     : 6667
+channels : ["#snowybottest"]
+nick     : SnowBot
+realname : Rain
+username : Rain
+modes    : +B
+`
+
 func main() {
-	bot := rbot.NewBot("0.5.0", &rbot.Config{
-		Host:     "irc.canternet.org",
-		Port:     "6667",
-		Channel:  []string{"#snowybottest"},
-		Nick:     "SnowBot",
-		RealName: "Rain",
-		UserName: "Rain",
-		Modes:    "+B",
-	})
+	bot := rbot.NewBot("0.5.0", rbot.ReadConfig(config))
 
 	setup.Default(bot)
 	bot.DefaultConnect()
 
 	// Logs privmsgs from connected channels
 	bot.AddListener("PRIVMSG", func(msg *nimbus.Message) {
-		fmt.Println(msg.Args[0], msg.Trailing)
+		fmt.Println(msg.Trailing)
 	})
 }
