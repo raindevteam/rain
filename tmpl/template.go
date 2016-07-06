@@ -7,36 +7,12 @@ import (
 	"text/template"
 )
 
+// ModuleConstruct is used to pass data to a template.
 type ModuleConstruct struct {
 	Name string
 }
 
-type TestConstruct struct {
-	Lib       string
-	SuiteName string
-}
-
-func CreateTestTemplate(lib string, name string) {
-	construct := TestConstruct{lib, strings.Title(name)}
-
-	var err error
-	t := template.New("test")
-	t, err = t.Parse(TestTemplate)
-
-	if err != nil {
-		fmt.Println(err)
-	}
-
-	f, err := os.Create(name + "_test.go")
-
-	if err != nil {
-		fmt.Println(err)
-	}
-
-	t.Execute(f, construct)
-	f.Close()
-}
-
+// GetModTemplate returns a predefined string representing the template type passed to it.
 func GetModTemplate(m string) string {
 	switch m {
 	case "go":
@@ -49,6 +25,8 @@ func GetModTemplate(m string) string {
 	return ""
 }
 
+// CreateModFile takes a template, file name and extension to create a file with the forementioned
+// template.
 func CreateModFile(tmpl string, name string, ext string) error {
 	t := template.New(name)
 	t, err := t.Parse(tmpl)
@@ -67,6 +45,7 @@ func CreateModFile(tmpl string, name string, ext string) error {
 	return nil
 }
 
+// CreateModTemplate will write a template of appropriate type to a file.
 func CreateModTemplate(mod string, name string) {
 	tmpl := GetModTemplate(mod)
 

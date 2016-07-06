@@ -62,7 +62,7 @@ func main() {
 	app := cli.NewApp()
 	app.Name = "rainbot"
 	app.Usage = "Command line tool for the management of everything rainbot"
-	app.Version = "0.5.0"
+	app.Version = "0.6.0-alpha.1"
 
 	app.Commands = []cli.Command{
 		{
@@ -73,15 +73,6 @@ func main() {
 				"   Possible build types are:\n    	default\n   	neverfree\n   	simple",
 			ArgsUsage: "install name",
 			Action:    createNewBot,
-		},
-		{
-			Name:        "test",
-			Aliases:     []string{"t"},
-			Usage:       "Creates a template for either a test or module.",
-			Description: "Creates a test template with the specified library to test",
-			ArgsUsage:   "library filename",
-			Action:      createTest,
-			Hidden:      true,
 		},
 		{
 			Name:        "mod",
@@ -158,27 +149,6 @@ func createNewBot(c *cli.Context) error {
 		fmt.Println(" Done!")
 	} else {
 		fmt.Println(" Not a valid install type. Valid install types are:\n - default\n - neverfree\n - simple")
-	}
-
-	return nil
-}
-
-func createTest(c *cli.Context) error {
-	if !c.Args().Present() {
-		fmt.Println(c.App.ArgsUsage)
-	}
-
-	if validLibraryOption(c.Args().First()) {
-		if c.Args().Get(1) == "" {
-			fmt.Println(" No filename specified")
-			fmt.Println(" Usage: " + c.Command.Name + " library filename")
-			return nil
-		}
-
-		tmpl.CreateTestTemplate(c.Args().Get(0), c.Args().Get(1))
-	} else {
-		// TODO: This is extremely inefficient and needs to be fixed!
-		fmt.Println(" Not a valid library. Valid libraries are:\n - rlog\n - db\n - bot\n - template\n - cli\n - setup")
 	}
 
 	return nil
