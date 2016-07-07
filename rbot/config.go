@@ -35,10 +35,10 @@ commandprefix : .
 # These are all optional. A '.' as a module path means its located in the default path. You may 
 # set a specific path if you wish. You may specify extra options for the module as a comma separated
 # list by putting a ':' after its route. We currently only support a few options.
-Modules :
+modules :
   # JavaScript Modules
   js :
-    umbrella : modulesOverHere/js:npm,
+    umbrella : modulesOverHere/js:npm noload
     mlpshow  : .
 
   # Python Modules
@@ -53,7 +53,7 @@ Modules :
 # These are optional
 # We don't recommend setting a default go route as you may have packages installed in different
 # places such as github.com and gopkg.in. You also can't move go packages outside you GOPATH.
-DefaultRoutes :
+defaultroutes :
   js : "modules/js"
   py : "modules/py"
 `
@@ -101,27 +101,33 @@ func ReadConfigFile(path string) (*Config, error) {
 	return ReadConfig(string(file))
 }
 
+func check(err error) {
+	if err != nil {
+		panic(err)
+	}
+}
+
 // ReadConfig parses the passed configuration string
 func ReadConfig(configstr string) (*Config, error) {
-	subconfigs := []interface{}{
-		ServerInfo{},
-		UserInfo{},
-		CommandInfo{},
-		ModuleInfo{},
-	}
+	si := ServerInfo{}
+	ui := UserInfo{}
+	ci := CommandInfo{}
+	mi := ModuleInfo{}
 
-	for i, subconfig := range subconfigs {
-		err := yaml.Unmarshal([]byte(configstr), &subconfig)
-		if err != nil {
-			return nil, err
-		}
-	}
+	err := yaml.Unmarshal([]byte(configstr), &si)
+	check(err)
+	err = yaml.Unmarshal([]byte(configstr), &ui)
+	check(err)
+	err = yaml.Unmarshal([]byte(configstr), &ci)
+	check(err)
+	err = yaml.Unmarshal([]byte(configstr), &mi)
+	check(err)
 
 	config := &Config{
-		subconfigs[0].(ServerInfo),
-		subconfigs[1].(UserInfo),
-		subconfigs[2].(CommandInfo),
-		subconfigs[3].(ModuleInfo),
+		si,
+		ui,
+		ci,
+		mi,
 	}
 
 	return config, nil

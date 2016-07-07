@@ -1,4 +1,4 @@
-package Tbot
+package rbot
 
 import (
 	"testing"

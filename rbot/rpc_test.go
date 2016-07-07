@@ -1,16 +1,7 @@
-package Tbot
+package rbot
 
-import (
-	"errors"
-	"net"
-	"net/rpc"
-	"testing"
-
-	"github.com/raindevteam/rain/rbot"
-	"github.com/stretchr/testify/suite"
-)
-
-/****                                 Suite Configuration                                      ****/
+/*
+/****                                 Suite Configuration                                      ****
 
 type RpcSuite struct {
 	suite.Suite
@@ -37,9 +28,9 @@ func (r TestAPI) Send(msg string, result *string) error {
 	return errors.New("Didn't receive right message")
 }
 
-/**************************************************************************************************/
+/**************************************************************************************************
 
-/****                                      Tests Go Here                                       ****/
+/****                                      Tests Go Here                                       ****
 
 func (s *RpcSuite) Test1RpcCodecServerInit() {
 	rpc.RegisterName("TestMaster", TestAPI{s})
@@ -78,12 +69,13 @@ func (s *RpcSuite) TearDownSuite() {
 	s.RpcServer.Close()
 }
 
-/**************************************************************************************************/
+/**************************************************************************************************
 
-/****                                        Run Suite                                         ****/
+/****                                        Run Suite                                         ****
 
 func TestRpcSuite(t *testing.T) {
 	suite.Run(t, new(RpcSuite))
 }
 
-/**************************************************************************************************/
+/**************************************************************************************************
+*/

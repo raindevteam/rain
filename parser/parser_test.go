@@ -1,4 +1,6 @@
-package Tbot
+package parser
+
+
 
 import (
 	"testing"

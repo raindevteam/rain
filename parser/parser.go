@@ -1,4 +1,4 @@
-package rbot
+package parser
 
 import "strings"
 
