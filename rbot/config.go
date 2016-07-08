@@ -6,6 +6,7 @@ import (
 	"gopkg.in/yaml.v2"
 
 	"github.com/RyanPrintup/nimbus"
+	"github.com/raindevteam/rain/rlog"
 )
 
 var ExampleConfig = `# Rain config
@@ -53,9 +54,15 @@ modules :
 # These are optional
 # We don't recommend setting a default go route as you may have packages installed in different
 # places such as github.com and gopkg.in. You also can't move go packages outside you GOPATH.
-defaultroutes :
-  js : "modules/js"
-  py : "modules/py"
+default-routes :
+  js : modules/js
+  py : modules/py
+
+# Global options define options to be used for all modules that fall under their respective type
+global-options :
+  js : npm
+  py : noload
+  go : noload
 `
 
 // The ServerInfo struct holds information about the IRC server.
@@ -82,9 +89,9 @@ type CommandInfo struct {
 type ModuleInfo struct {
 	//      Modules -> Type -> Module
 	// i.e. Modules["js"]["umbrella"] = "/modules/js"
-	Modules          map[string]map[string]string
-	DefaultRoutes    map[string]string
-	GlobalModOptions map[string]string
+	Modules       map[string]map[string]string
+	DefaultRoutes map[string]string `yaml:"default-routes"`
+	GlobalOptions map[string]string `yaml:"global-options"`
 }
 
 // Config keeps together all modular components of configuration
@@ -103,6 +110,7 @@ func ReadConfigFile(path string) (*Config, error) {
 
 func check(err error) {
 	if err != nil {
+		rlog.Fatal("Bot", "Could not correctly parse the configuration, check your syntax :::")
 		panic(err)
 	}
 }

@@ -1,4 +1,6 @@
-package bapi
+package rbot
+
+/*
 
 import (
 	"errors"
@@ -99,3 +101,4 @@ func (b BotAPI) Register(t Ticket, result *string) error {
 	rlog.Debug("Bot", "Registered "+string(t.Name)+" on port "+t.Port)
 	return nil
 }
+*/

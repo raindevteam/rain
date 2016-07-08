@@ -75,3 +75,7 @@ func Error(who string, msg string) {
 		log.Println(prefix(who, msg, Lerror) + msg)
 	}
 }
+
+func Fatal(who string, msg string) {
+	log.Println(prefix(who, msg, Lerror) + msg)
+}
