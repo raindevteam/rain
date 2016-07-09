@@ -12,9 +12,9 @@ func (m *GoMod) Greet(msg *nimbus.Message, args []string) {
 }
 
 func main() {
-	m := &GoMod{module.MakeModule("GoMod", "Your module's short description")}
+	m := &GoMod{module.NewModule("GoMod", "Your module's short description")}
 
-	m.CommandHook("greet", &module.Command{
+	m.AddCommand("greet", &module.Command{
 		Help: "It greets you!",
 		Fun:  m.Greet,
 	})

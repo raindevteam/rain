@@ -58,7 +58,7 @@ func TestMain(m *testing.M) {
 	os.Exit(ret)
 }
 
-func TestGoCommander(t *testing.T) {
+func TestProcessManagers(t *testing.T) {
 	pms := []*ProcessManager{
 		NewProcessManager("gomod", "go", "github.com/raindevteam/rain/tests/modules"),
 		NewProcessManager("pymod", "py", "../tests/modules"),
