@@ -40,15 +40,12 @@ func NewProcessManager(name string, cmdtype string, path string) *ProcessManager
 func (pm *ProcessManager) runCommand(name string, args ...string) chan *Result {
 	pm.mu.Lock()
 	pm.running = true
+	pm.cmd = exec.Command(name, args...)
 	pm.mu.Unlock()
 
 	ch := make(chan *Result)
 
 	go func(ch chan *Result, pm *ProcessManager) {
-		pm.mu.Lock()
-		pm.cmd = exec.Command(name, args...)
-		pm.mu.Unlock()
-
 		output, err := pm.cmd.CombinedOutput()
 		s := string(output[:])
 
