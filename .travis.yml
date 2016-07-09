@@ -20,7 +20,7 @@ before_install:
   - curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash - && sudo apt-get install -y nodejs
 
 install:
-  - cd tests/_helpers/modules/jsmod && npm install && cd $HOME/gopath/src/github.com/raindevteam/rain
+  - cd tests/modules/jsmod && npm install && cd $HOME/gopath/src/github.com/raindevteam/rain
   - sudo pip install pyrml
   - go get -d ./...
 
