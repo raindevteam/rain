@@ -188,7 +188,7 @@ func (b *Bot) ModuleReload(name string) (err error) {
 		return errors.New("Could not kill module, aborting reload")
 	}
 
-	err = pm.Recompile()
+	pm.Recompile()
 
 	if err != nil {
 		return errors.New("Could not recompile")
@@ -203,10 +203,10 @@ func (b *Bot) ModuleReload(name string) (err error) {
 // can then communicate back via the master rpc server.
 func (b *Bot) moduleRun(name string) {
 	pm := b.Modules[name].PM
-	err := pm.Start()
-	if err != nil {
-		rlog.Warn("Bot", "Could not start: "+name+"("+err.Error()+")")
-	}
+	pm.Start()
+	//if err != nil {
+	//	rlog.Warn("Bot", "Could not start: "+name+"("+err.Error()+")")
+	//}
 }
 
 ///////////////////////////          IRC Specific Methods         //////////////////////////////////

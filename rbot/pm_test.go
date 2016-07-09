@@ -7,25 +7,30 @@ import (
 	"testing"
 )
 
-var RPCServer net.Listener
+var (
+	RPCServer  net.Listener
+	registered = make(chan bool)
+)
 
 type MasterAPI struct {
+	reg chan bool
 }
 
 // The following two rpc procedures are only defined so that the test modules used here have
 // something to delegate their calls to. We plan on fully testing rpc procedures with bapi.go
 
-func (r MasterAPI) RegisterCommand(cr interface{}, result *string) error {
+func (r *MasterAPI) RegisterCommand(cr interface{}, result *string) error {
 	return nil
 }
 
-func (r MasterAPI) Register(t interface{}, result *string) error {
+func (r *MasterAPI) Register(t interface{}, result *string) error {
+	r.reg <- true
 	return nil
 }
 
 func SetupTest() error {
 	srv := rpc.NewServer()
-	srv.RegisterName("Master", MasterAPI{})
+	srv.RegisterName("Master", &MasterAPI{registered})
 
 	var err error
 	RPCServer, err = net.Listen("tcp", ":5555")
@@ -67,19 +72,24 @@ func TestProcessManagers(t *testing.T) {
 
 	for _, pm := range pms {
 		err := pm.Recompile()
-		// In the future, implement a last command status struct
 		if err != nil {
 			t.Fatalf("Failed to recompile %s: %s", pm.Name, err.Error())
 		}
 
-		err = pm.Start()
-		if err != nil {
-			t.Fatalf("Failed to start %s: %s", pm.Name, err.Error())
+		cmd := pm.Start()
+		select {
+		case res := <-cmd:
+			if res.Err != nil {
+				t.Fatalf("Module exited prematurely\n ::::\n%s", res.Output)
+			} else {
+				t.Fatal("Module exited but there was no error, perhaps it is broken")
+			}
+		case <-registered:
 		}
 
 		err = pm.Kill()
 		if err != nil {
-			t.Fatalf("Failed to kill %s: %s", pm.Name, err.Error())
+			t.Fatalf("Could not kill module process: %s", err.Error())
 		}
 	}
 }
