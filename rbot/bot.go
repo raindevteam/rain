@@ -36,15 +36,15 @@ func NewChannel(name string) *Channel {
 // The Module struct serves as a container for a module's commander. The struct holds its
 // module's corresponding name to make it easier for reference.
 type Module struct {
-	Name  string
-	Cmder *Commander
+	Name string
+	PM   *ProcessManager
 }
 
 // NewModule returns a module struct with an assigned commander appropriated to the module's type.
 func NewModule(name string, path string, cmdtype string) *Module {
 	module := &Module{
-		Name:  name,
-		Cmder: NewCommander(name, cmdtype, path),
+		Name: name,
+		PM:   NewProcessManager(name, cmdtype, path),
 	}
 	return module
 }
@@ -173,7 +173,7 @@ func (b *Bot) ModuleReload(name string) (err error) {
 		return errors.New("Module does not exist")
 	}
 
-	c := b.Modules[name].Cmder
+	pm := b.Modules[name].PM
 
 	err = b.Handler.SignalKill(name)
 
@@ -182,13 +182,13 @@ func (b *Bot) ModuleReload(name string) (err error) {
 		return errors.New("Module refused to stop, aborting reload")
 	}
 
-	err = c.Kill()
+	err = pm.Kill()
 
 	if err != nil {
 		return errors.New("Could not kill module, aborting reload")
 	}
 
-	err = c.Recompile()
+	err = pm.Recompile()
 
 	if err != nil {
 		return errors.New("Could not recompile")
@@ -202,8 +202,8 @@ func (b *Bot) ModuleReload(name string) (err error) {
 // the bot to dispatch events outbound to the module. The module
 // can then communicate back via the master rpc server.
 func (b *Bot) moduleRun(name string) {
-	c := b.Modules[name].Cmder
-	err := c.Start()
+	pm := b.Modules[name].PM
+	err := pm.Start()
 	if err != nil {
 		rlog.Warn("Bot", "Could not start: "+name+"("+err.Error()+")")
 	}
