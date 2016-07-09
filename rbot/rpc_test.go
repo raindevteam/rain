@@ -38,7 +38,7 @@ func (r *RPCHandler) CreateRPCServer() error {
 	go func() {
 		for {
 			conn, err := r.RPCServer.Accept()
-			if err != nil || r.stop {
+			if err != nil {
 				r.done <- true
 				return
 			}

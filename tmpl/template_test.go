@@ -5,8 +5,6 @@ import (
 	"io/ioutil"
 	"os"
 	"testing"
-
-	"github.com/wolfchase/rainbot/template"
 )
 
 var testTemplDir = "../tests/premade-templates/"
@@ -66,7 +64,7 @@ func TestCreateModFile(t *testing.T) {
 
 func TestCreateModTemplate(t *testing.T) {
 	for mod, templ := range modtypes {
-		tmpl.CreateModTemplate(mod, templ)
+		CreateModTemplate(mod, templ)
 		checks, err := checkTmplAgainst(testTemplDir+mod+"_module.txt", "test."+mod)
 		if err != nil {
 			t.Error("Error while checking templates: " + err.Error())
