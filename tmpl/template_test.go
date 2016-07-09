@@ -47,12 +47,12 @@ func TestGetModTemplate(t *testing.T) {
 }
 
 func TestCreateModFile(t *testing.T) {
-	err := CreateModFile(GOMTemplate, "mine", "go")
+	err := CreateModFile(GOMTemplate, "test", "go")
 	if err != nil {
 		t.Error("Could not create file: " + err.Error())
 	}
 
-	checks, err := checkTmplAgainst(testTemplDir+"go_module.txt", "mine.go")
+	checks, err := checkTmplAgainst(testTemplDir+"go_module.txt", "test.go")
 	if err != nil {
 		t.Error("Error while checking templates: " + err.Error())
 	}

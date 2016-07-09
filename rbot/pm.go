@@ -45,7 +45,10 @@ func (pm *ProcessManager) runCommand(name string, args ...string) chan *Result {
 	ch := make(chan *Result)
 
 	go func(ch chan *Result, pm *ProcessManager) {
+		pm.mu.Lock()
 		pm.cmd = exec.Command(name, args...)
+		pm.mu.Unlock()
+
 		output, err := pm.cmd.CombinedOutput()
 		s := string(output[:])
 
@@ -110,8 +113,13 @@ func (pm *ProcessManager) Start() chan *Result {
 
 // Kill attempts to kill its Cmd process, an error is returned if a failure occurs.
 func (pm *ProcessManager) Kill() error {
+	pm.mu.Lock()
+
 	err := pm.cmd.Process.Kill()
 	pm.running = false
+
+	pm.mu.Unlock()
+
 	if err != nil {
 		return err
 	}
