@@ -63,8 +63,8 @@ func TestCreateModFile(t *testing.T) {
 }
 
 func TestCreateModTemplate(t *testing.T) {
-	for mod, templ := range modtypes {
-		CreateModTemplate(mod, templ)
+	for mod := range modtypes {
+		CreateModTemplate(mod, "test")
 		checks, err := checkTmplAgainst(testTemplDir+mod+"_module.txt", "test."+mod)
 		if err != nil {
 			t.Error("Error while checking templates: " + err.Error())
@@ -77,9 +77,9 @@ func TestCreateModTemplate(t *testing.T) {
 }
 
 func tearDown() {
-	for _, file := range []string{"mine.go, test.go, test.js, test.py"} {
+	for _, file := range []string{"mine.go", "test.go", "test.js", "test.py"} {
 		if err := os.Remove(file); err != nil {
-			fmt.Println("Could not remove test files")
+			fmt.Printf("Could not remove test files: %s", err.Error())
 		}
 	}
 }
