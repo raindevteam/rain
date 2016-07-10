@@ -20,6 +20,7 @@ type ProcessManager struct {
 	cmd         *exec.Cmd
 	running     bool
 	processDone chan *Result
+	kill        chan bool
 	lastResult  *Result
 	mu          sync.Mutex
 }
@@ -32,6 +33,7 @@ func NewProcessManager(name string, cmdtype string, path string) *ProcessManager
 		Type:    cmdtype,
 		Path:    path,
 		running: false,
+		kill:    make(chan bool),
 		mu:      sync.Mutex{},
 	}
 	return pm
@@ -43,23 +45,35 @@ func (pm *ProcessManager) runCommand(name string, args ...string) chan *Result {
 	pm.cmd = exec.Command(name, args...)
 	pm.mu.Unlock()
 
-	ch := make(chan *Result)
+	ret := make(chan *Result)
+	done := make(chan *Result)
 
-	go func(ch chan *Result, pm *ProcessManager) {
+	go func(done chan *Result, pm *ProcessManager) {
 		output, err := pm.cmd.CombinedOutput()
 		s := string(output[:])
 
+		res := &Result{s, err}
+		done <- res
+
 		pm.mu.Lock()
 
-		pm.lastResult = &Result{s, err}
+		pm.lastResult = res
 		pm.running = false
 
 		pm.mu.Unlock()
+	}(done, pm)
 
-		ch <- pm.lastResult
-	}(ch, pm)
+	go func(ret chan *Result, done chan *Result, pm *ProcessManager) {
+		select {
+		case res := <-done:
+			ret <- res
+		case <-pm.kill:
+			res := <-done
+			ret <- res
+		}
+	}(ret, done, pm)
 
-	return ch
+	return ret
 }
 
 func (pm *ProcessManager) WaitForCommand() *Result {
@@ -112,13 +126,10 @@ func (pm *ProcessManager) Start() chan *Result {
 func (pm *ProcessManager) Kill() error {
 	pm.mu.Lock()
 
-	err := pm.cmd.Process.Kill()
+	pm.kill <- true
 	pm.running = false
 
 	pm.mu.Unlock()
 
-	if err != nil {
-		return err
-	}
 	return nil
 }
