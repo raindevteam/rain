@@ -14,7 +14,7 @@ addons:
     - deadsnakes
 
 before_install:
-  - sudo
+  - su
   - go get github.com/stretchr/testify
   - go get github.com/raindevteam/gorml
   - go get golang.org/x/tools/cmd/cover
