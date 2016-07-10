@@ -83,6 +83,7 @@ type Bot struct {
 	Channels map[string]*Channel
 	Parser   *parser.Parser
 	Handler  *Handler
+	Config   *Config
 	Mu       sync.Mutex
 }
 
@@ -102,6 +103,7 @@ func NewBot(version string, rconf *Config) *Bot {
 		/* Channels */ make(map[string]*Channel),
 		/* Parser   */ parser.NewParser(rconf.Command.Prefix),
 		/* Handler  */ NewHandler(),
+		/* Config   */ rconf,
 		/* Mutex    */ sync.Mutex{},
 	}
 
