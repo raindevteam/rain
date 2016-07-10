@@ -17,11 +17,13 @@ before_install:
   - go get github.com/mattn/goveralls
   - sudo apt-get update
   - sudo apt-get install python3.5
+  - alias python=python3
+  - sudo apt-get install python3-pip
   - curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash - && sudo apt-get install -y nodejs
 
 install:
   - cd tests/modules/jsmod && npm install && cd $HOME/gopath/src/github.com/raindevteam/rain
-  - sudo pip install pyrml
+  - sudo pip3 install pyrml
   - go get -d ./...
 
 script: 
