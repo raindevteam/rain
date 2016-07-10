@@ -22,7 +22,7 @@ before_install:
 
 install:
   - cd tests/modules/jsmod && npm install && cd $HOME/gopath/src/github.com/raindevteam/rain
-  - sudo pip3 install pyrml
+  - sudo pip install pyrml
   - go get -d ./...
 
 script: 
