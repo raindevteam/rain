@@ -3,13 +3,14 @@ package rbot
 import (
 	"net/rpc"
 	"strings"
-
+	"sync"
 
 	"github.com/RyanPrintup/nimbus"
+	"github.com/raindevteam/rain/rlog"
 )
 
 type Handler struct {
-	// Listeners for modules 
+	// Listeners for modules
 	Commands map[CommandName]ModuleName
 	Triggers map[Event][]ModuleName
 	Numerics map[Numeric][]ModuleName
@@ -20,6 +21,7 @@ type Handler struct {
 	InternalNumerics map[Numeric][]*Listener
 
 	Modules map[ModuleName]*rpc.Client
+	mu      sync.RWMutex
 }
 
 func NewHandler() *Handler {
@@ -33,6 +35,7 @@ func NewHandler() *Handler {
 		InternalNumerics: make(map[Numeric][]*Listener),
 
 		Modules: make(map[ModuleName]*rpc.Client),
+		mu:      sync.RWMutex{},
 	}
 	return handler
 }
@@ -50,9 +53,12 @@ func (h *Handler) ModuleExists(name string) bool {
 
 // SignalKill calls the Cleanup method for the given module. Returns an error if module did not
 // successfully cleanup after itself.
-func (h *Handler) SignalKill(mName string) error {
+func (h *Handler) SignalCleanup(name ModuleName) error {
+	h.mu.RLock()
+	defer h.mu.RUnlock()
+
 	result := ""
-	err := h.Modules[ModuleName(mName)].Call(mName+".Cleanup", nil, &result)
+	err := h.Modules[name].Call(string(name)+".Cleanup", nil, &result)
 
 	if err != nil {
 		return err
@@ -93,6 +99,9 @@ func (h *Handler) IsInternalCommand(cmd CommandName) bool {
 // Invoke runs a command. Commands are ran by calling the respective module's "InvokeCommand" rpc
 // method. The module then handles the firing.
 func (h *Handler) Invoke(msg *nimbus.Message, cmd CommandName, args []string) {
+	h.mu.RLock()
+	defer h.mu.RUnlock()
+
 	if h.IsInternalCommand(cmd) {
 		h.InvokeInternal(msg, cmd, args)
 	} else {
@@ -118,17 +127,77 @@ func (h *Handler) Fire(msg *nimbus.Message, e Event) {
 	h.FireInternal(msg, e)
 
 	for _, mName := range h.Triggers[e] {
-		result := ""
-		go h.Modules[mName].Call(string(mName)+".FireTriggers", msg, &result)
+		go func(h *Handler, name ModuleName, msg *nimbus.Message) {
+			h.mu.RLock()
+
+			result := ""
+			h.Modules[name].Call(string(name)+".FireTriggers", msg, &result)
+
+			h.mu.RUnlock()
+		}(h, mName, msg)
 	}
 }
 
 func (h *Handler) FireInternal(msg *nimbus.Message, e Event) {
 	for _, trigger := range h.InternalTriggers[e] {
-		go func(msg *nimbus.Message) {
+		go func(msg *nimbus.Message, trigger *Trigger) {
 			if trigger.Check(msg) {
 				trigger.Fun(msg)
 			}
-		}(msg)
+		}(msg, trigger)
 	}
+}
+
+func (h *Handler) RemoveModule(name ModuleName) {
+	h.mu.Lock()
+	defer h.mu.Unlock()
+
+	// Let's make sure we haven't already removed the module, as removal can be initiated by
+	// multiple sources.
+	if !h.ModuleExists(string(name)) {
+		// Our job here is/was done
+		return
+	}
+
+	// Remove all commands
+	for cmd, modname := range h.Commands {
+		if modname == name {
+			delete(h.Commands, cmd)
+		}
+	}
+
+	// Remove all triggers
+	for event, modnames := range h.Triggers {
+		for i, modname := range modnames {
+			if modname == name {
+				h.Triggers[event] = append(h.Triggers[event][:i], h.Triggers[event][i+1:]...)
+			}
+		}
+	}
+
+	// And finally remove from handler
+	delete(h.Modules, name)
+}
+
+func (h *Handler) doRPC(name ModuleName, procedure string, data interface{}) (string, error) {
+	result := ""
+
+	err := h.Modules[name].Call(string(name)+"."+procedure, data, &result)
+	if err != nil {
+		// RPC call failed, module deemed unstable and is therefore removed
+		// Signal a clean up to module
+		rlog.Warn("Handler", "Removing "+string(name)+"[RPC Module Client] due to RPC error: "+
+			err.Error())
+
+		err := h.SignalCleanup(name)
+		if err != nil {
+			rlog.Warn("Handler", string(name)+"[RPC Module Client] did not successfully clean up,"+
+				"it will still be removed.")
+		}
+
+		h.RemoveModule(name)
+		return "", err
+	}
+
+	return result, err
 }

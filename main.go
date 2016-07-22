@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"os/exec"
+	"runtime"
 
 	"github.com/raindevteam/rain/tmpl"
 	"github.com/urfave/cli"
@@ -120,10 +121,14 @@ func build(install string, name string) error {
 
 	path := os.Getenv("GOPATH") + "/bin/" + name
 
-	output, err = exec.Command("go", "build", "-o", path, "-i",
+	if runtime.GOOS == "windows" {
+		path = path + ".exe"
+	}
+
+	output, err = exec.Command("go", "build", "-o", path,
 		"github.com/raindevteam/rain/install/"+install).CombinedOutput()
 	if err != nil {
-		fmt.Println(" Internal command error >>>\n" + string(output[:]))
+		fmt.Println(" Internal command error\n ::::\n" + string(output[:]))
 		return err
 	}
 
@@ -143,7 +148,7 @@ func createNewBot(c *cli.Context) error {
 
 		fmt.Println(" Building... ")
 		if err := build(c.Args().Get(0), c.Args().Get(1)); err != nil {
-			fmt.Println(" Install was not successful, please review the above messages")
+			fmt.Println(" ::::\n Install was not successful, please report the above problem(s) as an issue")
 			return nil
 		}
 		fmt.Println(" Done!")

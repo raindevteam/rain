@@ -115,7 +115,7 @@ func (pm *ProcessManager) Start() chan *Result {
 	case "go":
 		return pm.runCommand(pm.Name)
 	case "py":
-		return pm.runCommand("python3", pm.Path+"/"+pm.Name)
+		return pm.runCommand("python", pm.Path+"/"+pm.Name)
 	default:
 		// Keep in mind that the will make it virtually impossible to reach here
 		return nil

@@ -2,6 +2,10 @@ package rbot
 
 import (
 	"errors"
+	"fmt"
+	"net"
+	"net/rpc"
+	"os"
 	"strings"
 	"sync"
 
@@ -9,6 +13,8 @@ import (
 	"github.com/raindevteam/rain/parser"
 	"github.com/raindevteam/rain/rlog"
 )
+
+var DefaultModulesRoute = "modules/"
 
 //////////////////////////////          Bot Internals         //////////////////////////////////////
 
@@ -36,15 +42,19 @@ func NewChannel(name string) *Channel {
 // The Module struct serves as a container for a module's commander. The struct holds its
 // module's corresponding name to make it easier for reference.
 type Module struct {
-	Name string
-	PM   *ProcessManager
+	Name    string
+	Route   string
+	Options map[string]bool
+	PM      *ProcessManager
 }
 
 // NewModule returns a module struct with an assigned commander appropriated to the module's type.
-func NewModule(name string, path string, cmdtype string) *Module {
+func NewModule(name string, path string, opts map[string]bool, cmdtype string) *Module {
 	module := &Module{
-		Name: name,
-		PM:   NewProcessManager(name, cmdtype, path),
+		Name:    name,
+		Route:   path,
+		Options: opts,
+		PM:      NewProcessManager(name, cmdtype, path),
 	}
 	return module
 }
@@ -91,7 +101,7 @@ type Bot struct {
 // for rlog. It then creates a Nimbus config to pass to the internal nimbus IRC client. This
 // client is embedded into an instance of Bot and returned. It has its fields initialized.
 func NewBot(version string, rconf *Config) *Bot {
-	rlog.SetFlags(rlog.Linfo | rlog.Lwarn | rlog.Lerror)
+	rlog.SetFlags(rlog.Linfo | rlog.Lwarn | rlog.Lerror | rlog.Ldebug)
 	rlog.SetLogFlags(0)
 
 	nconf := GetNimbusConfig(rconf)
@@ -110,13 +120,10 @@ func NewBot(version string, rconf *Config) *Bot {
 	return bot
 }
 
-// DefaultConnect will connect to IRC and start listening. It will not log anything. It also
-// waits on Client.Quit(), and when the chan is served, it logs the quit result.
+// DefaultConnect will connect to IRC and start listening. It will not log anything.
 func (b *Bot) DefaultConnect() {
 	b.Connect()
 	b.Listen()
-	result := <-b.Quit()
-	rlog.Info("Bot", "Quitting Now: "+result.Error())
 }
 
 // DefaultConnectWithMsg is similar to DefaultConnect, except a user may pass a pre-connect and
@@ -133,35 +140,75 @@ func (b *Bot) DefaultConnectWithMsg(pre string, post string) {
 	}
 
 	b.Listen()
-	result := <-b.Quit()
-	rlog.Info("Bot", "Quitting Now: "+result.Error())
 }
 
 /////////////////////////          Module Specific Methods         /////////////////////////////////
 
 // EnableModules goes through every module list found in the config and sets them up appropriately.
-func (b *Bot) EnableModules(rconf *Config) {
-	//var name, path string
-	/*
-		for name, path = range rainConfig.GoModules {
-			lowerName := strings.ToLower(name)
-			b.Modules[lowerName] = NewModule(lowerName, path, "go")
-		}
+func (b *Bot) EnableModules() {
+	rlog.Info("Bot", "Enabling Modules...")
+	fmt.Println(b.Config.Module.Modules)
+	for modtype, modules := range b.Config.Module.Modules {
+		for name, value := range modules {
+			route, optionsArray := b.Parser.ParseModuleValue(value)
 
-		for name, path = range rainConfig.JsModules {
-			lowerName := strings.ToLower(name)
-			b.Modules[lowerName] = NewModule(lowerName, path, "js")
+			optionsMap := make(map[string]bool)
+			for _, opt := range optionsArray {
+				optionsMap[opt] = true
+			}
+
+			if route == "." {
+				route = DefaultModulesRoute + modtype
+			}
+
+			b.Modules[strings.ToLower(name)] = NewModule(name, route, optionsMap, modtype)
+			rlog.Debug("Bot", "Module"+name+" Created")
 		}
-	*/
+	}
 	b.loadModules()
 }
 
 // LoadModules starts the bot's rpc master server and then calls moduleRun() on all modules.
 func (b *Bot) loadModules() {
-	//	b.startRPCServer()
-	for name := range b.Modules {
-		b.moduleRun(name)
+	b.startRPCServer()
+	for name, module := range b.Modules {
+		if _, ok := module.Options["noload"]; ok {
+			rlog.Info("Bot", "Module "+name+" has option noload, not loading")
+			continue
+		}
+
+		cmd := module.PM.Start()
+
+		go func(name string, cmd chan *Result) {
+			result := <-cmd
+			b.moduleExited(name, result)
+		}(name, cmd)
+
+		rlog.Info("Bot", "Module "+name+" loaded")
 	}
+}
+
+func (b *Bot) moduleExited(name string, result *Result) {
+	b.Mu.Lock()
+	defer b.Mu.Unlock()
+
+	if result.Err != nil {
+		rlog.Error("Bot", name+"[Module Process] has exited with error\n ::::\n"+result.Err.Error())
+	} else {
+		rlog.Info("Bot", "Module "+name+"[Module Process] has exited")
+	}
+
+	if b.Handler.ModuleExists(name) {
+		// If the module process is dead we can rest assured signalling it to clean up will fail
+		// so we won't even try. It's the sanest thing to do!
+		b.Handler.RemoveModule(ModuleName(name))
+	} else {
+		// We consider a module not starting before registering as an unrecoverable state.
+		rlog.Error("Bot", name+"[Module Client] did manage to register, aborting startup")
+		os.Exit(1)
+	}
+
+	delete(b.Modules, name)
 }
 
 // ModuleReload will reload a module by telling the handler to signal a kill cleanup to the module
@@ -169,31 +216,26 @@ func (b *Bot) loadModules() {
 // will be aborted. If the module complies, the module's corresponding process will be killed. The
 // module will then be recompiled if need be and will be restarted after.
 func (b *Bot) ModuleReload(name string) (err error) {
-	name = strings.ToLower(name)
-
 	if !b.Handler.ModuleExists(name) {
 		return errors.New("Module does not exist")
 	}
 
-	pm := b.Modules[name].PM
+	pm := b.Modules[strings.ToLower(name)].PM
 
-	err = b.Handler.SignalKill(name)
-
+	err = b.Handler.SignalCleanup(ModuleName(name))
 	if err != nil {
 		rlog.Error("Bot", err.Error())
 		return errors.New("Module refused to stop, aborting reload")
 	}
 
 	err = pm.Kill()
-
 	if err != nil {
 		return errors.New("Could not kill module, aborting reload")
 	}
 
-	pm.Recompile()
-
+	err = pm.Recompile()
 	if err != nil {
-		return errors.New("Could not recompile")
+		return errors.New("Could not recompile module")
 	}
 
 	b.moduleRun(name)
@@ -206,9 +248,6 @@ func (b *Bot) ModuleReload(name string) (err error) {
 func (b *Bot) moduleRun(name string) {
 	pm := b.Modules[name].PM
 	pm.Start()
-	//if err != nil {
-	//	rlog.Warn("Bot", "Could not start: "+name+"("+err.Error()+")")
-	//}
 }
 
 ///////////////////////////          IRC Specific Methods         //////////////////////////////////
@@ -226,7 +265,6 @@ func (b *Bot) RemoveUser(nick string, channel string) {
 
 ///////////////////////////          RPC Specific Methods         //////////////////////////////////
 
-/*
 // startRPCServer registers the master consumer for plugins. The master consumer allows plugins to
 // communicate with the bot, allowing access to connected channels, users and registered modules.
 // Conventionally, it uses a json codec to serve.
@@ -246,94 +284,3 @@ func (b *Bot) startRPCServer() {
 		}
 	}()
 }
-
-// BotAPI is the exposed api served via the bot's master consumer connection
-type BotAPI struct {
-	bot *Bot
-}
-
-// A Ticket is used to connect to a provider connection via rpc.
-type Ticket struct {
-	Port       string
-	ModuleName string
-}
-
-// A CommandRequest is used to register commands via the handler.
-type CommandRequest struct {
-	CommandName string
-	ModuleName  string
-}
-
-// A TriggerRequest is used to register triggers via the handler.
-type TriggerRequest struct {
-	Name  ModuleName
-	Event Event
-}
-
-// Send transmits a message over irc as a PRIVMSG
-func (b BotAPI) Send(raw string, result *string) error {
-
-	b.bot.Send(nimbus.PRIVMSG, raw)
-	return nil
-}
-
-// RegisterCommand registers a command from a module with the handler. The command request
-// holds the command's name and the module it belongs to (used to signal the module to fire the
-// command).
-func (b BotAPI) RegisterCommand(cr CommandRequest, result *string) error {
-	b.bot.Handler.AddCommand(cr.Name, cr.Module)
-	rlog.Debug("Bot", "Added: "+string(cr.Name)+" for module: "+string(cr.Module))
-	return nil
-}
-
-// RegisterTrigger will register a trigger from a module with the bot handler. If this the first
-// trigger for its corresponding event, the bot will add a new listener that handles trigger firing
-// for this event.
-func (b BotAPI) RegisterTrigger(tr TriggerRequest, result *string) error {
-	listeners := b.bot.GetListeners(string(tr.Event))
-	if len(listeners) == 0 {
-		b.bot.AddListener(string(tr.Event), func(msg *nimbus.Message) {
-			b.bot.Handler.Fire(msg, tr.Event)
-		})
-	}
-	b.bot.Handler.AddTrigger(tr.Name, tr.Event)
-	return nil
-}
-
-// GetVersion will return the bot's current version.
-func (b BotAPI) GetVersion(mName string, result *string) error {
-	*result = b.bot.Version
-	return nil
-}
-
-// GetConnectedUsers will return a user map (where every user has an IRC rank as a value).
-func (b BotAPI) GetConnectedUsers(channel string, result *map[string]string) error {
-	*result = b.bot.Channels[strings.ToLower(channel)].Users
-	return nil
-}
-
-// GetTopic returns the channel's topic.
-func (b BotAPI) GetTopic(channel string, result *string) error {
-	if _, ok := b.bot.Channels[strings.ToLower(channel)]; !ok {
-		*result = ""
-		return errors.New("Channel doesn't exist")
-	}
-
-	*result = b.bot.Channels[strings.ToLower(channel)].Topic
-	return nil
-}
-
-// Register registers a module with the bot. With the given port number in the Ticket, the bot
-// creates a new rpc provider client connection to the module. The module is kept in the handler
-// for event dispatching and module management.
-func (b BotAPI) Register(t Ticket, result *string) error {
-	module := rpc.NewClientWithCodec(RpcCodecClientWithPort(t.Port))
-	if module == nil {
-		rlog.Warn("Bot", "Could not register:"+string(t.Name))
-		return errors.New("Failed to regsiter module")
-	}
-	b.bot.Handler.AddModule(ModuleName(strings.ToLower(string(t.Name))), module)
-	rlog.Debug("Bot", "Registered "+string(t.Name)+" on port "+t.Port)
-	return nil
-}
-*/

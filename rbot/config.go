@@ -34,7 +34,7 @@ commandprefix : .
 
 # Modules
 # These are all optional. A '.' as a module path means its located in the default path. You may 
-# set a specific path if you wish. You may specify extra options for the module as a comma separated
+# set a specific path if you wish. You may specify extra options for the module as a space separated
 # list by putting a ':' after its route. We currently only support a few options.
 modules :
   # JavaScript Modules
@@ -53,7 +53,7 @@ modules :
 
 # These are optional
 # We don't recommend setting a default go route as you may have packages installed in different
-# places such as github.com and gopkg.in. You also can't move go packages outside you GOPATH.
+# places such as github.com and gopkg.in. You also can't move go packages outside your GOPATH.
 default-routes :
   js : modules/js
   py : modules/py
@@ -110,7 +110,7 @@ func ReadConfigFile(path string) (*Config, error) {
 
 func check(err error) {
 	if err != nil {
-		rlog.Fatal("Bot", "Could not correctly parse the configuration, check your syntax :::")
+		rlog.Fatal("Config", "Could not correctly parse the configuration, check your syntax :::")
 		panic(err)
 	}
 }
@@ -141,7 +141,7 @@ func ReadConfig(configstr string) (*Config, error) {
 	return config, nil
 }
 
-// GetNimbusConfig takes an rbot.Config and uses to create a nimbus.Config
+// GetNimbusConfig takes an rbot.Config and uses it to create a nimbus.Config
 func GetNimbusConfig(rconf *Config) (nconf *nimbus.Config) {
 	nconf = &nimbus.Config{
 		Port:     rconf.Server.Port,

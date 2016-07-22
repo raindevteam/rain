@@ -14,7 +14,7 @@ const (
 	Linfo
 	Lwarn
 	Lerror
-	LDefaultFlags = Linfo | Lwarn | Lerror // initial values for the standard logger
+	LDefaultFlags = Linfo | Lwarn | Lerror | Ldebug // initial values for the standard logger
 )
 
 var l = logger{LDefaultFlags}

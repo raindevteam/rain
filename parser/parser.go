@@ -1,6 +1,18 @@
 package parser
 
-import "strings"
+import (
+	"strings"
+	"unicode"
+)
+
+func trimAll(str string) string {
+	return strings.Map(func(r rune) rune {
+		if unicode.IsSpace(r) {
+			return -1
+		}
+		return r
+	}, str)
+}
 
 // The Parser is used occasionaly throughout different parts of the bot. It mostly handles parsing
 // irc messages for commands. The bot then takes what is parsed and is usually passed to the
@@ -15,6 +27,16 @@ func NewParser(prefix string) *Parser {
 	return parser
 }
 
+func (p *Parser) ParseModuleValue(value string) (string, []string) {
+	cut := strings.SplitN(value, ":", 2)
+	if len(cut) == 1 {
+		return cut[0], []string{}
+	}
+	route := cut[0]
+	options := strings.Split(cut[1], " ")
+	return route, options
+}
+
 // IsCommand checks if an IRC message is a command.
 func (p *Parser) IsCommand(text string) bool {
 	return string(text[0]) == p.Prefix
@@ -22,7 +44,7 @@ func (p *Parser) IsCommand(text string) bool {
 
 // ParseCommand will return the name of the command and its argument list.
 func (p *Parser) ParseCommand(raw string) (string, []string) {
-	splitMessage := strings.Split(string(raw[1:]), " ")
+	splitMessage := strings.Split(strings.Trim(string(raw[1:]), " "), " ")
 	return splitMessage[0], splitMessage[1:]
 }
 

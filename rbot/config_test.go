@@ -7,6 +7,7 @@ package rbot
  */
 
 import (
+	"fmt"
 	"reflect"
 	"testing"
 
@@ -87,6 +88,7 @@ func TestReadConfigFile(t *testing.T) {
 	conf, _ := ReadConfigFile("../tests/test_config.yaml")
 	checks := checkConfig(conf)
 	if checks != true {
+		fmt.Println(conf)
 		t.Error("Config did not parse correctly")
 	}
 }

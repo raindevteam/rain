@@ -12,14 +12,15 @@ var config = `
 host     : irc.canternet.org
 port     : 6667
 channels : ["#snowybottest"]
-nick     : SnowBot
+nick     : SnowyBot
 realname : Rain
 username : Rain
 modes    : +B
 `
 
 func main() {
-	bot := rbot.NewBot("0.5.0", rbot.ReadConfig(config))
+	conf, _ := rbot.ReadConfig(config)
+	bot := rbot.NewBot("0.5.0", conf)
 
 	setup.Default(bot)
 	bot.DefaultConnect()

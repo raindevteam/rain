@@ -1,7 +1,5 @@
 package rbot
 
-/*
-
 import (
 	"errors"
 	"net/rpc"
@@ -9,12 +7,11 @@ import (
 
 	"github.com/RyanPrintup/nimbus"
 	"github.com/raindevteam/rain/rlog"
-	"github.com/wolfchase/rainbot/bot"
 )
 
 // BotAPI is the exposed api served via the bot's master consumer connection
 type BotAPI struct {
-	bot *rbot.Bot
+	bot *Bot
 }
 
 // A Ticket is used to connect to a provider connection via rpc.
@@ -46,8 +43,8 @@ func (b BotAPI) Send(raw string, result *string) error {
 // holds the command's name and the module it belongs to (used to signal the module to fire the
 // command).
 func (b BotAPI) RegisterCommand(cr CommandRequest, result *string) error {
-	b.bot.Handler.AddCommand(cr.Name, cr.Module)
-	rlog.Debug("Bot", "Added: "+string(cr.Name)+" for module: "+string(cr.Module))
+	b.bot.Handler.AddCommand(CommandName(cr.CommandName), ModuleName(cr.ModuleName))
+	rlog.Debug("Bot", "Added: "+cr.CommandName+" for module: "+cr.ModuleName)
 	return nil
 }
 
@@ -92,13 +89,20 @@ func (b BotAPI) GetTopic(channel string, result *string) error {
 // creates a new rpc provider client connection to the module. The module is kept in the handler
 // for event dispatching and module management.
 func (b BotAPI) Register(t Ticket, result *string) error {
-	module := rpc.NewClientWithCodec(RpcCodecClientWithPort(t.Port))
+	rlog.Debug("Bot", "Starting registration for "+t.ModuleName+"[Module Client]")
+	client, err := RpcCodecClientWithPort(t.Port)
+	rlog.Debug("Bot", "Client created")
+	if err != nil {
+		rlog.Error("Bot", "Could not establish an RPC client: "+err.Error())
+	}
+
+	module := rpc.NewClientWithCodec(client)
 	if module == nil {
-		rlog.Warn("Bot", "Could not register:"+string(t.Name))
+		rlog.Warn("Bot", "Could not register:"+t.ModuleName)
 		return errors.New("Failed to regsiter module")
 	}
-	b.bot.Handler.AddModule(ModuleName(strings.ToLower(string(t.Name))), module)
-	rlog.Debug("Bot", "Registered "+string(t.Name)+" on port "+t.Port)
+
+	b.bot.Handler.AddModule(ModuleName(strings.ToLower(t.ModuleName)), module)
+	rlog.Debug("Bot", "Registered "+t.ModuleName+" on port "+t.Port)
 	return nil
 }
-*/

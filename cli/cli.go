@@ -6,6 +6,7 @@ import (
 
 	"github.com/RyanPrintup/nimbus"
 	"github.com/chzyer/readline"
+	"github.com/raindevteam/rain/parser"
 	"github.com/raindevteam/rain/rbot"
 	"github.com/raindevteam/rain/rlog"
 )
@@ -28,11 +29,11 @@ type CliClient struct {
 }
 
 func (c CliClient) GetNick() string {
-	return c.config.Nick
+	return c.config.User.Nick
 }
 
 func (c CliClient) GetChannels() []string {
-	return c.config.Channel
+	return c.config.Server.Channels
 }
 
 func (c CliClient) Send(raw ...string) {
@@ -61,15 +62,15 @@ func (c CliClient) Say(channel string, text string) {
 	c.Send(nimbus.PRIVMSG, channel, text)
 }
 
-func NewCLIBot(rainConfig *rbot.Config) *rbot.Bot {
-	rlog.SetFlags(rlog.Linfo | rlog.Lwarn | rlog.Lerror)
+func NewCLIBot(conf *rbot.Config) *rbot.Bot {
+	rlog.SetFlags(rlog.Linfo | rlog.Lwarn | rlog.Lerror | rlog.Ldebug)
 	rlog.SetLogFlags(0)
 
 	cli := &CliClient{
 		MsgMode,
-		rainConfig.CmdPrefix + ":",
+		conf.Command.Prefix + ":",
 		make(map[string][]nimbus.Listener),
-		rainConfig,
+		conf,
 		make(chan error),
 	}
 
@@ -78,8 +79,9 @@ func NewCLIBot(rainConfig *rbot.Config) *rbot.Bot {
 		/* Version     */ "CLI",
 		/* Modules     */ make(map[string]*rbot.Module),
 		/* Channels    */ make(map[string]*rbot.Channel),
-		/* Parser      */ rbot.NewParser(rainConfig.CmdPrefix),
+		/* Parser      */ parser.NewParser(conf.Command.Prefix),
 		/* Handler     */ rbot.NewHandler(),
+		/* Config      */ conf,
 		/* Mutex       */ sync.Mutex{},
 	}
 

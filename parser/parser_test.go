@@ -1,71 +1,72 @@
 package parser
 
-
-
 import (
+	"reflect"
 	"testing"
-
-	"github.com/raindevteam/rain/rbot"
-	"github.com/stretchr/testify/suite"
 )
 
-/****                                 Suite Configuration                                      ****/
+var parser = NewParser(".")
 
-type ParserSuite struct {
-	suite.Suite
-	Parser *rbot.Parser
+func TestParseModuleValue(t *testing.T) {
+	var (
+		route   string
+		options []string
+	)
+
+	route, options = parser.ParseModuleValue(".:pip noload")
+	if route != "." || !reflect.DeepEqual(options, []string{"pip", "noload"}) {
+		t.Fatal("\".:pip noload\" incorrectly parsed by parser")
+	}
+
+	route, options = parser.ParseModuleValue(".")
+	if route != "." || !reflect.DeepEqual(options, []string{}) {
+		t.Fatal("\".\" incorrectly parsed by parser")
+	}
+
+	route, options = parser.ParseModuleValue("modules/js:npm")
+	if route != "modules/js" || !reflect.DeepEqual(options, []string{"npm"}) {
+		t.Fatal("\".:pip noload\" incorrectly parsed by parser")
+	}
 }
 
-func (s *ParserSuite) SetupTest() {
-	s.Parser = rbot.NewParser(".")
+func TestIsCommand(t *testing.T) {
+	// Loop these
+	check := parser.IsCommand(".yes")
+	check = !parser.IsCommand("no, not a command") && check
+	check = parser.IsCommand(".yes I am a command") && check
+	check = !parser.IsCommand(";nope, I am not a command either") && check
+	if !check {
+		t.Fatal("Parser unable to correctly parse commands")
+	}
 }
 
-/**************************************************************************************************/
+func TestParseCommand(t *testing.T) {
+	var (
+		name string
+		args []string
+	)
 
-/****                                      Tests Go Here                                       ****/
+	name, args = parser.ParseCommand(".say")
+	if name != "say" || len(args) != 0 {
+		t.Fatal("\".say\" incorrectly parsed by parser")
+	}
 
-func (s *ParserSuite) TestNewParser() {
-	s.NotNil(s.Parser, "Parser created")
+	name, args = parser.ParseCommand(".echo I am broot")
+	if name != "echo" || !reflect.DeepEqual(args, []string{"I", "am", "broot"}) {
+		t.Fatal("\".echo I am broot\" incorrectly parsed by parser")
+	}
 }
 
-func (s *ParserSuite) TestIsCommand() {
-	s.True(s.Parser.IsCommand(".yes"))
-	s.False(s.Parser.IsCommand("no, not a command"))
-	s.True(s.Parser.IsCommand(".yes I am a command"))
-	s.False(s.Parser.IsCommand(";nope, I am not a command either"))
-}
-
-func (s *ParserSuite) TestParseCommand() {
-	var name string
-	var args []string
-
-	name, args = s.Parser.ParseCommand(".say")
-	s.Equal("say", name)
-	s.Empty(args)
-
-	name, args = s.Parser.ParseCommand(".echo I am broot")
-	s.Equal("echo", name)
-	s.Exactly([]string{"I", "am", "broot"}, args)
-}
-
-func (s *ParserSuite) TestParsePrefix() {
+func TestParsePrefix(t *testing.T) {
 	var who, host string
 
-	who, host = s.Parser.ParsePrefix("NimBot")
-	s.Equal("NimBot", who)
-	s.Empty(host)
+	who, host = parser.ParsePrefix("NimBot")
+	if who != "NimBot" || host != "" {
+		t.Fatal("\"NimBot\" incorrectly parsed by parser")
+	}
 
-	who, host = s.Parser.ParsePrefix("NimBot!this.host")
-	s.Equal("NimBot", who)
-	s.Equal("this.host", host)
+	who, host = parser.ParsePrefix("NimBot!this.host")
+	if who != "NimBot" || host != "this.host" {
+		t.Fatal("\"NimBot!this.host\" incorrectly parsed by parser")
+	}
 }
-
-/**************************************************************************************************/
-
-/****                                        Run Suite                                         ****/
-
-func TestParserSuite(t *testing.T) {
-	suite.Run(t, new(ParserSuite))
-}
-
-/**************************************************************************************************/

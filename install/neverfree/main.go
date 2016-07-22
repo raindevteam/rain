@@ -32,7 +32,7 @@ func main() {
 	if *i {
 		confarg = 2
 	}
-	rconf, err := rbot.ReadConfig(os.Args[confarg])
+	rconf, err := rbot.ReadConfigFile(os.Args[confarg])
 	if err != nil {
 		fmt.Println(err)
 		os.Exit(1)
@@ -51,7 +51,11 @@ func main() {
 	}
 
 	setup.Default(bot)
-
-	bot.EnableModules(rconf)
+	bot.EnableModules()
 	bot.DefaultConnectWithMsg(preConnectMsg, postConnectMsg)
+
+	result := <-bot.Quit()
+	if result != nil {
+		fmt.Println(result.Error())
+	}
 }
