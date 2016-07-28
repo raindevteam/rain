@@ -33,7 +33,7 @@ func NewProcessManager(name string, cmdtype string, path string) *ProcessManager
 		Type:    cmdtype,
 		Path:    path,
 		running: false,
-		kill:    make(chan bool),
+		kill:    make(chan bool, 1),
 		mu:      sync.Mutex{},
 	}
 	return pm
@@ -45,8 +45,8 @@ func (pm *ProcessManager) runCommand(name string, args ...string) chan *Result {
 	pm.cmd = exec.Command(name, args...)
 	pm.mu.Unlock()
 
-	ret := make(chan *Result)
-	done := make(chan *Result)
+	ret := make(chan *Result, 1)
+	done := make(chan *Result, 1)
 
 	go func(done chan *Result, pm *ProcessManager) {
 		output, err := pm.cmd.CombinedOutput()
@@ -85,6 +85,12 @@ func (pm *ProcessManager) WaitForCommand() *Result {
 	return <-pm.processDone
 }
 
+func (pm *ProcessManager) IsRunning() bool {
+	pm.mu.Lock()
+	defer pm.mu.Unlock()
+	return pm.running
+}
+
 func (pm *ProcessManager) LastResult() *Result {
 	pm.mu.Lock()
 	defer pm.mu.Unlock()
@@ -107,7 +113,6 @@ func (pm *ProcessManager) Recompile() error {
 
 // Start creates a new exec.Command and stores it. Will return an error if the Command fails to
 // start.
-// TODO: Cleanup and Refactor
 func (pm *ProcessManager) Start() chan *Result {
 	switch pm.Type {
 	case "js":
@@ -117,7 +122,8 @@ func (pm *ProcessManager) Start() chan *Result {
 	case "py":
 		return pm.runCommand("python", pm.Path+"/"+pm.Name)
 	default:
-		// Keep in mind that the will make it virtually impossible to reach here
+		// Keep in mind that the bot will make it virtually impossible to reach here
+		// But you know how the story goes...
 		return nil
 	}
 }

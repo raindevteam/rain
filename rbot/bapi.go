@@ -5,7 +5,8 @@ import (
 	"net/rpc"
 	"strings"
 
-	"github.com/RyanPrintup/nimbus"
+	"gopkg.in/sorcix/irc.v1"
+
 	"github.com/raindevteam/rain/rlog"
 )
 
@@ -32,10 +33,15 @@ type TriggerRequest struct {
 	Event Event
 }
 
+type JoinRequest struct {
+	Channel  string
+	Password string
+}
+
 // Send transmits a message over irc as a PRIVMSG
 func (b BotAPI) Send(raw string, result *string) error {
 
-	b.bot.Send(nimbus.PRIVMSG, raw)
+	b.bot.Send(irc.PRIVMSG, raw)
 	return nil
 }
 
@@ -54,11 +60,21 @@ func (b BotAPI) RegisterCommand(cr CommandRequest, result *string) error {
 func (b BotAPI) RegisterTrigger(tr TriggerRequest, result *string) error {
 	listeners := b.bot.GetListeners(string(tr.Event))
 	if len(listeners) == 0 {
-		b.bot.AddListener(string(tr.Event), func(msg *nimbus.Message) {
+		b.bot.AddListener(string(tr.Event), func(msg *irc.Message) {
 			b.bot.Handler.Fire(msg, tr.Event)
 		})
 	}
 	b.bot.Handler.AddTrigger(tr.Name, tr.Event)
+	return nil
+}
+
+func (b BotAPI) JoinChannel(jr JoinRequest, result *string) error {
+	if jr.Password != "" {
+		b.bot.Send(irc.JOIN, jr.Channel, jr.Password)
+	} else {
+		b.bot.Send(irc.JOIN, jr.Channel)
+	}
+
 	return nil
 }
 
@@ -89,7 +105,7 @@ func (b BotAPI) GetTopic(channel string, result *string) error {
 // creates a new rpc provider client connection to the module. The module is kept in the handler
 // for event dispatching and module management.
 func (b BotAPI) Register(t Ticket, result *string) error {
-	rlog.Debug("Bot", "Starting registration for "+t.ModuleName+"[Module Client]")
+	rlog.Debug("Bot", "Starting registration for "+t.ModuleName+" [Module Client]")
 	client, err := RpcCodecClientWithPort(t.Port)
 	rlog.Debug("Bot", "Client created")
 	if err != nil {
@@ -103,6 +119,7 @@ func (b BotAPI) Register(t Ticket, result *string) error {
 	}
 
 	b.bot.Handler.AddModule(ModuleName(strings.ToLower(t.ModuleName)), module)
+	b.bot.Modules[strings.ToLower(t.ModuleName)].Registered = true
 	rlog.Debug("Bot", "Registered "+t.ModuleName+" on port "+t.Port)
 	return nil
 }

@@ -47,7 +47,7 @@ func main() {
 	} else {
 		preConnectMsg = "Connecting... "
 		postConnectMsg = "Done"
-		bot = rbot.NewBot("0.5.0 (Stable 91)", rconf)
+		bot = rbot.NewBot("0.6.0 (Stable 91)", rconf)
 	}
 
 	setup.Default(bot)

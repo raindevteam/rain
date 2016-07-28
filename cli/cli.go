@@ -4,6 +4,8 @@ import (
 	"strings"
 	"sync"
 
+	"gopkg.in/sorcix/irc.v1"
+
 	"github.com/RyanPrintup/nimbus"
 	"github.com/chzyer/readline"
 	"github.com/raindevteam/rain/parser"
@@ -43,14 +45,10 @@ func (c CliClient) Send(raw ...string) {
 		rlog.Println("RainBot >> " + strings.Join(raw[:len(raw)-2], " "))
 	case MsgMode:
 		rawjoined := strings.Join(raw, " ")
-		msg, err := nimbus.ParseMessage(rawjoined)
+		msg := irc.ParseMessage(rawjoined)
 
-		if err != nil {
-			rlog.Println(c.GetNick() + "> " + err.Error())
-		}
-
-		if msg.Command == nimbus.PRIVMSG {
-			rlog.Println(" " + c.GetNick() + " » " + strings.Join(msg.Args[1:], " "))
+		if msg.Command == irc.PRIVMSG {
+			rlog.Println(" " + c.GetNick() + " » " + msg.Trailing)
 		} else {
 			rlog.Println(" " + c.GetNick() + " » " + "(" + msg.Command + ") ")
 		}
@@ -59,7 +57,7 @@ func (c CliClient) Send(raw ...string) {
 }
 
 func (c CliClient) Say(channel string, text string) {
-	c.Send(nimbus.PRIVMSG, channel, text)
+	c.Send(irc.PRIVMSG, channel, ":"+text)
 }
 
 func NewCLIBot(conf *rbot.Config) *rbot.Bot {
@@ -120,13 +118,13 @@ func (c CliClient) Listen() {
 			break
 		}
 
-		raw := ":RainBot " + nimbus.PRIVMSG + " #cli :" + line
-		msg, err := nimbus.ParseMessage(raw)
+		raw := ":RainBot " + irc.PRIVMSG + " #cli :" + line
+		msg := irc.ParseMessage(raw)
 
 		if err != nil {
 			rlog.Error("cli", err.Error())
 		}
 
-		c.Emit(nimbus.PRIVMSG, msg)
+		c.Emit(irc.PRIVMSG, msg)
 	}
 }

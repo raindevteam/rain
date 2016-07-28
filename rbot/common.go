@@ -1,15 +1,15 @@
 package rbot
 
-import "github.com/RyanPrintup/nimbus"
+import "gopkg.in/sorcix/irc.v1"
 
 // CommandFun denotes a function to be used for IRC bot commands
-type CommandFun func(*nimbus.Message, []string)
+type CommandFun func(*irc.Message, []string)
 
 // TriggerFun denotes a function that determines whether a trigger should fire or not
-type TriggerFun func(*nimbus.Message) bool
+type TriggerFun func(*irc.Message) bool
 
 // Listener denotes a raw IRC listener function
-type Listener func(*nimbus.Message)
+type Listener func(*irc.Message)
 
 // Event denotes an IRC event
 type Event string
@@ -27,17 +27,17 @@ type Numeric string
 
 /**************************************************************************************************/
 
-// IrcData bundles together an Event with it's corresponding nimbus.Message. Used mostly to Send
+// IrcData bundles together an Event with it's corresponding irc.Message. Used mostly to Send
 // IRC data to modules via rpc.
 type IrcData struct {
 	Event Event
-	Msg   *nimbus.Message
+	Msg   *irc.Message
 }
 
-// CommandData bundles together a nimbus.Message, command name and it's given arguments to a module
+// CommandData bundles together a irc.Message, command name and it's given arguments to a module
 // so that it may fire that respective command.
 type CommandData struct {
-	Msg  *nimbus.Message
+	Msg  *irc.Message
 	Name CommandName
 	Args []string
 }

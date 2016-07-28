@@ -21,7 +21,6 @@ before_install:
   - sudo apt-get update
   - sudo apt-get install -y python3.5
   - sudo apt-get install -y python3-pip
-  - export PYTHONPATH=$PYTHONPATH:/usr/local/lib/python3.5/site-packages
   - alias python=python3
   - curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash - && sudo apt-get install -y nodejs
 

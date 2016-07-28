@@ -2,16 +2,15 @@ package rbot
 
 import (
 	"errors"
-	"fmt"
 	"net"
 	"net/rpc"
-	"os"
 	"strings"
 	"sync"
 
 	"github.com/RyanPrintup/nimbus"
 	"github.com/raindevteam/rain/parser"
 	"github.com/raindevteam/rain/rlog"
+	"gopkg.in/sorcix/irc.v1"
 )
 
 var DefaultModulesRoute = "modules/"
@@ -42,19 +41,21 @@ func NewChannel(name string) *Channel {
 // The Module struct serves as a container for a module's commander. The struct holds its
 // module's corresponding name to make it easier for reference.
 type Module struct {
-	Name    string
-	Route   string
-	Options map[string]bool
-	PM      *ProcessManager
+	Name       string
+	Route      string
+	Options    map[string]bool
+	PM         *ProcessManager
+	Registered bool
 }
 
 // NewModule returns a module struct with an assigned commander appropriated to the module's type.
 func NewModule(name string, path string, opts map[string]bool, cmdtype string) *Module {
 	module := &Module{
-		Name:    name,
-		Route:   path,
-		Options: opts,
-		PM:      NewProcessManager(name, cmdtype, path),
+		Name:       name,
+		Route:      path,
+		Options:    opts,
+		PM:         NewProcessManager(name, cmdtype, path),
+		Registered: false,
 	}
 	return module
 }
@@ -77,7 +78,7 @@ type Client interface {
 	Say(channel string, text string)
 	AddListener(event string, l nimbus.Listener)
 	GetListeners(event string) []nimbus.Listener
-	Emit(event string, msg *nimbus.Message)
+	Emit(event string, msg *irc.Message)
 }
 
 // The Bot struct holds the internal Client, used to register listeners for IRC. ModuleNames
@@ -147,7 +148,7 @@ func (b *Bot) DefaultConnectWithMsg(pre string, post string) {
 // EnableModules goes through every module list found in the config and sets them up appropriately.
 func (b *Bot) EnableModules() {
 	rlog.Info("Bot", "Enabling Modules...")
-	fmt.Println(b.Config.Module.Modules)
+
 	for modtype, modules := range b.Config.Module.Modules {
 		for name, value := range modules {
 			route, optionsArray := b.Parser.ParseModuleValue(value)
@@ -162,7 +163,7 @@ func (b *Bot) EnableModules() {
 			}
 
 			b.Modules[strings.ToLower(name)] = NewModule(name, route, optionsMap, modtype)
-			rlog.Debug("Bot", "Module"+name+" Created")
+			rlog.Debug("Bot", "Module "+name+" Created")
 		}
 	}
 	b.loadModules()
@@ -193,22 +194,24 @@ func (b *Bot) moduleExited(name string, result *Result) {
 	defer b.Mu.Unlock()
 
 	if result.Err != nil {
-		rlog.Error("Bot", name+"[Module Process] has exited with error\n ::::\n"+result.Err.Error())
+		rlog.Error("Bot", name+" [Module Process] has exited with: + "+
+			result.Err.Error()+"\n ----\n"+result.Output+"\n ----\n")
 	} else {
-		rlog.Info("Bot", "Module "+name+"[Module Process] has exited")
+		rlog.Info("Bot", "Module "+name+" [Module Process] has exited")
 	}
 
 	if b.Handler.ModuleExists(name) {
 		// If the module process is dead we can rest assured signalling it to clean up will fail
 		// so we won't even try. It's the sanest thing to do!
 		b.Handler.RemoveModule(ModuleName(name))
-	} else {
-		// We consider a module not starting before registering as an unrecoverable state.
-		rlog.Error("Bot", name+"[Module Client] did manage to register, aborting startup")
-		os.Exit(1)
 	}
 
-	delete(b.Modules, name)
+	if !b.Modules[name].Registered {
+		rlog.Error("Bot", name+" [Module Client] did not manage to register")
+	} else {
+		b.Modules[name].Registered = false
+		rlog.Info("Bot", name+" [Module Client] has been unregistered from the bot")
+	}
 }
 
 // ModuleReload will reload a module by telling the handler to signal a kill cleanup to the module
@@ -216,21 +219,25 @@ func (b *Bot) moduleExited(name string, result *Result) {
 // will be aborted. If the module complies, the module's corresponding process will be killed. The
 // module will then be recompiled if need be and will be restarted after.
 func (b *Bot) ModuleReload(name string) (err error) {
-	if !b.Handler.ModuleExists(name) {
-		return errors.New("Module does not exist")
+	if _, ok := b.Modules[strings.ToLower(name)]; !ok {
+		return errors.New("Module is unknown to the bot")
 	}
 
 	pm := b.Modules[strings.ToLower(name)].PM
 
-	err = b.Handler.SignalCleanup(ModuleName(name))
-	if err != nil {
-		rlog.Error("Bot", err.Error())
-		return errors.New("Module refused to stop, aborting reload")
+	if b.Modules[strings.ToLower(name)].Registered {
+		err = b.Handler.SignalCleanup(ModuleName(name))
+		if err != nil {
+			rlog.Error("Bot", "Error while cleaning up module "+name+": "+err.Error())
+			return errors.New("Module refused to stop, aborting reload")
+		}
 	}
 
-	err = pm.Kill()
-	if err != nil {
-		return errors.New("Could not kill module, aborting reload")
+	if pm.IsRunning() {
+		err = pm.Kill()
+		if err != nil {
+			return errors.New("Could not kill module, aborting reload")
+		}
 	}
 
 	err = pm.Recompile()
@@ -242,12 +249,44 @@ func (b *Bot) ModuleReload(name string) (err error) {
 	return nil
 }
 
+func (b *Bot) ModuleLoad(name string) error {
+	if _, ok := b.Modules[strings.ToLower(name)]; !ok {
+		return errors.New("Module is unknown to the bot")
+	}
+
+	b.moduleRun(strings.ToLower(name))
+	return nil
+}
+
+func (b *Bot) ModuleInfo(name string) (string, error) {
+	module, ok := b.Modules[strings.ToLower(name)]
+
+	if !ok {
+		return "", errors.New("Module is unknown to the bot")
+	}
+
+	var info string
+
+	if module.Registered {
+		info = info + "+" + module.Name
+	} else {
+		info = info + "-" + module.Name
+	}
+
+	return info + " | " + module.PM.Type, nil
+}
+
 // moduleRun starts a plugin as a provider service. This allows
 // the bot to dispatch events outbound to the module. The module
 // can then communicate back via the master rpc server.
 func (b *Bot) moduleRun(name string) {
 	pm := b.Modules[name].PM
-	pm.Start()
+	cmd := pm.Start()
+
+	go func(name string, cmd chan *Result) {
+		result := <-cmd
+		b.moduleExited(name, result)
+	}(name, cmd)
 }
 
 ///////////////////////////          IRC Specific Methods         //////////////////////////////////
