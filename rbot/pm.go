@@ -1,18 +1,18 @@
 package rbot
 
 import (
-	"errors"
 	"os/exec"
 	"sync"
 )
 
+// The Result struct is used to hold information about ran commands, this makes it easier to debug and manage processes.
 type Result struct {
 	Output string
 	Err    error
 }
 
-// A ProcessManager handles an individual process of a module. The ProcessManager can recompile and
-// invoke a module as well as terminate its process. Mostly used by the bot for module management.
+// A ProcessManager handles an individual process of a module. The ProcessManager can recompile and invoke a module as
+// well as terminate its process. Mostly used by the bot for module management.
 type ProcessManager struct {
 	Name        string
 	Type        string
@@ -25,8 +25,7 @@ type ProcessManager struct {
 	mu          sync.Mutex
 }
 
-// NewProcessManager will return a ProcessManager of the correct type for a given module name and
-// its path.
+// NewProcessManager will return a ProcessManager of the correct type for a given module.
 func NewProcessManager(name string, cmdtype string, path string) *ProcessManager {
 	pm := &ProcessManager{
 		Name:    name,
@@ -39,6 +38,14 @@ func NewProcessManager(name string, cmdtype string, path string) *ProcessManager
 	return pm
 }
 
+// runCommand is the workhorse of a process manager. It will run a command with given arguments in a goroutine. Another
+// goroutine is used to wait upon two outcomes:
+//
+// (A) When the command has finished
+// (B) When the command is killed
+//
+// When the command has finished, lastResult is updated. The caller receives a channel that returns this result when
+// the command has exited via one of the outcomes mentioned.
 func (pm *ProcessManager) runCommand(name string, args ...string) chan *Result {
 	pm.mu.Lock()
 	pm.running = true
@@ -76,6 +83,8 @@ func (pm *ProcessManager) runCommand(name string, args ...string) chan *Result {
 	return ret
 }
 
+// WaitForCommand will wait on the processDone channel, which if fullfilled when a command has finished executing. A
+// Result struct will be returned.
 func (pm *ProcessManager) WaitForCommand() *Result {
 	pm.mu.Lock()
 	if !pm.running {
@@ -85,34 +94,38 @@ func (pm *ProcessManager) WaitForCommand() *Result {
 	return <-pm.processDone
 }
 
+// IsRunning returns a bool indicating whether a command is running or not.
 func (pm *ProcessManager) IsRunning() bool {
 	pm.mu.Lock()
 	defer pm.mu.Unlock()
 	return pm.running
 }
 
+// LastResult retrieves the last result struct from the most recent finished command.
 func (pm *ProcessManager) LastResult() *Result {
 	pm.mu.Lock()
 	defer pm.mu.Unlock()
 	return pm.lastResult
 }
 
-// Recompile will attempt to compile any source code of a module if needed. If compilation fails,
-// an error is returned. Nothing will be done for types that do not require compilation.
-func (pm *ProcessManager) Recompile() error {
+// Recompile will attempt to compile any source code of a module if needed. A result struct will be returned to the
+// caller for inspection To check if there was an error in compilation).
+func (pm *ProcessManager) Recompile() *Result {
+	var (
+		res *Result
+		cmd chan *Result
+	)
+
 	switch pm.Type {
 	case "go":
-		cmd := pm.runCommand("go", "install", pm.Path+"/"+pm.Name)
-		res := <-cmd
-		if res.Err != nil {
-			return errors.New("Could not recompile")
-		}
+		cmd = pm.runCommand("go", "install", pm.Path+"/"+pm.Name)
 	}
-	return nil
+
+	res = <-cmd
+	return res
 }
 
-// Start creates a new exec.Command and stores it. Will return an error if the Command fails to
-// start.
+// Start will run a command via runCommand and return it's channel for the caller.
 func (pm *ProcessManager) Start() chan *Result {
 	switch pm.Type {
 	case "js":
@@ -128,13 +141,11 @@ func (pm *ProcessManager) Start() chan *Result {
 	}
 }
 
-// Kill attempts to kill its Cmd process, an error is returned if a failure occurs.
+// Kill will fulfill the kill chan, and any running command will be terminated.
 func (pm *ProcessManager) Kill() error {
 	pm.mu.Lock()
-
 	pm.kill <- true
 	pm.running = false
-
 	pm.mu.Unlock()
 
 	return nil
