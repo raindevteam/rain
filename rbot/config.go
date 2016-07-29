@@ -110,7 +110,7 @@ func ReadConfigFile(path string) (*Config, error) {
 
 func check(err error) {
 	if err != nil {
-		rlog.Fatal("Config", "Could not correctly parse the configuration, check your syntax :::")
+		rlog.Error("Config", "Could not correctly parse the configuration, check your syntax :::")
 		panic(err)
 	}
 }
