@@ -1,4 +1,4 @@
-package clibot
+package cbot
 
 import (
 	"github.com/RyanPrintup/nimbus"

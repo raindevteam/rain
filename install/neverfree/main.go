@@ -45,7 +45,7 @@ func main() {
 
 	if *i {
 		preConnectMsg, postConnectMsg = "", ""
-		bot = clibot.NewCLIBot(rconf)
+		bot = cbot.NewCLIBot(rconf)
 	} else {
 		preConnectMsg, postConnectMsg = "Connecting... ", "Done"
 		bot = rbot.NewBot(rain.Version, rconf)

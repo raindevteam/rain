@@ -1,4 +1,4 @@
-package clibot
+package cbot
 
 import (
 	"strings"
