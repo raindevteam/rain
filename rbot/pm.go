@@ -75,7 +75,9 @@ func (pm *ProcessManager) runCommand(name string, args ...string) chan *Result {
 		case res := <-done:
 			ret <- res
 		case <-pm.kill:
+			pm.mu.Lock()
 			pm.cmd.Process.Kill()
+			pm.mu.Unlock()
 			res := <-done
 			ret <- res
 		}

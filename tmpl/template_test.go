@@ -77,7 +77,7 @@ func TestCreateModTemplate(t *testing.T) {
 }
 
 func tearDown() {
-	for _, file := range []string{"mine.go", "test.go", "test.js", "test.py"} {
+	for _, file := range []string{"test.go", "test.js", "test.py"} {
 		if err := os.Remove(file); err != nil {
 			fmt.Printf("Could not remove test files: %s", err.Error())
 		}

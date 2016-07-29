@@ -40,7 +40,6 @@ type JoinRequest struct {
 
 // Send transmits a message over irc as a PRIVMSG
 func (b BotAPI) Send(raw string, result *string) error {
-
 	b.bot.Send(irc.PRIVMSG, raw)
 	return nil
 }
