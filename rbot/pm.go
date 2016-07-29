@@ -1,6 +1,7 @@
 package rbot
 
 import (
+	"os"
 	"os/exec"
 	"sync"
 )
@@ -76,7 +77,7 @@ func (pm *ProcessManager) runCommand(name string, args ...string) chan *Result {
 			ret <- res
 		case <-pm.kill:
 			pm.mu.Lock()
-			pm.cmd.Process.Kill()
+			pm.cmd.Process.Signal(os.Kill)
 			pm.mu.Unlock()
 			res := <-done
 			ret <- res
