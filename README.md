@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/raindevteam/rain.svg?branch=develop)](https://travis-ci.org/raindevteam/rain)
+[![Build Status](https://travis-ci.org/raindevteam/rain.svg?branch=master)](https://travis-ci.org/raindevteam/rain)
 [![GitHub version](https://badge.fury.io/gh/raindevteam%2Frain.svg)](https://badge.fury.io/gh/raindevteam%2Frain)
 [![Go Report Card](https://goreportcard.com/badge/github.com/raindevteam/rain)](https://goreportcard.com/report/github.com/raindevteam/rain)
 [![codebeat badge](https://codebeat.co/badges/1e03860e-db6d-4751-81d1-1ed3e414537e)](https://codebeat.co/projects/github-com-raindevteam-rain)
