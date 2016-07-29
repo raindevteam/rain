@@ -1,2 +1,3 @@
 config.json
-tests/_helpers/modules/jsmod/node_modules
+tests/modules/jsmod/node_modules
+tests/modules/pymod/__pycache__

@@ -6,7 +6,8 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/raindevteam/rain/bot"
+	"github.com/raindevteam/rain/rain"
+	"github.com/raindevteam/rain/rbot"
 	"github.com/raindevteam/rain/setup"
 )
 
@@ -23,9 +24,9 @@ func main() {
 		os.Exit(1)
 	}
 
-	bot := rbot.NewBot("0.5.0", rconf)
+	bot := rbot.NewBot(rain.Version, rconf)
 	setup.Default(bot)
 
-	bot.EnableModules(rconf)
+	bot.EnableModules()
 	bot.DefaultConnectWithMsg("Connecting...", "Done")
 }

@@ -7,8 +7,9 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/raindevteam/rain/bot"
-	"github.com/raindevteam/rain/cli"
+	"github.com/raindevteam/rain/cbot"
+	"github.com/raindevteam/rain/rain"
+	"github.com/raindevteam/rain/rbot"
 	"github.com/raindevteam/rain/setup"
 )
 
@@ -32,26 +33,30 @@ func main() {
 	if *i {
 		confarg = 2
 	}
-	rconf, err := rbot.ReadConfig(os.Args[confarg])
+	rconf, err := rbot.ReadConfigFile(os.Args[confarg])
 	if err != nil {
-		fmt.Println(err)
-		os.Exit(1)
+		panic(err)
 	}
 
-	var preConnectMsg, postConnectMsg string
-	var bot *rbot.Bot
+	var (
+		preConnectMsg, postConnectMsg string
+		bot                           *rbot.Bot
+	)
+
 	if *i {
-		preConnectMsg = ""
-		postConnectMsg = ""
-		bot = clibot.NewCLIBot(rconf)
+		preConnectMsg, postConnectMsg = "", ""
+		bot = cbot.NewCLIBot(rconf)
 	} else {
-		preConnectMsg = "Connecting... "
-		postConnectMsg = "Done"
-		bot = rbot.NewBot("0.5.0 (Stable 91)", rconf)
+		preConnectMsg, postConnectMsg = "Connecting... ", "Done"
+		bot = rbot.NewBot(rain.Version, rconf)
 	}
 
 	setup.Default(bot)
-
-	bot.EnableModules(rconf)
+	bot.EnableModules()
 	bot.DefaultConnectWithMsg(preConnectMsg, postConnectMsg)
+
+	result := <-bot.Quit()
+	if result != nil {
+		fmt.Println(result.Error())
+	}
 }
