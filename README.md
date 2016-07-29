@@ -3,7 +3,6 @@
 [![Go Report Card](https://goreportcard.com/badge/github.com/raindevteam/rain)](https://goreportcard.com/report/github.com/raindevteam/rain)
 [![codebeat badge](https://codebeat.co/badges/1e03860e-db6d-4751-81d1-1ed3e414537e)](https://codebeat.co/projects/github-com-raindevteam-rain)
 [![GoDoc](https://godoc.org/github.com/raindevteam/rain?status.svg)](https://godoc.org/github.com/raindevteam/rain)
-[![DTS](https://img.shields.io/badge/dts-0.5.0-blue.svg)](https://github.com/raindevteam/rain-doc/tree/master/DTS/0.5.0)
 
 ----------------------------------------------------------------------------------------------------
 <img align="right" src="https://avatars1.githubusercontent.com/u/20262521?v=3&s=200">
