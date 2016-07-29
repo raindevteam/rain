@@ -21,8 +21,9 @@ type Handler struct {
 	InternalTriggers map[Event][]*Trigger
 	InternalNumerics map[Numeric][]*Listener
 
-	Modules map[ModuleName]*rpc.Client
-	mu      sync.RWMutex
+	Modules        map[ModuleName]*rpc.Client
+	removeCallback func(ModuleName)
+	mu             sync.RWMutex
 }
 
 func NewHandler() *Handler {
@@ -44,6 +45,10 @@ func NewHandler() *Handler {
 // AddModule adds a new module to the handler by adding its respective rpc client.
 func (h *Handler) AddModule(name ModuleName, module *rpc.Client) {
 	h.Modules[name] = module
+}
+
+func (h *Handler) AddRemoveCallback(callback func(ModuleName)) {
+	h.removeCallback = callback
 }
 
 // ModuleExists checks if a module exists within the handler.
@@ -196,6 +201,11 @@ func (h *Handler) removeUnstableClient(name ModuleName, err error) {
 	}
 
 	h.RemoveModule(name)
+	h.signalRemove(name)
+}
+
+func (h *Handler) signalRemove(name ModuleName) {
+	h.removeCallback(name)
 }
 
 func (h *Handler) doRPC(name ModuleName, procedure string, data interface{}) (string, error) {

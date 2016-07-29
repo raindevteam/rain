@@ -19,18 +19,18 @@ type MasterAPI struct {
 // The following two rpc procedures are only defined so that the test modules used here have
 // something to delegate their calls to. We plan on fully testing rpc procedures with bapi.go
 
-func (r *MasterAPI) RegisterCommand(cr interface{}, result *string) error {
+func (r MasterAPI) RegisterCommand(cr interface{}, result *string) error {
 	return nil
 }
 
-func (r *MasterAPI) Register(t interface{}, result *string) error {
+func (r MasterAPI) Register(t interface{}, result *string) error {
 	r.reg <- true
 	return nil
 }
 
 func SetupTest() error {
 	srv := rpc.NewServer()
-	srv.RegisterName("Master", &MasterAPI{registered})
+	srv.RegisterName("Master", MasterAPI{registered})
 
 	var err error
 	RPCServer, err = net.Listen("tcp", ":5555")
@@ -71,9 +71,9 @@ func TestProcessManagers(t *testing.T) {
 	}
 
 	for _, pm := range pms {
-		err := pm.Recompile()
-		if err != nil {
-			t.Fatalf("Failed to recompile %s: %s", pm.Name, err.Error())
+		res := pm.Recompile()
+		if res != nil && res.Err != nil {
+			t.Fatalf("Failed to recompile %s: %s", pm.Name, res.Output)
 		}
 
 		cmd := pm.Start()
@@ -87,10 +87,7 @@ func TestProcessManagers(t *testing.T) {
 		case <-registered:
 		}
 
-		err = pm.Kill()
-		if err != nil {
-			t.Fatalf("Could not kill module process: %s", err.Error())
-		}
+		pm.Kill()
 	}
 }
 

@@ -75,6 +75,7 @@ func (pm *ProcessManager) runCommand(name string, args ...string) chan *Result {
 		case res := <-done:
 			ret <- res
 		case <-pm.kill:
+			pm.cmd.Process.Kill()
 			res := <-done
 			ret <- res
 		}
@@ -119,6 +120,8 @@ func (pm *ProcessManager) Recompile() *Result {
 	switch pm.Type {
 	case "go":
 		cmd = pm.runCommand("go", "install", pm.Path+"/"+pm.Name)
+	default:
+		return nil
 	}
 
 	res = <-cmd
@@ -142,11 +145,9 @@ func (pm *ProcessManager) Start() chan *Result {
 }
 
 // Kill will fulfill the kill chan, and any running command will be terminated.
-func (pm *ProcessManager) Kill() error {
+func (pm *ProcessManager) Kill() {
 	pm.mu.Lock()
 	pm.kill <- true
 	pm.running = false
 	pm.mu.Unlock()
-
-	return nil
 }

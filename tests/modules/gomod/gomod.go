@@ -1,14 +1,14 @@
 package main
 
 import (
-	"github.com/RyanPrintup/nimbus"
 	"github.com/raindevteam/gorml"
+	"gopkg.in/sorcix/irc.v1"
 )
 
 type GoMod struct{ *module.Module }
 
-func (m *GoMod) Greet(msg *nimbus.Message, args []string) {
-	m.Say(msg.Args[0], "Hello there!")
+func (m *GoMod) Greet(msg *irc.Message, args []string) {
+	m.Say(msg.Params[0], "Hello there!")
 }
 
 func main() {
