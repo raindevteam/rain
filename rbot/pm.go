@@ -23,7 +23,7 @@ type ProcessManager struct {
 	processDone chan *Result
 	kill        chan bool
 	lastResult  *Result
-	mu          sync.Mutex
+	mu          sync.RWMutex
 }
 
 // NewProcessManager will return a ProcessManager of the correct type for a given module.
@@ -34,7 +34,7 @@ func NewProcessManager(name string, cmdtype string, path string) *ProcessManager
 		Path:    path,
 		running: false,
 		kill:    make(chan bool, 1),
-		mu:      sync.Mutex{},
+		mu:      sync.RWMutex{},
 	}
 	return pm
 }
@@ -57,7 +57,9 @@ func (pm *ProcessManager) runCommand(name string, args ...string) chan *Result {
 	done := make(chan *Result, 1)
 
 	go func(done chan *Result, pm *ProcessManager) {
+		pm.mu.Lock()
 		output, err := pm.cmd.CombinedOutput()
+		pm.mu.Unlock()
 		s := string(output[:])
 
 		res := &Result{s, err}
@@ -76,10 +78,10 @@ func (pm *ProcessManager) runCommand(name string, args ...string) chan *Result {
 		case res := <-done:
 			ret <- res
 		case <-pm.kill:
-			pm.mu.Lock()
+			pm.mu.RLock()
 			pm.cmd.Process.Release()
 			pm.cmd.Process.Signal(os.Kill)
-			pm.mu.Unlock()
+			pm.mu.RUnlock()
 			res := <-done
 			ret <- res
 		}
@@ -91,25 +93,25 @@ func (pm *ProcessManager) runCommand(name string, args ...string) chan *Result {
 // WaitForCommand will wait on the processDone channel, which if fullfilled when a command has finished executing. A
 // Result struct will be returned.
 func (pm *ProcessManager) WaitForCommand() *Result {
-	pm.mu.Lock()
+	pm.mu.RLock()
 	if !pm.running {
 		return nil
 	}
-	pm.mu.Unlock()
+	pm.mu.RUnlock()
 	return <-pm.processDone
 }
 
 // IsRunning returns a bool indicating whether a command is running or not.
 func (pm *ProcessManager) IsRunning() bool {
-	pm.mu.Lock()
-	defer pm.mu.Unlock()
+	pm.mu.RLock()
+	defer pm.mu.RUnlock()
 	return pm.running
 }
 
 // LastResult retrieves the last result struct from the most recent finished command.
 func (pm *ProcessManager) LastResult() *Result {
-	pm.mu.Lock()
-	defer pm.mu.Unlock()
+	pm.mu.RLock()
+	defer pm.mu.RUnlock()
 	return pm.lastResult
 }
 
@@ -150,8 +152,6 @@ func (pm *ProcessManager) Start() chan *Result {
 
 // Kill will fulfill the kill chan, and any running command will be terminated.
 func (pm *ProcessManager) Kill() {
-	pm.mu.Lock()
 	pm.kill <- true
-	pm.running = false
-	pm.mu.Unlock()
+	//pm.running = false
 }
