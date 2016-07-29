@@ -34,20 +34,20 @@ func main() {
 	}
 	rconf, err := rbot.ReadConfigFile(os.Args[confarg])
 	if err != nil {
-		fmt.Println(err)
-		os.Exit(1)
+		panic(err)
 	}
 
-	var preConnectMsg, postConnectMsg string
-	var bot *rbot.Bot
+	var (
+		preConnectMsg, postConnectMsg string
+		bot                           *rbot.Bot
+	)
+
 	if *i {
-		preConnectMsg = ""
-		postConnectMsg = ""
+		preConnectMsg, postConnectMsg = "", ""
 		bot = clibot.NewCLIBot(rconf)
 	} else {
-		preConnectMsg = "Connecting... "
-		postConnectMsg = "Done"
-		bot = rbot.NewBot("0.6.0 (Stable 91)", rconf)
+		preConnectMsg, postConnectMsg = "Connecting... ", "Done"
+		bot = rbot.NewBot("0.6.0-alpha.2 (Mister Peace)", rconf)
 	}
 
 	setup.Default(bot)

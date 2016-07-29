@@ -3,7 +3,8 @@ package main
 import (
 	"fmt"
 
-	"github.com/RyanPrintup/nimbus"
+	"gopkg.in/sorcix/irc.v1"
+
 	"github.com/raindevteam/rain/rbot"
 	"github.com/raindevteam/rain/setup"
 )
@@ -19,14 +20,23 @@ modes    : +B
 `
 
 func main() {
-	conf, _ := rbot.ReadConfig(config)
-	bot := rbot.NewBot("0.5.0", conf)
+	conf, err := rbot.ReadConfig(config)
+	if err != nil {
+		panic(err)
+	}
+
+	bot := rbot.NewBot("0.6.0-alpha.2", conf)
 
 	setup.Default(bot)
 	bot.DefaultConnect()
 
 	// Logs privmsgs from connected channels
-	bot.AddListener("PRIVMSG", func(msg *nimbus.Message) {
+	bot.AddListener("PRIVMSG", func(msg *irc.Message) {
 		fmt.Println(msg.Trailing)
 	})
+
+	result := bot.Quit()
+	if result != nil {
+		fmt.Println(result.Error())
+	}
 }
