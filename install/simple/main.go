@@ -5,6 +5,7 @@ import (
 
 	"gopkg.in/sorcix/irc.v1"
 
+	"github.com/raindevteam/rain/rain"
 	"github.com/raindevteam/rain/rbot"
 	"github.com/raindevteam/rain/setup"
 )
@@ -25,7 +26,7 @@ func main() {
 		panic(err)
 	}
 
-	bot := rbot.NewBot("0.6.0-alpha.2", conf)
+	bot := rbot.NewBot(rain.Version, conf)
 
 	setup.Default(bot)
 	bot.DefaultConnect()

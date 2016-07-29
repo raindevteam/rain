@@ -7,7 +7,7 @@ import (
 
 var AllDepends = []string{
 	"github.com/RyanPrintup/Nimbus",
-	"github.com/chyzer/readline",
+	"gopkg.in/readline.v1",
 	"gopkg.in/yaml.v2",
 }
 
@@ -17,7 +17,7 @@ var CoreDepends = []string{
 }
 
 var NeverfreeDepends = []string{
-	"github.com/chyzer/readline",
+	"gopkg.in/readline.v1",
 }
 
 func GetDepends(depends []string) error {

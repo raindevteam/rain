@@ -7,7 +7,8 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/raindevteam/rain/cli"
+	"github.com/raindevteam/rain/cbot"
+	"github.com/raindevteam/rain/rain"
 	"github.com/raindevteam/rain/rbot"
 	"github.com/raindevteam/rain/setup"
 )
@@ -47,7 +48,7 @@ func main() {
 		bot = clibot.NewCLIBot(rconf)
 	} else {
 		preConnectMsg, postConnectMsg = "Connecting... ", "Done"
-		bot = rbot.NewBot("0.6.0-alpha.2 (Mister Peace)", rconf)
+		bot = rbot.NewBot(rain.Version, rconf)
 	}
 
 	setup.Default(bot)

@@ -9,6 +9,7 @@ import (
 
 	"github.com/RyanPrintup/nimbus"
 	"github.com/raindevteam/rain/parser"
+	"github.com/raindevteam/rain/rain"
 	"github.com/raindevteam/rain/rlog"
 	"gopkg.in/sorcix/irc.v1"
 )
@@ -123,7 +124,7 @@ func NewBot(version string, rconf *Config) *Bot {
 
 // RainVersion returns the library version
 func (b *Bot) RainVersion() string {
-	return "0.6.0-alpha.2"
+	return rain.Version
 }
 
 // DefaultConnect will connect to IRC and start listening. It will not log anything.
@@ -153,6 +154,10 @@ func (b *Bot) DefaultConnectWithMsg(pre string, post string) {
 // EnableModules goes through every module list found in the config and sets them up appropriately.
 func (b *Bot) EnableModules() {
 	rlog.Info("Bot", "Enabling Modules...")
+
+	b.Handler.AddRemoveCallback(func(name ModuleName) {
+		b.Modules[strings.ToLower(string(name))].Registered = false
+	})
 
 	for modtype, modules := range b.Config.Module.Modules {
 		for name, value := range modules {
@@ -224,33 +229,31 @@ func (b *Bot) moduleExited(name string, result *Result) {
 // will be aborted. If the module complies, the module's corresponding process will be killed. The
 // module will then be recompiled if need be and will be restarted after.
 func (b *Bot) ModuleReload(name string) (err error) {
-	if _, ok := b.Modules[strings.ToLower(name)]; !ok {
+	module, ok := b.Modules[strings.ToLower(name)]
+
+	if !ok {
 		return errors.New("Module is unknown to the bot")
 	}
 
-	pm := b.Modules[strings.ToLower(name)].PM
-
-	if b.Modules[strings.ToLower(name)].Registered {
+	if module.PM.IsRunning() {
 		err = b.Handler.SignalCleanup(ModuleName(name))
 		if err != nil {
 			rlog.Error("Bot", "Error while cleaning up module "+name+": "+err.Error())
-			return errors.New("Module refused to stop, aborting reload")
+			return errors.New("Module did not cleanup, aborting reload")
 		}
+
+		module.PM.Kill()
+		module.PM.WaitForCommand()
+		module.Registered = false
 	}
 
-	if pm.IsRunning() {
-		err = pm.Kill()
-		if err != nil {
-			return errors.New("Could not kill module, aborting reload")
-		}
-	}
-
-	err = pm.Recompile()
-	if err != nil {
+	res := module.PM.Recompile()
+	if res.Err != nil {
+		rlog.Errorf("Bot", "Could not recompile module %s\n ----\n%s\n ----\n\n", module.Name, res.Output)
 		return errors.New("Could not recompile module")
 	}
 
-	b.moduleRun(name)
+	b.moduleStart(name)
 	return nil
 }
 
@@ -259,7 +262,7 @@ func (b *Bot) ModuleLoad(name string) error {
 		return errors.New("Module is unknown to the bot")
 	}
 
-	b.moduleRun(strings.ToLower(name))
+	b.moduleStart(strings.ToLower(name))
 	return nil
 }
 
@@ -281,17 +284,20 @@ func (b *Bot) ModuleInfo(name string) (string, error) {
 	return info + " | " + module.PM.Type, nil
 }
 
-// moduleRun starts a plugin as a provider service. This allows
+// moduleStart starts a plugin as a provider service. This allows
 // the bot to dispatch events outbound to the module. The module
 // can then communicate back via the master rpc server.
-func (b *Bot) moduleRun(name string) {
+func (b *Bot) moduleStart(name string) {
 	pm := b.Modules[name].PM
-	cmd := pm.Start()
 
-	go func(name string, cmd chan *Result) {
-		result := <-cmd
-		b.moduleExited(name, result)
-	}(name, cmd)
+	if !pm.IsRunning() {
+		cmd := pm.Start()
+
+		go func(name string, cmd chan *Result) {
+			result := <-cmd
+			b.moduleExited(name, result)
+		}(name, cmd)
+	}
 }
 
 ///////////////////////////          IRC Specific Methods         //////////////////////////////////
