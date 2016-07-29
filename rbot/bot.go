@@ -121,6 +121,11 @@ func NewBot(version string, rconf *Config) *Bot {
 	return bot
 }
 
+// RainVersion returns the library version
+func (b *Bot) RainVersion() string {
+	return "0.6.0-alpha.2"
+}
+
 // DefaultConnect will connect to IRC and start listening. It will not log anything.
 func (b *Bot) DefaultConnect() {
 	b.Connect()
