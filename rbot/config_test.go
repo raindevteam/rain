@@ -12,6 +12,7 @@ import (
 	"testing"
 
 	"github.com/RyanPrintup/nimbus"
+	"github.com/raindevteam/rain/rain"
 )
 
 var nconfig = &nimbus.Config{
@@ -94,14 +95,14 @@ func TestReadConfigFile(t *testing.T) {
 }
 
 func TestReadConfig(t *testing.T) {
-	config, _ := ReadConfig(ExampleConfig)
+	config, _ := ReadConfig(rain.ExampleConfig)
 	if checkConfig(config) != true {
 		t.Error("Config did not parse correctly")
 	}
 }
 
 func TestGetNimbusConfig(t *testing.T) {
-	rconfig, _ := ReadConfig(ExampleConfig)
+	rconfig, _ := ReadConfig(rain.ExampleConfig)
 	config := GetNimbusConfig(rconfig)
 	checks := reflect.DeepEqual(config, nconfig)
 	if checks != true {
