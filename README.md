@@ -27,6 +27,12 @@ bot up and running. The third install is the build off the unofficial #Neverfree
 irc.canternet.org server! With future development, we hope to provide more installs to garner to the
 needs that users may have. 
 
+Documentation is still pretty lacking, as I am currently developing the bot in a pre-alpha manner (despite the 
+versioning saying otherwise). Not all testing is done, and many features are still lacking. It is not recommended
+to use the library just yet, unless you understand the consequences (the bot is deemed unstable and many bugs are yet
+to be ironed out). If you wish to still use the library, you may view the godoc reference (at least what there is of it)
+to find your way around. We hope to change of this on our way to a stable 1.0.0 release!
+
 Installation<a name="installation"></a>
 ---------------------------------------
 First make sure you have properly installed go on your system (paths set and everything)
@@ -39,7 +45,7 @@ Find the nearest terminal or command prompt and run:
 ##### Installing the subpackages
 If you plan on using the subpackages, you may install their dependencies with the cli:
 
-    $ rain deps
+    $ rain depends
 
 If you don't give a care for the cli (I think it's useful! Don't knock it til' you try it):
 
@@ -54,18 +60,18 @@ If you're content enough with using one of the premade installation packages, yo
 leverage Rain's commandline utilities to install. After successfully installing 
 via go get, you may run:
 
-    $ rain mk <install> <bot-name>
+    $ rain install <install> <bot-name>
 
 This will build a new bot from the specified install package to your GOPATH/bin. It will also
 install dependencies of any of the sub packages for Rain. If you wish to install the premade
 installations then make sure you install the libraries you will use from Rain before hand, as to
 resolve dependencies.
 
-Rain Module Libraries (RMLS)<a name="rmls"></a>
+Rain Module Libraries (RMLs)<a name="rmls"></a>
 --------------------------------------------------
 
 In an effort to abstract the details of RPC when building your modules, we are currently supporting
-three RainBot Module Libraries called RMLS.
+three RainBot Module Libraries called RMLs.
 
 - [**gorml**](https://github.com/wolfchase/gorml) for Golang
 - [**pyrml**](https://github.com/wolfchase/pyrml) for Python and,
@@ -116,7 +122,7 @@ to add more starting with 0.6.0.
 
 #### Default
 
-| Commands | Action                                                           |
+| Commands | Description                                                      |
 |----------|------------------------------------------------------------------|
 | m        | Provides module management tools, such as reload, list, and more |
 
