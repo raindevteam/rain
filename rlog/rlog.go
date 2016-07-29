@@ -31,7 +31,7 @@ func SetFlags(flags int) {
 	l.logmodes = flags
 }
 
-func prefix(who string, msg string, level int) string {
+func prefix(who string, level int) string {
 	var logmode string
 
 	switch level {
@@ -54,28 +54,28 @@ func Println(v ...interface{}) {
 
 func Debug(who string, msg string) {
 	if Ldebug&l.logmodes != 0 {
-		log.Println(prefix(who, msg, Ldebug) + msg)
+		log.Println(prefix(who, Ldebug) + msg)
 	}
 }
 
 func Info(who string, msg string) {
 	if Linfo&l.logmodes != 0 {
-		log.Println(prefix(who, msg, Linfo) + msg)
+		log.Println(prefix(who, Linfo) + msg)
 	}
 }
 
 func Warn(who string, msg string) {
 	if Lwarn&l.logmodes != 0 {
-		log.Println(prefix(who, msg, Lwarn) + msg)
+		log.Println(prefix(who, Lwarn) + msg)
 	}
 }
 
 func Error(who string, msg string) {
-	if Lerror&l.logmodes != 0 {
-		log.Println(prefix(who, msg, Lerror) + msg)
-	}
+	Errorf(who, msg)
 }
 
-func Fatal(who string, msg string) {
-	log.Println(prefix(who, msg, Lerror) + msg)
+func Errorf(who string, format string, v ...interface{}) {
+	if Lerror&l.logmodes != 0 {
+		log.Printf(prefix(who, Lerror)+format, v...)
+	}
 }
