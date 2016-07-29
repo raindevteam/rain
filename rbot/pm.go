@@ -1,7 +1,6 @@
 package rbot
 
 import (
-	"os"
 	"os/exec"
 	"sync"
 )
@@ -80,7 +79,7 @@ func (pm *ProcessManager) runCommand(name string, args ...string) chan *Result {
 		case <-pm.kill:
 			pm.mu.RLock()
 			pm.cmd.Process.Release()
-			pm.cmd.Process.Signal(os.Kill)
+			pm.cmd.Process.Kill()
 			pm.mu.RUnlock()
 			res := <-done
 			ret <- res
@@ -153,5 +152,4 @@ func (pm *ProcessManager) Start() chan *Result {
 // Kill will fulfill the kill chan, and any running command will be terminated.
 func (pm *ProcessManager) Kill() {
 	pm.kill <- true
-	//pm.running = false
 }
