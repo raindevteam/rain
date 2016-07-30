@@ -160,8 +160,7 @@ func (h *Handler) RemoveModule(name ModuleName) {
 	h.mu.Lock()
 	defer h.mu.Unlock()
 
-	// Let's make sure we haven't already removed the module, as removal can be initiated by
-	// multiple sources.
+	// Let's make sure we haven't already removed the module, as removal can be initiated by multiple sources.
 	if !h.ModuleExists(string(name)) {
 		// Our job here is/was done
 		return
@@ -196,8 +195,7 @@ func (h *Handler) removeUnstableClient(name ModuleName, err error) {
 
 	err = h.SignalCleanup(name)
 	if err != nil {
-		rlog.Warn("Handler", string(name)+" [Module Client] did not successfully clean up,"+
-			" it will still be removed.")
+		rlog.Warn("Handler", string(name)+" [Module Client] did not successfully clean up, it will still be removed.")
 	}
 
 	h.RemoveModule(name)

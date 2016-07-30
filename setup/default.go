@@ -86,8 +86,10 @@ func Default(b *rbot.Bot) {
 	// Commands listener
 	b.AddListener(irc.PRIVMSG, func(msg *irc.Message) {
 		if b.Parser.IsCommand(msg.Trailing) {
-			command, Params := b.Parser.ParseCommand(msg.Trailing)
-			b.Handler.Invoke(msg, rbot.CommandName(command), Params)
+			if <-b.InboundLimiter() {
+				command, Params := b.Parser.ParseCommand(msg.Trailing)
+				b.Handler.Invoke(msg, rbot.CommandName(command), Params)
+			}
 		}
 	})
 

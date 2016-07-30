@@ -4,6 +4,8 @@ import (
 	"strings"
 	"sync"
 
+	"golang.org/x/time/rate"
+
 	"gopkg.in/sorcix/irc.v1"
 
 	"github.com/RyanPrintup/nimbus"
@@ -79,6 +81,7 @@ func NewCLIBot(conf *rbot.Config) *rbot.Bot {
 		/* Channels    */ make(map[string]*rbot.Channel),
 		/* Parser      */ parser.NewParser(conf.Command.Prefix),
 		/* Handler     */ rbot.NewHandler(),
+		/* Limiter     */ rate.NewLimiter(0.6, 3),
 		/* Config      */ conf,
 		/* Mutex       */ sync.Mutex{},
 	}

@@ -6,6 +6,9 @@ import (
 	"net/rpc"
 	"strings"
 	"sync"
+	"time"
+
+	"golang.org/x/time/rate"
 
 	"github.com/RyanPrintup/nimbus"
 	"github.com/raindevteam/rain/parser"
@@ -95,6 +98,7 @@ type Bot struct {
 	Channels map[string]*Channel
 	Parser   *parser.Parser
 	Handler  *Handler
+	Inlim    *rate.Limiter
 	Config   *Config
 	Mu       sync.Mutex
 }
@@ -115,11 +119,33 @@ func NewBot(version string, rconf *Config) *Bot {
 		/* Channels */ make(map[string]*Channel),
 		/* Parser   */ parser.NewParser(rconf.Command.Prefix),
 		/* Handler  */ NewHandler(),
+		/* Limiter  */ rate.NewLimiter(3/5, 3),
 		/* Config   */ rconf,
 		/* Mutex    */ sync.Mutex{},
 	}
 
 	return bot
+}
+
+func (b *Bot) InboundLimiter() chan bool {
+	ch := make(chan bool, 1)
+
+	go func(ch chan bool) {
+		r := b.Inlim.Reserve()
+		if !r.OK() {
+			rlog.Warn("Bot", "Inbound limiter not able to act")
+		}
+
+		// If in case the delay wins over the quit, the handler will have appropriated measures.
+		select {
+		case <-time.After(r.Delay()):
+			ch <- true
+		case <-b.Quit():
+			ch <- false
+		}
+	}(ch)
+
+	return ch
 }
 
 // RainVersion returns the library version
