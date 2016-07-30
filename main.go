@@ -18,6 +18,7 @@ func main() {
 		rain.CommandModule,
 		rain.CommandConfig,
 		rain.CommandDepends,
+		rain.CommandVersion,
 	}
 
 	app.Run(os.Args)

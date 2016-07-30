@@ -25,5 +25,5 @@ var v = version{Major: "0", Minor: "7", Patch: "0", PreRelease: "alpha", Build: 
 
 // Version returns the current version of Rain.
 func Version() string {
-	return fmt.Sprintf("Version: %s.%s.%s-%s.%s+%s", v.Major, v.Minor, v.Patch, v.PreRelease, v.Build, v.MetaData)
+	return fmt.Sprintf("%s.%s.%s-%s.%s+%s", v.Major, v.Minor, v.Patch, v.PreRelease, v.Build, v.MetaData)
 }
