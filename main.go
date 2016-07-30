@@ -11,7 +11,7 @@ func main() {
 	app := cli.NewApp()
 	app.Name = "rain"
 	app.Usage = "Command line tool for the management of everything Rain"
-	app.Version = rain.Version
+	app.Version = rain.Version()
 
 	app.Commands = []cli.Command{
 		rain.CommandInstall,

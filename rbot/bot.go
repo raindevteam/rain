@@ -150,7 +150,7 @@ func (b *Bot) InboundLimiter() chan bool {
 
 // RainVersion returns the library version
 func (b *Bot) RainVersion() string {
-	return rain.Version
+	return rain.Version()
 }
 
 // DefaultConnect will connect to IRC and start listening. It will not log anything.

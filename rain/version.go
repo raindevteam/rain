@@ -11,7 +11,7 @@ package rain
 import "fmt"
 
 // The Version struct is used to construct a version string.
-type Version struct {
+type version struct {
 	Major      string
 	Minor      string
 	Patch      string
@@ -20,10 +20,10 @@ type Version struct {
 	MetaData   string
 }
 
-// rainVersion is the current version of Rain.
-var rainVersion = Version{Major: "0", Minor: "7", Patch: "0", PreRelease: "alpha", Build: "1", MetaData: "LifeBloom"}
+// v is the current version of Rain.
+var v = version{Major: "0", Minor: "7", Patch: "0", PreRelease: "alpha", Build: "1", MetaData: "LifeBloom"}
 
-// Version returns a formated version string.
-func (v Version) Version() string {
+// Version returns the current version of Rain.
+func Version() string {
 	return fmt.Sprintf("Version: %s.%s.%s-%s.%s+%s", v.Major, v.Minor, v.Patch, v.PreRelease, v.Build, v.MetaData)
 }
