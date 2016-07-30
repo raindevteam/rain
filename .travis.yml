@@ -12,8 +12,8 @@ addons:
   apt:
     sources:
     - deadsnakes
-    - sourceline: 'deb https://deb.nodesource.com/node_6.x trusty main'
     - key_url: 'https://deb.nodesource.com/gpgkey/nodesource.gpg.key'
+    - sourceline: 'deb https://deb.nodesource.com/node_6.x trusty main'
     packages:
     - python3.5
     - python3-pip
@@ -22,17 +22,13 @@ addons:
 before_install:
   # Go RML
   - go get github.com/raindevteam/gorml
-
   # Python RML
   - sudo pip3 install pyrml
-
   # JavaScript RML
-#  - curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash - && sudo apt-get install -y nodejs
-#  - cd tests/modules/jsmod && npm install && cd $HOME/gopath/src/github.com/raindevteam/rain
+  - npm install --prefix ./tests/modules/jsmod/node_modules
 
 install:
-  - go install
-  - rain depends
+  - go get -d ./...
 
 script: 
   - go test -race -v ./rbot ./tmpl ./parser
