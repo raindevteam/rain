@@ -8,24 +8,16 @@ go:
   - 1.5
   - 1.6
 
-addons:
-  apt:
-    sources:
-    - deadsnakes
-    - sourceline: 'deb https://deb.nodesource.com/node_6.x trusty main'
-    key_url: 'https://deb.nodesource.com/gpgkey/nodesource.gpg.key'
-    packages:
-    - python3
-    - python-dev
-    - python3-pip
-    - nodejs
+python:
+  - 3.4
+
+node_js:
+  - 6.3
 
 before_install:
-  # Go RML
+  - sudo apt-get -y install python3-pip python-dev
   - go get github.com/raindevteam/gorml
-  # Python RML
   - sudo pip3 install pyrml
-  # JavaScript RML
   - cd tests/modules/jsmod && npm install && cd -
 
 install:
