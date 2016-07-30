@@ -15,7 +15,6 @@ addons:
     - sourceline: 'deb https://deb.nodesource.com/node_6.x trusty main'
     key_url: 'https://deb.nodesource.com/gpgkey/nodesource.gpg.key'
     packages:
-    - python3-pip
     - nodejs
 
 before_install:
