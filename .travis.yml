@@ -25,7 +25,7 @@ before_install:
   # Python RML
   - sudo pip3 install pyrml
   # JavaScript RML
-  - npm install --prefix ./tests/modules/jsmod/node_modules
+  - npm install --prefix ./tests/modules/jsmod
 
 install:
   - go get -d ./...
