@@ -2,6 +2,7 @@ package rbot
 
 import (
 	"os/exec"
+	"runtime"
 	"sync"
 )
 
@@ -141,7 +142,11 @@ func (pm *ProcessManager) Start() chan *Result {
 	case "go":
 		return pm.runCommand(pm.Name)
 	case "py":
-		return pm.runCommand("python", pm.Path+"/"+pm.Name)
+		var python = "python"
+		if runtime.GOOS != "windows" {
+			python = "python3"
+		}
+		return pm.runCommand(python, pm.Path+"/"+pm.Name)
 	default:
 		// Keep in mind that the bot will make it virtually impossible to reach here
 		// But you know how the story goes...

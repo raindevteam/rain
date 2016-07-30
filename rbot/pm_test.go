@@ -66,7 +66,7 @@ func TestMain(m *testing.M) {
 func TestProcessManagers(t *testing.T) {
 	pms := []*ProcessManager{
 		NewProcessManager("gomod", "go", "github.com/raindevteam/rain/tests/modules"),
-		//NewProcessManager("pymod", "py", "../tests/modules"),
+		NewProcessManager("pymod", "py", "../tests/modules"),
 		NewProcessManager("jsmod", "js", "../tests/modules"),
 	}
 
