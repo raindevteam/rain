@@ -29,7 +29,10 @@ import (
 	"gopkg.in/sorcix/irc.v1"
 )
 
-var DefaultModulesRoute = "modules/"
+const (
+	// DefaultModulesRoute tells the bot where to look for modules
+	DefaultModulesRoute = "modules/"
+)
 
 //////////////////////////////          Bot Internals         //////////////////////////////////////
 
@@ -54,8 +57,8 @@ func NewChannel(name string) *Channel {
 	return channel
 }
 
-// The Module struct serves as a container for a module's commander. The struct holds its
-// module's corresponding name to make it easier for reference.
+// The Module struct holds in place all information pertaining to a module. It also contains its
+// own process manager.
 type Module struct {
 	Name       string
 	Route      string
@@ -64,7 +67,7 @@ type Module struct {
 	Registered bool
 }
 
-// NewModule returns a module struct with an assigned commander appropriated to the module's type.
+// NewModule returns a module struct with its given information.
 func NewModule(name string, path string, opts map[string]bool, cmdtype string) *Module {
 	module := &Module{
 		Name:       name,
@@ -139,6 +142,9 @@ func NewBot(version string, rconf *Config) *Bot {
 	return bot
 }
 
+// InboundLimiter should be used for rate limiting in bound messages, usually commands. The chan
+// value should also be checked as false will indicate that the bot has quit and should not accept
+// anymore more inbound messages.
 func (b *Bot) InboundLimiter() chan bool {
 	ch := make(chan bool, 1)
 
@@ -237,6 +243,9 @@ func (b *Bot) loadModules() {
 	}
 }
 
+// moduleExited is called when a module process has exited. If an error was returned when exiting
+// it will be logged. The output (Stdout and Stderr) is also logged. If the module exists in the
+// handler it will be removed. The module is also unregistered from the bot.
 func (b *Bot) moduleExited(name string, result *Result) {
 	b.Mu.Lock()
 	defer b.Mu.Unlock()
@@ -295,6 +304,9 @@ func (b *Bot) ModuleReload(name string) (err error) {
 	return nil
 }
 
+// ModuleLoad will start a module process by calling moduleStart. It will not recompile,
+// ModuleReload should be used for that instead. If the module is not found, an error is returned
+// instead.
 func (b *Bot) ModuleLoad(name string) error {
 	if _, ok := b.Modules[strings.ToLower(name)]; !ok {
 		return errors.New("Module is unknown to the bot")
@@ -304,6 +316,8 @@ func (b *Bot) ModuleLoad(name string) error {
 	return nil
 }
 
+// ModuleInfo gathers all relevant information about a module and formats into a returned string. If
+// the module is not found within the bot and error is returned.
 func (b *Bot) ModuleInfo(name string) (string, error) {
 	module, ok := b.Modules[strings.ToLower(name)]
 
@@ -322,9 +336,8 @@ func (b *Bot) ModuleInfo(name string) (string, error) {
 	return info + " | " + module.PM.Type, nil
 }
 
-// moduleStart starts a plugin as a provider service. This allows
-// the bot to dispatch events outbound to the module. The module
-// can then communicate back via the master rpc server.
+// moduleStart will start a module's process manager. It will then run a goroutine to check for when
+// module process exits.
 func (b *Bot) moduleStart(name string) {
 	pm := b.Modules[name].PM
 
