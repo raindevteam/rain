@@ -14,21 +14,21 @@ addons:
     - deadsnakes
 
 before_install:
-  - go get github.com/stretchr/testify
+  # Go RML
   - go get github.com/raindevteam/gorml
-  - go get golang.org/x/tools/cmd/cover
-  - go get github.com/mattn/goveralls
-  - sudo apt-get update
+
+  # Python RML
   - sudo apt-get install -y python3.5
   - sudo apt-get install -y python3-pip
-  - alias python=python3
+  - sudo pip3 install pyrml
+
+  # JavaScript RML
   - curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash - && sudo apt-get install -y nodejs
+  - cd tests/modules/jsmod && npm install && cd $HOME/gopath/src/github.com/raindevteam/rain
 
 install:
-  - cd tests/modules/jsmod && npm install && cd $HOME/gopath/src/github.com/raindevteam/rain
-  - sudo pip3 install pyrml
-  - go get -d ./...
+  - go install
+  - rain depends
 
 script: 
-  - go test -race -v ./rbot ./tmpl
-#  - $HOME/gopath/bin/goveralls -coverprofile=coverage.out -service=travis-ci ./...
+  - go test -race -v ./rbot ./tmpl ./parser
