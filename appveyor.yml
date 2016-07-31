@@ -9,6 +9,8 @@ environment:
   PYTHON_VERSION: 3.4.x
   PYTHON_ARCH: x64
 
+  nodejs_version: "6"
+
   matrix:
   - GOPATH: C:\gopath
     GOROOT: C:\go\
@@ -25,13 +27,17 @@ environment:
 install:
 - set PATH=%GOPATH%\bin;%GOROOT%bin;%PATH%
 - SET PATH=%PYTHON%;%PYTHON%\Scripts;%PATH%
+- ps: Install-Product node $env:nodejs_version
 - python --version
+- node -v
 - go version
+- pip install pyrml
+- cd tests/modules/jsmod && npm install && cd %APPVEYOR_BUILD_FOLDER%
 - go get github.com/raindevteam/gorml
 - go get -d ./...
 
 build_script:
-- go test -race -v ./parser ./tmpl
+- go test -race -v ./parser ./tmpl ./rbot
 
 build:
   verbosity: minimal
