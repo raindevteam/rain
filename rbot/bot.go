@@ -236,12 +236,10 @@ func (b *Bot) loadModules() {
 			continue
 		}
 
-		cmd := module.PM.Start(b.ListenPort)
-
-		go func(name string, cmd chan *Result) {
-			result := <-cmd
+		go func(name string, pm *ProcessManager) {
+			result := pm.Start(b.ListenPort)
 			b.moduleExited(name, result)
-		}(name, cmd)
+		}(name, module.PM)
 
 		rlog.Info("Bot", "Module "+name+" loaded")
 	}
@@ -255,10 +253,13 @@ func (b *Bot) moduleExited(name string, result *Result) {
 	defer b.Mu.Unlock()
 
 	if result.Err != nil {
-		rlog.Error("Bot", name+" [Module Process] has exited with: + "+
-			result.Err.Error()+"\n ----\n"+result.Output+"\n ----\n")
+		rlog.Error("Bot", name+" [Module Process] has exited with: "+result.Err.Error())
 	} else {
 		rlog.Info("Bot", "Module "+name+" [Module Process] has exited")
+	}
+
+	if result.Output != "" {
+		rlog.Info(name, "Process output:"+"\n ----\n"+result.Output+"\n ----\n")
 	}
 
 	if b.Handler.ModuleExists(name) {
@@ -294,7 +295,7 @@ func (b *Bot) ModuleReload(name string) (err error) {
 		}
 
 		module.PM.Kill()
-		module.PM.WaitForCommand()
+		module.PM.Wait()
 		module.Registered = false
 	}
 
@@ -346,12 +347,10 @@ func (b *Bot) moduleStart(name string) {
 	pm := b.Modules[name].PM
 
 	if !pm.IsRunning() {
-		cmd := pm.Start(b.ListenPort)
-
-		go func(name string, cmd chan *Result) {
-			result := <-cmd
+		go func(name string, pm *ProcessManager) {
+			result := pm.Start(b.ListenPort)
 			b.moduleExited(name, result)
-		}(name, cmd)
+		}(name, pm)
 	}
 }
 

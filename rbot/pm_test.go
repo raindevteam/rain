@@ -84,12 +84,16 @@ func TestProcessManagers(t *testing.T) {
 	for _, pm := range pms {
 		res := pm.Recompile()
 		if res != nil && res.Err != nil {
-			t.Fatalf("Failed to recompile %s: %s", pm.Name, res.Output)
+			t.Fatalf("Failed to recompile %s: %s", pm.Name, res.Err)
 		}
 
-		cmd := pm.Start("5555")
+		done := make(chan *Result)
+		go func(pm *ProcessManager) {
+			done <- pm.Start("5555")
+		}(pm)
+
 		select {
-		case res := <-cmd:
+		case res := <-done:
 			if res.Err != nil {
 				t.Fatalf("Module exited prematurely\n ::::\n%s", res.Output)
 			} else {
