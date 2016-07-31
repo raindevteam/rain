@@ -16,8 +16,8 @@ node_js:
 
 before_install:
   - go get github.com/raindevteam/gorml
-  - sudo apt-get install python3-pip
-  - sudo pip3 install pyrml
+  - sudo apt-get install -y python3-pip
+  - sudo pip3 install -y pyrml
   - cd tests/modules/jsmod && npm install && cd -
 
 install:
