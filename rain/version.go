@@ -33,7 +33,7 @@ type version struct {
 }
 
 // v is the current version of Rain.
-var v = version{Major: "0", Minor: "7", Patch: "0", PreRelease: "alpha", Build: "1", MetaData: "LifeBloom"}
+var v = version{Major: "0", Minor: "7", Patch: "0", PreRelease: "alpha", Build: "2", MetaData: "LifeBloom"}
 
 // Version returns the current version of Rain.
 func Version() string {
