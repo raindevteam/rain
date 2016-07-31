@@ -149,7 +149,7 @@ func (pm *ProcessManager) Recompile() *Result {
 func (pm *ProcessManager) Start(port string) chan *Result {
 	switch pm.Type {
 	case "js":
-		return pm.runCommand("node", pm.Path+"/"+pm.Name)
+		return pm.runCommand("node", pm.Path+"/"+pm.Name, port)
 	case "go":
 		return pm.runCommand(pm.Name, port)
 	case "py":
@@ -157,7 +157,7 @@ func (pm *ProcessManager) Start(port string) chan *Result {
 		if runtime.GOOS != "windows" {
 			python = "python3"
 		}
-		return pm.runCommand(python, pm.Path+"/"+pm.Name)
+		return pm.runCommand(python, pm.Path+"/"+pm.Name, port)
 	default:
 		// Keep in mind that the bot will make it virtually impossible to reach here
 		// But you know how the story goes...
