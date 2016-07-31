@@ -48,7 +48,7 @@ func main() {
 		bot = cbot.NewCLIBot(rconf)
 	} else {
 		preConnectMsg, postConnectMsg = "Connecting... ", "Done"
-		bot = rbot.NewBot(rain.Version, rconf)
+		bot = rbot.NewBot(rain.Version(), rconf)
 	}
 
 	setup.Default(bot)

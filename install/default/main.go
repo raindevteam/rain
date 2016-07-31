@@ -24,7 +24,7 @@ func main() {
 		os.Exit(1)
 	}
 
-	bot := rbot.NewBot(rain.Version, rconf)
+	bot := rbot.NewBot(rain.Version(), rconf)
 	setup.Default(bot)
 
 	bot.EnableModules()

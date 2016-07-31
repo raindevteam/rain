@@ -26,7 +26,7 @@ func main() {
 		panic(err)
 	}
 
-	bot := rbot.NewBot(rain.Version, conf)
+	bot := rbot.NewBot(rain.Version(), conf)
 
 	setup.Default(bot)
 	bot.DefaultConnect()
