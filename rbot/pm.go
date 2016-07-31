@@ -51,14 +51,7 @@ func NewProcessManager(name string, cmdtype string, path string) *ProcessManager
 	return pm
 }
 
-// runCommand is the workhorse of a process manager. It will run a command with given arguments in a goroutine. Another
-// goroutine is used to wait upon two outcomes:
-//
-// (A) When the command has finished
-// (B) When the command is killed
-//
-// When the command has finished, lastResult is updated. The caller receives a channel that returns this result when
-// the command has exited via one of the outcomes mentioned.
+// runCommand is awaiting new documentation.
 func (pm *ProcessManager) runCommand(name string, args ...string) *Result {
 	pm.mu.Lock()
 
@@ -68,7 +61,9 @@ func (pm *ProcessManager) runCommand(name string, args ...string) *Result {
 	// Handle a kill signal
 	go func(pm *ProcessManager) {
 		<-pm.kill
+		pm.mu.Lock()
 		pm.cmd.Process.Kill()
+		pm.mu.Unlock()
 	}(pm)
 
 	var (
@@ -166,7 +161,5 @@ func (pm *ProcessManager) Start(port string) *Result {
 
 // Kill will fulfill the kill chan, and any running command will be terminated.
 func (pm *ProcessManager) Kill() {
-	pm.mu.RLock()
 	pm.kill <- true
-	pm.mu.RUnlock()
 }
