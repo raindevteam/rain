@@ -299,7 +299,7 @@ func (b *Bot) ModuleReload(name string) (err error) {
 	}
 
 	res := module.PM.Recompile()
-	if res.Err != nil {
+	if res != nil && res.Err != nil {
 		rlog.Errorf("Bot", "Could not recompile module %s\n ----\n%s\n ----\n\n", module.Name, res.Output)
 		return errors.New("Could not recompile module")
 	}
