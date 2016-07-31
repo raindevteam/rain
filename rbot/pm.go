@@ -146,12 +146,12 @@ func (pm *ProcessManager) Recompile() *Result {
 }
 
 // Start will run a command via runCommand and return it's channel for the caller.
-func (pm *ProcessManager) Start() chan *Result {
+func (pm *ProcessManager) Start(port string) chan *Result {
 	switch pm.Type {
 	case "js":
 		return pm.runCommand("node", pm.Path+"/"+pm.Name)
 	case "go":
-		return pm.runCommand(pm.Name)
+		return pm.runCommand(pm.Name, port)
 	case "py":
 		var python = "python"
 		if runtime.GOOS != "windows" {

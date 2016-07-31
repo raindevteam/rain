@@ -95,6 +95,7 @@ func NewCLIBot(conf *rbot.Config) *rbot.Bot {
 		/* Handler     */ rbot.NewHandler(),
 		/* Limiter     */ rate.NewLimiter(0.6, 3),
 		/* Config      */ conf,
+		/* ListenPort */ "0",
 		/* Mutex       */ sync.Mutex{},
 	}
 

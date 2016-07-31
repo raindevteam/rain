@@ -15,6 +15,7 @@ import (
 	"errors"
 	"net"
 	"net/rpc"
+	"strconv"
 	"strings"
 	"sync"
 	"time"
@@ -107,14 +108,15 @@ type Client interface {
 // separate in operation.
 type Bot struct {
 	Client
-	Version  string
-	Modules  map[string]*Module
-	Channels map[string]*Channel
-	Parser   *parser.Parser
-	Handler  *Handler
-	Inlim    *rate.Limiter
-	Config   *Config
-	Mu       sync.Mutex
+	Version    string
+	Modules    map[string]*Module
+	Channels   map[string]*Channel
+	Parser     *parser.Parser
+	Handler    *Handler
+	Inlim      *rate.Limiter
+	Config     *Config
+	ListenPort string
+	Mu         sync.Mutex
 }
 
 // NewBot initializes a number of things for proper operation. It will set appropriate flags
@@ -127,15 +129,16 @@ func NewBot(version string, rconf *Config) *Bot {
 	nconf := GetNimbusConfig(rconf)
 
 	bot := &Bot{
-		/* Client   */ nimbus.NewClient(rconf.Server.Host, rconf.User.Nick, *nconf),
-		/* Version  */ version,
-		/* Modules  */ make(map[string]*Module),
-		/* Channels */ make(map[string]*Channel),
-		/* Parser   */ parser.NewParser(rconf.Command.Prefix),
-		/* Handler  */ NewHandler(),
-		/* Limiter  */ rate.NewLimiter(3/5, 3),
-		/* Config   */ rconf,
-		/* Mutex    */ sync.Mutex{},
+		/* Client     */ nimbus.NewClient(rconf.Server.Host, rconf.User.Nick, *nconf),
+		/* Version    */ version,
+		/* Modules    */ make(map[string]*Module),
+		/* Channels   */ make(map[string]*Channel),
+		/* Parser     */ parser.NewParser(rconf.Command.Prefix),
+		/* Handler    */ NewHandler(),
+		/* Limiter    */ rate.NewLimiter(3/5, 3),
+		/* Config     */ rconf,
+		/* ListenPort */ "0",
+		/* Mutex      */ sync.Mutex{},
 	}
 
 	return bot
@@ -231,7 +234,7 @@ func (b *Bot) loadModules() {
 			continue
 		}
 
-		cmd := module.PM.Start()
+		cmd := module.PM.Start(b.ListenPort)
 
 		go func(name string, cmd chan *Result) {
 			result := <-cmd
@@ -341,7 +344,7 @@ func (b *Bot) moduleStart(name string) {
 	pm := b.Modules[name].PM
 
 	if !pm.IsRunning() {
-		cmd := pm.Start()
+		cmd := pm.Start(b.ListenPort)
 
 		go func(name string, cmd chan *Result) {
 			result := <-cmd
@@ -370,7 +373,9 @@ func (b *Bot) RemoveUser(nick string, channel string) {
 // Conventionally, it uses a json codec to serve.
 func (b *Bot) startRPCServer() {
 	rpc.RegisterName("Master", BotAPI{b})
-	master, err := net.Listen("tcp", ":5555")
+	master, err := net.Listen("tcp", ":0")
+	b.ListenPort = strconv.Itoa(master.Addr().(*net.TCPAddr).Port)
+	rlog.Info("Bot", "Listening on port: "+b.ListenPort)
 
 	if err != nil {
 		rlog.Error("Bot", err.Error())
