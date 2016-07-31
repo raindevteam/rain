@@ -12,6 +12,7 @@
 package rbot
 
 import (
+	"bytes"
 	"os/exec"
 	"runtime"
 	"sync"
@@ -67,10 +68,13 @@ func (pm *ProcessManager) runCommand(name string, args ...string) *Result {
 	}(pm)
 
 	var (
-		err    error
-		buffer []byte
-		res    *Result
+		b   bytes.Buffer
+		err error
+		res *Result
 	)
+
+	pm.cmd.Stdout = &b
+	pm.cmd.Stderr = &b
 
 	err = pm.cmd.Start()
 	if err != nil {
@@ -79,8 +83,8 @@ func (pm *ProcessManager) runCommand(name string, args ...string) *Result {
 
 	pm.mu.Unlock()
 
-	buffer, err = pm.cmd.CombinedOutput()
-	output := string(buffer[:])
+	err = pm.cmd.Wait()
+	output := string(b.Bytes()[:])
 
 	res = &Result{output, err}
 
