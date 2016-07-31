@@ -84,7 +84,7 @@ func TestProcessManagers(t *testing.T) {
 	for _, pm := range pms {
 		res := pm.Recompile()
 		if res != nil && res.Err != nil {
-			t.Fatalf("Failed to recompile %s: %s", pm.Name, res.Output)
+			t.Fatalf("Failed to recompile %s: %s", pm.Name, res.Err)
 		}
 
 		done := make(chan *Result)

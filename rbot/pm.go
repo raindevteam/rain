@@ -80,9 +80,14 @@ func (pm *ProcessManager) runCommand(name string, args ...string) *Result {
 	pm.cmd.Stdout = &b
 	pm.cmd.Stderr = &b
 
+	err = pm.cmd.Start()
+	if err != nil {
+		return &Result{"", err}
+	}
+
 	pm.mu.Unlock()
 
-	err = pm.cmd.Run()
+	err = pm.cmd.Wait()
 	output := string(b.Bytes()[:])
 
 	res = &Result{output, err}
