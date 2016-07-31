@@ -68,9 +68,9 @@ func (pm *ProcessManager) runCommand(name string, args ...string) chan *Result {
 	done := make(chan *Result, 1)
 
 	go func(done chan *Result, pm *ProcessManager) {
-		pm.mu.Lock()
+		pm.mu.RLock()
 		output, err := pm.cmd.CombinedOutput()
-		pm.mu.Unlock()
+		pm.mu.RUnlock()
 		s := string(output[:])
 
 		res := &Result{s, err}
@@ -89,10 +89,10 @@ func (pm *ProcessManager) runCommand(name string, args ...string) chan *Result {
 		case res := <-done:
 			ret <- res
 		case <-pm.kill:
-			pm.mu.RLock()
+			pm.mu.Lock()
 			pm.cmd.Process.Release()
 			pm.cmd.Process.Kill()
-			pm.mu.RUnlock()
+			pm.mu.Unlock()
 			res := <-done
 			ret <- res
 		}
