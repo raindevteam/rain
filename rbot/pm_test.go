@@ -87,7 +87,7 @@ func TestProcessManagers(t *testing.T) {
 			t.Fatalf("Failed to recompile %s: %s", pm.Name, res.Output)
 		}
 
-		cmd := pm.Start()
+		cmd := pm.Start("5555")
 		select {
 		case res := <-cmd:
 			if res.Err != nil {
