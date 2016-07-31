@@ -82,16 +82,9 @@ func (pm *ProcessManager) runCommand(name string, args ...string) *Result {
 	pm.cmd.Stdout = &b
 	pm.cmd.Stderr = &b
 
-	pm.mu.Lock()
-
-	err = pm.cmd.Start()
-	if err != nil {
-		return &Result{"", err}
-	}
-
 	pm.mu.Unlock()
 
-	err = pm.cmd.Wait()
+	err = pm.cmd.Run()
 	output := string(b.Bytes()[:])
 
 	res = &Result{output, err}
@@ -170,5 +163,7 @@ func (pm *ProcessManager) Start(port string) *Result {
 
 // Kill will fulfill the kill chan, and any running command will be terminated.
 func (pm *ProcessManager) Kill() {
+	pm.mu.RLock()
 	pm.kill <- true
+	pm.mu.RUnlock()
 }
