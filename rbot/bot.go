@@ -236,12 +236,10 @@ func (b *Bot) loadModules() {
 			continue
 		}
 
-		cmd := module.PM.Start(b.ListenPort)
-
-		go func(name string, cmd chan *Result) {
-			result := <-cmd
+		go func(name string, pm *ProcessManager) {
+			result := pm.Start(b.ListenPort)
 			b.moduleExited(name, result)
-		}(name, cmd)
+		}(name, module.PM)
 
 		rlog.Info("Bot", "Module "+name+" loaded")
 	}
@@ -346,12 +344,10 @@ func (b *Bot) moduleStart(name string) {
 	pm := b.Modules[name].PM
 
 	if !pm.IsRunning() {
-		cmd := pm.Start(b.ListenPort)
-
-		go func(name string, cmd chan *Result) {
-			result := <-cmd
+		go func(name string, pm *ProcessManager) {
+			result := pm.Start(b.ListenPort)
 			b.moduleExited(name, result)
-		}(name, cmd)
+		}(name, pm)
 	}
 }
 

@@ -23,4 +23,4 @@ install:
   - go get -d ./...
 
 script: 
-  - go test -race -v ./rbot ./tmpl ./parser
+  - go test -race -v ./rbot

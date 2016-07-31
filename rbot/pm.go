@@ -59,48 +59,51 @@ func NewProcessManager(name string, cmdtype string, path string) *ProcessManager
 //
 // When the command has finished, lastResult is updated. The caller receives a channel that returns this result when
 // the command has exited via one of the outcomes mentioned.
-func (pm *ProcessManager) runCommand(name string, args ...string) chan *Result {
+func (pm *ProcessManager) runCommand(name string, args ...string) *Result {
 	pm.mu.Lock()
+
 	pm.running = true
 	pm.cmd = exec.Command(name, args...)
+
 	pm.mu.Unlock()
 
-	ret := make(chan *Result, 1)
-	done := make(chan *Result, 1)
+	// Handle a kill signal
+	go func(pm *ProcessManager) {
+		<-pm.kill
+		pm.cmd.Process.Kill()
+	}(pm)
 
-	go func(done chan *Result, pm *ProcessManager) {
-		var b bytes.Buffer
+	var (
+		b   bytes.Buffer
+		err error
+		res *Result
+	)
 
-		pm.cmd.Stdout = &b
-		pm.cmd.Stderr = &b
+	pm.cmd.Stdout = &b
+	pm.cmd.Stderr = &b
 
-		err := pm.cmd.Run()
+	pm.mu.Lock()
 
-		output := string(b.Bytes()[:])
+	err = pm.cmd.Start()
+	if err != nil {
+		return &Result{"", err}
+	}
 
-		res := &Result{output, err}
-		done <- res
+	pm.mu.Unlock()
 
-		pm.mu.Lock()
+	err = pm.cmd.Wait()
+	output := string(b.Bytes()[:])
 
-		pm.lastResult = res
-		pm.running = false
+	res = &Result{output, err}
 
-		pm.mu.Unlock()
-	}(done, pm)
+	pm.mu.Lock()
 
-	go func(ret chan *Result, done chan *Result, pm *ProcessManager) {
-		select {
-		case res := <-done:
-			ret <- res
-		case <-pm.kill:
-			pm.cmd.Process.Kill()
-			res := <-done
-			ret <- res
-		}
-	}(ret, done, pm)
+	pm.lastResult = res
+	pm.running = false
 
-	return ret
+	pm.mu.Unlock()
+
+	return res
 }
 
 // WaitForCommand will wait on the processDone channel, which if fullfilled when a command has finished executing. A
@@ -133,22 +136,20 @@ func (pm *ProcessManager) LastResult() *Result {
 func (pm *ProcessManager) Recompile() *Result {
 	var (
 		res *Result
-		cmd chan *Result
 	)
 
 	switch pm.Type {
 	case "go":
-		cmd = pm.runCommand("go", "install", pm.Path+"/"+pm.Name)
+		res = pm.runCommand("go", "install", pm.Path+"/"+pm.Name)
 	default:
 		return nil
 	}
 
-	res = <-cmd
 	return res
 }
 
 // Start will run a command via runCommand and return it's channel for the caller.
-func (pm *ProcessManager) Start(port string) chan *Result {
+func (pm *ProcessManager) Start(port string) *Result {
 	switch pm.Type {
 	case "js":
 		return pm.runCommand("node", pm.Path+"/"+pm.Name, port)

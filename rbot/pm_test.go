@@ -87,9 +87,13 @@ func TestProcessManagers(t *testing.T) {
 			t.Fatalf("Failed to recompile %s: %s", pm.Name, res.Output)
 		}
 
-		cmd := pm.Start("5555")
+		done := make(chan *Result)
+		go func(pm *ProcessManager) {
+			done <- pm.Start("5555")
+		}(pm)
+
 		select {
-		case res := <-cmd:
+		case res := <-done:
 			if res.Err != nil {
 				t.Fatalf("Module exited prematurely\n ::::\n%s", res.Output)
 			} else {
