@@ -21,7 +21,8 @@ before_install:
   - cd tests/modules/jsmod && npm install && cd -
 
 install:
-  - python3 --version
+  - pip --version
+  - python --version
   - node -v
   - go version
   - go get -d ./...
