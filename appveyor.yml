@@ -1,0 +1,37 @@
+version: {build}
+
+os: Windows Server 2012 R2
+
+clone_folder: c:\gopath\src\github.com\raindevteam\rain
+
+environment:
+  PYTHON: C:\Python34-x64
+  PYTHON_VERSION: 3.4.x
+  PYTHON_ARCH: x64
+
+  matrix:
+  - GOPATH: C:\gopath
+    GOROOT: C:\go\
+    GOVERSION: 1.6
+
+  - GOPATH: C:\gopath
+    GOROOT: C:\go15\
+    GOVERSION: 1.5
+
+  - GOPATH: C:\gopath
+    GOROOT: C:\go14\
+    GOVERSION: 1.4
+
+install:
+- set PATH=%GOPATH%\bin;%GOROOT%bin;%PATH%
+- SET PATH=%PYTHON%;%PYTHON%\Scripts;%PATH%
+- python --version
+- go version
+- go get github.com/raindevteam/gorml
+- go get -d ./...
+
+build_script:
+- go test -race -v ./parser ./tmpl
+
+build:
+  verbosity: minimal
