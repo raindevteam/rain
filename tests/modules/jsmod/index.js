@@ -27,16 +27,10 @@ class Jsmod extends Module {
 if (require.main === module) {
     const m = new Jsmod();
 
-    m.initialize()
-    .then(() => {
-        m.addCommand("echo", {
-            Help: 'Repeats its arguments',
-            Fun: m.echo
-        });
-
-        m.register();
-    })
-    .fail((error) => {
-        console.error(error);
+    m.addCommand("echo", {
+        Help: 'Repeats its arguments',
+        Fun: m.echo
     });
+
+    m.register(process.argv);
 }

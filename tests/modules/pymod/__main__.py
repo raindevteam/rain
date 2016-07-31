@@ -11,6 +11,7 @@
 # Send any inquiries you may have about this program to: rcvallada@gmail.com
 
 import pyrml
+import sys
 
 m = pyrml.Module("Pymod", "Test Module")
 
@@ -18,4 +19,4 @@ m = pyrml.Module("Pymod", "Test Module")
 def echo(msg, args):
     m.say(msg["Args"][0], " ".join(args))
 
-m.register()
+m.register(sys.argv)

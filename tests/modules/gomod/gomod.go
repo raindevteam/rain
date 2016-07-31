@@ -13,6 +13,8 @@
 package main
 
 import (
+	"os"
+
 	"github.com/raindevteam/gorml"
 	"gopkg.in/sorcix/irc.v1"
 )
@@ -31,5 +33,5 @@ func main() {
 		Fun:  m.Greet,
 	})
 
-	m.Register()
+	m.Register(os.Args)
 }
