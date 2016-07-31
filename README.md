@@ -1,9 +1,11 @@
 [![Build Status](https://travis-ci.org/raindevteam/rain.svg?branch=master)](https://travis-ci.org/raindevteam/rain)
+[![Build status](https://ci.appveyor.com/api/projects/status/7rpa57pck1m3i2a1?svg=true)](https://ci.appveyor.com/project/wolfchase/rain)
 [![GitHub version](https://badge.fury.io/gh/raindevteam%2Frain.svg)](https://badge.fury.io/gh/raindevteam%2Frain)
 [![Go Report Card](https://goreportcard.com/badge/github.com/raindevteam/rain)](https://goreportcard.com/report/github.com/raindevteam/rain)
 [![codebeat badge](https://codebeat.co/badges/1e03860e-db6d-4751-81d1-1ed3e414537e)](https://codebeat.co/projects/github-com-raindevteam-rain)
 [![GoDoc](https://godoc.org/github.com/raindevteam/rain?status.svg)](https://godoc.org/github.com/raindevteam/rain)
 [![GitHub license](https://img.shields.io/badge/license-AGPL-blue.svg)](https://raw.githubusercontent.com/raindevteam/rain/master/LICENSE)
+
 
 ----------------------------------------------------------------------------------------------------
 <img align="right" src="https://avatars1.githubusercontent.com/u/20262521?v=3&s=200">
