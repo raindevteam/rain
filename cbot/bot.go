@@ -91,6 +91,7 @@ func NewCLIBot(conf *rbot.Config) *rbot.Bot {
 		/* Version     */ "CLI",
 		/* Modules     */ make(map[string]*rbot.Module),
 		/* Channels    */ make(map[string]*rbot.Channel),
+		/* ToJoinChs   */ make(map[string]string),
 		/* Parser      */ parser.NewParser(conf.Command.Prefix),
 		/* Handler     */ rbot.NewHandler(),
 		/* Limiter     */ rate.NewLimiter(0.6, 3),

@@ -111,6 +111,7 @@ type Bot struct {
 	Version    string
 	Modules    map[string]*Module
 	Channels   map[string]*Channel
+	ToJoinChs  map[string]string
 	Parser     *parser.Parser
 	Handler    *Handler
 	Inlim      *rate.Limiter
@@ -133,6 +134,7 @@ func NewBot(version string, rconf *Config) *Bot {
 		/* Version    */ version,
 		/* Modules    */ make(map[string]*Module),
 		/* Channels   */ make(map[string]*Channel),
+		/* ToJoinChs  */ make(map[string]string),
 		/* Parser     */ parser.NewParser(rconf.Command.Prefix),
 		/* Handler    */ NewHandler(),
 		/* Limiter    */ rate.NewLimiter(3/5, 3),

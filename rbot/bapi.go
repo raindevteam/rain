@@ -45,6 +45,7 @@ type TriggerRequest struct {
 }
 
 type JoinRequest struct {
+	Caller   string
 	Channel  string
 	Password string
 }
@@ -79,9 +80,12 @@ func (b BotAPI) RegisterTrigger(tr TriggerRequest, result *string) error {
 }
 
 func (b BotAPI) JoinChannel(jr JoinRequest, result *string) error {
+	b.bot.ToJoinChs[strings.ToLower(jr.Channel)] = jr.Caller
+
 	if jr.Password != "" {
 		b.bot.Send(irc.JOIN, jr.Channel, jr.Password)
 	} else {
+		rlog.Info("BAPI", "Joining "+jr.Channel)
 		b.bot.Send(irc.JOIN, jr.Channel)
 	}
 
