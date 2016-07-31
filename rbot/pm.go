@@ -65,8 +65,6 @@ func (pm *ProcessManager) runCommand(name string, args ...string) *Result {
 	pm.running = true
 	pm.cmd = exec.Command(name, args...)
 
-	pm.mu.Unlock()
-
 	// Handle a kill signal
 	go func(pm *ProcessManager) {
 		<-pm.kill
