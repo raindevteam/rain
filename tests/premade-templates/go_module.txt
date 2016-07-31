@@ -1,23 +1,25 @@
 package main
 
 import (
-	"github.com/RyanPrintup/nimbus"
-	"github.com/wolfchase/gorml"
+	"os"
+
+	"github.com/raindevteam/gorml"
+	"gopkg.in/sorcix/irc.v1"
 )
 
 type Test struct { *module.Module }
 
-func (m *Test) Greet(msg *nimbus.Message, args []string) {
+func (m *Test) Greet(msg *irc.Message, args []string) {
 	m.Say(msg.Args[0], "Hello there!")
 }
 
 func main() {
-	m := &Test{module.MakeModule("Test", "Your module's short description")}
+	m := &Test{module.NewModule("Test", "Your module's short description")}
 
 	m.AddCommand("greet", &module.Command{
 		Help: "It greets you!",
 		Fun:  m.Info,
 	})
 
-	m.Register()
+	m.Register(os.Args)
 }

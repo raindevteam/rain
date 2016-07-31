@@ -14,6 +14,8 @@ package tmpl
 
 const PYMTemplate = `from pyrml import Module
 
+import sys
+
 class {{.Name}}(Module):
     def __init__(self):
         Module.__init__(self, "{{.Name}}", "Your module")
@@ -29,5 +31,5 @@ if __name__ == '__main__':
         "Fun": m.echo
     })
 
-    m.register()
+    m.register(sys.argv)
 `

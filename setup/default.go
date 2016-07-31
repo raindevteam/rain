@@ -18,6 +18,7 @@ import (
 	"gopkg.in/sorcix/irc.v1"
 
 	"github.com/raindevteam/rain/rbot"
+	"github.com/raindevteam/rain/rlog"
 )
 
 type moduleManager struct{ bot *rbot.Bot }
@@ -148,6 +149,13 @@ func Default(b *rbot.Bot) {
 		where := msg.Trailing
 
 		if who == b.GetNick() {
+			rlog.Info("Bot", "Joined: "+where)
+
+			caller, ok := b.ToJoinChs[strings.ToLower(where)]
+			if ok {
+				b.Say(caller, "Joined "+where)
+			}
+
 			channel := rbot.NewChannel(where)
 			b.Channels[strings.ToLower(where)] = channel
 			return

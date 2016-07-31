@@ -1,5 +1,7 @@
 from pyrml import Module
 
+import sys
+
 class Test(Module):
     def __init__(self):
         Module.__init__(self, "Test", "Your module")
@@ -15,4 +17,4 @@ if __name__ == '__main__':
         "Fun": m.echo
     })
 
-    m.register()
+    m.register(sys.argv)
