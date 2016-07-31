@@ -74,8 +74,7 @@ func (pm *ProcessManager) runCommand(name string, args ...string) chan *Result {
 		pm.cmd.Stdout = &b
 		pm.cmd.Stderr = &b
 
-		pm.cmd.Run()
-		err := pm.cmd.Wait()
+		err := pm.cmd.Run()
 
 		output := string(b.Bytes()[:])
 
