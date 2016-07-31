@@ -253,10 +253,13 @@ func (b *Bot) moduleExited(name string, result *Result) {
 	defer b.Mu.Unlock()
 
 	if result.Err != nil {
-		rlog.Error("Bot", name+" [Module Process] has exited with: + "+
-			result.Err.Error()+"\n ----\n"+result.Output+"\n ----\n")
+		rlog.Error("Bot", name+" [Module Process] has exited with: "+result.Err.Error())
 	} else {
 		rlog.Info("Bot", "Module "+name+" [Module Process] has exited")
+	}
+
+	if result.Output != "" {
+		rlog.Info(name, "Process output:"+"\n ----\n"+result.Output+"\n ----\n")
 	}
 
 	if b.Handler.ModuleExists(name) {
@@ -292,7 +295,7 @@ func (b *Bot) ModuleReload(name string) (err error) {
 		}
 
 		module.PM.Kill()
-		module.PM.WaitForCommand()
+		module.PM.Wait()
 		module.Registered = false
 	}
 

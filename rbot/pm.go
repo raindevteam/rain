@@ -12,7 +12,6 @@
 package rbot
 
 import (
-	"bytes"
 	"os/exec"
 	"runtime"
 	"sync"
@@ -41,12 +40,13 @@ type ProcessManager struct {
 // NewProcessManager will return a ProcessManager of the correct type for a given module.
 func NewProcessManager(name string, cmdtype string, path string) *ProcessManager {
 	pm := &ProcessManager{
-		Name:    name,
-		Type:    cmdtype,
-		Path:    path,
-		running: false,
-		kill:    make(chan bool, 1),
-		mu:      sync.RWMutex{},
+		Name:        name,
+		Type:        cmdtype,
+		Path:        path,
+		running:     false,
+		processDone: make(chan *Result, 1),
+		kill:        make(chan bool, 1),
+		mu:          sync.RWMutex{},
 	}
 	return pm
 }
@@ -67,13 +67,10 @@ func (pm *ProcessManager) runCommand(name string, args ...string) *Result {
 	}(pm)
 
 	var (
-		b   bytes.Buffer
-		err error
-		res *Result
+		err    error
+		buffer []byte
+		res    *Result
 	)
-
-	pm.cmd.Stdout = &b
-	pm.cmd.Stderr = &b
 
 	err = pm.cmd.Start()
 	if err != nil {
@@ -82,8 +79,8 @@ func (pm *ProcessManager) runCommand(name string, args ...string) *Result {
 
 	pm.mu.Unlock()
 
-	err = pm.cmd.Wait()
-	output := string(b.Bytes()[:])
+	buffer, err = pm.cmd.CombinedOutput()
+	output := string(buffer[:])
 
 	res = &Result{output, err}
 
@@ -94,12 +91,13 @@ func (pm *ProcessManager) runCommand(name string, args ...string) *Result {
 
 	pm.mu.Unlock()
 
+	pm.processDone <- res
 	return res
 }
 
-// WaitForCommand will wait on the processDone channel, which if fullfilled when a command has finished executing. A
+// Wait will wait on the processDone channel, which if fullfilled when a command has finished executing. A
 // Result struct will be returned.
-func (pm *ProcessManager) WaitForCommand() *Result {
+func (pm *ProcessManager) Wait() *Result {
 	pm.mu.RLock()
 	if !pm.running {
 		return nil
