@@ -26,11 +26,13 @@ var AllDepends = []string{
 	"github.com/RyanPrintup/Nimbus",
 	"gopkg.in/readline.v1",
 	"gopkg.in/yaml.v2",
+	"golang.org/x/time/rate",
 }
 
 var CoreDepends = []string{
 	"github.com/RyanPrintup/Nimbus",
 	"gopkg.in/yaml.v2",
+	"golang.org/x/time/rate",
 }
 
 var NeverfreeDepends = []string{

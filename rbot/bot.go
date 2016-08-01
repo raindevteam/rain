@@ -21,6 +21,7 @@ import (
 	"errors"
 	"net"
 	"net/rpc"
+	"os"
 	"strconv"
 	"strings"
 	"sync"
@@ -31,6 +32,7 @@ import (
 	"github.com/RyanPrintup/nimbus"
 	"github.com/raindevteam/rain/parser"
 	"github.com/raindevteam/rain/rain"
+	"github.com/raindevteam/rain/rbot"
 	"github.com/raindevteam/rain/rlog"
 	"gopkg.in/sorcix/irc.v1"
 )
@@ -184,7 +186,11 @@ func (b *Bot) RainVersion() string {
 
 // DefaultConnect will connect to IRC and start listening. It will not log anything.
 func (b *Bot) DefaultConnect() {
-	b.Connect()
+	err := b.Connect()
+	if err != nil {
+		rlog.Errorf("Bot", "Could not connect to irc server: %s\n ----\n The bot will now exit\n")
+		os.Exit(1)
+	}
 	b.Listen()
 }
 
@@ -202,6 +208,11 @@ func (b *Bot) DefaultConnectWithMsg(pre string, post string) {
 	}
 
 	b.Listen()
+}
+
+// AddCommand let's a user insert an internal command to the handler
+func (b *Bot) AddCommand(name, command *rbot.Command) {
+	b.Handler.AddInternalCommand(name, command)
 }
 
 /////////////////////////          Module Specific Methods         /////////////////////////////////
