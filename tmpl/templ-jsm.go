@@ -17,6 +17,7 @@
 
 package tmpl
 
+// JSMTemplate is the template for JavaScript modules
 const JSMTemplate = `"use strict";
 
 const Module = require('jsrml');

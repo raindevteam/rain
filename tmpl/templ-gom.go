@@ -17,6 +17,7 @@
 
 package tmpl
 
+// GOMTemplate is the template for go modules
 const GOMTemplate = `package main
 
 import (

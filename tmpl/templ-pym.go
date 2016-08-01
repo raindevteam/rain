@@ -17,6 +17,7 @@
 
 package tmpl
 
+// PYMTemplate is the template for python modules
 const PYMTemplate = `from pyrml import Module
 
 import sys
