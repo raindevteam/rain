@@ -95,6 +95,7 @@ func NewModule(name string, path string, opts map[string]bool, cmdtype string) *
 // currently undermine this idea which include a generalized IRC message struct and IRC config.
 type Client interface {
 	GetNick() string
+	SetNick(nick string)
 	GetChannels() []string
 	Connect() error
 	Listen()

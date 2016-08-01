@@ -53,6 +53,10 @@ func (c CliClient) GetNick() string {
 	return c.config.User.Nick
 }
 
+func (c CliClient) SetNick(nick string) {
+	c.config.User.Nick = nick
+}
+
 func (c CliClient) GetChannels() []string {
 	return c.config.Server.Channels
 }
