@@ -24,14 +24,15 @@ import (
 	"sync"
 )
 
-// The Result struct is used to hold information about ran commands, this makes it easier to debug and manage processes.
+// The Result struct is used to hold information about ran commands, this makes it easier to debug
+// and manage processes.
 type Result struct {
 	Output string
 	Err    error
 }
 
-// A ProcessManager handles an individual process of a module. The ProcessManager can recompile and invoke a module as
-// well as terminate its process. Mostly used by the bot for module management.
+// A ProcessManager handles an individual process of a module. The ProcessManager can recompile and
+// invoke a module as well as terminate its process. Mostly used by the bot for module management.
 type ProcessManager struct {
 	Name        string
 	Type        string
@@ -58,7 +59,10 @@ func NewProcessManager(name string, cmdtype string, path string) *ProcessManager
 	return pm
 }
 
-// runCommand is awaiting new documentation.
+// runCommand  will start a given command (usually a module process). It will also run a goroutine
+// that will listen on the kill chan, which when fulfilled, will terminate the current running
+// process. Stderr and Stdout are handled manually rather than calling CombinedOutput so that the
+// Process Manager can hold a lock up until the command has started.
 func (pm *ProcessManager) runCommand(name string, args ...string) *Result {
 	pm.mu.Lock()
 
@@ -105,8 +109,8 @@ func (pm *ProcessManager) runCommand(name string, args ...string) *Result {
 	return res
 }
 
-// Wait will wait on the processDone channel, which if fullfilled when a command has finished executing. A
-// Result struct will be returned.
+// Wait will wait on the processDone channel, which if fulfilled when a command has finished
+// executing. A Result struct will be returned.
 func (pm *ProcessManager) Wait() *Result {
 	pm.mu.RLock()
 	if !pm.running {
@@ -130,8 +134,8 @@ func (pm *ProcessManager) LastResult() *Result {
 	return pm.lastResult
 }
 
-// Recompile will attempt to compile any source code of a module if needed. A result struct will be returned to the
-// caller for inspection To check if there was an error in compilation).
+// Recompile will attempt to compile any source code of a module if needed. A result struct will be
+// returned to the caller for inspection To check if there was an error in compilation.
 func (pm *ProcessManager) Recompile() *Result {
 	var (
 		res *Result
@@ -147,7 +151,8 @@ func (pm *ProcessManager) Recompile() *Result {
 	return res
 }
 
-// Start will run a command via runCommand and return it's channel for the caller.
+// Start will run a module process and pass a given port to it via command line arguments. A result
+// struct will be returned when module process has exited.
 func (pm *ProcessManager) Start(port string) *Result {
 	switch pm.Type {
 	case "js":
@@ -167,7 +172,7 @@ func (pm *ProcessManager) Start(port string) *Result {
 	}
 }
 
-// Kill will fulfill the kill chan, and any running command will be terminated.
+// Kill will fulfill the kill chan, and any running module process will be terminated.
 func (pm *ProcessManager) Kill() {
 	pm.kill <- true
 }

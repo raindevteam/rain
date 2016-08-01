@@ -50,6 +50,7 @@ type TriggerRequest struct {
 	Event Event
 }
 
+// JoinRequest holds information for joining a channel.
 type JoinRequest struct {
 	Caller   string
 	Channel  string
@@ -85,6 +86,9 @@ func (b BotAPI) RegisterTrigger(tr TriggerRequest, result *string) error {
 	return nil
 }
 
+// JoinChannel takes a JoinRequest. It will add the channel to join to the ToJoinChs map so that
+// when the bot receives a JOIN reply from the IRC server, it can verify whether it joined a
+// channel.
 func (b BotAPI) JoinChannel(jr JoinRequest, result *string) error {
 	b.bot.ToJoinChs[strings.ToLower(jr.Channel)] = jr.Caller
 
