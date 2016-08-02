@@ -32,7 +32,6 @@ import (
 	"github.com/RyanPrintup/nimbus"
 	"github.com/raindevteam/rain/parser"
 	"github.com/raindevteam/rain/rain"
-	"github.com/raindevteam/rain/rbot"
 	"github.com/raindevteam/rain/rlog"
 	"gopkg.in/sorcix/irc.v1"
 )
@@ -103,7 +102,7 @@ type Client interface {
 	Listen()
 	Quit() chan error
 	Send(raw ...string)
-	Say(channel string, text string)
+	Say(to string, text string)
 	AddListener(event string, l nimbus.Listener)
 	GetListeners(event string) []nimbus.Listener
 	Emit(event string, msg *irc.Message)
@@ -139,7 +138,8 @@ func NewBot(version string, rconf *Config) *Bot {
 	nconf := GetNimbusConfig(rconf)
 
 	bot := &Bot{
-		/* Client     */ nimbus.NewClient(rconf.Server.Host, rconf.User.Nick, *nconf),
+		/* Client     */ nimbus.NewClient(rconf.Server.Host, rconf.Server.Port,
+			rconf.User.Nick, *nconf),
 		/* Version    */ version,
 		/* Modules    */ make(map[string]*Module),
 		/* Channels   */ make(map[string]*Channel),
@@ -211,8 +211,8 @@ func (b *Bot) DefaultConnectWithMsg(pre string, post string) {
 }
 
 // AddCommand let's a user insert an internal command to the handler
-func (b *Bot) AddCommand(name, command *rbot.Command) {
-	b.Handler.AddInternalCommand(name, command)
+func (b *Bot) AddCommand(name string, command *Command) {
+	b.Handler.AddInternalCommand(CommandName(name), command)
 }
 
 /////////////////////////          Module Specific Methods         /////////////////////////////////
@@ -319,7 +319,8 @@ func (b *Bot) ModuleReload(name string) (err error) {
 
 	res := module.PM.Recompile()
 	if res != nil && res.Err != nil {
-		rlog.Errorf("Bot", "Could not recompile module %s\n ----\n%s\n ----\n\n", module.Name, res.Output)
+		rlog.Errorf("Bot", "Could not recompile module %s\n ----\n%s\n ----\n\n",
+			module.Name, res.Output)
 		return errors.New("Could not recompile module")
 	}
 

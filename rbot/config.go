@@ -35,10 +35,11 @@ type ServerInfo struct {
 
 // UserInfo holds information pertaining to the bot.
 type UserInfo struct {
-	Nick     string
-	RealName string
-	UserName string
-	Modes    string
+	Nick        string
+	RealName    string
+	UserName    string
+	Modes       string
+	NimbusDebug int `yaml:"nimbus-debug"`
 }
 
 // CommandInfo holds information needed for parsing commands
@@ -105,12 +106,12 @@ func ReadConfig(configstr string) (*Config, error) {
 // GetNimbusConfig takes an rbot.Config and uses it to create a nimbus.Config
 func GetNimbusConfig(rconf *Config) (nconf *nimbus.Config) {
 	nconf = &nimbus.Config{
-		Port:     rconf.Server.Port,
 		Channels: rconf.Server.Channels,
 		RealName: rconf.User.RealName,
 		UserName: rconf.User.UserName,
 		Password: "",
 		Modes:    rconf.User.Modes,
+		Debug:    rconf.User.NimbusDebug,
 	}
 
 	return nconf
