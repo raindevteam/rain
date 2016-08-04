@@ -108,12 +108,12 @@ type Client interface {
 	Emit(event string, msg *irc.Message)
 }
 
-// The Bot struct holds the internal Client, used to register listeners for IRC. ModuleNames
-// is used to look up which plugins to start and are eventually passed to the handler. The Handler
-// provides management of commands, listeners and triggers. Since listeners act independently of
-// each other, a mutex is used to keep bot writes (such as channel updates) synchronised. The bot
-// struct can be realized as a core to glue all modular components together, whilst keeping them
-// separate in operation.
+// The Bot struct holds all core information for handling IRC. It has the internal IRC client used
+// to make and handle an IRC connection. It holds information about modules, which is used to start
+// module processes. It has a channels array to hold information about IRC channels if a user wishes
+// to do so. The ToJoinChs map is used to validate whether the bot successfully managed to join
+// a channel. It also has a parser and handler for commands and listeners. The bot struct also
+// includes two limiters, one inbound for commands and another outbound for IRC sends.
 type Bot struct {
 	Client
 	Version    string
@@ -129,7 +129,7 @@ type Bot struct {
 }
 
 // NewBot initializes a number of things for proper operation. It will set appropriate flags
-// for rlog. It then creates a Nimbus config to pass to the internal nimbus IRC client. This
+// for rlog and then creates a Nimbus config to pass to the internal nimbus IRC client. This
 // client is embedded into an instance of Bot and returned. It has its fields initialized.
 func NewBot(version string, rconf *Config) *Bot {
 	rlog.SetFlags(rlog.Linfo | rlog.Lwarn | rlog.Lerror | rlog.Ldebug)
@@ -314,7 +314,6 @@ func (b *Bot) ModuleReload(name string) (err error) {
 
 		module.PM.Kill()
 		module.PM.Wait()
-		module.Registered = false
 	}
 
 	res := module.PM.Recompile()
