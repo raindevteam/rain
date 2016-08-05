@@ -125,6 +125,7 @@ type Bot struct {
 	Inlim      *rate.Limiter
 	Config     *Config
 	ListenPort string
+	quit       chan string
 	Mu         sync.Mutex
 }
 
@@ -149,10 +150,28 @@ func NewBot(version string, rconf *Config) *Bot {
 		/* Limiter    */ rate.NewLimiter(3/5, 3),
 		/* Config     */ rconf,
 		/* ListenPort */ "0",
+		/* Quit Chan  */ make(chan string),
 		/* Mutex      */ sync.Mutex{},
 	}
 
 	return bot
+}
+
+// Quit returns the bot's quit chan. Differs from the Client's quit in that the bot's quit is used
+// for non-error quits.
+func (b *Bot) Quit() chan string {
+	return b.quit
+}
+
+// WaitForQuit waits on either the client's quit, which returns an error, or the bot's quit, which
+// returns a string as a reason. If an error occurs, reason will be the error's string.
+func (b *Bot) WaitForQuit() (string, error) {
+	select {
+	case err := <-b.Client.Quit():
+		return err.Error(), err
+	case reason := <-b.quit:
+		return reason, nil
+	}
 }
 
 // InboundLimiter should be used for rate limiting in bound messages, usually commands. The chan
@@ -171,7 +190,9 @@ func (b *Bot) InboundLimiter() chan bool {
 		select {
 		case <-time.After(r.Delay()):
 			ch <- true
-		case <-b.Quit():
+		case <-b.quit:
+			ch <- false
+		case <-b.Client.Quit():
 			ch <- false
 		}
 	}(ch)

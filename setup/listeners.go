@@ -18,7 +18,6 @@
 package setup
 
 import (
-	"errors"
 	"strconv"
 	"strings"
 
@@ -133,7 +132,7 @@ func (l *Listeners) Kill(msg *irc.Message) {
 	who := msg.Params[1]
 
 	if who == l.bot.GetNick() {
-		l.bot.Quit() <- errors.New("Bot was killed")
+		l.bot.Quit() <- "Bot was killed"
 		return
 	}
 
@@ -164,7 +163,7 @@ func (l *Listeners) Quit(msg *irc.Message) {
 	who := msg.Prefix.Name
 
 	if who == l.bot.GetNick() {
-		l.bot.Quit() <- errors.New("Bot has quit from the irc server")
+		l.bot.Quit() <- "Bot has quit from the irc server"
 	}
 
 	for _, channel := range l.bot.Channels {

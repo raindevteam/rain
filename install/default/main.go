@@ -29,4 +29,12 @@ func main() {
 
 	bot.EnableModules()
 	bot.DefaultConnectWithMsg("Connecting...", "Done")
+
+	reason, err := bot.WaitForQuit()
+	if err != nil {
+		fmt.Printf("Quit Error: %s\n", reason)
+		os.Exit(1)
+	}
+
+	fmt.Printf("Quit: %s\n", reason)
 }

@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"os"
 
 	"gopkg.in/sorcix/irc.v1"
 
@@ -36,8 +37,12 @@ func main() {
 		fmt.Println(msg.Trailing)
 	})
 
-	result := bot.Quit()
-	if result != nil {
-		fmt.Println(result.Error())
+	reason, err := bot.WaitForQuit()
+
+	if err != nil {
+		fmt.Printf("Quit Error: %s\n", reason)
+		os.Exit(1)
 	}
+
+	fmt.Printf("Quit: %s\n", reason)
 }
