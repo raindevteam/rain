@@ -19,15 +19,11 @@ package cbot
 
 import (
 	"strings"
-	"sync"
-
-	"golang.org/x/time/rate"
 
 	"gopkg.in/sorcix/irc.v1"
 
 	"github.com/RyanPrintup/nimbus"
 	"github.com/chzyer/readline"
-	"github.com/raindevteam/rain/parser"
 	"github.com/raindevteam/rain/rbot"
 	"github.com/raindevteam/rain/rlog"
 )
@@ -95,19 +91,8 @@ func NewCLIBot(conf *rbot.Config) *rbot.Bot {
 		make(chan error),
 	}
 
-	bot := &rbot.Bot{
-		/* Client      */ cli,
-		/* Version     */ "CLI",
-		/* Modules     */ make(map[string]*rbot.Module),
-		/* Channels    */ make(map[string]*rbot.Channel),
-		/* ToJoinChs   */ make(map[string]string),
-		/* Parser      */ parser.NewParser(conf.Command.Prefix),
-		/* Handler     */ rbot.NewHandler(),
-		/* Limiter     */ rate.NewLimiter(0.6, 3),
-		/* Config      */ conf,
-		/* ListenPort */ "0",
-		/* Mutex       */ sync.Mutex{},
-	}
+	bot := rbot.NewBot("CLI", conf)
+	bot.Client = cli // Oh what? I can do this?
 
 	return bot
 }
