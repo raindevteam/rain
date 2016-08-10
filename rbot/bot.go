@@ -182,9 +182,11 @@ func (b *Bot) WaitForQuit() (string, error) {
 	}
 }
 
-// InboundLimiter should be used for rate limiting in bound messages, usually commands. The chan
-// value should also be checked as false will indicate that the bot has quit and should not accept
-// anymore more inbound messages.
+// Limiter will rate limit inbound or outbound actions. If lim is Inlim, it will rate limit using
+// the inbound rate limiter. If lim is Outlim, it will limit using the outbound limiter. A chan is
+// is returned to the caller. It will be fulfilled when the rate limiter is able to act or when the
+// bot has quit. Therefore a caller should check the value, as a false indicates that the bot's
+// connection has been closed and no more inbound or outbound actions should be acted upon.
 func (b *Bot) Limiter(lim string) chan bool {
 	ch := make(chan bool, 1)
 
@@ -361,7 +363,7 @@ func (b *Bot) ModuleReload(name string) (err error) {
 		}
 
 		module.PM.Kill()
-		module.PM.Wait()
+		<-module.PM.Wait()
 	}
 
 	res := module.PM.Recompile()
@@ -423,7 +425,7 @@ func (b *Bot) moduleStart(name string) {
 ///////////////////////////          IRC Specific Methods         //////////////////////////////////
 
 // RemoveUser will delete a user entry from the given channel. If the user is the bot itself, the
-// bot will isntead remove the channel from the bot's channel list.
+// bot will instead remove the channel from the bot's channel list.
 func (b *Bot) RemoveUser(nick string, channel string) {
 	if nick == b.GetNick() {
 		delete(b.Channels, strings.ToLower(channel))

@@ -112,20 +112,22 @@ func (pm *ProcessManager) runCommand(name string, args ...string) *Result {
 
 // Wait will wait on the processDone channel, which if fulfilled when a command has finished
 // executing. A Result struct will be returned.
-func (pm *ProcessManager) Wait() *Result {
+func (pm *ProcessManager) Wait() chan *Result {
 	pm.mu.RLock()
+	defer pm.mu.RUnlock()
+
 	if !pm.running {
-		pm.mu.RUnlock()
 		return nil
 	}
-	pm.mu.RUnlock()
-	return <-pm.processDone
+
+	return pm.processDone
 }
 
 // IsRunning returns a bool indicating whether a command is running or not.
 func (pm *ProcessManager) IsRunning() bool {
 	pm.mu.RLock()
 	defer pm.mu.RUnlock()
+
 	return pm.running
 }
 
@@ -133,6 +135,7 @@ func (pm *ProcessManager) IsRunning() bool {
 func (pm *ProcessManager) LastResult() *Result {
 	pm.mu.RLock()
 	defer pm.mu.RUnlock()
+
 	return pm.lastResult
 }
 
