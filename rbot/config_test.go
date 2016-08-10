@@ -33,12 +33,12 @@ import (
 )
 
 var nconfig = &nimbus.Config{
-	Port:     "6667",
 	Channels: []string{"#Your", "#Channels"},
 	RealName: "Wolfstein Jr. II",
 	UserName: "wolfstein",
 	Password: "",
 	Modes:    "+B",
+	Debug:    2,
 }
 
 var modules = map[string]map[string]string{
@@ -79,6 +79,7 @@ func checkUserInfo(config *Config) (check bool) {
 	check = config.User.RealName == "Wolfstein Jr. II" && check
 	check = config.User.UserName == "wolfstein" && check
 	check = config.User.Modes == "+B" && check
+	check = config.User.NimbusDebug == 2 && check
 	return
 }
 
@@ -123,6 +124,7 @@ func TestGetNimbusConfig(t *testing.T) {
 	config := GetNimbusConfig(rconfig)
 	checks := reflect.DeepEqual(config, nconfig)
 	if checks != true {
-		t.Error("Could create a proper nimbus config")
+		fmt.Println(config)
+		t.Error("Could not create a proper nimbus config")
 	}
 }

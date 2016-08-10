@@ -21,6 +21,8 @@ modes    : +B
 # The command prefix is used to denote commands from IRC users
 commandprefix : .
 
+nimbus-debug: 2
+
 # Modules
 # These are all optional. A '.' as a module path means its located in the default path. You may 
 # set a specific path if you wish. You may specify extra options for the module as a comma separated

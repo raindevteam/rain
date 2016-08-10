@@ -43,6 +43,11 @@ realname : Wolfstein Jr. II
 username : wolfstein
 modes    : +B
 
+# Debug level for internal IRC client
+# 1 = Print received IRC Messages
+# 2 = Also print parsed values from IRC messages
+nimbus-debug: 2
+
 # Command Information
 # The command prefix is used to denote commands from IRC users
 commandprefix : .
