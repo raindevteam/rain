@@ -137,7 +137,7 @@ func (h *Handler) Invoke(msg *irc.Message, cmd CommandName, args []string) {
 	} else {
 		mName, ok := h.Commands[CommandName(strings.ToLower(string(cmd)))]
 		if !ok {
-			rlog.Debug("Handler", string(cmd)+" [Command Listener] does not exist")
+			h.mu.RUnlock()
 			return
 		}
 

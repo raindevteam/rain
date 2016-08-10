@@ -48,13 +48,12 @@ type ProcessManager struct {
 // NewProcessManager will return a ProcessManager of the correct type for a given module.
 func NewProcessManager(name string, cmdtype string, path string) *ProcessManager {
 	pm := &ProcessManager{
-		Name:        name,
-		Type:        cmdtype,
-		Path:        path,
-		running:     false,
-		processDone: make(chan *Result, 1),
-		kill:        make(chan bool, 1),
-		mu:          sync.RWMutex{},
+		Name:    name,
+		Type:    cmdtype,
+		Path:    path,
+		running: false,
+		kill:    make(chan bool, 1),
+		mu:      sync.RWMutex{},
 	}
 	return pm
 }
@@ -66,6 +65,7 @@ func NewProcessManager(name string, cmdtype string, path string) *ProcessManager
 func (pm *ProcessManager) runCommand(name string, args ...string) *Result {
 	pm.mu.Lock()
 
+	pm.processDone = make(chan *Result, 1)
 	pm.running = true
 	pm.cmd = exec.Command(name, args...)
 
@@ -88,6 +88,7 @@ func (pm *ProcessManager) runCommand(name string, args ...string) *Result {
 
 	err = pm.cmd.Start()
 	if err != nil {
+		pm.mu.Unlock()
 		return &Result{"", err}
 	}
 
@@ -114,6 +115,7 @@ func (pm *ProcessManager) runCommand(name string, args ...string) *Result {
 func (pm *ProcessManager) Wait() *Result {
 	pm.mu.RLock()
 	if !pm.running {
+		pm.mu.RUnlock()
 		return nil
 	}
 	pm.mu.RUnlock()

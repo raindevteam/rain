@@ -35,7 +35,7 @@ type Listeners struct{ bot *rbot.Bot }
 // has an inbound rate limiter to prevent command flooding.
 func (l *Listeners) Privmsg(msg *irc.Message) {
 	if l.bot.Parser.IsCommand(msg.Trailing) {
-		if <-l.bot.InboundLimiter() {
+		if <-l.bot.Limiter(rbot.Inlim) {
 			command, Params := l.bot.Parser.ParseCommand(msg.Trailing)
 			l.bot.Handler.Invoke(msg, rbot.CommandName(command), Params)
 		}

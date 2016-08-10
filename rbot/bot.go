@@ -39,6 +39,12 @@ import (
 const (
 	// DefaultModulesRoute tells the bot where to look for modules
 	DefaultModulesRoute = "modules/"
+
+	// Inlim is used for the bot's limiter function to tell it to use the inbound limiter
+	Inlim = "Inbound Limiter"
+
+	// Outlim has the same purpose as Inlim, except it denotes usage of the outbound limiter
+	Outlim = "Outbound Limiter"
 )
 
 //////////////////////////////          Bot Internals         //////////////////////////////////////
@@ -123,6 +129,7 @@ type Bot struct {
 	Parser     *parser.Parser
 	Handler    *Handler
 	Inlim      *rate.Limiter
+	Outlim     *rate.Limiter
 	Config     *Config
 	ListenPort string
 	quit       chan string
@@ -147,7 +154,8 @@ func NewBot(version string, rconf *Config) *Bot {
 		/* ToJoinChs  */ make(map[string]string),
 		/* Parser     */ parser.NewParser(rconf.Command.Prefix),
 		/* Handler    */ NewHandler(),
-		/* Limiter    */ rate.NewLimiter(3/5, 3),
+		/* Inlim      */ rate.NewLimiter(3/5, 3),
+		/* Outlim     */ rate.NewLimiter(rate.Every(time.Millisecond*750), 1),
 		/* Config     */ rconf,
 		/* ListenPort */ "0",
 		/* Quit Chan  */ make(chan string),
@@ -177,13 +185,22 @@ func (b *Bot) WaitForQuit() (string, error) {
 // InboundLimiter should be used for rate limiting in bound messages, usually commands. The chan
 // value should also be checked as false will indicate that the bot has quit and should not accept
 // anymore more inbound messages.
-func (b *Bot) InboundLimiter() chan bool {
+func (b *Bot) Limiter(lim string) chan bool {
 	ch := make(chan bool, 1)
 
 	go func(ch chan bool) {
-		r := b.Inlim.Reserve()
+		var r *rate.Reservation
+
+		if lim == Inlim {
+			r = b.Inlim.Reserve()
+		} else if lim == Outlim {
+			r = b.Outlim.Reserve()
+		} else {
+			ch <- false
+		}
+
 		if !r.OK() {
-			rlog.Warn("Bot", "Inbound limiter not able to act")
+			rlog.Warn("Bot", lim+" not able to act")
 		}
 
 		// If in case the delay wins over the quit, the handler will have appropriated measures.
@@ -234,6 +251,16 @@ func (b *Bot) DefaultConnectWithMsg(pre string, post string) {
 // AddCommand let's a user insert an internal command to the handler
 func (b *Bot) AddCommand(name string, command *Command) {
 	b.Handler.AddInternalCommand(CommandName(name), command)
+}
+
+func (b *Bot) Send(raw ...string) {
+	if <-b.Limiter(Outlim) {
+		b.Client.Send(raw...)
+	}
+}
+
+func (b *Bot) Say(to string, text string) {
+	b.Send(irc.PRIVMSG, to, ":"+text)
 }
 
 /////////////////////////          Module Specific Methods         /////////////////////////////////
