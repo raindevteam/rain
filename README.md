@@ -126,16 +126,17 @@ to add more starting with 0.6.0.
 
 | Commands | Description                                                      |
 |----------|------------------------------------------------------------------|
-| m        | Provides module management tools, such as reload, list, and more |
+| m        | Provides module management tools, such as reload, info, and more |
 
-| Listeners                       | Event        |
-|---------------------------------|--------------|
-| Add/Update Topic                | RPL_TOPIC    |
-| Update Users on Channel Connect | RPL_NAMREPLY |
-| Update User/Self on Join        | JOIN         |
-| Update User/Self on Kick        | KICK         |
-| Update User/Self on Kill        | KILL         |
-| Update User/Self on Part        | PART         |
-| Update User/Self on Quit        | QUIT         |
-| Update User/Self on Nick        | NICK         |
+| Listeners                       | Event             |
+|---------------------------------|-------------------|
+| Add/Update Topic                | RPL_TOPIC         |
+| Update Users on Channel Connect | RPL_NAMREPLY      |
+| Update User/Self on Join        | JOIN              |
+| Update User/Self on Kick        | KICK              |
+| Update User/Self on Kill        | KILL              |
+| Update User/Self on Part        | PART              |
+| Update User/Self on Quit        | QUIT              |
+| Update User/Self on Nick        | NICK              |
+| Update bot nick when in use     | ERR_NICKNAMEINUSE |
 
