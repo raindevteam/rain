@@ -1,18 +1,38 @@
+// Copyright (C) 2015  Rodolfo Castillo-Valladares & Contributors
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU Affero General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU Affero General Public License for more details.
+//
+// You should have received a copy of the GNU Affero General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+//
+// Send any inquiries you may have about this program to: rcvallada@gmail.com
+
 package rbot
 
 import (
+	"bytes"
 	"os/exec"
+	"runtime"
 	"sync"
 )
 
-// The Result struct is used to hold information about ran commands, this makes it easier to debug and manage processes.
+// The Result struct is used to hold information about ran commands, this makes it easier to debug
+// and manage processes.
 type Result struct {
 	Output string
 	Err    error
 }
 
-// A ProcessManager handles an individual process of a module. The ProcessManager can recompile and invoke a module as
-// well as terminate its process. Mostly used by the bot for module management.
+// A ProcessManager handles an individual process of a module. The ProcessManager can recompile and
+// invoke a module as well as terminate its process. Mostly used by the bot for module management.
 type ProcessManager struct {
 	Name        string
 	Type        string
@@ -38,72 +58,76 @@ func NewProcessManager(name string, cmdtype string, path string) *ProcessManager
 	return pm
 }
 
-// runCommand is the workhorse of a process manager. It will run a command with given arguments in a goroutine. Another
-// goroutine is used to wait upon two outcomes:
-//
-// (A) When the command has finished
-// (B) When the command is killed
-//
-// When the command has finished, lastResult is updated. The caller receives a channel that returns this result when
-// the command has exited via one of the outcomes mentioned.
-func (pm *ProcessManager) runCommand(name string, args ...string) chan *Result {
+// runCommand  will start a given command (usually a module process). It will also run a goroutine
+// that will listen on the kill chan, which when fulfilled, will terminate the current running
+// process. Stderr and Stdout are handled manually rather than calling CombinedOutput so that the
+// Process Manager can hold a lock up until the command has started.
+func (pm *ProcessManager) runCommand(name string, args ...string) *Result {
 	pm.mu.Lock()
+
+	pm.processDone = make(chan *Result, 1)
 	pm.running = true
 	pm.cmd = exec.Command(name, args...)
+
+	// Handle a kill signal
+	go func(pm *ProcessManager) {
+		<-pm.kill
+		pm.mu.Lock()
+		pm.cmd.Process.Kill()
+		pm.mu.Unlock()
+	}(pm)
+
+	var (
+		b   bytes.Buffer
+		err error
+		res *Result
+	)
+
+	pm.cmd.Stdout = &b
+	pm.cmd.Stderr = &b
+
+	err = pm.cmd.Start()
+	if err != nil {
+		pm.mu.Unlock()
+		return &Result{"", err}
+	}
+
 	pm.mu.Unlock()
 
-	ret := make(chan *Result, 1)
-	done := make(chan *Result, 1)
+	err = pm.cmd.Wait()
+	output := string(b.Bytes()[:])
 
-	go func(done chan *Result, pm *ProcessManager) {
-		pm.mu.Lock()
-		output, err := pm.cmd.CombinedOutput()
-		pm.mu.Unlock()
-		s := string(output[:])
+	res = &Result{output, err}
 
-		res := &Result{s, err}
-		done <- res
+	pm.mu.Lock()
 
-		pm.mu.Lock()
+	pm.lastResult = res
+	pm.running = false
 
-		pm.lastResult = res
-		pm.running = false
+	pm.mu.Unlock()
 
-		pm.mu.Unlock()
-	}(done, pm)
-
-	go func(ret chan *Result, done chan *Result, pm *ProcessManager) {
-		select {
-		case res := <-done:
-			ret <- res
-		case <-pm.kill:
-			pm.mu.RLock()
-			pm.cmd.Process.Release()
-			pm.cmd.Process.Kill()
-			pm.mu.RUnlock()
-			res := <-done
-			ret <- res
-		}
-	}(ret, done, pm)
-
-	return ret
+	pm.processDone <- res
+	return res
 }
 
-// WaitForCommand will wait on the processDone channel, which if fullfilled when a command has finished executing. A
-// Result struct will be returned.
-func (pm *ProcessManager) WaitForCommand() *Result {
+// Wait will wait on the processDone channel, which if fulfilled when a command has finished
+// executing. A Result struct will be returned.
+func (pm *ProcessManager) Wait() chan *Result {
 	pm.mu.RLock()
+	defer pm.mu.RUnlock()
+
 	if !pm.running {
 		return nil
 	}
-	pm.mu.RUnlock()
-	return <-pm.processDone
+
+	return pm.processDone
 }
 
 // IsRunning returns a bool indicating whether a command is running or not.
 func (pm *ProcessManager) IsRunning() bool {
 	pm.mu.RLock()
 	defer pm.mu.RUnlock()
+
 	return pm.running
 }
 
@@ -111,37 +135,41 @@ func (pm *ProcessManager) IsRunning() bool {
 func (pm *ProcessManager) LastResult() *Result {
 	pm.mu.RLock()
 	defer pm.mu.RUnlock()
+
 	return pm.lastResult
 }
 
-// Recompile will attempt to compile any source code of a module if needed. A result struct will be returned to the
-// caller for inspection To check if there was an error in compilation).
+// Recompile will attempt to compile any source code of a module if needed. A result struct will be
+// returned to the caller for inspection To check if there was an error in compilation.
 func (pm *ProcessManager) Recompile() *Result {
 	var (
 		res *Result
-		cmd chan *Result
 	)
 
 	switch pm.Type {
 	case "go":
-		cmd = pm.runCommand("go", "install", pm.Path+"/"+pm.Name)
+		res = pm.runCommand("go", "install", pm.Path+"/"+pm.Name)
 	default:
 		return nil
 	}
 
-	res = <-cmd
 	return res
 }
 
-// Start will run a command via runCommand and return it's channel for the caller.
-func (pm *ProcessManager) Start() chan *Result {
+// Start will run a module process and pass a given port to it via command line arguments. A result
+// struct will be returned when module process has exited.
+func (pm *ProcessManager) Start(port string) *Result {
 	switch pm.Type {
 	case "js":
-		return pm.runCommand("node", pm.Path+"/"+pm.Name)
+		return pm.runCommand("node", pm.Path+"/"+pm.Name, port)
 	case "go":
-		return pm.runCommand(pm.Name)
+		return pm.runCommand(pm.Name, port)
 	case "py":
-		return pm.runCommand("python", pm.Path+"/"+pm.Name)
+		var python = "python"
+		if runtime.GOOS != "windows" {
+			python = "python3"
+		}
+		return pm.runCommand(python, pm.Path+"/"+pm.Name, port)
 	default:
 		// Keep in mind that the bot will make it virtually impossible to reach here
 		// But you know how the story goes...
@@ -149,7 +177,7 @@ func (pm *ProcessManager) Start() chan *Result {
 	}
 }
 
-// Kill will fulfill the kill chan, and any running command will be terminated.
+// Kill will fulfill the kill chan, and any running module process will be terminated.
 func (pm *ProcessManager) Kill() {
 	pm.kill <- true
 }

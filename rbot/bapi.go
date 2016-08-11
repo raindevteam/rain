@@ -1,3 +1,20 @@
+// Copyright (C) 2015  Rodolfo Castillo-Valladares & Contributors
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU Affero General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU Affero General Public License for more details.
+//
+// You should have received a copy of the GNU Affero General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+//
+// Send any inquiries you may have about this program to: rcvallada@gmail.com
+
 package rbot
 
 import (
@@ -10,7 +27,7 @@ import (
 	"github.com/raindevteam/rain/rlog"
 )
 
-// BotAPI is the exposed api served via the bot's master consumer connection
+// BotAPI is the api served via the bot's master RPC connection.
 type BotAPI struct {
 	bot *Bot
 }
@@ -21,24 +38,26 @@ type Ticket struct {
 	ModuleName string
 }
 
-// A CommandRequest is used to register commands via the handler.
+// A CommandRequest is used to register commands with the handler.
 type CommandRequest struct {
 	CommandName string
 	ModuleName  string
 }
 
-// A TriggerRequest is used to register triggers via the handler.
+// A TriggerRequest is used to register triggers with the handler.
 type TriggerRequest struct {
 	Name  ModuleName
 	Event Event
 }
 
+// JoinRequest holds information for joining a channel.
 type JoinRequest struct {
+	Caller   string
 	Channel  string
 	Password string
 }
 
-// Send transmits a message over irc as a PRIVMSG
+// Send transmits a message over irc as a PRIVMSG.
 func (b BotAPI) Send(raw string, result *string) error {
 	b.bot.Send(irc.PRIVMSG, raw)
 	return nil
@@ -55,7 +74,7 @@ func (b BotAPI) RegisterCommand(cr CommandRequest, result *string) error {
 
 // RegisterTrigger will register a trigger from a module with the bot handler. If this the first
 // trigger for its corresponding event, the bot will add a new listener that handles trigger firing
-// for this event.
+// for said event.
 func (b BotAPI) RegisterTrigger(tr TriggerRequest, result *string) error {
 	listeners := b.bot.GetListeners(string(tr.Event))
 	if len(listeners) == 0 {
@@ -67,10 +86,16 @@ func (b BotAPI) RegisterTrigger(tr TriggerRequest, result *string) error {
 	return nil
 }
 
+// JoinChannel takes a JoinRequest. It will add the channel to join to the ToJoinChs map so that
+// when the bot receives a JOIN reply from the IRC server, it can verify whether it joined a
+// channel.
 func (b BotAPI) JoinChannel(jr JoinRequest, result *string) error {
+	b.bot.ToJoinChs[strings.ToLower(jr.Channel)] = jr.Caller
+
 	if jr.Password != "" {
 		b.bot.Send(irc.JOIN, jr.Channel, jr.Password)
 	} else {
+		rlog.Info("BAPI", "Joining "+jr.Channel)
 		b.bot.Send(irc.JOIN, jr.Channel)
 	}
 
@@ -105,10 +130,11 @@ func (b BotAPI) GetTopic(channel string, result *string) error {
 // for event dispatching and module management.
 func (b BotAPI) Register(t Ticket, result *string) error {
 	rlog.Debug("Bot", "Starting registration for "+t.ModuleName+" [Module Client]")
+
 	client, err := RpcCodecClientWithPort(t.Port)
-	rlog.Debug("Bot", "Client created")
 	if err != nil {
 		rlog.Error("Bot", "Could not establish an RPC client: "+err.Error())
+		return err
 	}
 
 	module := rpc.NewClientWithCodec(client)
@@ -119,6 +145,7 @@ func (b BotAPI) Register(t Ticket, result *string) error {
 
 	b.bot.Handler.AddModule(ModuleName(strings.ToLower(t.ModuleName)), module)
 	b.bot.Modules[strings.ToLower(t.ModuleName)].Registered = true
+
 	rlog.Debug("Bot", "Registered "+t.ModuleName+" on port "+t.Port)
 	return nil
 }

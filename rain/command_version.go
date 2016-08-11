@@ -15,28 +15,22 @@
 //
 // Send any inquiries you may have about this program to: rcvallada@gmail.com
 
-package main
+package rain
 
 import (
-	"os"
+	"fmt"
 
-	"github.com/raindevteam/gorml"
-	"gopkg.in/sorcix/irc.v1"
+	"github.com/urfave/cli"
 )
 
-type GoMod struct{ *module.Module }
-
-func (m *GoMod) Greet(msg *irc.Message, args []string) {
-	m.Say(msg.Params[0], "Hello there!")
+func ver(c *cli.Context) error {
+	fmt.Println(Version())
+	return nil
 }
 
-func main() {
-	m := &GoMod{module.NewModule("GoMod", "Your module's short description")}
-
-	m.AddCommand("greet", &module.Command{
-		Help: "It greets you!",
-		Fun:  m.Greet,
-	})
-
-	m.Register(os.Args)
+var CommandVersion = cli.Command{
+	Name:    "version",
+	Aliases: []string{"v"},
+	Usage:   "Shows ONLY the version, as opposed to -(-v)ersion",
+	Action:  ver,
 }

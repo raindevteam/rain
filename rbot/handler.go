@@ -1,3 +1,20 @@
+// Copyright (C) 2015  Rodolfo Castillo-Valladares & Contributors
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU Affero General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU Affero General Public License for more details.
+//
+// You should have received a copy of the GNU Affero General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+//
+// Send any inquiries you may have about this program to: rcvallada@gmail.com
+
 package rbot
 
 import (
@@ -10,6 +27,10 @@ import (
 	"github.com/raindevteam/rain/rlog"
 )
 
+// The Handler is used to manage RPC clients and their respective commands and listeners. It will
+// invoke appropriate RPC calls when needed. It will also in the future handle pings, inbound and
+// outbound, to/from modules. It also manages internal commands and listeners. A callback function
+// should be registered with the handler so that the bot will no when RPC clients are removed.
 type Handler struct {
 	// Listeners for modules
 	Commands map[CommandName]ModuleName
@@ -26,6 +47,7 @@ type Handler struct {
 	mu             sync.RWMutex
 }
 
+// NewHandler creates a new Handler.
 func NewHandler() *Handler {
 	handler := &Handler{
 		Commands: make(map[CommandName]ModuleName),
@@ -47,6 +69,8 @@ func (h *Handler) AddModule(name ModuleName, module *rpc.Client) {
 	h.Modules[name] = module
 }
 
+// AddRemoveCallback will register a callback function, which is called when a module has been
+// removed. The module's name is passed as a parameter.
 func (h *Handler) AddRemoveCallback(callback func(ModuleName)) {
 	h.removeCallback = callback
 }
@@ -113,7 +137,7 @@ func (h *Handler) Invoke(msg *irc.Message, cmd CommandName, args []string) {
 	} else {
 		mName, ok := h.Commands[CommandName(strings.ToLower(string(cmd)))]
 		if !ok {
-			rlog.Debug("Handler", string(cmd)+" [Command Listener] does not exist")
+			h.mu.RUnlock()
 			return
 		}
 
@@ -131,6 +155,7 @@ func (h *Handler) InvokeInternal(msg *irc.Message, cmd CommandName, args []strin
 	listener.Fun(msg, args)
 }
 
+// Fire calls all modules that have registered an event
 func (h *Handler) Fire(msg *irc.Message, e Event) {
 	h.FireInternal(msg, e)
 
@@ -146,6 +171,7 @@ func (h *Handler) Fire(msg *irc.Message, e Event) {
 	}
 }
 
+// FireInternal will fire all internal listeners of the bot.
 func (h *Handler) FireInternal(msg *irc.Message, e Event) {
 	for _, trigger := range h.InternalTriggers[e] {
 		go func(msg *irc.Message, trigger *Trigger) {
@@ -156,6 +182,8 @@ func (h *Handler) FireInternal(msg *irc.Message, e Event) {
 	}
 }
 
+// RemoveModule will first remove all commands and listeners of a module from the handler. It will
+// then remove its RPC client.
 func (h *Handler) RemoveModule(name ModuleName) {
 	h.mu.Lock()
 	defer h.mu.Unlock()
@@ -190,14 +218,15 @@ func (h *Handler) RemoveModule(name ModuleName) {
 
 func (h *Handler) removeUnstableClient(name ModuleName, err error) {
 	// RPC call failed, module deemed unstable and is therefore removed
+
 	// Signal a clean up to module
 	rlog.Warn("Handler", "Removing "+string(name)+" [Module Client] due to RPC error: "+
 		err.Error())
 
 	err = h.SignalCleanup(name)
 	if err != nil {
-		rlog.Warn("Handler", string(name)+" [Module Client] did not successfully clean up,"+
-			" it will still be removed.")
+		rlog.Warn("Handler", string(name)+
+			" [Module Client] did not successfully clean up, it will still be removed.")
 	}
 
 	h.RemoveModule(name)

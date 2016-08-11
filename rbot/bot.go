@@ -1,11 +1,33 @@
+// Copyright (C) 2015  Rodolfo Castillo-Valladares & Contributors
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU Affero General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU Affero General Public License for more details.
+//
+// You should have received a copy of the GNU Affero General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+//
+// Send any inquiries you may have about this program to: rcvallada@gmail.com
+
 package rbot
 
 import (
 	"errors"
 	"net"
 	"net/rpc"
+	"os"
+	"strconv"
 	"strings"
 	"sync"
+	"time"
+
+	"golang.org/x/time/rate"
 
 	"github.com/RyanPrintup/nimbus"
 	"github.com/raindevteam/rain/parser"
@@ -14,7 +36,16 @@ import (
 	"gopkg.in/sorcix/irc.v1"
 )
 
-var DefaultModulesRoute = "modules/"
+const (
+	// DefaultModulesRoute tells the bot where to look for modules
+	DefaultModulesRoute = "modules/"
+
+	// Inlim is used for the bot's limiter function to tell it to use the inbound limiter
+	Inlim = "Inbound Limiter"
+
+	// Outlim has the same purpose as Inlim, except it denotes usage of the outbound limiter
+	Outlim = "Outbound Limiter"
+)
 
 //////////////////////////////          Bot Internals         //////////////////////////////////////
 
@@ -39,8 +70,8 @@ func NewChannel(name string) *Channel {
 	return channel
 }
 
-// The Module struct serves as a container for a module's commander. The struct holds its
-// module's corresponding name to make it easier for reference.
+// The Module struct holds in place all information pertaining to a module. It also contains its
+// own process manager.
 type Module struct {
 	Name       string
 	Route      string
@@ -49,7 +80,7 @@ type Module struct {
 	Registered bool
 }
 
-// NewModule returns a module struct with an assigned commander appropriated to the module's type.
+// NewModule returns a module struct with its given information.
 func NewModule(name string, path string, opts map[string]bool, cmdtype string) *Module {
 	module := &Module{
 		Name:       name,
@@ -71,36 +102,42 @@ func NewModule(name string, path string, opts map[string]bool, cmdtype string) *
 // currently undermine this idea which include a generalized IRC message struct and IRC config.
 type Client interface {
 	GetNick() string
+	SetNick(nick string)
 	GetChannels() []string
 	Connect() error
 	Listen()
 	Quit() chan error
 	Send(raw ...string)
-	Say(channel string, text string)
+	Say(to string, text string)
 	AddListener(event string, l nimbus.Listener)
 	GetListeners(event string) []nimbus.Listener
 	Emit(event string, msg *irc.Message)
 }
 
-// The Bot struct holds the internal Client, used to register listeners for IRC. ModuleNames
-// is used to look up which plugins to start and are eventually passed to the handler. The Handler
-// provides management of commands, listeners and triggers. Since listeners act independently of
-// each other, a mutex is used to keep bot writes (such as channel updates) synchronised. The bot
-// struct can be realized as a core to glue all modular components together, whilst keeping them
-// separate in operation.
+// The Bot struct holds all core information for handling IRC. It has the internal IRC client used
+// to make and handle an IRC connection. It holds information about modules, which is used to start
+// module processes. It has a channels array to hold information about IRC channels if a user wishes
+// to do so. The ToJoinChs map is used to validate whether the bot successfully managed to join
+// a channel. It also has a parser and handler for commands and listeners. The bot struct also
+// includes two limiters, one inbound for commands and another outbound for IRC sends.
 type Bot struct {
 	Client
-	Version  string
-	Modules  map[string]*Module
-	Channels map[string]*Channel
-	Parser   *parser.Parser
-	Handler  *Handler
-	Config   *Config
-	Mu       sync.Mutex
+	Version    string
+	Modules    map[string]*Module
+	Channels   map[string]*Channel
+	ToJoinChs  map[string]string
+	Parser     *parser.Parser
+	Handler    *Handler
+	Inlim      *rate.Limiter
+	Outlim     *rate.Limiter
+	Config     *Config
+	ListenPort string
+	quit       chan string
+	Mu         sync.Mutex
 }
 
 // NewBot initializes a number of things for proper operation. It will set appropriate flags
-// for rlog. It then creates a Nimbus config to pass to the internal nimbus IRC client. This
+// for rlog and then creates a Nimbus config to pass to the internal nimbus IRC client. This
 // client is embedded into an instance of Bot and returned. It has its fields initialized.
 func NewBot(version string, rconf *Config) *Bot {
 	rlog.SetFlags(rlog.Linfo | rlog.Lwarn | rlog.Lerror | rlog.Ldebug)
@@ -109,27 +146,91 @@ func NewBot(version string, rconf *Config) *Bot {
 	nconf := GetNimbusConfig(rconf)
 
 	bot := &Bot{
-		/* Client   */ nimbus.NewClient(rconf.Server.Host, rconf.User.Nick, *nconf),
-		/* Version  */ version,
-		/* Modules  */ make(map[string]*Module),
-		/* Channels */ make(map[string]*Channel),
-		/* Parser   */ parser.NewParser(rconf.Command.Prefix),
-		/* Handler  */ NewHandler(),
-		/* Config   */ rconf,
-		/* Mutex    */ sync.Mutex{},
+		/* Client     */ nimbus.NewClient(rconf.Server.Host, rconf.Server.Port,
+			rconf.User.Nick, *nconf),
+		/* Version    */ version,
+		/* Modules    */ make(map[string]*Module),
+		/* Channels   */ make(map[string]*Channel),
+		/* ToJoinChs  */ make(map[string]string),
+		/* Parser     */ parser.NewParser(rconf.Command.Prefix),
+		/* Handler    */ NewHandler(),
+		/* Inlim      */ rate.NewLimiter(3/5, 3),
+		/* Outlim     */ rate.NewLimiter(rate.Every(time.Millisecond*750), 1),
+		/* Config     */ rconf,
+		/* ListenPort */ "0",
+		/* Quit Chan  */ make(chan string),
+		/* Mutex      */ sync.Mutex{},
 	}
 
 	return bot
 }
 
+// Quit returns the bot's quit chan. Differs from the Client's quit in that the bot's quit is used
+// for non-error quits.
+func (b *Bot) Quit() chan string {
+	return b.quit
+}
+
+// WaitForQuit waits on either the client's quit, which returns an error, or the bot's quit, which
+// returns a string as a reason. If an error occurs, reason will be the error's string.
+func (b *Bot) WaitForQuit() (string, error) {
+	select {
+	case err := <-b.Client.Quit():
+		return err.Error(), err
+	case reason := <-b.quit:
+		return reason, nil
+	}
+}
+
+// Limiter will rate limit inbound or outbound actions. If lim is Inlim, it will rate limit using
+// the inbound rate limiter. If lim is Outlim, it will limit using the outbound limiter. A chan is
+// is returned to the caller. It will be fulfilled when the rate limiter is able to act or when the
+// bot has quit. Therefore a caller should check the value, as a false indicates that the bot's
+// connection has been closed and no more inbound or outbound actions should be acted upon.
+func (b *Bot) Limiter(lim string) chan bool {
+	ch := make(chan bool, 1)
+
+	go func(ch chan bool) {
+		var r *rate.Reservation
+
+		if lim == Inlim {
+			r = b.Inlim.Reserve()
+		} else if lim == Outlim {
+			r = b.Outlim.Reserve()
+		} else {
+			ch <- false
+		}
+
+		if !r.OK() {
+			rlog.Warn("Bot", lim+" not able to act")
+		}
+
+		// If in case the delay wins over the quit, the handler will have appropriated measures.
+		select {
+		case <-time.After(r.Delay()):
+			ch <- true
+		case <-b.quit:
+			ch <- false
+		case <-b.Client.Quit():
+			ch <- false
+		}
+	}(ch)
+
+	return ch
+}
+
 // RainVersion returns the library version
 func (b *Bot) RainVersion() string {
-	return rain.Version
+	return rain.Version()
 }
 
 // DefaultConnect will connect to IRC and start listening. It will not log anything.
 func (b *Bot) DefaultConnect() {
-	b.Connect()
+	err := b.Connect()
+	if err != nil {
+		rlog.Errorf("Bot", "Could not connect to irc server: %s\n ----\n The bot will now exit\n")
+		os.Exit(1)
+	}
 	b.Listen()
 }
 
@@ -147,6 +248,21 @@ func (b *Bot) DefaultConnectWithMsg(pre string, post string) {
 	}
 
 	b.Listen()
+}
+
+// AddCommand let's a user insert an internal command to the handler
+func (b *Bot) AddCommand(name string, command *Command) {
+	b.Handler.AddInternalCommand(CommandName(name), command)
+}
+
+func (b *Bot) Send(raw ...string) {
+	if <-b.Limiter(Outlim) {
+		b.Client.Send(raw...)
+	}
+}
+
+func (b *Bot) Say(to string, text string) {
+	b.Send(irc.PRIVMSG, to, ":"+text)
 }
 
 /////////////////////////          Module Specific Methods         /////////////////////////////////
@@ -188,26 +304,30 @@ func (b *Bot) loadModules() {
 			continue
 		}
 
-		cmd := module.PM.Start()
-
-		go func(name string, cmd chan *Result) {
-			result := <-cmd
+		go func(name string, pm *ProcessManager) {
+			result := pm.Start(b.ListenPort)
 			b.moduleExited(name, result)
-		}(name, cmd)
+		}(name, module.PM)
 
 		rlog.Info("Bot", "Module "+name+" loaded")
 	}
 }
 
+// moduleExited is called when a module process has exited. If an error was returned when exiting
+// it will be logged. The output (Stdout and Stderr) is also logged. If the module exists in the
+// handler it will be removed. The module is also unregistered from the bot.
 func (b *Bot) moduleExited(name string, result *Result) {
 	b.Mu.Lock()
 	defer b.Mu.Unlock()
 
 	if result.Err != nil {
-		rlog.Error("Bot", name+" [Module Process] has exited with: + "+
-			result.Err.Error()+"\n ----\n"+result.Output+"\n ----\n")
+		rlog.Error("Bot", name+" [Module Process] has exited with: "+result.Err.Error())
 	} else {
 		rlog.Info("Bot", "Module "+name+" [Module Process] has exited")
+	}
+
+	if result.Output != "" {
+		rlog.Info(name, "Process output:"+"\n ----\n"+result.Output+"\n ----\n")
 	}
 
 	if b.Handler.ModuleExists(name) {
@@ -243,13 +363,13 @@ func (b *Bot) ModuleReload(name string) (err error) {
 		}
 
 		module.PM.Kill()
-		module.PM.WaitForCommand()
-		module.Registered = false
+		<-module.PM.Wait()
 	}
 
 	res := module.PM.Recompile()
-	if res.Err != nil {
-		rlog.Errorf("Bot", "Could not recompile module %s\n ----\n%s\n ----\n\n", module.Name, res.Output)
+	if res != nil && res.Err != nil {
+		rlog.Errorf("Bot", "Could not recompile module %s\n ----\n%s\n ----\n\n",
+			module.Name, res.Output)
 		return errors.New("Could not recompile module")
 	}
 
@@ -257,6 +377,9 @@ func (b *Bot) ModuleReload(name string) (err error) {
 	return nil
 }
 
+// ModuleLoad will start a module process by calling moduleStart. It will not recompile,
+// ModuleReload should be used for that instead. If the module is not found, an error is returned
+// instead.
 func (b *Bot) ModuleLoad(name string) error {
 	if _, ok := b.Modules[strings.ToLower(name)]; !ok {
 		return errors.New("Module is unknown to the bot")
@@ -266,6 +389,8 @@ func (b *Bot) ModuleLoad(name string) error {
 	return nil
 }
 
+// ModuleInfo gathers all relevant information about a module and formats into a returned string. If
+// the module is not found within the bot and error is returned.
 func (b *Bot) ModuleInfo(name string) (string, error) {
 	module, ok := b.Modules[strings.ToLower(name)]
 
@@ -284,26 +409,23 @@ func (b *Bot) ModuleInfo(name string) (string, error) {
 	return info + " | " + module.PM.Type, nil
 }
 
-// moduleStart starts a plugin as a provider service. This allows
-// the bot to dispatch events outbound to the module. The module
-// can then communicate back via the master rpc server.
+// moduleStart will start a module's process manager. It will then run a goroutine to check for when
+// module process exits.
 func (b *Bot) moduleStart(name string) {
 	pm := b.Modules[name].PM
 
 	if !pm.IsRunning() {
-		cmd := pm.Start()
-
-		go func(name string, cmd chan *Result) {
-			result := <-cmd
+		go func(name string, pm *ProcessManager) {
+			result := pm.Start(b.ListenPort)
 			b.moduleExited(name, result)
-		}(name, cmd)
+		}(name, pm)
 	}
 }
 
 ///////////////////////////          IRC Specific Methods         //////////////////////////////////
 
 // RemoveUser will delete a user entry from the given channel. If the user is the bot itself, the
-// bot will isntead remove the channel from the bot's channel list.
+// bot will instead remove the channel from the bot's channel list.
 func (b *Bot) RemoveUser(nick string, channel string) {
 	if nick == b.GetNick() {
 		delete(b.Channels, strings.ToLower(channel))
@@ -320,7 +442,9 @@ func (b *Bot) RemoveUser(nick string, channel string) {
 // Conventionally, it uses a json codec to serve.
 func (b *Bot) startRPCServer() {
 	rpc.RegisterName("Master", BotAPI{b})
-	master, err := net.Listen("tcp", ":5555")
+	master, err := net.Listen("tcp", ":0")
+	b.ListenPort = strconv.Itoa(master.Addr().(*net.TCPAddr).Port)
+	rlog.Info("Bot", "Listening on port: "+b.ListenPort)
 
 	if err != nil {
 		rlog.Error("Bot", err.Error())

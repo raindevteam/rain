@@ -48,15 +48,19 @@ func main() {
 		bot = cbot.NewCLIBot(rconf)
 	} else {
 		preConnectMsg, postConnectMsg = "Connecting... ", "Done"
-		bot = rbot.NewBot(rain.Version, rconf)
+		bot = rbot.NewBot(rain.Version(), rconf)
 	}
 
 	setup.Default(bot)
 	bot.EnableModules()
 	bot.DefaultConnectWithMsg(preConnectMsg, postConnectMsg)
 
-	result := <-bot.Quit()
-	if result != nil {
-		fmt.Println(result.Error())
+	reason, err := bot.WaitForQuit()
+
+	if err != nil {
+		fmt.Printf("Quit Error: %s\n", reason)
+		os.Exit(1)
 	}
+
+	fmt.Printf("Quit: %s\n", reason)
 }

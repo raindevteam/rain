@@ -1,8 +1,10 @@
 [![Build Status](https://travis-ci.org/raindevteam/rain.svg?branch=master)](https://travis-ci.org/raindevteam/rain)
-[![GitHub version](https://badge.fury.io/gh/raindevteam%2Frain.svg)](https://badge.fury.io/gh/raindevteam%2Frain)
+[![Build status](https://ci.appveyor.com/api/projects/status/7rpa57pck1m3i2a1?svg=true)](https://ci.appveyor.com/project/wolfchase/rain)
 [![Go Report Card](https://goreportcard.com/badge/github.com/raindevteam/rain)](https://goreportcard.com/report/github.com/raindevteam/rain)
 [![codebeat badge](https://codebeat.co/badges/1e03860e-db6d-4751-81d1-1ed3e414537e)](https://codebeat.co/projects/github-com-raindevteam-rain)
 [![GoDoc](https://godoc.org/github.com/raindevteam/rain?status.svg)](https://godoc.org/github.com/raindevteam/rain)
+[![GitHub license](https://img.shields.io/badge/license-AGPL-blue.svg)](https://raw.githubusercontent.com/raindevteam/rain/master/LICENSE)
+
 
 ----------------------------------------------------------------------------------------------------
 <img align="right" src="https://avatars1.githubusercontent.com/u/20262521?v=3&s=200">
@@ -117,22 +119,23 @@ Setups<a name="setups"></a>
 
 Setups provide prepackaged listeners and commands to help in bot development of common IRC
 tasks. These are bound to change rapidly within the next few version updates, we also hope
-to add more starting with 0.6.0.
+to add more soon.
 
 #### Default
 
 | Commands | Description                                                      |
 |----------|------------------------------------------------------------------|
-| m        | Provides module management tools, such as reload, list, and more |
+| m        | Provides module management tools, such as reload, info, and more |
 
-| Listeners                       | Event        |
-|---------------------------------|--------------|
-| Add/Update Topic                | RPL_TOPIC    |
-| Update Users on Channel Connect | RPL_NAMREPLY |
-| Update User/Self on Join        | JOIN         |
-| Update User/Self on Kick        | KICK         |
-| Update User/Self on Kill        | KILL         |
-| Update User/Self on Part        | PART         |
-| Update User/Self on Quit        | QUIT         |
-| Update User/Self on Nick        | NICK         |
+| Listeners                       | Event             |
+|---------------------------------|-------------------|
+| Add/Update Topic                | RPL_TOPIC         |
+| Update Users on Channel Connect | RPL_NAMREPLY      |
+| Update User/Self on Join        | JOIN              |
+| Update User/Self on Kick        | KICK              |
+| Update User/Self on Kill        | KILL              |
+| Update User/Self on Part        | PART              |
+| Update User/Self on Quit        | QUIT              |
+| Update User/Self on Nick        | NICK              |
+| Update bot nick when in use     | ERR_NICKNAMEINUSE |
 

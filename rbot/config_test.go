@@ -1,3 +1,20 @@
+// Copyright (C) 2015  Rodolfo Castillo-Valladares & Contributors
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU Affero General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU Affero General Public License for more details.
+//
+// You should have received a copy of the GNU Affero General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+//
+// Send any inquiries you may have about this program to: rcvallada@gmail.com
+
 package rbot
 
 /*
@@ -16,12 +33,12 @@ import (
 )
 
 var nconfig = &nimbus.Config{
-	Port:     "6667",
 	Channels: []string{"#Your", "#Channels"},
 	RealName: "Wolfstein Jr. II",
 	UserName: "wolfstein",
 	Password: "",
 	Modes:    "+B",
+	Debug:    2,
 }
 
 var modules = map[string]map[string]string{
@@ -62,6 +79,7 @@ func checkUserInfo(config *Config) (check bool) {
 	check = config.User.RealName == "Wolfstein Jr. II" && check
 	check = config.User.UserName == "wolfstein" && check
 	check = config.User.Modes == "+B" && check
+	check = config.User.NimbusDebug == 2 && check
 	return
 }
 
@@ -106,6 +124,7 @@ func TestGetNimbusConfig(t *testing.T) {
 	config := GetNimbusConfig(rconfig)
 	checks := reflect.DeepEqual(config, nconfig)
 	if checks != true {
-		t.Error("Could create a proper nimbus config")
+		fmt.Println(config)
+		t.Error("Could not create a proper nimbus config")
 	}
 }

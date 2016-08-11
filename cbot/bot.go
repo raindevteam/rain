@@ -1,14 +1,29 @@
+// Copyright (C) 2015  Rodolfo Castillo-Valladares & Contributors
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU Affero General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU Affero General Public License for more details.
+//
+// You should have received a copy of the GNU Affero General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+//
+// Send any inquiries you may have about this program to: rcvallada@gmail.com
+
 package cbot
 
 import (
 	"strings"
-	"sync"
 
 	"gopkg.in/sorcix/irc.v1"
 
 	"github.com/RyanPrintup/nimbus"
 	"github.com/chzyer/readline"
-	"github.com/raindevteam/rain/parser"
 	"github.com/raindevteam/rain/rbot"
 	"github.com/raindevteam/rain/rlog"
 )
@@ -32,6 +47,10 @@ type CliClient struct {
 
 func (c CliClient) GetNick() string {
 	return c.config.User.Nick
+}
+
+func (c CliClient) SetNick(nick string) {
+	c.config.User.Nick = nick
 }
 
 func (c CliClient) GetChannels() []string {
@@ -72,16 +91,8 @@ func NewCLIBot(conf *rbot.Config) *rbot.Bot {
 		make(chan error),
 	}
 
-	bot := &rbot.Bot{
-		/* Client      */ cli,
-		/* Version     */ "CLI",
-		/* Modules     */ make(map[string]*rbot.Module),
-		/* Channels    */ make(map[string]*rbot.Channel),
-		/* Parser      */ parser.NewParser(conf.Command.Prefix),
-		/* Handler     */ rbot.NewHandler(),
-		/* Config      */ conf,
-		/* Mutex       */ sync.Mutex{},
-	}
+	bot := rbot.NewBot("CLI", conf)
+	bot.Client = cli // Oh what? I can do this?
 
 	return bot
 }
