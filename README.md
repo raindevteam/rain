@@ -120,7 +120,7 @@ Setups<a name="setups"></a>
 
 Setups provide prepackaged listeners and commands to help in bot development of common IRC
 tasks. These are bound to change rapidly within the next few version updates, we also hope
-to add more starting with 0.6.0.
+to add more soon.
 
 #### Default
 

@@ -18,6 +18,7 @@
 package rain
 
 import (
+	"errors"
 	"fmt"
 	"os"
 	"os/exec"
@@ -41,7 +42,15 @@ func doInstall(install string, name string) error {
 		return err
 	}
 
-	path := os.Getenv("GOPATH") + "/bin/" + name
+	var path string
+	if gopath := os.Getenv("GOPATH"); gopath != "" {
+		path = gopath + "/bin/" + name
+	} else if goroot := os.Getenv("GOROOT"); goroot != "" {
+		path = goroot + "/bin/" + name
+	} else {
+		fmt.Println(" No GOROOT or GOPATH set, aborting install")
+		return errors.New("No GOROOT or GOPATH set")
+	}
 
 	if runtime.GOOS == "windows" {
 		path = path + ".exe"
