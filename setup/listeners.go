@@ -199,7 +199,7 @@ func (l *Listeners) ErrNicknameInUse(msg *irc.Message) {
 	l.bot.Mu.Lock()
 	defer l.bot.Mu.Unlock()
 
-	nick := msg.Params[0]
+	nick := msg.Params[1]
 	lastChar := nick[len(nick)-1]
 
 	num, err := strconv.Atoi(string(lastChar))
