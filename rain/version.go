@@ -38,9 +38,26 @@ type version struct {
 }
 
 // v is the current version of Rain.
-var v = version{Major: "0", Minor: "7", Patch: "0", PreRelease: "alpha", Build: "4", MetaData: "LifeBloom"}
+var v = version{Major: "0", Minor: "7", Patch: "0", PreRelease: "", Build: "", MetaData: "LifeBloom"}
 
 // Version returns the current version of Rain.
 func Version() string {
-	return fmt.Sprintf("%s.%s.%s-%s.%s+%s", v.Major, v.Minor, v.Patch, v.PreRelease, v.Build, v.MetaData)
+	fmtstr := "%s.%s.%s"
+
+	if v.PreRelease != "" {
+		fmtstr = fmtstr + "-"
+	}
+	fmtstr = fmtstr + "%s"
+
+	if v.Build != "" {
+		fmtstr = fmtstr + "."
+	}
+	fmtstr = fmtstr + "%s"
+
+	if v.MetaData != "" {
+		fmtstr = fmtstr + "+"
+	}
+	fmtstr = fmtstr + "%s"
+
+	return fmt.Sprintf(fmtstr, v.Major, v.Minor, v.Patch, v.PreRelease, v.Build, v.MetaData)
 }
