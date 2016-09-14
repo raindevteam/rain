@@ -199,6 +199,7 @@ func (b *Bot) Limiter(lim string) chan bool {
 			r = b.Outlim.Reserve()
 		} else {
 			ch <- false
+			return
 		}
 
 		if !r.OK() {

@@ -12,6 +12,7 @@
 
 package Thelpers
 
+/*
 import (
 	"strings"
 
@@ -34,7 +35,7 @@ func NewMockClient(config *rbot.Config, msgs []string) *MockClient {
 	return mc
 }
 
-/****                                        Getters                                           ****/
+/****                                        Getters                                           ****
 
 func (mc *MockClient) GetNick() string {
 	return mc.config.Nick
@@ -44,9 +45,9 @@ func (mc *MockClient) GetChannels() []string {
 	return mc.config.Channel
 }
 
-/**************************************************************************************************/
+/**************************************************************************************************
 
-/****                                          IRC                                             ****/
+/****                                          IRC                                             ****
 
 func (mc *MockClient) Connect() error {
 	return nil
@@ -79,9 +80,9 @@ func (mc *MockClient) handleMsg(msg *nimbus.Message) {
 	}
 }
 
-/**************************************************************************************************/
+/**************************************************************************************************
 
-/****                                        Events                                            ****/
+/****                                        Events                                            ****
 
 type Handle struct {
 	listener nimbus.Listener
@@ -109,4 +110,4 @@ func (mc *MockClient) Emit(event string, msg *nimbus.Message) {
 	}
 }
 
-/**************************************************************************************************/
+*/

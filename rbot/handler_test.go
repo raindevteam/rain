@@ -5,27 +5,13 @@
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU Affero General Public License for more details.
+//
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 // Send any inquiries you may have about this program to: rcvallada@gmail.com
-
-package Thelpers
-
-/*
-func NewMockBot(rcon *rbot.Config) *rbot.Bot {
-	bot := &rbot.Bot{
-		/* Client      * NewMockClient(rcon, []string{
-			"JOIN #snowybottest",
-			"JOIN #rainbot",
-		}),
-		/* Version     * "Alpha 0.4.0 (Monterey Jack)",
-		/* Modules     * make(map[string]*rbot.Module),
-		/* Channels    * make(map[string]*rbot.Channel),
-		/* Parser      * rbot.NewParser(rcon.CmdPrefix),
-		/* Handler     * rbot.NewHandler(),
-		/* Mutex       * sync.Mutex{},
-	}
-	return bot
-}
-*/
+package rbot

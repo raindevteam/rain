@@ -70,7 +70,7 @@ func (h *Handler) AddModule(name ModuleName, module *rpc.Client) {
 }
 
 // AddRemoveCallback will register a callback function, which is called when a module has been
-// removed. The module's name is passed as a parameter.
+// removed. The module's name is passed as a parameter to the callback function.
 func (h *Handler) AddRemoveCallback(callback func(ModuleName)) {
 	h.removeCallback = callback
 }
