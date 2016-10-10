@@ -19,10 +19,9 @@ package Thelpers
 
 import (
 	"errors"
+	"io"
 	"net"
 	"net/rpc"
-
-	"github.com/raindevteam/rain/rbot"
 )
 
 // An RPCHandler is used to help manage an RPC connection while testing.
@@ -34,16 +33,17 @@ type RPCHandler struct {
 }
 
 // NewRPCHandler returns an intialized RPCHandler.
-func (r *RPCHandler) NewRPCHandler() *RPCHandler {
+func NewRPCHandler() *RPCHandler {
 	rh := &RPCHandler{
 		registered: make(chan bool),
+		TestPort:   "23524", // Make this random in future tests
 	}
 
 	return rh
 }
 
-// TODO: Create separate function to handle erroring
-func (r *RPCHandler) CreateRPCServer() error {
+// CreateRPCServer creates a new RPC server and makes it listen within a goroutine loop.
+func (r *RPCHandler) CreateRPCServer(CodecServer func(io.ReadWriteCloser) rpc.ServerCodec) error {
 	srv := rpc.NewServer()
 	srv.RegisterName("TestMaster", TestAPI{r})
 
@@ -54,37 +54,43 @@ func (r *RPCHandler) CreateRPCServer() error {
 		return err
 	}
 
-	go func() {
+	go func(srv *rpc.Server, r *RPCHandler) {
 		for {
 			conn, err := r.RPCServer.Accept()
 			if err != nil {
 				break
 			}
-			r.conn = rbot.RpcCodecServer(conn)
+			r.conn = CodecServer(conn)
 			srv.ServeCodec(r.conn)
 		}
-	}()
+	}(srv, r)
 
 	return nil
 }
 
+// CloseRPCServer will close the RPCHandler's internal server.
 func (r *RPCHandler) CloseRPCServer() error {
 	err := r.RPCServer.Close()
 	return err
 }
 
+// A TestAPI is used as a test RPC API for testing.
 type TestAPI struct {
 	t *RPCHandler
 }
 
+// Send should be called as an RPC procedure to ensure the RPC server can successfully receive
+// messages.
 func (tapi TestAPI) Send(msg string, result *string) error {
 	if msg == "Got RPC?" {
-		tapi.t.GotRPC = true
 		return nil
 	}
 	return errors.New("Didn't receive right message")
 }
 
+// Register will call on the registered chan of an RPCHandler when a module has registered with
+// the test master RPC server.
 func (tapi TestAPI) Register(t interface{}, result *string) error {
+	tapi.t.registered <- true
 	return nil
 }
