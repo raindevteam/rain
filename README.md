@@ -5,6 +5,10 @@
 [![GoDoc](https://godoc.org/github.com/raindevteam/rain?status.svg)](https://godoc.org/github.com/raindevteam/rain)
 [![GitHub license](https://img.shields.io/badge/license-AGPL-blue.svg)](https://raw.githubusercontent.com/raindevteam/rain/master/LICENSE)
 
+### __Important!__
+
+__Rain's development is currently slowed due to personal college studies. However, a super secret
+project is under way to help with Rain's development!__
 
 ----------------------------------------------------------------------------------------------------
 <img align="right" src="https://avatars1.githubusercontent.com/u/20262521?v=3&s=200">
