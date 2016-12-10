@@ -17,6 +17,8 @@
 
 package rain
 
+import "fmt"
+
 func isIn(list []string, el string) bool {
 	for _, v := range list {
 		if v == el {
@@ -32,4 +34,8 @@ func listPrint(list []string) string {
 		str = str + "    " + v + "\n"
 	}
 	return str
+}
+
+func fmtCmdOutput(out []byte) string {
+	return fmt.Sprintf("----\n%s\n----\n", string(out[:]))
 }

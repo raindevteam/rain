@@ -45,11 +45,9 @@ func doInstall(install string, name string) error {
 	var path string
 	if gopath := os.Getenv("GOPATH"); gopath != "" {
 		path = gopath + "/bin/" + name
-	} else if goroot := os.Getenv("GOROOT"); goroot != "" {
-		path = goroot + "/bin/" + name
 	} else {
-		fmt.Println(" No GOROOT or GOPATH set, aborting install")
-		return errors.New("No GOROOT or GOPATH set")
+		fmt.Println("No GOPATH set, aborting install")
+		return errors.New("No GOPATH set")
 	}
 
 	if runtime.GOOS == "windows" {
@@ -59,7 +57,8 @@ func doInstall(install string, name string) error {
 	output, err := exec.Command("go", "build", "-o", path,
 		"github.com/raindevteam/rain/install/"+install).CombinedOutput()
 	if err != nil {
-		fmt.Printf(" Internal command error\n ----\n%s\n -----\n\n", string(output[:]))
+		fmt.Println("Internal command error")
+		fmt.Println(fmtCmdOutput(output))
 		return err
 	}
 

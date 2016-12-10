@@ -22,28 +22,35 @@ import (
 	"os/exec"
 )
 
+// AllDepends are all the dependencies needed to install any premade bot.
 var AllDepends = []string{
-	"github.com/RyanPrintup/Nimbus",
+	"github.com/RyanPrintup/nimbus",
 	"gopkg.in/readline.v1",
 	"gopkg.in/yaml.v2",
 	"golang.org/x/time/rate",
 }
 
+// CoreDepends are all the dependencies needed for for all premade bot.
 var CoreDepends = []string{
-	"github.com/RyanPrintup/Nimbus",
+	"github.com/RyanPrintup/nimbus",
 	"gopkg.in/yaml.v2",
 	"golang.org/x/time/rate",
 }
 
+// NeverfreeDepends are all the depends needed to install the premade Neverfree bot.
 var NeverfreeDepends = []string{
 	"gopkg.in/readline.v1",
 }
 
+// GetDepends will "go get" the dependencies specified as an array.
 func GetDepends(depends []string) error {
 	for _, dep := range depends {
+		fmt.Printf("get %s... ", dep)
 		output, err := exec.Command("go", "get", "-u", dep).CombinedOutput()
+		fmt.Println("done!")
 		if err != nil {
-			fmt.Printf(" Internal command error\n ----\n%s\n ----\n\n", string(output[:]))
+			fmt.Println("Internal command error")
+			fmt.Println(fmtCmdOutput(output))
 			return err
 		}
 	}
