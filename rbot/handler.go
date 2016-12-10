@@ -220,8 +220,7 @@ func (h *Handler) removeUnstableClient(name ModuleName, err error) {
 	// RPC call failed, module deemed unstable and is therefore removed
 
 	// Signal a clean up to module
-	rlog.Warn("Handler", "Removing "+string(name)+" [Module Client] due to RPC error: "+
-		err.Error())
+	rlog.Warn("Handler", "Removing "+string(name)+" [Module Client] due to RPC error: "+err.Error())
 
 	err = h.SignalCleanup(name)
 	if err != nil {
