@@ -24,16 +24,16 @@ import (
 )
 
 func deps(c *cli.Context) error {
-	fmt.Println(" Getting dependencies... ")
+	fmt.Println("Installing dependencies.")
 	err := GetDepends(AllDepends)
 	if err != nil {
-		fmt.Println(" An error has occurred, please review the above and report as an issue if you can")
 		return err
 	}
-	fmt.Println(" Dependencies installed!")
+	fmt.Println("Dependencies installed!")
 	return nil
 }
 
+// CommandDepends is a command that will install all dependencies needed for the subpackages.
 var CommandDepends = cli.Command{
 	Name:    "depends",
 	Aliases: []string{"d"},

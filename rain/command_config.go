@@ -24,60 +24,76 @@ import (
 	"github.com/urfave/cli"
 )
 
+// ExampleConfig is an example YAML configuration displaying all possible configuration options.
 var ExampleConfig = `# Rain config
-# 0.6.0-alpha.1
+# -----------
 
 # Server information
+# ------------------
 host : irc.examplehost.net
 port : 6667
 
 # Channel Information
+# -------------------
 # Channels listed here will be automatically joined upon server connect
 channels :
   - "#Your"
   - "#Channels"
 
 # User information
+# ----------------
+# nick is the only required field, the rest can be omitted and will default to the Nimbus default.
 nick     : MyBot
 realname : Wolfstein Jr. II
 username : wolfstein
 modes    : +B
 
 # Debug level for internal IRC client
+# -----------------------------------
 # 1 = Print received IRC Messages
 # 2 = Also print parsed values from IRC messages
 nimbus-debug: 2
 
 # Command Information
+# -------------------
 # The command prefix is used to denote commands from IRC users
 commandprefix : .
 
-# Modules
-# These are all optional. A '.' as a module path means its located in the default path. You may 
-# set a specific path if you wish. You may specify extra options for the module as a space separated
-# list by putting a ':' after its route. We currently only support a few options.
+# Modules (Optional)
+# ------------------
+# A '.' as a module path means its located in the default path. You can't use this for Go modules
+# however, as they may be installed in different places such as github.com or gopkg.in. You may 
+# set a specific path if you wish. You may also specify extra options for the module as a space 
+# separated list by putting a ':' after its route. We currently only support the noload option.
 modules :
   # JavaScript Modules
   js :
-    umbrella : modulesOverHere/js:npm noload
+    umbrella : modulesOverHere/js:noload
     mlpshow  : .
 
   # Python Modules
   py :
-    echo  : ../andSomeMoreOverHere/py:pip
+    echo  : ../andSomeMoreOverHere/py
     ltest : .
 
   # Go Modules
   go :
     raincore : github.com/raindevteam
 
-# These are optional
+# Default Routes (Optional)
+# -------------------------
+# Changing these will overwrite the default module routes for their respective module type. Keep in
+# mind that modules/<type> is already the default type for js and py. Go has no default module route
+# set due to how Go modules are installed.
+#
 # We don't recommend setting a default go route as you may have packages installed in different
 # places such as github.com and gopkg.in. You also can't move go packages outside your GOPATH.
 default-routes :
   js : modules/js
   py : modules/py
 
+# Global Options (Optional)
+# -------------------------
 # Global options define options to be used for all modules that fall under their respective type
 global-options :
   js : npm
@@ -86,29 +102,31 @@ global-options :
 `
 
 func config(c *cli.Context) error {
-	fmt.Println(" Making an example config.yaml...")
+	fmt.Println("Making an example config.yaml...")
 
 	f, err := os.Create("config.yaml")
 	if err != nil {
-		fmt.Println(" Oops, something went wrong: " + err.Error())
+		fmt.Println("Oops, something went wrong: " + err.Error())
 		return err
 	}
 
 	_, err = f.Write([]byte(ExampleConfig))
 	if err != nil {
-		fmt.Println(" Couldn't write config: " + err.Error())
+		fmt.Println("Couldn't write config: " + err.Error())
 		return err
 	}
 
 	f.Close()
-	fmt.Println(" All done!")
+	fmt.Println("All done!")
 	return nil
 }
 
+// CommandConfig is a command that allows the user to create an example config.yaml. The config will
+// show all possible config options a user can assign.
 var CommandConfig = cli.Command{
 	Name:        "config",
 	Aliases:     []string{"c"},
-	Usage:       "Creates an example YAML config",
+	Usage:       "Creates an example YAML config file",
 	Description: "Will create a new example config.yaml file in the current directory.",
 	Action:      config,
 }

@@ -18,6 +18,7 @@
 package rain
 
 import (
+	"errors"
 	"fmt"
 
 	"github.com/urfave/cli"
@@ -31,21 +32,22 @@ var installs = []string{
 
 func install(c *cli.Context) error {
 	if !c.Args().Present() {
-		fmt.Println(c.App.ArgsUsage)
+		fmt.Println(c.Command.UsageText)
+		return errors.New("")
 	}
 
 	if !isIn(installs, c.Args().First()) {
-		fmt.Printf(" Not a valid install type. Valid install types are:\n%s", listPrint(installs))
+		fmt.Printf("Not a valid install type. Valid install types are:\n%s", listPrint(installs))
 	} else {
 		if c.Args().Get(1) == "" {
-			fmt.Println(" No name specified")
-			fmt.Println(" Usage: " + c.Command.Name + " install bot-name")
+			fmt.Println("No name specified")
+			fmt.Println("Usage: " + c.Command.Name + " install bot-name")
 			return nil
 		}
 
-		fmt.Println(" Building... ")
+		fmt.Println("Building... ")
 		if err := doInstall(c.Args().Get(0), c.Args().Get(1)); err != nil {
-			fmt.Println(" Install was not successful, please report the above problem(s) as an issue")
+			fmt.Println("Install was not successful, please report the above problem(s) as an issue")
 			return err
 		}
 		fmt.Println(" Done!")
