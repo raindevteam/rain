@@ -101,7 +101,7 @@ func TestProcessManagers(t *testing.T) {
 		select {
 		case res := <-done:
 			if res.Err != nil {
-				t.Fatalf("Module exited prematurely\n ::::\n%s", res.Output)
+				t.Fatalf("Module exited prematurely\n ::::\n%s", res.Err)
 			} else {
 				t.Fatal("Module exited but there was no error, perhaps it is broken")
 			}
