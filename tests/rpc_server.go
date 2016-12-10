@@ -24,18 +24,24 @@ import (
 	"net/rpc"
 )
 
+type Ticket struct {
+	Port       string
+	ModuleName string
+}
+
 // An RPCHandler is used to help manage an RPC connection while testing.
 type RPCHandler struct {
 	RPCServer  net.Listener
 	conn       rpc.ServerCodec
 	TestPort   string
-	registered chan bool
+	ModPort    string
+	Registered chan bool
 }
 
 // NewRPCHandler returns an intialized RPCHandler.
 func NewRPCHandler() *RPCHandler {
 	rh := &RPCHandler{
-		registered: make(chan bool),
+		Registered: make(chan bool),
 		TestPort:   "23524", // Make this random in future tests
 	}
 
@@ -45,7 +51,7 @@ func NewRPCHandler() *RPCHandler {
 // CreateRPCServer creates a new RPC server and makes it listen within a goroutine loop.
 func (r *RPCHandler) CreateRPCServer(CodecServer func(io.ReadWriteCloser) rpc.ServerCodec) error {
 	srv := rpc.NewServer()
-	srv.RegisterName("TestMaster", TestAPI{r})
+	srv.RegisterName("Master", TestAPI{r})
 
 	var err error
 	r.RPCServer, err = net.Listen("tcp", ":"+r.TestPort)
@@ -88,9 +94,14 @@ func (tapi TestAPI) Send(msg string, result *string) error {
 	return errors.New("Didn't receive right message")
 }
 
+func (tapi TestAPI) RegisterCommand(cr CommandRequest, result *string) error {
+	// write
+}
+
 // Register will call on the registered chan of an RPCHandler when a module has registered with
 // the test master RPC server.
-func (tapi TestAPI) Register(t interface{}, result *string) error {
-	tapi.t.registered <- true
+func (tapi TestAPI) Register(t Ticket, result *string) error {
+	tapi.t.Registered <- true
+	tapi.t.ModPort = t.Port
 	return nil
 }
