@@ -20,10 +20,10 @@ package cbot
 import (
 	"strings"
 
+	"gopkg.in/readline.v1"
 	"gopkg.in/sorcix/irc.v1"
 
 	"github.com/RyanPrintup/nimbus"
-	"github.com/chzyer/readline"
 	"github.com/raindevteam/rain/rbot"
 	"github.com/raindevteam/rain/rlog"
 )
