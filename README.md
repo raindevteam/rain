@@ -1,6 +1,7 @@
 ### __Important!__
 
-__Rain is no longer an IRC library. We are now only supporting Discord!__
+__Rain is no longer an IRC library. We are now only supporting Discord!__ 
+__Also we're in very early development and things might not be tidy!__
 
 ----------------------------------------------------------------------------------------------------
 <img align="right" src="https://avatars1.githubusercontent.com/u/20262521?v=3&s=200">
