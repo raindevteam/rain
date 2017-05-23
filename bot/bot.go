@@ -9,6 +9,7 @@ import (
 // the discord session struct from bwmarrin's discordgo).
 type DiscordSession interface {
 	Open() (err error)
+	AddHandler(handler interface{}) func()
 }
 
 // The Bot struct holds all information needed to do any general work on the
@@ -16,7 +17,7 @@ type DiscordSession interface {
 // level.
 type Bot struct {
 	name string
-	ds   DiscordSession
+	Ds   DiscordSession
 }
 
 // NewBot will create a new instance of a bot, almost everything will be
@@ -40,7 +41,7 @@ func NewBot(conf *Config, name, token string) (*Bot, error) {
 
 	b := &Bot{
 		name: name,
-		ds:   ds,
+		Ds:   ds,
 	}
 	return b, nil
 }
@@ -58,4 +59,8 @@ type DST struct {
 // Open mocks discordgo.Session.Open().
 func (dst *DST) Open() (err error) {
 	return nil
+}
+
+func (dst *DST) AddHandler(handler interface{}) func() {
+	return func() {}
 }
