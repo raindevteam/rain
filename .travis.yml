@@ -10,4 +10,7 @@ install:
   - go get -d ./...
 
 script: 
-  - go test -race -v ./rbot ./handler ./hail
+  - go test -race -coverprofile=coverage.txt -covermode=atomic -v ./rbot ./handler ./hail
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
