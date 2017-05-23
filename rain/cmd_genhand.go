@@ -1,6 +1,8 @@
 // Copyright 2015-2017, Rodolfo Castillo-Valladares. All rights reserved.
+//
 // This file is governed by the Modified BSD License. You should have
 // received a copy of the license (LICENSE.md) with this file's program.
+// You may find the program here: https://github.com/raindevteam/rain
 //
 // Contact Rodolfo at rcvallada@gmail.com for any inquiries of this file.
 
@@ -22,10 +24,12 @@ var discordEvents = []string{
 }
 
 var handlersTemplate = `// Copyright 2015-2017, Rodolfo Castillo-Valladares. All rights reserved.
+//
 // This file is governed by the Modified BSD License. You should have
 // received a copy of the license (LICENSE.md) with this file's program.
+// You may find the program here: https://github.com/raindevteam/rain
 //
-// Contact Rodolfo at rcvallada@gmail.com for any inquires of this file.
+// Contact Rodolfo at rcvallada@gmail.com for any inquiries of this file.
 
 // DO NOT EDIT; This code is automatically generated.
 // See godoc package information for more details.
@@ -34,14 +38,20 @@ package handler
 
 import (
 	"github.com/bwmarrin/discordgo"
-	"github.com/raindevteam/rain/bot"
+	"github.com/raindevteam/rain/rbot"
 )
 
 const Internal = "__INTERNAL__"
 
 type Registry struct {
 	{{ range $value := .}}
-	{{ $value }}Listeners         map[string][]*Listener
+	{{ $value }}Listeners         map[string][]Listener
+	{{ end }}
+}
+
+func (r Registry) Initilize() {
+	{{ range $value := . }}
+	r.{{ $value }}Listeners = make(map[string][]Listener)
 	{{ end }}
 }
 
@@ -59,19 +69,11 @@ func (h Handler) runEvent{{ $value }}(s *discordgo.Session, e *discordgo.{{ $val
 }
 {{ end }}
 
-func (r Registry) addListener(l EventListener) {
-	var listener EventListener
-	switch l.(type) {
-	case Listener:
-		listener = l.(Listener)
-    case InternalListener:
-		listener = l.(InternalListener)
-	}
-
-	switch listener.act.(type) {
+func (r Registry) addListener(l Listener) {
+	switch l.Action().(type) {
 	{{ range $value := . }}
 	case *discordgo.{{ $value }}:
-		r.{{ $value }}InternalListeners = append(r.{{ $value }}InternalListeners, il)
+		r.{{ $value }}Listeners[l.Owner()] = append(r.{{ $value }}Listeners[l.Owner()], l)
     {{ end }}
 	}
 }
@@ -87,12 +89,12 @@ func runAction(v interface{}, act Action) {
 }
 
 func (h Handler) AttachHandlers(b *bot.Bot) { {{ range $value := . }}
-	b.Ds.AddHandler(h.RunEvent{{ $value }}) {{ end }}
+	b.Session.AddHandler(h.runEvent{{ $value }}) {{ end }}
 }
 `
 
-// Dir will set the GOLNS_DIR environment variable to the new argument-passed subdirectory.
-func Gdispatch(cli *cli.Context) error {
+// Gencode generates files needed for the handler subpackage.
+func Gencode(cli *cli.Context) error {
 	if cli.NArg() != 0 {
 		fmt.Println(cli.Command.ArgsUsage)
 	}
@@ -113,14 +115,15 @@ func Gdispatch(cli *cli.Context) error {
 	return nil
 }
 
-// NewCommandDir appends the Dir function wrapped in a cli.Command struct.
-func NewCmdGenhand(app *cli.App) {
+// NewCmdGencode appends the Gencode function wrapped in a
+// cli.Command struct.
+func NewCmdGencode(app *cli.App) {
 	Command := cli.Command{
-		Name:      "gdispatch",
-		Aliases:   []string{"gh"},
-		Usage:     "Generate the handlers file",
+		Name:      "gencode",
+		Aliases:   []string{"gc"},
+		Usage:     "Generate handler files (dispathers.go, registry.go)",
 		ArgsUsage: "",
-		Action:    Gdispatch,
+		Action:    Gencode,
 	}
 	app.Commands = append(app.Commands, Command)
 }

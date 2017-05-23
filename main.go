@@ -20,7 +20,7 @@ func main() {
 	app.Name = "rain"
 	app.Usage = "A command line tool for Rain."
 
-	rain.NewCmdGenhand(app)
+	rain.NewCmdGencode(app)
 
 	app.Run(os.Args)
 }

@@ -11,7 +11,6 @@ import (
 	"testing"
 
 	"github.com/bwmarrin/discordgo"
-	"github.com/raindevteam/rain/droplet"
 )
 
 func tAction(e *discordgo.Ready) {
@@ -22,8 +21,8 @@ func TestInternalListenersRun(t *testing.T) {
 	var v interface{}
 	v = tAction
 	il := &InternalListener{
-		drop: &droplet.Droplet{},
-		act:  v,
+		enabled: true,
+		act:     v,
 	}
 	e := &discordgo.Ready{}
 	il.Run(e)

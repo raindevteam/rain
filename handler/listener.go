@@ -50,16 +50,16 @@ func (il InternalListener) Owner(v interface{}) string {
 	return Internal
 }
 
-type Listener struct {
+type DropletListener struct {
 	drop *droplet.Droplet
 	act  Action
 }
 
-func (l Listener) Run(v interface{}) {
+func (l DropletListener) Run(v interface{}) {
 }
 
-func (h Handler) AddInternalListener(il *InternalListener) {
-	h.registry.addInternalListener(il)
+func (h Handler) AddInternalListener(l Listener) {
+	h.registry.addListener(l)
 }
 
 ///////////////////                 Command                  ///////////////////
