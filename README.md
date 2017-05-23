@@ -1,3 +1,10 @@
+###### I like these too much
+
+[![codebeat badge](https://codebeat.co/badges/fc8f57aa-7ccb-4502-adf1-5dd90af9d08c)](https://codebeat.co/projects/github-com-raindevteam-rain-master)
+[![Go Report Card](https://goreportcard.com/badge/github.com/raindevteam/rain)](https://goreportcard.com/report/github.com/raindevteam/rain)
+[![Code Climate](https://codeclimate.com/github/raindevteam/rain/badges/gpa.svg)](https://codeclimate.com/github/raindevteam/rain)
+[![codecov](https://codecov.io/gh/raindevteam/rain/branch/master/graph/badge.svg)](https://codecov.io/gh/raindevteam/rain)
+
 ### __Important!__
 
 __Rain is no longer an IRC library. We are now only supporting Discord!__ 
