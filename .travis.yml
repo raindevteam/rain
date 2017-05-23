@@ -8,6 +8,7 @@ go:
 install:
   - go version
   - go get -d ./...
+  - chmod +x test.sh
 
 script: 
   - ./test.sh
