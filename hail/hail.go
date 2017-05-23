@@ -1,8 +1,10 @@
 // Copyright 2015-2017, Rodolfo Castillo-Valladares. All rights reserved.
+//
 // This file is governed by the Modified BSD License. You should have
 // received a copy of the license (LICENSE.md) with this file's program.
+// You may find the program here: https://github.com/raindevteam/rain
 //
-// Contact Rodolfo at rcvallada@gmail.com for any inquires of this file.
+// Contact Rodolfo at rcvallada@gmail.com for any inquiries of this file.
 
 // Package hail stands for Heavily Aspired Irresponsible Logger.
 package hail
@@ -31,6 +33,12 @@ const (
 
 var l = hail{LDefaultFlags}
 
+// Defaults will set default settings for hail.
+func Defaults() {
+	l.logmodes = Linfo | Lnotice | Lerr | Lcrit | Lalert | Lemerg
+	SetLogFlags(0)
+}
+
 // SetOutput will set the internal logger's output to the given writer.
 func SetOutput(w io.Writer) {
 	log.SetOutput(w)
@@ -44,7 +52,7 @@ func SetLogFlags(flags int) {
 
 // SetFlags sets hail's logging flags.
 func SetFlags(flags int) {
-	l.logmodes = flags
+	l.logmodes |= flags
 }
 
 // Facility takes a facility constant and returns a corresponding string.
