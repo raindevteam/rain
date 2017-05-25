@@ -10,6 +10,7 @@ package handler
 
 import (
 	"fmt"
+	"reflect"
 	"testing"
 
 	"github.com/bwmarrin/discordgo"
@@ -20,12 +21,14 @@ func tAction(e *discordgo.Ready) {
 }
 
 func TestInternalListenersRun(t *testing.T) {
+	fmt.Println(reflect.TypeOf(tAction))
 	var v interface{}
 	v = tAction
 	il := &InternalListener{
 		enabled: true,
 		act:     v,
 	}
+	fmt.Println(reflect.TypeOf(v))
 	e := &discordgo.Ready{}
 	il.Run(e)
 }

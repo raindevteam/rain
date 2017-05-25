@@ -12,12 +12,16 @@ import (
 	"github.com/raindevteam/rain/droplet"
 )
 
+//go:generate go run ../tools/main.go
+
 type Handler struct {
 	Status   bool
 	registry *Registry
 }
 
-type Action interface{}
+type Action interface {
+	Do(v interface{})
+}
 
 ///////////////////                Listener                  ///////////////////
 
@@ -25,43 +29,61 @@ type Action interface{}
 // listeners. Use the Owner() function to discern if a listener is internal. If
 // it is, it will return the string constant "__INTERNAL__".
 type Listener interface {
-	Run(v interface{})
-	Action() Action
+	Run()
+	SetActionHandler(a Action)
+	SetEvent(v interface{})
 	Owner() string
 }
 
 // InternalListener is the struct for internal listeners. It does not have a
 // droplet field like DropletListener.
 type InternalListener struct {
+	Event   interface{}
 	enabled bool
-	act     Action
+	action  Action
 }
 
 // Run will execute the listener's Action.
-func (il InternalListener) Run(v interface{}) {
-	runAction(v, il.act)
+func (il InternalListener) Run() {
+	il.action.Do(il.Event)
 }
 
 // Action will return the listener's Action.
-func (il InternalListener) Action() Action {
-	return il.act
+func (il InternalListener) SetActionHandler(a Action) {
+	il.action = a
+}
+
+func (il InternalListener) SetEvent(v interface{}) {
+	il.Event = v
 }
 
 // Owner for InternalListener returns the string constant "__INTERNAL__".
-func (il InternalListener) Owner(v interface{}) string {
+func (il InternalListener) Owner() string {
 	return Internal
 }
 
 type DropletListener struct {
-	drop *droplet.Droplet
-	act  Action
+	Event  interface{}
+	drop   *droplet.Droplet
+	action Action
 }
 
-func (l DropletListener) Run(v interface{}) {
+func (l DropletListener) Run() {
+}
+
+func (l DropletListener) SetActionHandler(a Action) {
+	l.action = a
+}
+
+func (l DropletListener) SetEvent(v interface{}) {
+	l.Event = v
+}
+
+func (l DropletListener) Owner() string {
+	return "module"
 }
 
 func (h Handler) AddInternalListener(l Listener) {
-	h.registry.addListener(l)
 }
 
 ///////////////////                 Command                  ///////////////////
