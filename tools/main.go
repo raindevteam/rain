@@ -69,14 +69,21 @@ import (
 	"github.com/raindevteam/rain/rbot"
 )
 
+// Internal is the string constant identifier for bot listeners.
 const Internal = "__INTERNAL__"
 
+// The Registry holds all listeners registered with the bot. They are grouped by
+// droplet, however each contains an entry of listeners belonging to the bot.
+// This entry is identified with the "__INTERNAL__" string constant. 
 type Registry struct { {{ range $value := .}}
 	{{ $value }}Listeners         map[string][]Listener {{ end }}
 }
 
 {{ range . }}
+// {{ . }}Handler is the handler for {{ . }} Listeners.
 type {{ . }}Handler func(*discordgo.{{ . }})
+
+// Do runs the underlying function for the handled Listener.
 func (eh {{ . }}Handler) Do(v interface{}) {
 	if e, ok := v.(*discordgo.{{ . }}); ok {
 		eh(e)
@@ -84,7 +91,8 @@ func (eh {{ . }}Handler) Do(v interface{}) {
 }
 {{ end }}
 
-func (r Registry) Initilize() { {{ range $value := . }}
+// Initialize will initialize all maps in the registry.
+func (r Registry) Initialize() { {{ range $value := . }}
 	r.{{ $value }}Listeners = make(map[string][]Listener) {{ end }}
 }
 
@@ -107,6 +115,7 @@ func (h Handler) dispatch{{ $value }}(s *discordgo.Session, e *discordgo.{{ $val
 }
 {{ end }}
 
+// CreateListener creates a new listener from a given function.
 func (r Registry) CreateListener(v interface{}, isInternal bool) Listener {
 	var l Listener
 	if isInternal {
@@ -124,6 +133,9 @@ func (r Registry) CreateListener(v interface{}, isInternal bool) Listener {
 	return l
 }
 
+// AttachDispatchers will add all dispatch functions to the discord session for
+// each supported discord event. Supported events are those from the discordgo
+// library.
 func (h Handler) AttachDispatchers(b *bot.Bot) { {{ range $value := . }}
 	b.Session.AddHandler(h.dispatch{{ $value }}) {{ end }}
 }
