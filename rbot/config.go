@@ -6,7 +6,7 @@
 //
 // Contact Rodolfo at rcvallada@gmail.com for any inquiries of this file.
 
-package bot
+package rbot
 
 import (
 	"io/ioutil"
