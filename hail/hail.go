@@ -10,6 +10,7 @@
 package hail
 
 import (
+	"fmt"
 	"io"
 	"log"
 )
@@ -62,6 +63,8 @@ func Facility(facility int) string {
 	switch facility {
 	case Fbot:
 		fstr = "Bot"
+	case Fcore:
+		fstr = "Core"
 	case Fdrophand:
 		fstr = "DH"
 	case Feventhand:
@@ -73,6 +76,10 @@ func Facility(facility int) string {
 	}
 
 	return fstr
+}
+
+func prefix(f int, s int, msgf string) string {
+	return fmt.Sprintf("[%s] (%d): ", Facility(f), s) + msgf
 }
 
 // Emerg is like Emergf but adds a new line. Does not accept format specifiers.
@@ -102,16 +109,18 @@ func Alertf(facility int, msgf string, v ...interface{}) {
 }
 
 // Err is like Errf but adds a new line. Does not accept format specifiers.
-func Err(facility int, msg string) {
-	Errf(facility, msg+"\n")
+func Err(facility int, msg string) error {
+	return Errf(facility, msg+"\n")
 }
 
 // Errf takes a facility specifier, format string and arguments to parse into
 // said string.
-func Errf(facility int, msgf string, v ...interface{}) {
+func Errf(f int, msgf string, v ...interface{}) error {
+	err := fmt.Errorf(prefix(f, Serr, msgf), v...)
 	if Lerr&l.logmodes != 0 {
-		log.Printf("[%s] (%d): "+msgf, v)
+		log.Print(err.Error())
 	}
+	return err
 }
 
 // Crit is like Critf but adds a new line. Does not accept format specifiers.
@@ -121,20 +130,21 @@ func Crit(facility int, msg string) {
 
 // Critf takes a facility specifier, format string and arguments to parse into
 // said string.
-func Critf(facility int, msgf string, v ...interface{}) {
+func Critf(f int, msgf string, v ...interface{}) {
 	if Lcrit&l.logmodes != 0 {
-		log.Printf("[%s] (%d): "+msgf, v)
+		fstr := fmt.Sprintf("[%s] (%d): ", Facility(f), Scrit) + msgf
+		log.Printf(fstr, v...)
 	}
 }
 
 // Warning is like Warningf but adds a new line. Does not accept format specifiers.
-func Warning(facility int, msg string) {
-	Warningf(facility, msg+"\n")
+func Warn(facility int, msg string) {
+	Warnf(facility, msg+"\n")
 }
 
 // Warningf takes a facility specifier, format string and arguments to parse into
 // said string.
-func Warningf(facility int, msgf string, v ...interface{}) {
+func Warnf(facility int, msgf string, v ...interface{}) {
 	if Lwarning&l.logmodes != 0 {
 		log.Printf("[%s] (%d): "+msgf, v)
 	}
@@ -160,9 +170,9 @@ func Info(facility int, msg string) {
 
 // Infof takes a facility specifier, format string and arguments to parse into
 // said string.
-func Infof(facility int, msgf string, v ...interface{}) {
+func Infof(f int, msgf string, v ...interface{}) {
 	if Linfo&l.logmodes != 0 {
-		log.Printf("[%s] (%d): "+msgf, v)
+		log.Printf(prefix(f, Sinfo, msgf), v...)
 	}
 }
 

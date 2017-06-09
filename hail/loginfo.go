@@ -7,8 +7,10 @@
 package hail
 
 const (
+	// Fcore specifies core logs
+	Fcore = iota
 	// Fbot specifies bot logs
-	Fbot = iota
+	Fbot
 	// Fdrophand specifies droplet handler logs
 	Fdrophand
 	// Feventhand specifies event handler logs
