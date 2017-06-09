@@ -6,7 +6,7 @@
 //
 // Contact Rodolfo at rcvallada@gmail.com for any inquiries of this file.
 
-package bot
+package rbot
 
 import (
 	"os"
@@ -21,7 +21,11 @@ func SetupTesting(t *testing.T) {
 	hail.SetFlags(hail.Ldebug)
 }
 
-func TestNewBot(t *testing.T) {
+func PrebuiltConfig() *Config {
+	return &Config{Name: "RainBot"}
+}
+
+func TestBot_NewBot(t *testing.T) {
 	SetupTesting(t)
 
 	conf, err := NewConfigFromString(configString)
@@ -29,7 +33,7 @@ func TestNewBot(t *testing.T) {
 		t.Fatalf("Error while creating new config: %s\n", err)
 	}
 
-	b, err := NewBot(conf, "token")
+	b, err := NewBot("token", conf)
 	if err != nil {
 		t.Fatalf("err: %s", err)
 	}
@@ -41,5 +45,46 @@ func TestNewBot(t *testing.T) {
 	if b.config.Name != "RainBot" {
 		t.Errorf("NewBot failed to set the correct name! Got %s instead",
 			b.config.Name)
+	}
+}
+
+func TestBot_Connect(t *testing.T) {
+	type fields struct {
+		config  *Config
+		Session DiscordSession
+	}
+	tests := []struct {
+		name    string
+		fields  fields
+		wantErr bool
+	}{
+		{
+			name: "Working connect",
+			fields: fields{
+				config:  PrebuiltConfig(),
+				Session: &DST{1},
+			},
+			wantErr: false,
+		},
+		{
+			name: "Broken connect",
+			fields: fields{
+				config:  PrebuiltConfig(),
+				Session: &DST{-1},
+			},
+			wantErr: true,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			b := &Bot{
+				config:  tt.fields.config,
+				Session: tt.fields.Session,
+			}
+			if err := b.Connect(); (err != nil) != tt.wantErr {
+				t.Errorf("Bot.Connect() error = %v, wantErr %v",
+					err, tt.wantErr)
+			}
+		})
 	}
 }

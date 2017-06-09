@@ -6,9 +6,11 @@
 //
 // Contact Rodolfo at rcvallada@gmail.com for any inquiries of this file.
 
-package bot
+package rbot
 
 import (
+	"errors"
+
 	"github.com/bwmarrin/discordgo"
 	"github.com/raindevteam/rain/hail"
 )
@@ -17,8 +19,8 @@ import (
 // implemented mostly for testing of the bot (so that mocks can be created for
 // the discord session struct from bwmarrin's discordgo).
 type DiscordSession interface {
-	Open() (err error)
 	AddHandler(handler interface{}) func()
+	Open() (err error)
 }
 
 // The Bot struct holds all information needed to do any general work on the
@@ -32,7 +34,7 @@ type Bot struct {
 // NewBot will create a new instance of a bot, almost everything will be
 // initialized, but some things such as connecting to discord will not. It'll
 // be wise to read the documentation for the rest of this API.
-func NewBot(conf *Config, token string) (*Bot, error) {
+func NewBot(token string, conf *Config) (*Bot, error) {
 	var (
 		ds  DiscordSession
 		err error
@@ -56,6 +58,15 @@ func NewBot(conf *Config, token string) (*Bot, error) {
 	return b, nil
 }
 
+// Connect will call Open() on the discord session.
+func (b *Bot) Connect() error {
+	err := b.Session.Open()
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
 ///////////////////               Testing                    ///////////////////
 
 // DST stands for DiscordSessionTest. It has mocked methods that are used within
@@ -66,12 +77,15 @@ type DST struct {
 	id int
 }
 
-// Open mocks discordgo.Session.Open().
-func (dst *DST) Open() (err error) {
-	return nil
-}
-
 // AddHandler mocks discordgo.Session.AddHandler()
 func (dst *DST) AddHandler(handler interface{}) func() {
 	return func() {}
+}
+
+// Open mocks discordgo.Session.Open().
+func (dst *DST) Open() (err error) {
+	if dst.id < 0 {
+		return errors.New("can't open discord session (false alarm from DST)")
+	}
+	return nil
 }
