@@ -8,7 +8,10 @@ go:
 install:
   - go version
   - go get -d ./...
-  - chmod +x test.sh
+  - chmod +x ./tools/build.sh
+  - chmod +x ./tools/test.sh
+  # Generate handler code.
+  - ./tools/build.sh
 
 script: 
   - ./test.sh
