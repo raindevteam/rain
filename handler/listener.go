@@ -10,26 +10,20 @@ package handler
 
 import (
 	"github.com/raindevteam/rain/droplet"
+	"github.com/raindevteam/rain/hail"
 )
 
-//go:generate go run ../tools/main.go
-
-type Handler struct {
-	Status   bool
-	registry *Registry
-}
-
-type Action interface {
-	Do(v interface{})
-}
-
-///////////////////                Listener                  ///////////////////
+const (
+	// NoDroplet is the string used to check whether a droplet listener has an
+	// owner assigned or not.
+	NoDroplet = "__NO_DROPLET__"
+)
 
 // Listener is the interface for both internal listeners and droplet
 // listeners. Use the Owner() function to discern if a listener is internal. If
 // it is, it will return the string constant "__INTERNAL__".
 type Listener interface {
-	Run()
+	Run() error
 	SetActionHandler(a Action)
 	SetEvent(v interface{})
 	Owner() string
@@ -44,46 +38,63 @@ type InternalListener struct {
 }
 
 // Run will execute the listener's Action.
-func (il InternalListener) Run() {
+func (il *InternalListener) Run() error {
+	if il.action == nil {
+		return hail.Err(hail.Feventhand,
+			"listener tried to run without action set")
+	}
+	if il.Event == nil {
+		return hail.Err(hail.Feventhand,
+			"listener tried to run without event set")
+	}
 	il.action.Do(il.Event)
+	return nil
 }
 
-// Action will return the listener's Action.
-func (il InternalListener) SetActionHandler(a Action) {
+// SetActionHandler will set the listener's action. It is set during a call to
+// AddInternalListener().
+func (il *InternalListener) SetActionHandler(a Action) {
 	il.action = a
 }
 
-func (il InternalListener) SetEvent(v interface{}) {
+// SetEvent will set the listener's event for future use when Do() is called on
+// the listener's action.
+func (il *InternalListener) SetEvent(v interface{}) {
 	il.Event = v
 }
 
 // Owner for InternalListener returns the string constant "__INTERNAL__".
-func (il InternalListener) Owner() string {
+func (il *InternalListener) Owner() string {
 	return Internal
 }
 
+// The DropletListener struct is similar to InternalListener, but is used for
+// droplet listeners. The most notable difference is how action is handled.
 type DropletListener struct {
 	Event  interface{}
 	drop   *droplet.Droplet
 	action Action
 }
 
-func (l DropletListener) Run() {
+// Run will run the listener's action that being an RPC call.
+func (l *DropletListener) Run() error {
+	return nil
 }
 
-func (l DropletListener) SetActionHandler(a Action) {
+// SetActionHandler will set the listener's action.
+func (l *DropletListener) SetActionHandler(a Action) {
 	l.action = a
 }
 
-func (l DropletListener) SetEvent(v interface{}) {
+// SetEvent will set a listener's event for future use when calling action.Do().
+func (l *DropletListener) SetEvent(v interface{}) {
 	l.Event = v
 }
 
-func (l DropletListener) Owner() string {
-	return "module"
+// Owner will return the name of the droplet to which this listener belongs to.
+func (l *DropletListener) Owner() string {
+	if l.drop == nil {
+		return NoDroplet
+	}
+	return NoDroplet
 }
-
-func (h Handler) AddInternalListener(l Listener) {
-}
-
-///////////////////                 Command                  ///////////////////
