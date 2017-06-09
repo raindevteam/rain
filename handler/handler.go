@@ -4,7 +4,7 @@ import (
 	"github.com/raindevteam/rain/hail"
 )
 
-//go:generate go run ../tools/main.go
+//go:generate go run ../tools/generate/dispatchers.go
 
 // Handler contains all information necessary for handling listeners.
 type Handler struct {

@@ -14,7 +14,7 @@ install:
   - ./tools/build.sh
 
 script: 
-  - ./test.sh
+  - ./tools/test.sh
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
