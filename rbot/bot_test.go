@@ -59,7 +59,7 @@ func TestBot_Connect(t *testing.T) {
 		wantErr bool
 	}{
 		{
-			name: "Working connect",
+			name: "working connect",
 			fields: fields{
 				config:  PrebuiltConfig(),
 				Session: &DST{1},
@@ -67,7 +67,7 @@ func TestBot_Connect(t *testing.T) {
 			wantErr: false,
 		},
 		{
-			name: "Broken connect",
+			name: "broken connect",
 			fields: fields{
 				config:  PrebuiltConfig(),
 				Session: &DST{-1},
