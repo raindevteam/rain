@@ -11,10 +11,12 @@ const (
 	Fcore = iota
 	// Fbot specifies bot logs
 	Fbot
-	// Fdrophand specifies droplet handler logs
-	Fdrophand
-	// Feventhand specifies event handler logs
-	Feventhand
+	// Fdroplet specifies droplet handler logs
+	Fdroplet
+	// Fhandler specifies event handler logs
+	Fhandler
+	// Finternal specifies internal listeners/commands logs.
+	Finternal
 	// Frain specifies rain logs
 	Frain
 	// Fhail specifies hail logs

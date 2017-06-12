@@ -40,11 +40,11 @@ type InternalListener struct {
 // Run will execute the listener's Action.
 func (il *InternalListener) Run() error {
 	if il.action == nil {
-		return hail.Err(hail.Feventhand,
+		return hail.Err(hail.Fhandler,
 			"listener tried to run without action set")
 	}
 	if il.Event == nil {
-		return hail.Err(hail.Feventhand,
+		return hail.Err(hail.Fhandler,
 			"listener tried to run without event set")
 	}
 	il.action.Do(il.Event)

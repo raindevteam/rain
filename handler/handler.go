@@ -20,7 +20,7 @@ var H *Handler
 // already created, CreateHandler will return an error.
 func CreateHandler() error {
 	if H != nil {
-		return hail.Err(hail.Feventhand, "a handler has already been created")
+		return hail.Err(hail.Fhandler, "a handler has already been created")
 	}
 	H = &Handler{
 		Status:   true,

@@ -62,15 +62,17 @@ func Facility(facility int) string {
 
 	switch facility {
 	case Fbot:
-		fstr = "Bot"
+		fstr = "BOT"
 	case Fcore:
-		fstr = "Core"
-	case Fdrophand:
-		fstr = "DH"
-	case Feventhand:
-		fstr = "EH"
+		fstr = "CORE"
+	case Fdroplet:
+		fstr = "DROPLET"
+	case Fhandler:
+		fstr = "HANDLER"
+	case Finternal:
+		fstr = "INTERNAL"
 	case Frain:
-		fstr = "Rain"
+		fstr = "RAIN"
 	case Fhail:
 		fstr = "HAIL"
 	}
