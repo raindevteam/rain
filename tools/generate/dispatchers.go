@@ -7,6 +7,7 @@ import (
 )
 
 const filename = "dispatchers.go"
+const filenametest = "dispatchers_test.go"
 
 var discordEvents = []string{
 	"Connect",
@@ -141,27 +142,95 @@ func (r *Registry) CreateListener(v interface{}, isInternal bool) Listener {
 // library.
 func Attach(b *rbot.Bot) { 
 	if H == nil {
-		hail.Crit(hail.Feventhand,
+		hail.Crit(hail.Fhandler,
 			"H has not been created yet, cannot attach listeners! Exiting...")
 		os.Exit(1)
 	}{{ range $value := . }}
 	b.Session.AddHandler(dispatch{{ $value }}) {{ end }}
 }
 `
+var handlersTestTemplate = `// Copyright 2015-2017, Rodolfo Castillo-Valladares. All rights reserved.
+//
+// This file is governed by the Modified BSD License. You should have
+// received a copy of the license (LICENSE.md) with this file's program.
+// You may find the program here: https://github.com/raindevteam/rain
+//
+// Contact Rodolfo at rcvallada@gmail.com for any inquiries of this file.
 
-// Gencode generates files needed for the handler subpackage.
-func main() {
-	t := template.New(filename)
-	t, err := t.Parse(handlersTemplate)
+// DO NOT EDIT; This code is automatically generated.
+// See godoc package information for more details.
+
+package handler
+
+import (
+	"testing"
+	"time"
+
+	"github.com/bwmarrin/discordgo"
+)
+
+var confirmDo = make(chan bool, 1)
+
+{{ range . }}
+func Test{{ . }}Handler_Do(t *testing.T) {
+	type args struct {
+		v interface{}
+	}
+	tests := []struct {
+		name string
+		eh   {{ . }}Handler
+		args args
+	}{
+		{
+			name: "run do",
+			eh: {{ . }}Handler(func(e *discordgo.{{ . }}) {
+				confirmDo {{ noescape "<" }}- true
+			}),
+			args: args{&discordgo.{{ . }}{}},
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			tt.eh.Do(tt.args.v)
+			select {
+			case {{ noescape "<" }}-confirmDo:
+			case {{ noescape "<" }}-time.After(time.Second * 1):
+				t.Errorf("listener timed out.")
+			}
+		})
+	}
+}
+{{ end }}
+
+`
+
+func noescape(str string) template.HTML {
+	return template.HTML(str)
+}
+
+var fns = template.FuncMap{
+	"noescape": noescape,
+}
+
+func genCode(file string, tstr string) {
+	t := template.New(file)
+	t.Funcs(fns)
+	t, err := t.Parse(tstr)
 
 	if err != nil {
 		fmt.Println(err)
 	}
 
-	f, err := os.Create("../handler/" + filename)
+	f, err := os.Create("../handler/" + file)
 	if err != nil {
 		os.Exit(1)
 	}
 	t.Execute(f, discordEvents)
 	f.Close()
+}
+
+// Gencode generates files needed for the handler subpackage.
+func main() {
+	genCode(filename, handlersTemplate)
+	genCode(filenametest, handlersTestTemplate)
 }
