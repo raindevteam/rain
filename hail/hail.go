@@ -32,11 +32,11 @@ const (
 		Lwarning | Lnotice | Linfo | Ldebug
 )
 
-var l = hail{LDefaultFlags}
+var hlog = hail{LDefaultFlags}
 
 // Defaults will set default settings for hail.
 func Defaults() {
-	l.logmodes = Linfo | Lnotice | Lerr | Lcrit | Lalert | Lemerg
+	hlog.logmodes = LDefaultFlags
 	SetLogFlags(0)
 }
 
@@ -53,7 +53,7 @@ func SetLogFlags(flags int) {
 
 // SetFlags sets hail's logging flags.
 func SetFlags(flags int) {
-	l.logmodes |= flags
+	hlog.logmodes |= flags
 }
 
 // Facility takes a facility constant and returns a corresponding string.
@@ -72,119 +72,12 @@ func Facility(facility int) string {
 	case Frain:
 		fstr = "Rain"
 	case Fhail:
-		fstr = "Hail"
+		fstr = "HAIL"
 	}
 
 	return fstr
 }
 
-func prefix(f int, s int, msgf string) string {
-	return fmt.Sprintf("[%s] (%d): ", Facility(f), s) + msgf
-}
-
-// Emerg is like Emergf but adds a new line. Does not accept format specifiers.
-func Emerg(facility int, msg string) {
-	Emergf(facility, msg+"\n")
-}
-
-// Emergf takes a facility specifier, format string and arguments to parse into
-// said string.
-func Emergf(facility int, msgf string, v ...interface{}) {
-	if Lemerg&l.logmodes != 0 {
-		log.Printf("[%s] (%d): "+msgf, facility, Semerg, v)
-	}
-}
-
-// Alert is like Alertf but adds a new line. Does not accept format specifiers.
-func Alert(facility int, msg string) {
-	Alertf(facility, msg+"\n")
-}
-
-// Alertf takes a facility specifier, format string and arguments to parse into
-// said string.
-func Alertf(facility int, msgf string, v ...interface{}) {
-	if Lalert&l.logmodes != 0 {
-		log.Printf("[%s] (%d): "+msgf, v)
-	}
-}
-
-// Err is like Errf but adds a new line. Does not accept format specifiers.
-func Err(facility int, msg string) error {
-	return Errf(facility, msg+"\n")
-}
-
-// Errf takes a facility specifier, format string and arguments to parse into
-// said string.
-func Errf(f int, msgf string, v ...interface{}) error {
-	err := fmt.Errorf(prefix(f, Serr, msgf), v...)
-	if Lerr&l.logmodes != 0 {
-		log.Print(err.Error())
-	}
-	return err
-}
-
-// Crit is like Critf but adds a new line. Does not accept format specifiers.
-func Crit(facility int, msg string) {
-	Critf(facility, msg+"\n")
-}
-
-// Critf takes a facility specifier, format string and arguments to parse into
-// said string.
-func Critf(f int, msgf string, v ...interface{}) {
-	if Lcrit&l.logmodes != 0 {
-		fstr := fmt.Sprintf("[%s] (%d): ", Facility(f), Scrit) + msgf
-		log.Printf(fstr, v...)
-	}
-}
-
-// Warning is like Warningf but adds a new line. Does not accept format specifiers.
-func Warn(facility int, msg string) {
-	Warnf(facility, msg+"\n")
-}
-
-// Warningf takes a facility specifier, format string and arguments to parse into
-// said string.
-func Warnf(facility int, msgf string, v ...interface{}) {
-	if Lwarning&l.logmodes != 0 {
-		log.Printf("[%s] (%d): "+msgf, v)
-	}
-}
-
-// Notice is like Noticef but adds a new line. Does not accept format specifiers.
-func Notice(facility int, msg string) {
-	Noticef(facility, msg+"\n")
-}
-
-// Noticef takes a facility specifier, format string and arguments to parse into
-// said string.
-func Noticef(facility int, msgf string, v ...interface{}) {
-	if Lnotice&l.logmodes != 0 {
-		log.Printf("[%s] (%d): "+msgf, v)
-	}
-}
-
-// Info is like Infof but adds a new line. Does not accept format specifiers.
-func Info(facility int, msg string) {
-	Infof(facility, msg+"\n")
-}
-
-// Infof takes a facility specifier, format string and arguments to parse into
-// said string.
-func Infof(f int, msgf string, v ...interface{}) {
-	if Linfo&l.logmodes != 0 {
-		log.Printf(prefix(f, Sinfo, msgf), v...)
-	}
-}
-
-// Debug is like Debugf but adds a new line. Does not accept format specifiers.
-func Debug(facility int, msg string) {
-	Debugf(facility, msg+"\n")
-}
-
-// Debugf takes a facility specifier, format string and arguments to parse into
-// said string.
-func Debugf(facility int, msgf string, v ...interface{}) {
-	if Ldebug&l.logmodes != 0 {
-		log.Printf("[%s] (%d): "+msgf, facility, Sdebug, v)
-	}
+func prefix(f int, s int) string {
+	return fmt.Sprintf("[%s] (%d): ", Facility(f), s)
 }
