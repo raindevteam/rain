@@ -6,9 +6,9 @@ import (
 	"os/signal"
 	"syscall"
 
-	"github.com/raindevteam/rain/core"
 	"github.com/raindevteam/rain/hail"
 	"github.com/raindevteam/rain/handler"
+	"github.com/raindevteam/rain/internal"
 	"github.com/raindevteam/rain/rbot"
 	cli "gopkg.in/urfave/cli.v1"
 )
@@ -26,13 +26,13 @@ func Run(ctx *cli.Context) {
 	conf, err := rbot.NewConfigFromFile(conffile)
 	if err != nil {
 		hail.Err(hail.Frain, err.Error())
-		return
+		os.Exit(1)
 	}
 
 	// Create bot.
 	bot, err := rbot.NewBot(os.Getenv("DG_TOKEN"), conf)
 	if err != nil {
-		fmt.Println("Unable to create new bot")
+		hail.Errf(hail.Frain, "Unable to create bot: err: %s", err)
 		os.Exit(1)
 	}
 
@@ -41,7 +41,7 @@ func Run(ctx *cli.Context) {
 	handler.Attach(bot)
 
 	// Attach internals to bot.
-	core.Attach(bot)
+	internal.Attach(bot)
 
 	// Open discord session.
 	bot.Connect()
