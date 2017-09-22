@@ -78,46 +78,28 @@ func testLogFunction(t *testing.T, name string,
 	}
 }
 
-func TestEmerg(t *testing.T) {
-	testLogFunction(t, "emerg log", &LogTestData{
+func TestFatal(t *testing.T) {
+	testLogFunction(t, "fatal log", &LogTestData{
 		msg:   "unit 1",
 		out:   "[HAIL] (1): unit 1\n",
 		vargs: nil,
 		t:     le,
-	}, Emerg)
+	}, Fatal)
 }
 
-func TestEmergf(t *testing.T) {
-	testLogFunction(t, "emergf log", &LogTestData{
+func TestFatalf(t *testing.T) {
+	testLogFunction(t, "fatalf log", &LogTestData{
 		msg:   "%s %d",
 		out:   "[HAIL] (1): unit 2",
 		vargs: []interface{}{"unit", 2},
 		t:     lfe,
-	}, Emergf)
-}
-
-func TestAlert(t *testing.T) {
-	testLogFunction(t, "alert log", &LogTestData{
-		msg:   "unit 1",
-		out:   "[HAIL] (2): unit 1\n",
-		vargs: nil,
-		t:     le,
-	}, Alert)
-}
-
-func TestAlertf(t *testing.T) {
-	testLogFunction(t, "alertf log", &LogTestData{
-		msg:   "%s %d",
-		out:   "[HAIL] (2): unit 2",
-		vargs: []interface{}{"unit", 2},
-		t:     lfe,
-	}, Alertf)
+	}, Fatalf)
 }
 
 func TestCrit(t *testing.T) {
 	testLogFunction(t, "crit log", &LogTestData{
 		msg:   "unit 1",
-		out:   "[HAIL] (3): unit 1\n",
+		out:   "[HAIL] (2): unit 1\n",
 		vargs: nil,
 		t:     le,
 	}, Crit)
@@ -126,7 +108,7 @@ func TestCrit(t *testing.T) {
 func TestCritf(t *testing.T) {
 	testLogFunction(t, "critf log", &LogTestData{
 		msg:   "%s %d",
-		out:   "[HAIL] (3): unit 2",
+		out:   "[HAIL] (2): unit 2",
 		vargs: []interface{}{"unit", 2},
 		t:     lfe,
 	}, Critf)
@@ -135,7 +117,7 @@ func TestCritf(t *testing.T) {
 func TestErr(t *testing.T) {
 	testLogFunction(t, "err log", &LogTestData{
 		msg:   "unit 1",
-		out:   "[HAIL] (4): unit 1\n",
+		out:   "[HAIL] (3): unit 1\n",
 		vargs: nil,
 		t:     le,
 	}, Err)
@@ -144,7 +126,7 @@ func TestErr(t *testing.T) {
 func TestErrf(t *testing.T) {
 	testLogFunction(t, "errf log", &LogTestData{
 		msg:   "%s %d",
-		out:   "[HAIL] (4): unit 2",
+		out:   "[HAIL] (3): unit 2",
 		vargs: []interface{}{"unit", 2},
 		t:     lfe,
 	}, Errf)
@@ -153,7 +135,7 @@ func TestErrf(t *testing.T) {
 func TestWarn(t *testing.T) {
 	testLogFunction(t, "warn log", &LogTestData{
 		msg:   "unit 1",
-		out:   "[HAIL] (5): unit 1\n",
+		out:   "[HAIL] (4): unit 1\n",
 		vargs: nil,
 		t:     l,
 	}, Warn)
@@ -162,34 +144,16 @@ func TestWarn(t *testing.T) {
 func TestWarnf(t *testing.T) {
 	testLogFunction(t, "warnf log", &LogTestData{
 		msg:   "%s %d",
-		out:   "[HAIL] (5): unit 2",
+		out:   "[HAIL] (4): unit 2",
 		vargs: []interface{}{"unit", 2},
 		t:     lf,
 	}, Warnf)
 }
 
-func TestNotice(t *testing.T) {
-	testLogFunction(t, "notice log", &LogTestData{
-		msg:   "unit 1",
-		out:   "[HAIL] (6): unit 1\n",
-		vargs: nil,
-		t:     l,
-	}, Notice)
-}
-
-func TestNoticef(t *testing.T) {
-	testLogFunction(t, "noticef log", &LogTestData{
-		msg:   "%s %d",
-		out:   "[HAIL] (6): unit 2",
-		vargs: []interface{}{"unit", 2},
-		t:     lf,
-	}, Noticef)
-}
-
 func TestInfo(t *testing.T) {
 	testLogFunction(t, "info log", &LogTestData{
 		msg:   "unit 1",
-		out:   "[HAIL] (7): unit 1\n",
+		out:   "[HAIL] (5): unit 1\n",
 		vargs: nil,
 		t:     l,
 	}, Info)
@@ -198,7 +162,7 @@ func TestInfo(t *testing.T) {
 func TestInfof(t *testing.T) {
 	testLogFunction(t, "infof log", &LogTestData{
 		msg:   "%s %d",
-		out:   "[HAIL] (7): unit 2",
+		out:   "[HAIL] (5): unit 2",
 		vargs: []interface{}{"unit", 2},
 		t:     lf,
 	}, Infof)
@@ -207,7 +171,7 @@ func TestInfof(t *testing.T) {
 func TestDebug(t *testing.T) {
 	testLogFunction(t, "debug log", &LogTestData{
 		msg:   "unit 1",
-		out:   "[HAIL] (8): unit 1\n",
+		out:   "[HAIL] (6): unit 1\n",
 		vargs: nil,
 		t:     l,
 	}, Debug)
@@ -216,7 +180,7 @@ func TestDebug(t *testing.T) {
 func TestDebugf(t *testing.T) {
 	testLogFunction(t, "debugf log", &LogTestData{
 		msg:   "%s %d",
-		out:   "[HAIL] (8): unit 2",
+		out:   "[HAIL] (6): unit 2",
 		vargs: []interface{}{"unit", 2},
 		t:     lf,
 	}, Debugf)

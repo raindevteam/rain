@@ -24,18 +24,14 @@ const (
 )
 
 const (
-	// Semerg is the emergency level status
-	Semerg = iota + 1
-	// Salert is the alert level status
-	Salert
+	// Sfatal is the emergency level status
+	Sfatal = iota + 1
 	// Scrit is the critical level status
 	Scrit
 	// Serr is the error level status
 	Serr
 	// Swarn is the warning level status
 	Swarn
-	// Snotice is the notice level status
-	Snotice
 	// Sinfo is the notice level status
 	Sinfo
 	// Sdebug is the debug level status

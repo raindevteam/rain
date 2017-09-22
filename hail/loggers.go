@@ -4,32 +4,17 @@ import (
 	"fmt"
 )
 
-// Emerg is like Emergf but adds a new line. Does not accept format specifiers.
-func Emerg(facility int, msg string) error {
-	return Emergf(facility, msg+"\n")
+// Fatal is like Emergf but adds a new line. Does not accept format specifiers.
+func Fatal(facility int, msg string) error {
+	return Fatalf(facility, msg+"\n")
 }
 
-// Emergf takes a facility specifier, format string and arguments to parse into
+// Fatalf takes a facility specifier, format string and arguments to parse into
 // said string. It returns an error with msgf as the error string.
-func Emergf(f int, msgf string, v ...interface{}) error {
+func Fatalf(f int, msgf string, v ...interface{}) error {
 	err := fmt.Errorf(msgf, v...)
-	if Lemerg&hlog.logmodes != 0 {
-		fmt.Print(prefix(f, Semerg) + err.Error())
-	}
-	return err
-}
-
-// Alert is like Alertf but adds a new line. Does not accept format specifiers.
-func Alert(facility int, msg string) error {
-	return Alertf(facility, msg+"\n")
-}
-
-// Alertf takes a facility specifier, format string and arguments to parse into
-// said string.
-func Alertf(f int, msgf string, v ...interface{}) error {
-	err := fmt.Errorf(msgf, v...)
-	if Lalert&hlog.logmodes != 0 {
-		fmt.Print(prefix(f, Salert) + err.Error())
+	if Lfatal&hlog.logmodes != 0 {
+		fmt.Print(prefix(f, Sfatal) + err.Error())
 	}
 	return err
 }
@@ -72,21 +57,8 @@ func Warn(facility int, msg string) {
 // Warnf takes a facility specifier, format string and arguments to parse into
 // said string.
 func Warnf(f int, msgf string, v ...interface{}) {
-	if Lwarning&hlog.logmodes != 0 {
+	if Lwarn&hlog.logmodes != 0 {
 		fmt.Printf(prefix(f, Swarn) + fmt.Sprintf(msgf, v...))
-	}
-}
-
-// Notice is like Noticef but adds a new line. Does not accept format specifiers.
-func Notice(facility int, msg string) {
-	Noticef(facility, msg+"\n")
-}
-
-// Noticef takes a facility specifier, format string and arguments to parse into
-// said string.
-func Noticef(f int, msgf string, v ...interface{}) {
-	if Lnotice&hlog.logmodes != 0 {
-		fmt.Printf(prefix(f, Snotice) + fmt.Sprintf(msgf, v...))
 	}
 }
 

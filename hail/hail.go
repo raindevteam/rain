@@ -20,16 +20,21 @@ type hail struct {
 }
 
 const (
-	Lemerg = 1 << iota
-	Lalert
+	// Lfatal denotes Fatal log mode.
+	Lfatal = 1 << iota
+	// Lcrit denotes Critical log mode.
 	Lcrit
+	// Lerr denotes Error log mode.
 	Lerr
-	Lwarning
-	Lnotice
+	// Lwarn denotes Warning log mode.
+	Lwarn
+	// Linfo denotes Info log mode.
 	Linfo
+	// Ldebug denotes Debug log mode.
 	Ldebug
-	LDefaultFlags = Lemerg | Lalert | Lcrit | Lerr |
-		Lwarning | Lnotice | Linfo | Ldebug
+	// LDefaultFlags denotes all log modes.
+	LDefaultFlags = Lfatal | Lcrit | Lerr |
+		Lwarn | Linfo | Ldebug
 )
 
 var hlog = hail{LDefaultFlags}
@@ -63,8 +68,6 @@ func Facility(facility int) string {
 	switch facility {
 	case Fbot:
 		fstr = "BOT"
-	case Fcore:
-		fstr = "CORE"
 	case Fdroplet:
 		fstr = "DROPLET"
 	case Fhandler:
