@@ -14,5 +14,5 @@ func (l *Listeners) AddMessageCreate() {
 }
 
 func (l *Listeners) messageCreate(e *discordgo.MessageCreate) {
-	hail.Infof(hail.Fcore, "MessageCreate: %s", e.Message.Content)
+	hail.Infof(hail.Finternal, "MessageCreate: %s", e.Message.Content)
 }
