@@ -10,6 +10,7 @@ package rbot
 
 import (
 	"errors"
+	"os"
 
 	"github.com/bwmarrin/discordgo"
 	"github.com/raindevteam/rain/hail"
@@ -44,8 +45,12 @@ func NewBot(token string, conf *Config) (*Bot, error) {
 		ds = &DST{0}
 		err = nil
 	} else {
-		ds, err = discordgo.New("Bot " + token)
 		hail.Defaults()
+		if token == "" {
+			hail.Fatalf(hail.Fbot, "Token is empty, exiting...")
+			os.Exit(1)
+		}
+		ds, err = discordgo.New("Bot " + token)
 	}
 	if err != nil {
 		return nil, err
