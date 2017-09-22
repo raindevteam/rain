@@ -17,6 +17,7 @@ import (
 func Run(ctx *cli.Context) {
 	if ctx.NArg() != 1 {
 		fmt.Println(ctx.Command.Usage)
+		// TODO: Set error code on exit.
 		return
 	}
 	hail.Defaults()
@@ -25,7 +26,7 @@ func Run(ctx *cli.Context) {
 	conffile := ctx.Args().First()
 	conf, err := rbot.NewConfigFromFile(conffile)
 	if err != nil {
-		hail.Err(hail.Frain, err.Error())
+		hail.Fatal(hail.Frain, err.Error())
 		os.Exit(1)
 	}
 
