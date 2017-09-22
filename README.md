@@ -39,7 +39,7 @@ Overall, we currently have the following guidelines to meet before getting to
 
 1. Get a solid foundation going.
 
-    We don't want to regret any decisions now, in the future. I am doing my best
+    We don't want to regret any decisions made now, in the future. I am doing my best
     to lay groundwork so that maintenance in the future is less of a chore.
 
 2. Ensure room for proper debugging.
@@ -60,6 +60,6 @@ Droplets<a name="droplets"></a>
 -------------------------------
 
 Currently the droplet system is not implemented yet. We are still working on 
-making sure internal listeners and commands work. Have after all that is done
+making sure internal listeners and commands work. After all that is done
 and tested, I'll move on to making the commands. It's a one man army here so 
 work will be a little slow. I've got college too...
