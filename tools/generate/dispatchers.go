@@ -73,9 +73,6 @@ import (
 	"github.com/raindevteam/rain/rbot"
 )
 
-// Internal is the string constant identifier for bot listeners.
-const Internal = "__INTERNAL__"
-
 // The Registry holds all listeners registered with the bot. They are grouped by
 // droplet, however each contains an entry of listeners belonging to the bot.
 // This entry is identified with the "__INTERNAL__" string constant. 
@@ -202,6 +199,103 @@ func Test{{ . }}Handler_Do(t *testing.T) {
 }
 {{ end }}
 
+{{ range . }}
+func Test_dispatch{{ . }}(t *testing.T) {
+	type args struct {
+		s *discordgo.Session
+		e *discordgo.{{ . }}
+	}
+	tests := []struct {
+		name                string
+		args                args
+		listenersToRegister int
+	}{
+		{
+			name: "dispatch {{ . }} listeners (empty)",
+			args: args{
+				s: &discordgo.Session{},
+				e: &discordgo.{{ . }}{},
+			},
+			listenersToRegister: 0,
+		},
+		{
+			name: "dispatch {{ . }} listeners (One)",
+			args: args{
+				s: &discordgo.Session{},
+				e: &discordgo.{{ . }}{},
+			},
+			listenersToRegister: 1,
+		},
+		{
+			name: "dispatch {{ . }} listeners (Two)",
+			args: args{
+				s: &discordgo.Session{},
+				e: &discordgo.{{ . }}{},
+			},
+			listenersToRegister: 2,
+		},
+	}
+	// Manually set up handler.
+	H = &Handler{}
+	H.registry = &Registry{}
+	H.Status = true
+	H.registry.Initialize()
+	for _, tt := range tests {
+		switch tt.listenersToRegister {
+		case 0:
+			t.Run(tt.name, func(t *testing.T) {
+				dispatch{{ . }}(tt.args.s, tt.args.e)
+			})
+		case 1:
+			// Listener callback chan.
+			l1chan := make(chan bool, 1)
+			// Create and add listner to registry.
+			l := &InternalListener{}
+			l.SetActionHandler({{ . }}Handler(func(e *discordgo.{{ . }}) {
+				l1chan {{ noescape "<" }}- true
+			}))
+			H.registry.{{ . }}Listeners[l.Owner()] = append(H.registry.{{ . }}Listeners[l.Owner()], l)
+			// Run test.
+			t.Run(tt.name, func(t *testing.T) {
+				dispatch{{ . }}(tt.args.s, tt.args.e)
+			})
+			select {
+			case {{ noescape "<" }}-l1chan:
+			case {{ noescape "<" }}-time.After(time.Second * 1):
+				t.Errorf("Case %d: listener timed out.", 1)
+			}
+		case 2:
+			// Listeners callback chan.
+			l1chan := make(chan bool, 2)
+			// Create Listeners.
+			l1 := &InternalListener{}
+			l2 := &InternalListener{}
+			// Add listeners to registry.
+			l1.SetActionHandler({{ . }}Handler(func(e *discordgo.{{ . }}) {
+				l1chan {{ noescape "<" }}- true
+			}))
+			H.registry.{{ . }}Listeners[l1.Owner()] = append(H.registry.{{ . }}Listeners[l1.Owner()], l1)
+			l2.SetActionHandler({{ . }}Handler(func(e *discordgo.{{ . }}) {
+				l1chan {{ noescape "<" }}- true
+			}))
+			H.registry.{{ . }}Listeners[l2.Owner()] = append(H.registry.{{ . }}Listeners[l2.Owner()], l2)
+			t.Run(tt.name, func(t *testing.T) {
+				dispatch{{ . }}(tt.args.s, tt.args.e)
+			})
+			// Two listeners to callback on.
+			for i := 0; i {{ noescape "<" }} 2; i++ {
+				select {
+				case {{ noescape "<" }}-l1chan:
+				case {{ noescape "<" }}-time.After(time.Second * 1):
+					t.Errorf("Case %d: listener (%d) timed out.", 2, i+1)
+				}
+			}
+		}
+	}
+	H = nil
+}
+{{ end }}
+
 `
 
 func noescape(str string) template.HTML {
@@ -221,7 +315,7 @@ func genCode(file string, tstr string) {
 		fmt.Println(err)
 	}
 
-	f, err := os.Create("../handler/" + file)
+	f, err := os.Create("../../internal/handler/" + file)
 	if err != nil {
 		os.Exit(1)
 	}
