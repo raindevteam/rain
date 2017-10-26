@@ -61,7 +61,6 @@ var handlersTemplate = `// Copyright 2015-2017, Rodolfo Castillo-Valladares. All
 // Contact Rodolfo at rcvallada@gmail.com for any inquiries of this file.
 
 // DO NOT EDIT; This code is automatically generated.
-// See godoc package information for more details.
 
 package handler
 
@@ -69,8 +68,8 @@ import (
 	"os"
 
 	"github.com/bwmarrin/discordgo"
-	"github.com/raindevteam/rain/hail"
-	"github.com/raindevteam/rain/rbot"
+	"github.com/raindevteam/rain/internal/hail"
+	"github.com/raindevteam/rain/internal/rbot"
 )
 
 // The Registry holds all listeners registered with the bot. They are grouped by
