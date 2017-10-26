@@ -13,7 +13,7 @@ import (
 	"os"
 
 	"github.com/bwmarrin/discordgo"
-	"github.com/raindevteam/rain/hail"
+	"github.com/raindevteam/rain/internal/hail"
 )
 
 // DiscordSession is an interface to specify discord session capability. It is
@@ -33,8 +33,7 @@ type Bot struct {
 }
 
 // NewBot will create a new instance of a bot, almost everything will be
-// initialized, but some things such as connecting to discord will not. It'll
-// be wise to read the documentation for the rest of this API.
+// initialized, but some things such as connecting to discord will not.
 func NewBot(token string, conf *Config) (*Bot, error) {
 	var (
 		ds  DiscordSession
@@ -45,6 +44,8 @@ func NewBot(token string, conf *Config) (*Bot, error) {
 		ds = &DST{0}
 		err = nil
 	} else {
+		// TODO: Test this section of code by verifying that
+		//       discordgo.New() sets ds and err accordingly.
 		hail.Defaults()
 		if token == "" {
 			hail.Fatalf(hail.Fbot, "Token is empty, exiting...")
@@ -76,10 +77,10 @@ func (b *Bot) Connect() error {
 
 // DST stands for DiscordSessionTest. It has mocked methods that are used within
 // the bot's functions. The 'id' int for each struct is used to identify the
-// structs. The identifer 0 is special and means it is the primary (first
-// ever instanced) test session when testing.
+// structs. Positive IDs, starting with 0, represent properly working mocks.
+// Negative IDs, starting with -1, represent intentionally broken mocks.
 type DST struct {
-	id int
+	ID int
 }
 
 // AddHandler mocks discordgo.Session.AddHandler()
@@ -89,7 +90,7 @@ func (dst *DST) AddHandler(handler interface{}) func() {
 
 // Open mocks discordgo.Session.Open().
 func (dst *DST) Open() (err error) {
-	if dst.id < 0 {
+	if dst.ID < 0 {
 		return errors.New("can't open discord session (false alarm from DST)")
 	}
 	return nil

@@ -9,7 +9,7 @@ name: RainBot
 func TestNewConfigFromFile(t *testing.T) {
 	SetupTesting(t)
 
-	conf, err := NewConfigFromFile("../exconf/exconf.yaml")
+	conf, err := NewConfigFromFile("../../exconf/exconf.yaml")
 	if err != nil {
 		t.Fatalf("Error while parsing config file: %s\n", err)
 	}

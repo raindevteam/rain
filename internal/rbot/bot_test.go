@@ -12,7 +12,7 @@ import (
 	"os"
 	"testing"
 
-	"github.com/raindevteam/rain/hail"
+	"github.com/raindevteam/rain/internal/hail"
 )
 
 func SetupTesting(t *testing.T) {
@@ -38,8 +38,8 @@ func TestBot_NewBot(t *testing.T) {
 		t.Fatalf("err: %s", err)
 	}
 	ds := b.Session.(*DST)
-	if ds.id != 0 {
-		t.Fatalf("DST set incorrect ID, got %d, expecting 0\n", ds.id)
+	if ds.ID != 0 {
+		t.Fatalf("DST set incorrect ID, got %d, expecting 0\n", ds.ID)
 	}
 
 	if b.config.Name != "RainBot" {

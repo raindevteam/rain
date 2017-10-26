@@ -1,10 +1,10 @@
 package handler
 
 import (
-	"github.com/raindevteam/rain/hail"
+	"github.com/raindevteam/rain/internal/hail"
 )
 
-//go:generate go run ../tools/generate/dispatchers.go
+//go:generate go run ../../tools/generate/dispatchers.go
 
 // Handler contains all information necessary for handling listeners.
 type Handler struct {

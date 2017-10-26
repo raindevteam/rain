@@ -9,14 +9,17 @@
 package handler
 
 import (
-	"github.com/raindevteam/rain/droplet"
-	"github.com/raindevteam/rain/hail"
+	"github.com/raindevteam/rain/internal/droplet"
+	"github.com/raindevteam/rain/internal/hail"
 )
 
 const (
 	// NoDroplet is the string used to check whether a droplet listener has an
 	// owner assigned or not.
 	NoDroplet = "__NO_DROPLET__"
+
+	// Internal is the string constant identifier for bot listeners.
+	Internal = "__INTERNAL__"
 )
 
 // Listener is the interface for both internal listeners and droplet

@@ -7,6 +7,7 @@
 // Contact Rodolfo at rcvallada@gmail.com for any inquiries of this file.
 
 // Package hail stands for Heavily Aspired Irresponsible Logger.
+// Yes, that was a joke.
 package hail
 
 import (

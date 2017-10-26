@@ -11,7 +11,7 @@ package main
 import (
 	"os"
 
-	"github.com/raindevteam/rain/rain"
+	"github.com/raindevteam/rain/internal/rain"
 	cli "gopkg.in/urfave/cli.v1"
 )
 

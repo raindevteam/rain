@@ -14,7 +14,7 @@ import (
 	"time"
 
 	"github.com/bwmarrin/discordgo"
-	"github.com/raindevteam/rain/droplet"
+	"github.com/raindevteam/rain/internal/droplet"
 )
 
 var confirmRun = make(chan bool, 1)
@@ -43,6 +43,9 @@ func TestInternalListener_Run(t *testing.T) {
 			},
 			wantsRun: true,
 		},
+		// Keep in mind for the next two unit tests that a nil action and event
+		// should prevent a run. Therefore it is considered a fail if the
+		// listener does run.
 		{
 			name: "nil action run",
 			fields: fields{

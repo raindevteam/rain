@@ -6,10 +6,10 @@ import (
 	"os/signal"
 	"syscall"
 
-	"github.com/raindevteam/rain/hail"
-	"github.com/raindevteam/rain/handler"
-	"github.com/raindevteam/rain/internal"
-	"github.com/raindevteam/rain/rbot"
+	"github.com/raindevteam/rain/internal/hail"
+	"github.com/raindevteam/rain/internal/handler"
+	"github.com/raindevteam/rain/internal/internal"
+	"github.com/raindevteam/rain/internal/rbot"
 	cli "gopkg.in/urfave/cli.v1"
 )
 
@@ -21,17 +21,19 @@ func Run(ctx *cli.Context) {
 		return
 	}
 	hail.Defaults()
+	hail.Debug(hail.Frain, "If your are seeing this message than DEBUG is ON.")
 
 	// Get Config.
 	conffile := ctx.Args().First()
 	conf, err := rbot.NewConfigFromFile(conffile)
 	if err != nil {
-		hail.Fatal(hail.Frain, err.Error())
+		hail.Fatalf(hail.Frain, "Error reading config file: %s\n", err.Error())
 		os.Exit(1)
 	}
 
 	// Create bot.
 	bot, err := rbot.NewBot(os.Getenv("DG_TOKEN"), conf)
+	hail.Info(hail.Frain, "Bot created.")
 	if err != nil {
 		hail.Errf(hail.Frain, "Unable to create bot: err: %s", err)
 		os.Exit(1)
@@ -40,12 +42,15 @@ func Run(ctx *cli.Context) {
 	// Create and attach handler to bot.
 	handler.CreateHandler()
 	handler.Attach(bot)
+	hail.Info(hail.Frain, "Handler created and attached.")
 
 	// Attach internals to bot.
 	internal.Attach(bot)
+	hail.Info(hail.Frain, "Internals attached.")
 
 	// Open discord session.
 	bot.Connect()
+	hail.Info(hail.Frain, "Discord connection initiated.")
 	sc := make(chan os.Signal, 1)
 	signal.Notify(sc, syscall.SIGINT, syscall.SIGTERM, os.Interrupt, os.Kill)
 	<-sc
