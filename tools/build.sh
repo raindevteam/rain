@@ -1,3 +1,5 @@
 #!/usr/bin/env bash
 
-cd handler && go generate
+cd internal/handler && go generate
+cd ../..
+go install
