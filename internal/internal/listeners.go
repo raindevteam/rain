@@ -18,5 +18,5 @@ func (l *Listeners) AddMessageCreate() {
 
 // MessageCreate logs messages sent in all channels the bot has access to.
 func (l *Listeners) MessageCreate(e *discordgo.MessageCreate) {
-	hail.Infof(hail.Finternal, "MessageCreate: %s", e.Message.Content)
+	hail.Infof(hail.Finternal, "MessageCreate: %s\n", e.Message.Content)
 }
