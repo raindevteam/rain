@@ -1,6 +1,10 @@
 package handler
 
 import (
+	"errors"
+
+	"github.com/bwmarrin/discordgo"
+
 	"github.com/raindevteam/rain/internal/hail"
 )
 
@@ -10,24 +14,25 @@ import (
 type Handler struct {
 	Status   bool
 	registry *Registry
+	Commands map[string]map[string]*InternalCommand
 }
 
-// H is the global singleton instance of the handler. It should be instantiated
-// by calling CreateHandler().
-var H *Handler
-
-// CreateHandler will instantiate H. If it was done so in another way or H was
-// already created, CreateHandler will return an error.
-func CreateHandler() error {
-	if H != nil {
-		return hail.Err(hail.Fhandler, "a handler has already been created")
-	}
-	H = &Handler{
+// NewHandler will create a new handler.
+func NewHandler() *Handler {
+	h := &Handler{
 		Status:   true,
 		registry: &Registry{},
+		Commands: make(map[string]map[string]*InternalCommand),
 	}
-	H.registry.Initialize()
-	return nil
+	h.registry.Initialize()
+	return h
+}
+
+// CommandData holds information pertaining to a command. The command will
+// always be specified but the owner is not guaranteed to be filled.
+type CommandData struct {
+	Owner   string
+	Command string
 }
 
 // An Action is an interface wrapper for listener commands. It is primarily used
@@ -40,6 +45,36 @@ type Action interface {
 // AddInternalListener takes a function and wraps it into a listener. This
 // listener is then added to registry and returned to the caller. If the value
 // passed to this function is not valid, listener will be nil.
-func AddInternalListener(v interface{}) Listener {
-	return H.registry.CreateListener(v, true)
+func (h *Handler) AddInternalListener(v interface{}) Listener {
+	return h.registry.CreateListener(v, true)
+}
+
+// AddInternalCommand takes a function and wraps it into a command.
+func (h *Handler) AddInternalCommand(name string,
+	f func(string, *discordgo.MessageCreate) error) {
+	ic := &InternalCommand{}
+	ic.CommandFunc = f
+	ic.SetName(name)
+	h.registry.AddCommand(ic)
+}
+
+// InvokeCommand takes a CommandData struct and uses it to run a specified
+// command.
+func (h *Handler) InvokeCommand(cd *CommandData, e *discordgo.MessageCreate) error {
+	// Droplets aren't implement yet.
+	if cd.Owner != Internal {
+		return errors.New("droplet commands are not implemented yet")
+	}
+
+	// TODO: Create registry get methods for commands and listeners.
+	command, ok := h.registry.Commands[cd.Owner][cd.Command]
+	if !ok {
+		hail.Warn(hail.Fhandler, "not a command")
+		return nil
+	}
+	command.SetArguments("")
+	command.SetEvent(e)
+	command.Invoke()
+
+	return nil
 }

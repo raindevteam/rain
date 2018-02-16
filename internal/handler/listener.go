@@ -9,6 +9,7 @@
 package handler
 
 import (
+	"github.com/bwmarrin/discordgo"
 	"github.com/raindevteam/rain/internal/droplet"
 	"github.com/raindevteam/rain/internal/hail"
 )
@@ -29,6 +30,16 @@ type Listener interface {
 	Run() error
 	SetActionHandler(a Action)
 	SetEvent(v interface{})
+	Owner() string
+}
+
+// Command is an interface for both internal and droplets.
+type Command interface {
+	Invoke() error
+	SetArguments(string)
+	SetEvent(*discordgo.MessageCreate)
+	SetName(string)
+	GetName() string
 	Owner() string
 }
 
@@ -100,4 +111,48 @@ func (l *DropletListener) Owner() string {
 		return NoDroplet
 	}
 	return NoDroplet
+}
+
+// The InternalCommand struct is a wrapper for internal commands.
+type InternalCommand struct {
+	Event       *discordgo.MessageCreate
+	CommandFunc func(string, *discordgo.MessageCreate) error
+	Arguments   string
+	name        string
+}
+
+// Invoke runs the commandFunc for the internal command.
+func (ic *InternalCommand) Invoke() error {
+	err := ic.CommandFunc(ic.Arguments, ic.Event)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+// SetArguments sets the internal command's argument string.
+func (ic *InternalCommand) SetArguments(arguments string) {
+	ic.Arguments = arguments
+}
+
+// SetEvent sets the internal command's MessageCreate event. It will always be
+// the one corresponding to the message that specified the command.
+func (ic *InternalCommand) SetEvent(e *discordgo.MessageCreate) {
+	ic.Event = e
+}
+
+// SetName will set the name for the command. This name is used to call the
+// command from Discord.
+func (ic *InternalCommand) SetName(name string) {
+	ic.name = name
+}
+
+// GetName will return the name for this command.
+func (ic *InternalCommand) GetName() string {
+	return ic.name
+}
+
+// Owner returns the internal command's owner. Always handler.Internal.
+func (ic *InternalCommand) Owner() string {
+	return Internal
 }

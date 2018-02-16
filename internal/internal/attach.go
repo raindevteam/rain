@@ -7,5 +7,11 @@ import "github.com/raindevteam/rain/internal/rbot"
 // structs.
 func Attach(bot *rbot.Bot) {
 	ls := Listeners{bot}
+	cs := Commands{bot}
+
 	ls.AddMessageCreate()
+	ls.AddCommandParser()
+
+	cs.AddSource()
+	cs.AddHelp()
 }
