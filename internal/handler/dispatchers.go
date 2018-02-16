@@ -7,62 +7,62 @@
 // Contact Rodolfo at rcvallada@gmail.com for any inquiries of this file.
 
 // DO NOT EDIT; This code is automatically generated.
-// See godoc package information for more details.
 
 package handler
 
 import (
-	"os"
-
 	"github.com/bwmarrin/discordgo"
-	"github.com/raindevteam/rain/internal/hail"
-	"github.com/raindevteam/rain/internal/rbot"
+)
+
+const (
+	Connect                 = "Connect"
+	Disconnect              = "Disconnect"
+	RateLimit               = "RateLimit"
+	Event                   = "Event"
+	Ready                   = "Ready"
+	ChannelCreate           = "ChannelCreate"
+	ChannelUpdate           = "ChannelUpdate"
+	ChannelDelete           = "ChannelDelete"
+	ChannelPinsUpdate       = "ChannelPinsUpdate"
+	GuildCreate             = "GuildCreate"
+	GuildUpdate             = "GuildUpdate"
+	GuildDelete             = "GuildDelete"
+	GuildBanAdd             = "GuildBanAdd"
+	GuildBanRemove          = "GuildBanRemove"
+	GuildMemberAdd          = "GuildMemberAdd"
+	GuildMemberUpdate       = "GuildMemberUpdate"
+	GuildMemberRemove       = "GuildMemberRemove"
+	GuildRoleCreate         = "GuildRoleCreate"
+	GuildRoleUpdate         = "GuildRoleUpdate"
+	GuildRoleDelete         = "GuildRoleDelete"
+	GuildEmojisUpdate       = "GuildEmojisUpdate"
+	GuildMembersChunk       = "GuildMembersChunk"
+	GuildIntegrationsUpdate = "GuildIntegrationsUpdate"
+	MessageAck              = "MessageAck"
+	MessageCreate           = "MessageCreate"
+	MessageUpdate           = "MessageUpdate"
+	MessageDelete           = "MessageDelete"
+	MessageReactionAdd      = "MessageReactionAdd"
+	MessageReactionRemove   = "MessageReactionRemove"
+	PresencesReplace        = "PresencesReplace"
+	PresenceUpdate          = "PresenceUpdate"
+	Resumed                 = "Resumed"
+	RelationshipAdd         = "RelationshipAdd"
+	RelationshipRemove      = "RelationshipRemove"
+	TypingStart             = "TypingStart"
+	UserUpdate              = "UserUpdate"
+	UserSettingsUpdate      = "UserSettingsUpdate"
+	UserGuildSettingsUpdate = "UserGuildSettingsUpdate"
+	VoiceServerUpdate       = "VoiceServerUpdate"
+	VoiceStateUpdate        = "VoiceStateUpdate"
 )
 
 // The Registry holds all listeners registered with the bot. They are grouped by
 // droplet, however each contains an entry of listeners belonging to the bot.
 // This entry is identified with the "__INTERNAL__" string constant.
 type Registry struct {
-	ConnectListeners                 map[string][]Listener
-	DisconnectListeners              map[string][]Listener
-	RateLimitListeners               map[string][]Listener
-	EventListeners                   map[string][]Listener
-	ReadyListeners                   map[string][]Listener
-	ChannelCreateListeners           map[string][]Listener
-	ChannelUpdateListeners           map[string][]Listener
-	ChannelDeleteListeners           map[string][]Listener
-	ChannelPinsUpdateListeners       map[string][]Listener
-	GuildCreateListeners             map[string][]Listener
-	GuildUpdateListeners             map[string][]Listener
-	GuildDeleteListeners             map[string][]Listener
-	GuildBanAddListeners             map[string][]Listener
-	GuildBanRemoveListeners          map[string][]Listener
-	GuildMemberAddListeners          map[string][]Listener
-	GuildMemberUpdateListeners       map[string][]Listener
-	GuildMemberRemoveListeners       map[string][]Listener
-	GuildRoleCreateListeners         map[string][]Listener
-	GuildRoleUpdateListeners         map[string][]Listener
-	GuildRoleDeleteListeners         map[string][]Listener
-	GuildEmojisUpdateListeners       map[string][]Listener
-	GuildMembersChunkListeners       map[string][]Listener
-	GuildIntegrationsUpdateListeners map[string][]Listener
-	MessageAckListeners              map[string][]Listener
-	MessageCreateListeners           map[string][]Listener
-	MessageUpdateListeners           map[string][]Listener
-	MessageDeleteListeners           map[string][]Listener
-	MessageReactionAddListeners      map[string][]Listener
-	MessageReactionRemoveListeners   map[string][]Listener
-	PresencesReplaceListeners        map[string][]Listener
-	PresenceUpdateListeners          map[string][]Listener
-	ResumedListeners                 map[string][]Listener
-	RelationshipAddListeners         map[string][]Listener
-	RelationshipRemoveListeners      map[string][]Listener
-	TypingStartListeners             map[string][]Listener
-	UserUpdateListeners              map[string][]Listener
-	UserSettingsUpdateListeners      map[string][]Listener
-	UserGuildSettingsUpdateListeners map[string][]Listener
-	VoiceServerUpdateListeners       map[string][]Listener
-	VoiceStateUpdateListeners        map[string][]Listener
+	Listeners map[string]map[string][]Listener
+	Commands  map[string]map[string]Command
 }
 
 // ConnectHandler is the handler for Connect Listeners.
@@ -467,52 +467,54 @@ func (eh VoiceStateUpdateHandler) Do(v interface{}) {
 
 // Initialize will initialize all maps in the registry.
 func (r *Registry) Initialize() {
-	r.ConnectListeners = make(map[string][]Listener)
-	r.DisconnectListeners = make(map[string][]Listener)
-	r.RateLimitListeners = make(map[string][]Listener)
-	r.EventListeners = make(map[string][]Listener)
-	r.ReadyListeners = make(map[string][]Listener)
-	r.ChannelCreateListeners = make(map[string][]Listener)
-	r.ChannelUpdateListeners = make(map[string][]Listener)
-	r.ChannelDeleteListeners = make(map[string][]Listener)
-	r.ChannelPinsUpdateListeners = make(map[string][]Listener)
-	r.GuildCreateListeners = make(map[string][]Listener)
-	r.GuildUpdateListeners = make(map[string][]Listener)
-	r.GuildDeleteListeners = make(map[string][]Listener)
-	r.GuildBanAddListeners = make(map[string][]Listener)
-	r.GuildBanRemoveListeners = make(map[string][]Listener)
-	r.GuildMemberAddListeners = make(map[string][]Listener)
-	r.GuildMemberUpdateListeners = make(map[string][]Listener)
-	r.GuildMemberRemoveListeners = make(map[string][]Listener)
-	r.GuildRoleCreateListeners = make(map[string][]Listener)
-	r.GuildRoleUpdateListeners = make(map[string][]Listener)
-	r.GuildRoleDeleteListeners = make(map[string][]Listener)
-	r.GuildEmojisUpdateListeners = make(map[string][]Listener)
-	r.GuildMembersChunkListeners = make(map[string][]Listener)
-	r.GuildIntegrationsUpdateListeners = make(map[string][]Listener)
-	r.MessageAckListeners = make(map[string][]Listener)
-	r.MessageCreateListeners = make(map[string][]Listener)
-	r.MessageUpdateListeners = make(map[string][]Listener)
-	r.MessageDeleteListeners = make(map[string][]Listener)
-	r.MessageReactionAddListeners = make(map[string][]Listener)
-	r.MessageReactionRemoveListeners = make(map[string][]Listener)
-	r.PresencesReplaceListeners = make(map[string][]Listener)
-	r.PresenceUpdateListeners = make(map[string][]Listener)
-	r.ResumedListeners = make(map[string][]Listener)
-	r.RelationshipAddListeners = make(map[string][]Listener)
-	r.RelationshipRemoveListeners = make(map[string][]Listener)
-	r.TypingStartListeners = make(map[string][]Listener)
-	r.UserUpdateListeners = make(map[string][]Listener)
-	r.UserSettingsUpdateListeners = make(map[string][]Listener)
-	r.UserGuildSettingsUpdateListeners = make(map[string][]Listener)
-	r.VoiceServerUpdateListeners = make(map[string][]Listener)
-	r.VoiceStateUpdateListeners = make(map[string][]Listener)
+	r.Listeners = make(map[string]map[string][]Listener)
+	r.Commands = make(map[string]map[string]Command)
+	r.Listeners[Connect] = make(map[string][]Listener)
+	r.Listeners[Disconnect] = make(map[string][]Listener)
+	r.Listeners[RateLimit] = make(map[string][]Listener)
+	r.Listeners[Event] = make(map[string][]Listener)
+	r.Listeners[Ready] = make(map[string][]Listener)
+	r.Listeners[ChannelCreate] = make(map[string][]Listener)
+	r.Listeners[ChannelUpdate] = make(map[string][]Listener)
+	r.Listeners[ChannelDelete] = make(map[string][]Listener)
+	r.Listeners[ChannelPinsUpdate] = make(map[string][]Listener)
+	r.Listeners[GuildCreate] = make(map[string][]Listener)
+	r.Listeners[GuildUpdate] = make(map[string][]Listener)
+	r.Listeners[GuildDelete] = make(map[string][]Listener)
+	r.Listeners[GuildBanAdd] = make(map[string][]Listener)
+	r.Listeners[GuildBanRemove] = make(map[string][]Listener)
+	r.Listeners[GuildMemberAdd] = make(map[string][]Listener)
+	r.Listeners[GuildMemberUpdate] = make(map[string][]Listener)
+	r.Listeners[GuildMemberRemove] = make(map[string][]Listener)
+	r.Listeners[GuildRoleCreate] = make(map[string][]Listener)
+	r.Listeners[GuildRoleUpdate] = make(map[string][]Listener)
+	r.Listeners[GuildRoleDelete] = make(map[string][]Listener)
+	r.Listeners[GuildEmojisUpdate] = make(map[string][]Listener)
+	r.Listeners[GuildMembersChunk] = make(map[string][]Listener)
+	r.Listeners[GuildIntegrationsUpdate] = make(map[string][]Listener)
+	r.Listeners[MessageAck] = make(map[string][]Listener)
+	r.Listeners[MessageCreate] = make(map[string][]Listener)
+	r.Listeners[MessageUpdate] = make(map[string][]Listener)
+	r.Listeners[MessageDelete] = make(map[string][]Listener)
+	r.Listeners[MessageReactionAdd] = make(map[string][]Listener)
+	r.Listeners[MessageReactionRemove] = make(map[string][]Listener)
+	r.Listeners[PresencesReplace] = make(map[string][]Listener)
+	r.Listeners[PresenceUpdate] = make(map[string][]Listener)
+	r.Listeners[Resumed] = make(map[string][]Listener)
+	r.Listeners[RelationshipAdd] = make(map[string][]Listener)
+	r.Listeners[RelationshipRemove] = make(map[string][]Listener)
+	r.Listeners[TypingStart] = make(map[string][]Listener)
+	r.Listeners[UserUpdate] = make(map[string][]Listener)
+	r.Listeners[UserSettingsUpdate] = make(map[string][]Listener)
+	r.Listeners[UserGuildSettingsUpdate] = make(map[string][]Listener)
+	r.Listeners[VoiceServerUpdate] = make(map[string][]Listener)
+	r.Listeners[VoiceStateUpdate] = make(map[string][]Listener)
 }
 
-func runListeners(ls map[string][]Listener, v interface{}) {
+func (h *Handler) runListeners(ls map[string][]Listener, v interface{}) {
 	for _, listeners := range ls {
 		for _, l := range listeners {
-			if ok := H.Status; ok {
+			if ok := h.Status; ok {
 				l.SetEvent(v)
 				l.Run()
 			} else {
@@ -522,164 +524,164 @@ func runListeners(ls map[string][]Listener, v interface{}) {
 	}
 }
 
-func dispatchConnect(s *discordgo.Session, e *discordgo.Connect) {
-	runListeners(H.registry.ConnectListeners, e)
+func (h *Handler) dispatchConnect(s *discordgo.Session, e *discordgo.Connect) {
+	h.runListeners(h.registry.Listeners[Connect], e)
 }
 
-func dispatchDisconnect(s *discordgo.Session, e *discordgo.Disconnect) {
-	runListeners(H.registry.DisconnectListeners, e)
+func (h *Handler) dispatchDisconnect(s *discordgo.Session, e *discordgo.Disconnect) {
+	h.runListeners(h.registry.Listeners[Disconnect], e)
 }
 
-func dispatchRateLimit(s *discordgo.Session, e *discordgo.RateLimit) {
-	runListeners(H.registry.RateLimitListeners, e)
+func (h *Handler) dispatchRateLimit(s *discordgo.Session, e *discordgo.RateLimit) {
+	h.runListeners(h.registry.Listeners[RateLimit], e)
 }
 
-func dispatchEvent(s *discordgo.Session, e *discordgo.Event) {
-	runListeners(H.registry.EventListeners, e)
+func (h *Handler) dispatchEvent(s *discordgo.Session, e *discordgo.Event) {
+	h.runListeners(h.registry.Listeners[Event], e)
 }
 
-func dispatchReady(s *discordgo.Session, e *discordgo.Ready) {
-	runListeners(H.registry.ReadyListeners, e)
+func (h *Handler) dispatchReady(s *discordgo.Session, e *discordgo.Ready) {
+	h.runListeners(h.registry.Listeners[Ready], e)
 }
 
-func dispatchChannelCreate(s *discordgo.Session, e *discordgo.ChannelCreate) {
-	runListeners(H.registry.ChannelCreateListeners, e)
+func (h *Handler) dispatchChannelCreate(s *discordgo.Session, e *discordgo.ChannelCreate) {
+	h.runListeners(h.registry.Listeners[ChannelCreate], e)
 }
 
-func dispatchChannelUpdate(s *discordgo.Session, e *discordgo.ChannelUpdate) {
-	runListeners(H.registry.ChannelUpdateListeners, e)
+func (h *Handler) dispatchChannelUpdate(s *discordgo.Session, e *discordgo.ChannelUpdate) {
+	h.runListeners(h.registry.Listeners[ChannelUpdate], e)
 }
 
-func dispatchChannelDelete(s *discordgo.Session, e *discordgo.ChannelDelete) {
-	runListeners(H.registry.ChannelDeleteListeners, e)
+func (h *Handler) dispatchChannelDelete(s *discordgo.Session, e *discordgo.ChannelDelete) {
+	h.runListeners(h.registry.Listeners[ChannelDelete], e)
 }
 
-func dispatchChannelPinsUpdate(s *discordgo.Session, e *discordgo.ChannelPinsUpdate) {
-	runListeners(H.registry.ChannelPinsUpdateListeners, e)
+func (h *Handler) dispatchChannelPinsUpdate(s *discordgo.Session, e *discordgo.ChannelPinsUpdate) {
+	h.runListeners(h.registry.Listeners[ChannelPinsUpdate], e)
 }
 
-func dispatchGuildCreate(s *discordgo.Session, e *discordgo.GuildCreate) {
-	runListeners(H.registry.GuildCreateListeners, e)
+func (h *Handler) dispatchGuildCreate(s *discordgo.Session, e *discordgo.GuildCreate) {
+	h.runListeners(h.registry.Listeners[GuildCreate], e)
 }
 
-func dispatchGuildUpdate(s *discordgo.Session, e *discordgo.GuildUpdate) {
-	runListeners(H.registry.GuildUpdateListeners, e)
+func (h *Handler) dispatchGuildUpdate(s *discordgo.Session, e *discordgo.GuildUpdate) {
+	h.runListeners(h.registry.Listeners[GuildUpdate], e)
 }
 
-func dispatchGuildDelete(s *discordgo.Session, e *discordgo.GuildDelete) {
-	runListeners(H.registry.GuildDeleteListeners, e)
+func (h *Handler) dispatchGuildDelete(s *discordgo.Session, e *discordgo.GuildDelete) {
+	h.runListeners(h.registry.Listeners[GuildDelete], e)
 }
 
-func dispatchGuildBanAdd(s *discordgo.Session, e *discordgo.GuildBanAdd) {
-	runListeners(H.registry.GuildBanAddListeners, e)
+func (h *Handler) dispatchGuildBanAdd(s *discordgo.Session, e *discordgo.GuildBanAdd) {
+	h.runListeners(h.registry.Listeners[GuildBanAdd], e)
 }
 
-func dispatchGuildBanRemove(s *discordgo.Session, e *discordgo.GuildBanRemove) {
-	runListeners(H.registry.GuildBanRemoveListeners, e)
+func (h *Handler) dispatchGuildBanRemove(s *discordgo.Session, e *discordgo.GuildBanRemove) {
+	h.runListeners(h.registry.Listeners[GuildBanRemove], e)
 }
 
-func dispatchGuildMemberAdd(s *discordgo.Session, e *discordgo.GuildMemberAdd) {
-	runListeners(H.registry.GuildMemberAddListeners, e)
+func (h *Handler) dispatchGuildMemberAdd(s *discordgo.Session, e *discordgo.GuildMemberAdd) {
+	h.runListeners(h.registry.Listeners[GuildMemberAdd], e)
 }
 
-func dispatchGuildMemberUpdate(s *discordgo.Session, e *discordgo.GuildMemberUpdate) {
-	runListeners(H.registry.GuildMemberUpdateListeners, e)
+func (h *Handler) dispatchGuildMemberUpdate(s *discordgo.Session, e *discordgo.GuildMemberUpdate) {
+	h.runListeners(h.registry.Listeners[GuildMemberUpdate], e)
 }
 
-func dispatchGuildMemberRemove(s *discordgo.Session, e *discordgo.GuildMemberRemove) {
-	runListeners(H.registry.GuildMemberRemoveListeners, e)
+func (h *Handler) dispatchGuildMemberRemove(s *discordgo.Session, e *discordgo.GuildMemberRemove) {
+	h.runListeners(h.registry.Listeners[GuildMemberRemove], e)
 }
 
-func dispatchGuildRoleCreate(s *discordgo.Session, e *discordgo.GuildRoleCreate) {
-	runListeners(H.registry.GuildRoleCreateListeners, e)
+func (h *Handler) dispatchGuildRoleCreate(s *discordgo.Session, e *discordgo.GuildRoleCreate) {
+	h.runListeners(h.registry.Listeners[GuildRoleCreate], e)
 }
 
-func dispatchGuildRoleUpdate(s *discordgo.Session, e *discordgo.GuildRoleUpdate) {
-	runListeners(H.registry.GuildRoleUpdateListeners, e)
+func (h *Handler) dispatchGuildRoleUpdate(s *discordgo.Session, e *discordgo.GuildRoleUpdate) {
+	h.runListeners(h.registry.Listeners[GuildRoleUpdate], e)
 }
 
-func dispatchGuildRoleDelete(s *discordgo.Session, e *discordgo.GuildRoleDelete) {
-	runListeners(H.registry.GuildRoleDeleteListeners, e)
+func (h *Handler) dispatchGuildRoleDelete(s *discordgo.Session, e *discordgo.GuildRoleDelete) {
+	h.runListeners(h.registry.Listeners[GuildRoleDelete], e)
 }
 
-func dispatchGuildEmojisUpdate(s *discordgo.Session, e *discordgo.GuildEmojisUpdate) {
-	runListeners(H.registry.GuildEmojisUpdateListeners, e)
+func (h *Handler) dispatchGuildEmojisUpdate(s *discordgo.Session, e *discordgo.GuildEmojisUpdate) {
+	h.runListeners(h.registry.Listeners[GuildEmojisUpdate], e)
 }
 
-func dispatchGuildMembersChunk(s *discordgo.Session, e *discordgo.GuildMembersChunk) {
-	runListeners(H.registry.GuildMembersChunkListeners, e)
+func (h *Handler) dispatchGuildMembersChunk(s *discordgo.Session, e *discordgo.GuildMembersChunk) {
+	h.runListeners(h.registry.Listeners[GuildMembersChunk], e)
 }
 
-func dispatchGuildIntegrationsUpdate(s *discordgo.Session, e *discordgo.GuildIntegrationsUpdate) {
-	runListeners(H.registry.GuildIntegrationsUpdateListeners, e)
+func (h *Handler) dispatchGuildIntegrationsUpdate(s *discordgo.Session, e *discordgo.GuildIntegrationsUpdate) {
+	h.runListeners(h.registry.Listeners[GuildIntegrationsUpdate], e)
 }
 
-func dispatchMessageAck(s *discordgo.Session, e *discordgo.MessageAck) {
-	runListeners(H.registry.MessageAckListeners, e)
+func (h *Handler) dispatchMessageAck(s *discordgo.Session, e *discordgo.MessageAck) {
+	h.runListeners(h.registry.Listeners[MessageAck], e)
 }
 
-func dispatchMessageCreate(s *discordgo.Session, e *discordgo.MessageCreate) {
-	runListeners(H.registry.MessageCreateListeners, e)
+func (h *Handler) dispatchMessageCreate(s *discordgo.Session, e *discordgo.MessageCreate) {
+	h.runListeners(h.registry.Listeners[MessageCreate], e)
 }
 
-func dispatchMessageUpdate(s *discordgo.Session, e *discordgo.MessageUpdate) {
-	runListeners(H.registry.MessageUpdateListeners, e)
+func (h *Handler) dispatchMessageUpdate(s *discordgo.Session, e *discordgo.MessageUpdate) {
+	h.runListeners(h.registry.Listeners[MessageUpdate], e)
 }
 
-func dispatchMessageDelete(s *discordgo.Session, e *discordgo.MessageDelete) {
-	runListeners(H.registry.MessageDeleteListeners, e)
+func (h *Handler) dispatchMessageDelete(s *discordgo.Session, e *discordgo.MessageDelete) {
+	h.runListeners(h.registry.Listeners[MessageDelete], e)
 }
 
-func dispatchMessageReactionAdd(s *discordgo.Session, e *discordgo.MessageReactionAdd) {
-	runListeners(H.registry.MessageReactionAddListeners, e)
+func (h *Handler) dispatchMessageReactionAdd(s *discordgo.Session, e *discordgo.MessageReactionAdd) {
+	h.runListeners(h.registry.Listeners[MessageReactionAdd], e)
 }
 
-func dispatchMessageReactionRemove(s *discordgo.Session, e *discordgo.MessageReactionRemove) {
-	runListeners(H.registry.MessageReactionRemoveListeners, e)
+func (h *Handler) dispatchMessageReactionRemove(s *discordgo.Session, e *discordgo.MessageReactionRemove) {
+	h.runListeners(h.registry.Listeners[MessageReactionRemove], e)
 }
 
-func dispatchPresencesReplace(s *discordgo.Session, e *discordgo.PresencesReplace) {
-	runListeners(H.registry.PresencesReplaceListeners, e)
+func (h *Handler) dispatchPresencesReplace(s *discordgo.Session, e *discordgo.PresencesReplace) {
+	h.runListeners(h.registry.Listeners[PresencesReplace], e)
 }
 
-func dispatchPresenceUpdate(s *discordgo.Session, e *discordgo.PresenceUpdate) {
-	runListeners(H.registry.PresenceUpdateListeners, e)
+func (h *Handler) dispatchPresenceUpdate(s *discordgo.Session, e *discordgo.PresenceUpdate) {
+	h.runListeners(h.registry.Listeners[PresenceUpdate], e)
 }
 
-func dispatchResumed(s *discordgo.Session, e *discordgo.Resumed) {
-	runListeners(H.registry.ResumedListeners, e)
+func (h *Handler) dispatchResumed(s *discordgo.Session, e *discordgo.Resumed) {
+	h.runListeners(h.registry.Listeners[Resumed], e)
 }
 
-func dispatchRelationshipAdd(s *discordgo.Session, e *discordgo.RelationshipAdd) {
-	runListeners(H.registry.RelationshipAddListeners, e)
+func (h *Handler) dispatchRelationshipAdd(s *discordgo.Session, e *discordgo.RelationshipAdd) {
+	h.runListeners(h.registry.Listeners[RelationshipAdd], e)
 }
 
-func dispatchRelationshipRemove(s *discordgo.Session, e *discordgo.RelationshipRemove) {
-	runListeners(H.registry.RelationshipRemoveListeners, e)
+func (h *Handler) dispatchRelationshipRemove(s *discordgo.Session, e *discordgo.RelationshipRemove) {
+	h.runListeners(h.registry.Listeners[RelationshipRemove], e)
 }
 
-func dispatchTypingStart(s *discordgo.Session, e *discordgo.TypingStart) {
-	runListeners(H.registry.TypingStartListeners, e)
+func (h *Handler) dispatchTypingStart(s *discordgo.Session, e *discordgo.TypingStart) {
+	h.runListeners(h.registry.Listeners[TypingStart], e)
 }
 
-func dispatchUserUpdate(s *discordgo.Session, e *discordgo.UserUpdate) {
-	runListeners(H.registry.UserUpdateListeners, e)
+func (h *Handler) dispatchUserUpdate(s *discordgo.Session, e *discordgo.UserUpdate) {
+	h.runListeners(h.registry.Listeners[UserUpdate], e)
 }
 
-func dispatchUserSettingsUpdate(s *discordgo.Session, e *discordgo.UserSettingsUpdate) {
-	runListeners(H.registry.UserSettingsUpdateListeners, e)
+func (h *Handler) dispatchUserSettingsUpdate(s *discordgo.Session, e *discordgo.UserSettingsUpdate) {
+	h.runListeners(h.registry.Listeners[UserSettingsUpdate], e)
 }
 
-func dispatchUserGuildSettingsUpdate(s *discordgo.Session, e *discordgo.UserGuildSettingsUpdate) {
-	runListeners(H.registry.UserGuildSettingsUpdateListeners, e)
+func (h *Handler) dispatchUserGuildSettingsUpdate(s *discordgo.Session, e *discordgo.UserGuildSettingsUpdate) {
+	h.runListeners(h.registry.Listeners[UserGuildSettingsUpdate], e)
 }
 
-func dispatchVoiceServerUpdate(s *discordgo.Session, e *discordgo.VoiceServerUpdate) {
-	runListeners(H.registry.VoiceServerUpdateListeners, e)
+func (h *Handler) dispatchVoiceServerUpdate(s *discordgo.Session, e *discordgo.VoiceServerUpdate) {
+	h.runListeners(h.registry.Listeners[VoiceServerUpdate], e)
 }
 
-func dispatchVoiceStateUpdate(s *discordgo.Session, e *discordgo.VoiceStateUpdate) {
-	runListeners(H.registry.VoiceStateUpdateListeners, e)
+func (h *Handler) dispatchVoiceStateUpdate(s *discordgo.Session, e *discordgo.VoiceStateUpdate) {
+	h.runListeners(h.registry.Listeners[VoiceStateUpdate], e)
 }
 
 // CreateListener creates a new listener from a given function.
@@ -694,176 +696,180 @@ func (r *Registry) CreateListener(v interface{}, isInternal bool) Listener {
 	switch f := v.(type) {
 	case func(*discordgo.Connect):
 		l.SetActionHandler(ConnectHandler(f))
-		r.ConnectListeners[l.Owner()] = append(r.ConnectListeners[l.Owner()], l)
+		r.Listeners[Connect][l.Owner()] = append(r.Listeners[Connect][l.Owner()], l)
 	case func(*discordgo.Disconnect):
 		l.SetActionHandler(DisconnectHandler(f))
-		r.DisconnectListeners[l.Owner()] = append(r.DisconnectListeners[l.Owner()], l)
+		r.Listeners[Disconnect][l.Owner()] = append(r.Listeners[Disconnect][l.Owner()], l)
 	case func(*discordgo.RateLimit):
 		l.SetActionHandler(RateLimitHandler(f))
-		r.RateLimitListeners[l.Owner()] = append(r.RateLimitListeners[l.Owner()], l)
+		r.Listeners[RateLimit][l.Owner()] = append(r.Listeners[RateLimit][l.Owner()], l)
 	case func(*discordgo.Event):
 		l.SetActionHandler(EventHandler(f))
-		r.EventListeners[l.Owner()] = append(r.EventListeners[l.Owner()], l)
+		r.Listeners[Event][l.Owner()] = append(r.Listeners[Event][l.Owner()], l)
 	case func(*discordgo.Ready):
 		l.SetActionHandler(ReadyHandler(f))
-		r.ReadyListeners[l.Owner()] = append(r.ReadyListeners[l.Owner()], l)
+		r.Listeners[Ready][l.Owner()] = append(r.Listeners[Ready][l.Owner()], l)
 	case func(*discordgo.ChannelCreate):
 		l.SetActionHandler(ChannelCreateHandler(f))
-		r.ChannelCreateListeners[l.Owner()] = append(r.ChannelCreateListeners[l.Owner()], l)
+		r.Listeners[ChannelCreate][l.Owner()] = append(r.Listeners[ChannelCreate][l.Owner()], l)
 	case func(*discordgo.ChannelUpdate):
 		l.SetActionHandler(ChannelUpdateHandler(f))
-		r.ChannelUpdateListeners[l.Owner()] = append(r.ChannelUpdateListeners[l.Owner()], l)
+		r.Listeners[ChannelUpdate][l.Owner()] = append(r.Listeners[ChannelUpdate][l.Owner()], l)
 	case func(*discordgo.ChannelDelete):
 		l.SetActionHandler(ChannelDeleteHandler(f))
-		r.ChannelDeleteListeners[l.Owner()] = append(r.ChannelDeleteListeners[l.Owner()], l)
+		r.Listeners[ChannelDelete][l.Owner()] = append(r.Listeners[ChannelDelete][l.Owner()], l)
 	case func(*discordgo.ChannelPinsUpdate):
 		l.SetActionHandler(ChannelPinsUpdateHandler(f))
-		r.ChannelPinsUpdateListeners[l.Owner()] = append(r.ChannelPinsUpdateListeners[l.Owner()], l)
+		r.Listeners[ChannelPinsUpdate][l.Owner()] = append(r.Listeners[ChannelPinsUpdate][l.Owner()], l)
 	case func(*discordgo.GuildCreate):
 		l.SetActionHandler(GuildCreateHandler(f))
-		r.GuildCreateListeners[l.Owner()] = append(r.GuildCreateListeners[l.Owner()], l)
+		r.Listeners[GuildCreate][l.Owner()] = append(r.Listeners[GuildCreate][l.Owner()], l)
 	case func(*discordgo.GuildUpdate):
 		l.SetActionHandler(GuildUpdateHandler(f))
-		r.GuildUpdateListeners[l.Owner()] = append(r.GuildUpdateListeners[l.Owner()], l)
+		r.Listeners[GuildUpdate][l.Owner()] = append(r.Listeners[GuildUpdate][l.Owner()], l)
 	case func(*discordgo.GuildDelete):
 		l.SetActionHandler(GuildDeleteHandler(f))
-		r.GuildDeleteListeners[l.Owner()] = append(r.GuildDeleteListeners[l.Owner()], l)
+		r.Listeners[GuildDelete][l.Owner()] = append(r.Listeners[GuildDelete][l.Owner()], l)
 	case func(*discordgo.GuildBanAdd):
 		l.SetActionHandler(GuildBanAddHandler(f))
-		r.GuildBanAddListeners[l.Owner()] = append(r.GuildBanAddListeners[l.Owner()], l)
+		r.Listeners[GuildBanAdd][l.Owner()] = append(r.Listeners[GuildBanAdd][l.Owner()], l)
 	case func(*discordgo.GuildBanRemove):
 		l.SetActionHandler(GuildBanRemoveHandler(f))
-		r.GuildBanRemoveListeners[l.Owner()] = append(r.GuildBanRemoveListeners[l.Owner()], l)
+		r.Listeners[GuildBanRemove][l.Owner()] = append(r.Listeners[GuildBanRemove][l.Owner()], l)
 	case func(*discordgo.GuildMemberAdd):
 		l.SetActionHandler(GuildMemberAddHandler(f))
-		r.GuildMemberAddListeners[l.Owner()] = append(r.GuildMemberAddListeners[l.Owner()], l)
+		r.Listeners[GuildMemberAdd][l.Owner()] = append(r.Listeners[GuildMemberAdd][l.Owner()], l)
 	case func(*discordgo.GuildMemberUpdate):
 		l.SetActionHandler(GuildMemberUpdateHandler(f))
-		r.GuildMemberUpdateListeners[l.Owner()] = append(r.GuildMemberUpdateListeners[l.Owner()], l)
+		r.Listeners[GuildMemberUpdate][l.Owner()] = append(r.Listeners[GuildMemberUpdate][l.Owner()], l)
 	case func(*discordgo.GuildMemberRemove):
 		l.SetActionHandler(GuildMemberRemoveHandler(f))
-		r.GuildMemberRemoveListeners[l.Owner()] = append(r.GuildMemberRemoveListeners[l.Owner()], l)
+		r.Listeners[GuildMemberRemove][l.Owner()] = append(r.Listeners[GuildMemberRemove][l.Owner()], l)
 	case func(*discordgo.GuildRoleCreate):
 		l.SetActionHandler(GuildRoleCreateHandler(f))
-		r.GuildRoleCreateListeners[l.Owner()] = append(r.GuildRoleCreateListeners[l.Owner()], l)
+		r.Listeners[GuildRoleCreate][l.Owner()] = append(r.Listeners[GuildRoleCreate][l.Owner()], l)
 	case func(*discordgo.GuildRoleUpdate):
 		l.SetActionHandler(GuildRoleUpdateHandler(f))
-		r.GuildRoleUpdateListeners[l.Owner()] = append(r.GuildRoleUpdateListeners[l.Owner()], l)
+		r.Listeners[GuildRoleUpdate][l.Owner()] = append(r.Listeners[GuildRoleUpdate][l.Owner()], l)
 	case func(*discordgo.GuildRoleDelete):
 		l.SetActionHandler(GuildRoleDeleteHandler(f))
-		r.GuildRoleDeleteListeners[l.Owner()] = append(r.GuildRoleDeleteListeners[l.Owner()], l)
+		r.Listeners[GuildRoleDelete][l.Owner()] = append(r.Listeners[GuildRoleDelete][l.Owner()], l)
 	case func(*discordgo.GuildEmojisUpdate):
 		l.SetActionHandler(GuildEmojisUpdateHandler(f))
-		r.GuildEmojisUpdateListeners[l.Owner()] = append(r.GuildEmojisUpdateListeners[l.Owner()], l)
+		r.Listeners[GuildEmojisUpdate][l.Owner()] = append(r.Listeners[GuildEmojisUpdate][l.Owner()], l)
 	case func(*discordgo.GuildMembersChunk):
 		l.SetActionHandler(GuildMembersChunkHandler(f))
-		r.GuildMembersChunkListeners[l.Owner()] = append(r.GuildMembersChunkListeners[l.Owner()], l)
+		r.Listeners[GuildMembersChunk][l.Owner()] = append(r.Listeners[GuildMembersChunk][l.Owner()], l)
 	case func(*discordgo.GuildIntegrationsUpdate):
 		l.SetActionHandler(GuildIntegrationsUpdateHandler(f))
-		r.GuildIntegrationsUpdateListeners[l.Owner()] = append(r.GuildIntegrationsUpdateListeners[l.Owner()], l)
+		r.Listeners[GuildIntegrationsUpdate][l.Owner()] = append(r.Listeners[GuildIntegrationsUpdate][l.Owner()], l)
 	case func(*discordgo.MessageAck):
 		l.SetActionHandler(MessageAckHandler(f))
-		r.MessageAckListeners[l.Owner()] = append(r.MessageAckListeners[l.Owner()], l)
+		r.Listeners[MessageAck][l.Owner()] = append(r.Listeners[MessageAck][l.Owner()], l)
 	case func(*discordgo.MessageCreate):
 		l.SetActionHandler(MessageCreateHandler(f))
-		r.MessageCreateListeners[l.Owner()] = append(r.MessageCreateListeners[l.Owner()], l)
+		r.Listeners[MessageCreate][l.Owner()] = append(r.Listeners[MessageCreate][l.Owner()], l)
 	case func(*discordgo.MessageUpdate):
 		l.SetActionHandler(MessageUpdateHandler(f))
-		r.MessageUpdateListeners[l.Owner()] = append(r.MessageUpdateListeners[l.Owner()], l)
+		r.Listeners[MessageUpdate][l.Owner()] = append(r.Listeners[MessageUpdate][l.Owner()], l)
 	case func(*discordgo.MessageDelete):
 		l.SetActionHandler(MessageDeleteHandler(f))
-		r.MessageDeleteListeners[l.Owner()] = append(r.MessageDeleteListeners[l.Owner()], l)
+		r.Listeners[MessageDelete][l.Owner()] = append(r.Listeners[MessageDelete][l.Owner()], l)
 	case func(*discordgo.MessageReactionAdd):
 		l.SetActionHandler(MessageReactionAddHandler(f))
-		r.MessageReactionAddListeners[l.Owner()] = append(r.MessageReactionAddListeners[l.Owner()], l)
+		r.Listeners[MessageReactionAdd][l.Owner()] = append(r.Listeners[MessageReactionAdd][l.Owner()], l)
 	case func(*discordgo.MessageReactionRemove):
 		l.SetActionHandler(MessageReactionRemoveHandler(f))
-		r.MessageReactionRemoveListeners[l.Owner()] = append(r.MessageReactionRemoveListeners[l.Owner()], l)
+		r.Listeners[MessageReactionRemove][l.Owner()] = append(r.Listeners[MessageReactionRemove][l.Owner()], l)
 	case func(*discordgo.PresencesReplace):
 		l.SetActionHandler(PresencesReplaceHandler(f))
-		r.PresencesReplaceListeners[l.Owner()] = append(r.PresencesReplaceListeners[l.Owner()], l)
+		r.Listeners[PresencesReplace][l.Owner()] = append(r.Listeners[PresencesReplace][l.Owner()], l)
 	case func(*discordgo.PresenceUpdate):
 		l.SetActionHandler(PresenceUpdateHandler(f))
-		r.PresenceUpdateListeners[l.Owner()] = append(r.PresenceUpdateListeners[l.Owner()], l)
+		r.Listeners[PresenceUpdate][l.Owner()] = append(r.Listeners[PresenceUpdate][l.Owner()], l)
 	case func(*discordgo.Resumed):
 		l.SetActionHandler(ResumedHandler(f))
-		r.ResumedListeners[l.Owner()] = append(r.ResumedListeners[l.Owner()], l)
+		r.Listeners[Resumed][l.Owner()] = append(r.Listeners[Resumed][l.Owner()], l)
 	case func(*discordgo.RelationshipAdd):
 		l.SetActionHandler(RelationshipAddHandler(f))
-		r.RelationshipAddListeners[l.Owner()] = append(r.RelationshipAddListeners[l.Owner()], l)
+		r.Listeners[RelationshipAdd][l.Owner()] = append(r.Listeners[RelationshipAdd][l.Owner()], l)
 	case func(*discordgo.RelationshipRemove):
 		l.SetActionHandler(RelationshipRemoveHandler(f))
-		r.RelationshipRemoveListeners[l.Owner()] = append(r.RelationshipRemoveListeners[l.Owner()], l)
+		r.Listeners[RelationshipRemove][l.Owner()] = append(r.Listeners[RelationshipRemove][l.Owner()], l)
 	case func(*discordgo.TypingStart):
 		l.SetActionHandler(TypingStartHandler(f))
-		r.TypingStartListeners[l.Owner()] = append(r.TypingStartListeners[l.Owner()], l)
+		r.Listeners[TypingStart][l.Owner()] = append(r.Listeners[TypingStart][l.Owner()], l)
 	case func(*discordgo.UserUpdate):
 		l.SetActionHandler(UserUpdateHandler(f))
-		r.UserUpdateListeners[l.Owner()] = append(r.UserUpdateListeners[l.Owner()], l)
+		r.Listeners[UserUpdate][l.Owner()] = append(r.Listeners[UserUpdate][l.Owner()], l)
 	case func(*discordgo.UserSettingsUpdate):
 		l.SetActionHandler(UserSettingsUpdateHandler(f))
-		r.UserSettingsUpdateListeners[l.Owner()] = append(r.UserSettingsUpdateListeners[l.Owner()], l)
+		r.Listeners[UserSettingsUpdate][l.Owner()] = append(r.Listeners[UserSettingsUpdate][l.Owner()], l)
 	case func(*discordgo.UserGuildSettingsUpdate):
 		l.SetActionHandler(UserGuildSettingsUpdateHandler(f))
-		r.UserGuildSettingsUpdateListeners[l.Owner()] = append(r.UserGuildSettingsUpdateListeners[l.Owner()], l)
+		r.Listeners[UserGuildSettingsUpdate][l.Owner()] = append(r.Listeners[UserGuildSettingsUpdate][l.Owner()], l)
 	case func(*discordgo.VoiceServerUpdate):
 		l.SetActionHandler(VoiceServerUpdateHandler(f))
-		r.VoiceServerUpdateListeners[l.Owner()] = append(r.VoiceServerUpdateListeners[l.Owner()], l)
+		r.Listeners[VoiceServerUpdate][l.Owner()] = append(r.Listeners[VoiceServerUpdate][l.Owner()], l)
 	case func(*discordgo.VoiceStateUpdate):
 		l.SetActionHandler(VoiceStateUpdateHandler(f))
-		r.VoiceStateUpdateListeners[l.Owner()] = append(r.VoiceStateUpdateListeners[l.Owner()], l)
+		r.Listeners[VoiceStateUpdate][l.Owner()] = append(r.Listeners[VoiceStateUpdate][l.Owner()], l)
 	}
 
 	return l
 }
 
+// AddCommand will add a command to the registry.
+func (r *Registry) AddCommand(c Command) {
+	if r.Commands[c.Owner()] == nil {
+		r.Commands[c.Owner()] = make(map[string]Command)
+	}
+	r.Commands[c.Owner()][c.GetName()] = c
+}
+
 // Attach will add all dispatch functions to the discord session for
 // each supported discord event. Supported events are those from the discordgo
 // library.
-func Attach(b *rbot.Bot) {
-	if H == nil {
-		hail.Crit(hail.Fhandler,
-			"H has not been created yet, cannot attach listeners! Exiting...")
-		os.Exit(1)
-	}
-	b.Session.AddHandler(dispatchConnect)
-	b.Session.AddHandler(dispatchDisconnect)
-	b.Session.AddHandler(dispatchRateLimit)
-	b.Session.AddHandler(dispatchEvent)
-	b.Session.AddHandler(dispatchReady)
-	b.Session.AddHandler(dispatchChannelCreate)
-	b.Session.AddHandler(dispatchChannelUpdate)
-	b.Session.AddHandler(dispatchChannelDelete)
-	b.Session.AddHandler(dispatchChannelPinsUpdate)
-	b.Session.AddHandler(dispatchGuildCreate)
-	b.Session.AddHandler(dispatchGuildUpdate)
-	b.Session.AddHandler(dispatchGuildDelete)
-	b.Session.AddHandler(dispatchGuildBanAdd)
-	b.Session.AddHandler(dispatchGuildBanRemove)
-	b.Session.AddHandler(dispatchGuildMemberAdd)
-	b.Session.AddHandler(dispatchGuildMemberUpdate)
-	b.Session.AddHandler(dispatchGuildMemberRemove)
-	b.Session.AddHandler(dispatchGuildRoleCreate)
-	b.Session.AddHandler(dispatchGuildRoleUpdate)
-	b.Session.AddHandler(dispatchGuildRoleDelete)
-	b.Session.AddHandler(dispatchGuildEmojisUpdate)
-	b.Session.AddHandler(dispatchGuildMembersChunk)
-	b.Session.AddHandler(dispatchGuildIntegrationsUpdate)
-	b.Session.AddHandler(dispatchMessageAck)
-	b.Session.AddHandler(dispatchMessageCreate)
-	b.Session.AddHandler(dispatchMessageUpdate)
-	b.Session.AddHandler(dispatchMessageDelete)
-	b.Session.AddHandler(dispatchMessageReactionAdd)
-	b.Session.AddHandler(dispatchMessageReactionRemove)
-	b.Session.AddHandler(dispatchPresencesReplace)
-	b.Session.AddHandler(dispatchPresenceUpdate)
-	b.Session.AddHandler(dispatchResumed)
-	b.Session.AddHandler(dispatchRelationshipAdd)
-	b.Session.AddHandler(dispatchRelationshipRemove)
-	b.Session.AddHandler(dispatchTypingStart)
-	b.Session.AddHandler(dispatchUserUpdate)
-	b.Session.AddHandler(dispatchUserSettingsUpdate)
-	b.Session.AddHandler(dispatchUserGuildSettingsUpdate)
-	b.Session.AddHandler(dispatchVoiceServerUpdate)
-	b.Session.AddHandler(dispatchVoiceStateUpdate)
+func (h *Handler) Attach(s *discordgo.Session) {
+
+	s.AddHandler(h.dispatchConnect)
+	s.AddHandler(h.dispatchDisconnect)
+	s.AddHandler(h.dispatchRateLimit)
+	s.AddHandler(h.dispatchEvent)
+	s.AddHandler(h.dispatchReady)
+	s.AddHandler(h.dispatchChannelCreate)
+	s.AddHandler(h.dispatchChannelUpdate)
+	s.AddHandler(h.dispatchChannelDelete)
+	s.AddHandler(h.dispatchChannelPinsUpdate)
+	s.AddHandler(h.dispatchGuildCreate)
+	s.AddHandler(h.dispatchGuildUpdate)
+	s.AddHandler(h.dispatchGuildDelete)
+	s.AddHandler(h.dispatchGuildBanAdd)
+	s.AddHandler(h.dispatchGuildBanRemove)
+	s.AddHandler(h.dispatchGuildMemberAdd)
+	s.AddHandler(h.dispatchGuildMemberUpdate)
+	s.AddHandler(h.dispatchGuildMemberRemove)
+	s.AddHandler(h.dispatchGuildRoleCreate)
+	s.AddHandler(h.dispatchGuildRoleUpdate)
+	s.AddHandler(h.dispatchGuildRoleDelete)
+	s.AddHandler(h.dispatchGuildEmojisUpdate)
+	s.AddHandler(h.dispatchGuildMembersChunk)
+	s.AddHandler(h.dispatchGuildIntegrationsUpdate)
+	s.AddHandler(h.dispatchMessageAck)
+	s.AddHandler(h.dispatchMessageCreate)
+	s.AddHandler(h.dispatchMessageUpdate)
+	s.AddHandler(h.dispatchMessageDelete)
+	s.AddHandler(h.dispatchMessageReactionAdd)
+	s.AddHandler(h.dispatchMessageReactionRemove)
+	s.AddHandler(h.dispatchPresencesReplace)
+	s.AddHandler(h.dispatchPresenceUpdate)
+	s.AddHandler(h.dispatchResumed)
+	s.AddHandler(h.dispatchRelationshipAdd)
+	s.AddHandler(h.dispatchRelationshipRemove)
+	s.AddHandler(h.dispatchTypingStart)
+	s.AddHandler(h.dispatchUserUpdate)
+	s.AddHandler(h.dispatchUserSettingsUpdate)
+	s.AddHandler(h.dispatchUserGuildSettingsUpdate)
+	s.AddHandler(h.dispatchVoiceServerUpdate)
+	s.AddHandler(h.dispatchVoiceStateUpdate)
 }
