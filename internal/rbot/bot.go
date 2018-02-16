@@ -14,6 +14,7 @@ import (
 
 	"github.com/bwmarrin/discordgo"
 	"github.com/raindevteam/rain/internal/hail"
+	"github.com/raindevteam/rain/internal/handler"
 )
 
 // DiscordSession is an interface to specify discord session capability. It is
@@ -22,6 +23,8 @@ import (
 type DiscordSession interface {
 	AddHandler(handler interface{}) func()
 	Open() (err error)
+	ChannelMessageSend(channelID string, content string) (*discordgo.Message, error)
+	User(userID string) (*discordgo.User, error)
 }
 
 // The Bot struct holds all information needed to do any general work on the
@@ -30,6 +33,7 @@ type DiscordSession interface {
 type Bot struct {
 	config  *Config
 	Session DiscordSession
+	Handler *handler.Handler
 }
 
 // NewBot will create a new instance of a bot, almost everything will be
@@ -60,7 +64,9 @@ func NewBot(token string, conf *Config) (*Bot, error) {
 	b := &Bot{
 		config:  conf,
 		Session: ds,
+		Handler: handler.NewHandler(),
 	}
+	b.Handler.Attach(b.Session.(*discordgo.Session))
 	return b, nil
 }
 
@@ -94,4 +100,13 @@ func (dst *DST) Open() (err error) {
 		return errors.New("can't open discord session (false alarm from DST)")
 	}
 	return nil
+}
+
+func (dst *DST) ChannelMessageSend(channelID string,
+	content string) (*discordgo.Message, error) {
+	return nil, nil
+}
+
+func (dst *DST) User(userID string) (*discordgo.User, error) {
+	return nil, nil
 }
