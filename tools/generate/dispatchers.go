@@ -65,18 +65,20 @@ var handlersTemplate = `// Copyright 2015-2017, Rodolfo Castillo-Valladares. All
 package handler
 
 import (
-	"os"
-
 	"github.com/bwmarrin/discordgo"
-	"github.com/raindevteam/rain/internal/hail"
-	"github.com/raindevteam/rain/internal/rbot"
+)
+
+const (
+{{ range . }}
+	{{ . }} = "{{ . }}" {{ end }}
 )
 
 // The Registry holds all listeners registered with the bot. They are grouped by
 // droplet, however each contains an entry of listeners belonging to the bot.
 // This entry is identified with the "__INTERNAL__" string constant. 
-type Registry struct { {{ range $value := .}}
-	{{ $value }}Listeners         map[string][]Listener {{ end }}
+type Registry struct {
+	Listeners         map[string]map[string][]Listener
+	Commands          map[string]map[string]Command
 }
 
 {{ range . }}
@@ -92,14 +94,16 @@ func (eh {{ . }}Handler) Do(v interface{}) {
 {{ end }}
 
 // Initialize will initialize all maps in the registry.
-func (r *Registry) Initialize() { {{ range $value := . }}
-	r.{{ $value }}Listeners = make(map[string][]Listener) {{ end }}
+func (r *Registry) Initialize() {
+	r.Listeners = make(map[string]map[string][]Listener)
+	r.Commands = make(map[string]map[string]Command) {{ range . }}
+	r.Listeners[{{ . }}] = make(map[string][]Listener) {{ end }}
 }
 
-func runListeners(ls map[string][]Listener, v interface{}) {
+func (h *Handler) runListeners(ls map[string][]Listener, v interface{}) {
 	for _, listeners := range ls {
 		for _, l := range listeners {
-			if ok := H.Status; ok {
+			if ok := h.Status; ok {
 				l.SetEvent(v)
 				l.Run()
 			} else {
@@ -109,9 +113,9 @@ func runListeners(ls map[string][]Listener, v interface{}) {
 	}
 }
 
-{{ range $value := . }}
-func dispatch{{ $value }}(s *discordgo.Session, e *discordgo.{{ $value }}) {
-	runListeners(H.registry.{{ $value }}Listeners, e)
+{{ range . }}
+func (h *Handler) dispatch{{ . }}(s *discordgo.Session, e *discordgo.{{ . }}) {
+	h.runListeners(h.registry.Listeners[{{ . }}], e)
 }
 {{ end }}
 
@@ -124,25 +128,29 @@ func (r *Registry) CreateListener(v interface{}, isInternal bool) Listener {
 		l = &DropletListener{}
 	}
 
-	switch f := v.(type) { {{ range $value := . }}
-	case func(*discordgo.{{ $value }}):
-	    l.SetActionHandler({{ $value }}Handler(f))
-		r.{{ $value }}Listeners[l.Owner()] = append(r.{{ $value }}Listeners[l.Owner()], l){{ end }}
+	switch f := v.(type) { {{ range . }}
+	case func(*discordgo.{{ . }}):
+	    l.SetActionHandler({{ . }}Handler(f))
+		r.Listeners[{{ . }}][l.Owner()] = append(r.Listeners[{{ . }}][l.Owner()], l){{ end }}
 	}
 
 	return l
 }
 
+// AddCommand will add a command to the registry.
+func (r *Registry) AddCommand(c Command) {
+	if r.Commands[c.Owner()] == nil {
+		r.Commands[c.Owner()] = make(map[string]Command)
+	}
+	r.Commands[c.Owner()][c.GetName()] = c
+}
+
 // Attach will add all dispatch functions to the discord session for
 // each supported discord event. Supported events are those from the discordgo
 // library.
-func Attach(b *rbot.Bot) { 
-	if H == nil {
-		hail.Crit(hail.Fhandler,
-			"H has not been created yet, cannot attach listeners! Exiting...")
-		os.Exit(1)
-	}{{ range $value := . }}
-	b.Session.AddHandler(dispatch{{ $value }}) {{ end }}
+func (h *Handler) Attach(s *discordgo.Session) { 
+	{{ range . }}
+	s.AddHandler(h.dispatch{{ . }}) {{ end }}
 }
 `
 var handlersTestTemplate = `// Copyright 2015-2017, Rodolfo Castillo-Valladares. All rights reserved.
