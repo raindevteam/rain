@@ -7,7 +7,6 @@ import (
 	"syscall"
 
 	"github.com/raindevteam/rain/internal/hail"
-	"github.com/raindevteam/rain/internal/handler"
 	"github.com/raindevteam/rain/internal/internal"
 	"github.com/raindevteam/rain/internal/rbot"
 	cli "gopkg.in/urfave/cli.v1"
@@ -38,11 +37,6 @@ func Run(ctx *cli.Context) {
 		hail.Errf(hail.Frain, "Unable to create bot: err: %s", err)
 		os.Exit(1)
 	}
-
-	// Create and attach handler to bot.
-	handler.CreateHandler()
-	handler.Attach(bot)
-	hail.Info(hail.Frain, "Handler created and attached.")
 
 	// Attach internals to bot.
 	internal.Attach(bot)
