@@ -24,7 +24,7 @@ dispatcher, a list of listeners for the corresponding event are fired. These are
 kept by the handler in what is known as the registry, which provides convenient
 access and management.
 
-Ideology Behind the Creatiion and Running of Listeners
+Ideology Behind the Creation and Running of Listeners
 ------------------------------------------------------
 
 The way listeners are created and ran within the handler may seem convoluted at
@@ -36,7 +36,7 @@ the implementations in question exist.
 The discord library that Rain uses does not currently allow us to remove or
 disable listeners. Also, since the listeners are simply functions, it is hard to
 associate metadata to the functions; data such as to whom the function belongs
-becomes difficult to implement.
+to becomes difficult to implement.
 
 With this in mind, the following section explains how a listener is created
 using an interface to provide metadata to functions passed to the underlying
@@ -94,7 +94,7 @@ appropriate discord type.
 
 ### Optimization
 
-Trying to find better ways to handle implementations explain in the previous
+Trying to find better ways to handle implementations explained in the previous
 sections has been fruitless. That said, what the current implementations offer
 should not be so easily dismissed. Creating listeners requires very little effort
 as a function needs only be defined. Also, because said function is casted into
