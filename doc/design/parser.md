@@ -59,9 +59,3 @@ string. The following example shows the format.
 This would produce the following struct.
 
         { owner: "game", command: "roll" }
-
-Command Struct Processing
--------------------------
-
-For information on how the struct data is used, please read the <section> in the
-handler package's design document.
