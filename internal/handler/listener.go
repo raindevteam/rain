@@ -10,7 +10,7 @@ package handler
 
 import (
 	"github.com/bwmarrin/discordgo"
-	"github.com/raindevteam/rain/internal/droplet"
+	"github.com/raindevteam/rain/internal/dapi"
 	"github.com/raindevteam/rain/internal/hail"
 )
 
@@ -86,7 +86,7 @@ func (il *InternalListener) Owner() string {
 // droplet listeners. The most notable difference is how action is handled.
 type DropletListener struct {
 	Event  interface{}
-	drop   *droplet.Droplet
+	drop   *dapi.Droplet
 	action Action
 }
 
