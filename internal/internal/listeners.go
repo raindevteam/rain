@@ -18,9 +18,13 @@ func (ls *Listeners) AddCommandParser() {
 
 // CommandParser parses messages for commands.
 func (ls *Listeners) CommandParser(e *discordgo.MessageCreate) {
+	if e.Message.Content == "" {
+		// No text message was sent.
+		return
+	}
 	commandData, err := parser.ParseCommand(e.Message.Content)
 	if err == nil {
-		hail.Infof(hail.Finternal, "CommandParser: Owner: %s, Command: %s\n",
+		hail.Debugf(hail.Finternal, "CommandParser: Owner: %s, Command: %s\n",
 			commandData.Owner, commandData.Command)
 		ls.bot.Handler.InvokeCommand(commandData, e)
 	}
@@ -32,10 +36,9 @@ func (ls *Listeners) AddMessageCreate() {
 }
 
 // MessageCreate logs messages sent in all channels the bot has access to.
+// Reference https://godoc.org/github.com/bwmarrin/discordgo#Message for
+// what is available from the MessageCreate event.
 func (ls *Listeners) MessageCreate(e *discordgo.MessageCreate) {
-	hail.Infof(hail.Finternal, "MessageCreate: %s: %s\n",
-		e.Author.Username, e.Message.Content)
-
 	for _, duser := range e.Mentions {
 		me, _ := ls.bot.Session.User("@me")
 		if duser.ID == me.ID {
