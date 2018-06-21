@@ -42,6 +42,8 @@ func Run(ctx *cli.Context) {
 	internal.Attach(bot)
 	hail.Info(hail.Frain, "Internals attached.")
 
+	go bot.Handler.StartPluginServer()
+
 	// Open discord session.
 	bot.Connect()
 	hail.Info(hail.Frain, "Discord connection initiated.")
